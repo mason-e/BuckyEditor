@@ -741,6 +741,16 @@ namespace CadEditor
             return null;
         }
 
+        public static GetPalFunc readPalFromBin(string[] fname)
+        {
+            return (int x)=> { return readBinFile(fname[x]); };
+        }
+
+        public static GetVideoChunkFunc getVideoChunk(string[] fname)
+        {
+            return (int x)=> { return readVideoBankFromFile(fname[x], 0); };
+        }
+
         public static byte[] readVideoBankFrom16Pointers(int[] ptrs)
         {
             byte[] videoChunk = new byte[Globals.videoPageSize];
