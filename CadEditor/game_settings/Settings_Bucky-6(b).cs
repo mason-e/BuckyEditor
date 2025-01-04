@@ -1,7 +1,18 @@
 using CadEditor;
 using System;
-//css_include bucky_ohare/BuckyUtils.cs;
 
+public static class BuckyUtils 
+{ 
+    public static GetPalFunc readPalFromBin(string[] fname)
+    {
+        return (int x)=> { return Utils.readBinFile(fname[x]); };
+    }
+    
+    public static GetVideoChunkFunc getVideoChunk(string[] fname)
+    {
+       return (int x)=> { return Utils.readVideoBankFromFile(fname[x], 0); };
+    }
+}
 public class Data 
 { 
   public OffsetRec getScreensOffset()  { return new OffsetRec(0xb65f, 1 , 8*46, 8, 46);   }
