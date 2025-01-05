@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Windows.Forms;
-using System.Globalization;
-using System.IO;
 using System.Drawing;
-using System.Linq;
-using System.Collections.Generic;
+using System.Windows.Forms;
 
 namespace CadEditor
 {
@@ -59,7 +55,7 @@ namespace CadEditor
             {
                 blocksOnRow = 1;
             }
-            int blocksOnCol = (int)Math.Ceiling(bigBlocks.Length *1.0f / blocksOnRow);
+            int blocksOnCol = (int)Math.Ceiling(bigBlocks.Length * 1.0f / blocksOnRow);
             blocksScreen.Height = blocksOnCol * tileSizeY;
         }
 

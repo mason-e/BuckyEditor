@@ -1,10 +1,5 @@
 ﻿using System;
-using System.Windows.Forms;
-using System.Globalization;
-using System.IO;
 using System.Drawing;
-using System.Linq;
-using System.Collections.Generic;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 using System.Runtime.InteropServices;
@@ -25,7 +20,7 @@ namespace CadEditor
         public static Rectangle FindBorderRect(Image source)
         {
             var bmp = source as Bitmap;
-            int minX = 0, minY = 0, maxX = bmp.Width-1, maxY = bmp.Height-1;
+            int minX = 0, minY = 0, maxX = bmp.Width - 1, maxY = bmp.Height - 1;
 
             for (int x = 0; x < bmp.Width; x++)
             {
@@ -42,7 +37,7 @@ namespace CadEditor
 
                 if (zeroCol)
                 {
-                    minX = x+1;
+                    minX = x + 1;
                 }
                 else
                 {
@@ -50,7 +45,7 @@ namespace CadEditor
                 }
             }
 
-            for (int x = bmp.Width-1; x >=0 ; x--)
+            for (int x = bmp.Width - 1; x >= 0; x--)
             {
                 bool zeroCol = true;
                 for (int y = 0; y < bmp.Height; y++)
@@ -88,7 +83,7 @@ namespace CadEditor
 
                 if (zeroRow)
                 {
-                    minY = y+1;
+                    minY = y + 1;
                 }
                 else
                 {
@@ -328,7 +323,7 @@ namespace CadEditor
             int imCountX = imSrc.Width / imBlockWidth;
             int imCountY = imSrc.Height / imBlockHeight;
 
-            var bigBlocks = new Image[imCountX*imCountY];
+            var bigBlocks = new Image[imCountX * imCountY];
             for (int i = 0; i < bigBlocks.Length; i++)
             {
                 bigBlocks[i] = new Bitmap((int)(curButtonScale * blockWidth), (int)(curButtonScale * blockHeight));
@@ -340,7 +335,7 @@ namespace CadEditor
                 {
                     var imBlock = CropImage(imSrc as Bitmap, new Rectangle(x * imBlockWidth, y * imBlockHeight, imBlockWidth, imBlockHeight));
                     var imResized = ResizeBitmap(imBlock, (int)(curButtonScale * blockWidth), (int)(curButtonScale * blockHeight));
-                    bigBlocks[y*imCountX + x] = imResized;
+                    bigBlocks[y * imCountX + x] = imResized;
                 }
             }
 

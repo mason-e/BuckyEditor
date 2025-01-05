@@ -1,12 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using System.IO;
 using System.Windows.Forms;
-using System.Globalization;
-using System.Linq;
-
-using System.Drawing;
 
 namespace CadEditor
 {
@@ -32,7 +26,7 @@ namespace CadEditor
                 MessageBox.Show(ex.Message, "Load rom error");
                 return false;
             }
-            
+
             try
             {
                 ConfigScript.LoadFromFile(configFilename);
@@ -87,7 +81,7 @@ namespace CadEditor
             return -1;
         }
 
-        public static Screen getScreen(OffsetRec screenOffset,  int screenIndex)
+        public static Screen getScreen(OffsetRec screenOffset, int screenIndex)
         {
             var result = new int[Math.Max(64, screenOffset.recSize)];
             var arrayWithData = Globals.romdata;

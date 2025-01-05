@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Windows.Forms;
-using System.Globalization;
-using System.IO;
 using System.Drawing;
+using System.IO;
 using System.Linq;
-using System.Collections.Generic;
+using System.Windows.Forms;
 
 namespace CadEditor
 {
@@ -51,7 +49,7 @@ namespace CadEditor
         //strip ints to bytes
         public static byte[] linearizeBigBlocks(BigBlock[] bigBlocks)
         {
-            if ((bigBlocks == null)  || (bigBlocks.Length == 0))
+            if ((bigBlocks == null) || (bigBlocks.Length == 0))
             {
                 return new byte[0];
             }
@@ -60,7 +58,7 @@ namespace CadEditor
             {
                 int size = bigBlocks[i].getSize();
                 var byteIndexes = bigBlocks[i].indexes.Select(old => (byte)old).ToArray();
-                Array.Copy(byteIndexes, 0, result, i*size, size);
+                Array.Copy(byteIndexes, 0, result, i * size, size);
             }
             return result;
         }
@@ -68,16 +66,16 @@ namespace CadEditor
         public static T[] unlinearizeBigBlocks<T>(byte[] data, int w, int h)
             where T : BigBlock
         {
-            if ((data == null)  || (data.Length == 0))
+            if ((data == null) || (data.Length == 0))
             {
                 return new T[0];
             }
-            int size = w*h;
+            int size = w * h;
             T[] result = new T[data.Length / size];
             for (int i = 0; i < result.Length; i++)
             {
-                result[i] = Activator.CreateInstance(typeof(T), w,h) as T;
-                Array.Copy(data, i*size, result[i].indexes, 0, size);
+                result[i] = Activator.CreateInstance(typeof(T), w, h) as T;
+                Array.Copy(data, i * size, result[i].indexes, 0, size);
             }
             return result;
         }
@@ -228,18 +226,18 @@ namespace CadEditor
 
         public static int readWordLE(byte[] data, int addr)
         {
-            return (short)(data[addr+1] << 8 | data[addr]);
+            return (short)(data[addr + 1] << 8 | data[addr]);
         }
 
         public static void writeWord(byte[] data, int addr, int word)
         {
-            data[addr]     = (byte)(word >> 8);
+            data[addr] = (byte)(word >> 8);
             data[addr + 1] = (byte)(word & 0xFF);
         }
 
         public static void writeWordLE(byte[] data, int addr, int word)
         {
-            data[addr+1] = (byte)(word >> 8);
+            data[addr + 1] = (byte)(word >> 8);
             data[addr] = (byte)(word & 0xFF);
         }
 
@@ -254,7 +252,7 @@ namespace CadEditor
             }
             var screens = new Screen[totalCount];
 
-            int  currentScreen = 0;
+            int currentScreen = 0;
             for (int i = 0; i < count; i++)
             {
                 for (int scrI = 0; scrI < offsets[i].recCount; scrI++)
@@ -363,15 +361,15 @@ namespace CadEditor
 
         public static GetPalFunc readPalFromBin(string[] fname)
         {
-            return (int x)=> { return readBinFile(fname[x]); };
+            return (int x) => { return readBinFile(fname[x]); };
         }
 
         public static GetVideoChunkFunc getVideoChunk(string[] fname)
         {
-            return (int x)=> { return readVideoBankFromFile(fname[x], 0); };
+            return (int x) => { return readVideoBankFromFile(fname[x], 0); };
         }
 
-        public static  void defaultDrawObject(Graphics g, ObjectRec curObject, int listNo, bool isSelected, float curScale, ImageList objectSprites, bool inactive, int leftMargin, int topMargin)
+        public static void defaultDrawObject(Graphics g, ObjectRec curObject, int listNo, bool isSelected, float curScale, ImageList objectSprites, bool inactive, int leftMargin, int topMargin)
         {
             int x = curObject.x, y = curObject.y;
             var myFont = new Font(FontFamily.GenericSansSerif, 6.0f);
@@ -409,7 +407,7 @@ namespace CadEditor
             int x = curObject.x, y = curObject.y;
             int xsize = objectSpritesBig[curObject.type].Size.Width;
             int ysize = objectSpritesBig[curObject.type].Size.Height;
-            var rect = new Rectangle((int)((x - xsize/2) * curScale) + leftMargin, (int)((y - ysize/2) * curScale) + topMargin, (int)(xsize * curScale), (int)(ysize * curScale));
+            var rect = new Rectangle((int)((x - xsize / 2) * curScale) + leftMargin, (int)((y - ysize / 2) * curScale) + topMargin, (int)(xsize * curScale), (int)(ysize * curScale));
             if (curObject.type < objectSpritesBig.Length)
                 g.DrawImage(objectSpritesBig[curObject.type], rect);
             if (isSelected)

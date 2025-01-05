@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.Text;
-using System.IO;
 using System.Windows.Forms;
 
 namespace CadEditor
@@ -51,7 +48,7 @@ namespace CadEditor
                 resetControls();
             }
 
-            subeditorsDict = new Dictionary<ToolStripButton, Func<Form>> { 
+            subeditorsDict = new Dictionary<ToolStripButton, Func<Form>> {
                  { bttBlocks,       makeBlocksEditor },
             };
         }
@@ -120,7 +117,7 @@ namespace CadEditor
             pnGroups.Visible = ConfigScript.getGroups().Length > 0;
 
             updateScaleMenuItemsChecked(Array.FindIndex(scaleFactors, el => el == curScale)); //float comparasion with == is danger
-            
+
             resetMapScreenSize();
         }
 
@@ -235,7 +232,7 @@ namespace CadEditor
             }
             if (showNeiScreens && (screenNo < ConfigScript.screensOffset[0].recCount - 1) && screen.layers[0].showLayer)
             {
-                renderNeighbornLine(g, screenNo + 1, 0 , (width + 1) * tileSizeX);
+                renderNeighbornLine(g, screenNo + 1, 0, (width + 1) * tileSizeX);
             }
 
             //show brush
@@ -292,8 +289,8 @@ namespace CadEditor
 
             int width = screen.width;
 
-            int dx = ee.X / (int) (bigBlocks[0].Width * curScale) - 1;
-            int dy = ee.Y / (int) (bigBlocks[0].Height * curScale);
+            int dx = ee.X / (int)(bigBlocks[0].Width * curScale) - 1;
+            int dy = ee.Y / (int)(bigBlocks[0].Height * curScale);
 
             if (ea.Button == MouseButtons.Right)
             {
@@ -326,8 +323,8 @@ namespace CadEditor
             }
             var screen = getActiveScreen();
             int width = screen.width;
-            int dx = ee.X / (int) (bigBlocks[0].Width * curScale) - 1;
-            int dy = ee.Y / (int) (bigBlocks[0].Height * curScale);
+            int dx = ee.X / (int)(bigBlocks[0].Width * curScale) - 1;
+            int dy = ee.Y / (int)(bigBlocks[0].Height * curScale);
             lbCoords.Text = String.Format("Coords:({0},{1})", dx, dy);
 
             bool curDeltaChanged = curDx != dx || curDy != dy;
@@ -486,7 +483,7 @@ namespace CadEditor
             }
 
             return true;
-            
+
         }
 
         public void reloadGameType()
@@ -529,7 +526,7 @@ namespace CadEditor
         private FormClosedEventHandler subeditorClosed(ToolStripItem enabledAfterCloseButton)
         {
             return delegate
-            { 
+            {
                 enabledAfterCloseButton.Enabled = true;
                 reloadLevel(true, true);
             };
@@ -544,11 +541,11 @@ namespace CadEditor
                 f.FormClosed += subeditorClosed(b);
                 if (showDialog)
                 {
-                  f.ShowDialog();
+                    f.ShowDialog();
                 }
                 else
                 {
-                  f.Show();
+                    f.Show();
                 }
             }
         }
@@ -645,7 +642,7 @@ namespace CadEditor
                 }
                 int deltaX = selectionEndX - selectionBeginX + 1;
                 int deltaY = selectionEndY - selectionBeginY + 1;
-                int [][] tiles = new int[deltaY][];
+                int[][] tiles = new int[deltaY][];
                 for (int arrs = 0; arrs < tiles.Length; arrs++)
                     tiles[arrs] = new int[deltaX];
                 var curScreen = screens[screenNo];
@@ -653,7 +650,7 @@ namespace CadEditor
                 {
                     for (int j = 0; j < deltaY; j++)
                     {
-                        int index = (selectionBeginY + j)*curScreen.width + (selectionBeginX + i);
+                        int index = (selectionBeginY + j) * curScreen.width + (selectionBeginX + i);
                         tiles[j][i] = curScreen.layers[curActiveLayer].data[index];
                     }
                 }
@@ -694,7 +691,7 @@ namespace CadEditor
 
         private void FormMain_KeyDown(object sender, KeyEventArgs e)
         {
-            
+
         }
 
         private void blocksScreen_Paint(object sender, PaintEventArgs e)
@@ -704,7 +701,7 @@ namespace CadEditor
             var g = e.Graphics;
             g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.NearestNeighbor;
             g.PixelOffsetMode = System.Drawing.Drawing2D.PixelOffsetMode.Half;
-            
+
             var renderParams = new MapEditor.RenderParams
             {
                 bigBlocks = bigBlocks,
@@ -795,7 +792,7 @@ namespace CadEditor
 
         public void addSubeditorButton(ToolStripItem item)
         {
-          toolStrip1.Items.Insert(toolStrip1.Items.IndexOf(bttBlocks)+1, item);
+            toolStrip1.Items.Insert(toolStrip1.Items.IndexOf(bttBlocks) + 1, item);
         }
 
         private void bttScale_ButtonClick(object sender, EventArgs e)
@@ -833,7 +830,7 @@ namespace CadEditor
             UtilsGui.setCbIndexWithoutUpdateLevel(cbPaletteNo, cbLevel_SelectedIndexChanged, g.palNo);
             cbLevel_SelectedIndexChanged(cbVideoNo, new EventArgs());
             if (g.firstScreen < 0 || g.firstScreen <= cbScreenNo.Items.Count)
-              cbScreenNo.SelectedIndex = g.firstScreen - 1;
+                cbScreenNo.SelectedIndex = g.firstScreen - 1;
         }
 
         private void setWindowText()

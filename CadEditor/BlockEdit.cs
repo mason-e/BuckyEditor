@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Text;
-using System.Windows.Forms;
 using System.Linq;
+using System.Windows.Forms;
 
 namespace CadEditor
 {
@@ -44,7 +40,7 @@ namespace CadEditor
             curActivePal = formMain.curActivePalleteNo;
             UtilsGui.setCbIndexWithoutUpdateLevel(cbSubpalette, cbSubpalette_SelectedIndexChanged);
 
-            UtilsGui.setCbItemsCount(cbPanelNo, (ConfigScript.getBlocksCount(curActiveBigBlock) + BlocksPerPage  - 1)/ BlocksPerPage);
+            UtilsGui.setCbItemsCount(cbPanelNo, (ConfigScript.getBlocksCount(curActiveBigBlock) + BlocksPerPage - 1) / BlocksPerPage);
             UtilsGui.setCbIndexWithoutUpdateLevel(cbPanelNo, cbPanelNo_SelectedIndexChanged);
         }
 
@@ -56,7 +52,7 @@ namespace CadEditor
             setObjects();
             reloadLevelEx();
             if (resetDirty)
-              dirty = false;
+                dirty = false;
         }
 
         protected virtual void reloadLevelEx()
@@ -102,13 +98,13 @@ namespace CadEditor
             var chunk = ConfigScript.getVideoChunk(curActiveVideo);
             for (int i = 0; i < 4; i++)
             {
-                videoSprites[i] = Enumerable.Range(0,256).Select(t => ((Bitmap)UtilsGDI.ResizeBitmap(ConfigScript.videoNes.makeImage(t, chunk, palette, i), 16, 16))).ToArray();
+                videoSprites[i] = Enumerable.Range(0, 256).Select(t => ((Bitmap)UtilsGDI.ResizeBitmap(ConfigScript.videoNes.makeImage(t, chunk, palette, i), 16, 16))).ToArray();
             }
         }
 
         protected void setVideoImage()
         {
-            var b = new Bitmap(TileSize*16, TileSize*16);
+            var b = new Bitmap(TileSize * 16, TileSize * 16);
             using (Graphics g = Graphics.FromImage(b))
             {
                 for (int i = 0; i < Globals.chunksCount; i++)
@@ -177,8 +173,8 @@ namespace CadEditor
             int y = e.Y / TileSize;
             PictureBox p = (PictureBox)sender;
             int objIndex = curPageIndex * BlocksPerPage + (int)p.Tag;
-            var obj = objects[ objIndex];
-            if (x >= 0 && x < obj.w && y>=0 && y < obj.h)
+            var obj = objects[objIndex];
+            if (x >= 0 && x < obj.w && y >= 0 && y < obj.h)
             {
                 if (left)
                 {
@@ -314,7 +310,7 @@ namespace CadEditor
                 lb.Location = new Point(curPanelX, 0);
                 lb.Size = new Size(32, 32);
                 lb.Tag = i;
-                lb.Text = String.Format("{0:X}",i);
+                lb.Text = String.Format("{0:X}", i);
                 fp.Controls.Add(lb);
                 curPanelX += lb.Size.Width;
                 //
@@ -343,7 +339,7 @@ namespace CadEditor
                 nudType.Location = new Point(curPanelX, 0);
                 nudType.Tag = i;
                 nudType.Minimum = 0;
-                nudType.Maximum = objectTypes.Length-1;
+                nudType.Maximum = objectTypes.Length - 1;
                 nudType.Hexadecimal = true;
                 nudType.ValueChanged += nudType_ValueChanged;
                 fp.Controls.Add(nudType);
@@ -399,10 +395,10 @@ namespace CadEditor
 
         protected void btClear_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show("Are you sure want to clear all blocks?", "Clear", MessageBoxButtons.YesNo)!= DialogResult.Yes)
-              return;
+            if (MessageBox.Show("Are you sure want to clear all blocks?", "Clear", MessageBoxButtons.YesNo) != DialogResult.Yes)
+                return;
             for (int i = 0; i < ConfigScript.getBlocksCount(curActiveBigBlock); i++)
-                objects[i] = new ObjRec(0,0,0,0,0,0);
+                objects[i] = new ObjRec(0, 0, 0, 0, 0, 0);
             dirty = true;
             refillPanel();
         }

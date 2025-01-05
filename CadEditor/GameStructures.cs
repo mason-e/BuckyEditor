@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
-using System.Globalization;
-using System.Linq;
-
 using System.Drawing;
+using System.Linq;
 using System.Text.Json.Serialization;
 
 namespace CadEditor
@@ -74,11 +71,11 @@ namespace CadEditor
 
         public ObjRec(ObjRec other)
         {
-           w = other.w;
-           h = other.h;
-           type = other.type;
-           indexes = new int[other.indexes.Length];
-           palBytes = new int[other.palBytes.Length];
+            w = other.w;
+            h = other.h;
+            type = other.type;
+            indexes = new int[other.indexes.Length];
+            palBytes = new int[other.palBytes.Length];
             Array.Copy(other.indexes, indexes, indexes.Length);
             Array.Copy(other.palBytes, palBytes, palBytes.Length);
         }
@@ -111,7 +108,7 @@ namespace CadEditor
 
         bool IEquatable<ObjRec>.Equals(ObjRec other)
         {
-            if ((w != other.w) || (h!=other.h))
+            if ((w != other.w) || (h != other.h))
             {
                 return false;
             }
@@ -148,7 +145,7 @@ namespace CadEditor
             {
                 hash += i.GetHashCode();
             }
-            foreach(var p in palBytes)
+            foreach (var p in palBytes)
             {
                 hash += p.GetHashCode();
             }
@@ -193,7 +190,7 @@ namespace CadEditor
         }
 
         public LevelRec(int objectsBeginAddr, int objCount, int width = 0, int height = 0, int layoutAddr = 0, string name = "", GroupRec group = null)
-            :this(objectsBeginAddr, objCount, width, height, layoutAddr, name)
+            : this(objectsBeginAddr, objCount, width, height, layoutAddr, name)
         {
             this.group = group;
         }
@@ -284,7 +281,7 @@ namespace CadEditor
             this.sy = other.sy;
             this.x = other.x;
             this.y = other.y;
-            this.additionalData = new Dictionary<String,int>(other.additionalData);
+            this.additionalData = new Dictionary<String, int>(other.additionalData);
         }
         public int type { get; set; }
         public int x { get; set; }

@@ -1,12 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Text;
 using System.IO;
-using System.Windows.Forms;
 using System.Linq;
+using System.Windows.Forms;
 
 namespace CadEditor
 {
@@ -73,7 +68,7 @@ namespace CadEditor
         }
 
         public static string fileName = "";
-        public static string configName="";
+        public static string configName = "";
 
         private void OpenFile_Load(object sender, EventArgs e)
         {

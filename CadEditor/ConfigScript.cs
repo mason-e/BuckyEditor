@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
@@ -9,13 +8,13 @@ using CSScriptLibrary;
 namespace CadEditor
 {
     public delegate byte[] GetVideoChunkFunc(int videoPageId);
-    public delegate void   SetVideoChunkFunc(int videoPageId, byte[] videoChunk);
+    public delegate void SetVideoChunkFunc(int videoPageId, byte[] videoChunk);
 
     public delegate int GetBlocksAddrFunc(int blockId);
     public delegate int GetBlocksCountFunc(int blockId);
 
     public delegate BigBlock[] GetBigBlocksFunc(int bigBlockId);
-    public delegate void   SetBigBlocksFunc(int bigTileIndex, BigBlock[] bigBlocks);
+    public delegate void SetBigBlocksFunc(int bigTileIndex, BigBlock[] bigBlocks);
     public delegate int GetBigBlocksAddrFunc(int bigBlockId);
     public delegate int GetBigBlocksCountFunc(int hierLevel, int bigBlockId);
 
@@ -24,19 +23,19 @@ namespace CadEditor
     public delegate GroupRec[] GetGroupsFunc();
     public delegate IList<LevelRec> GetLevelRecsFunc();
 
-    public delegate void   RenderToMainScreenFunc(Graphics g, int curScale, int scrNo);
+    public delegate void RenderToMainScreenFunc(Graphics g, int curScale, int scrNo);
 
     public delegate List<ObjectList> GetObjectsFunc(int levelNo);
-    public delegate bool            SetObjectsFunc(int levelNo, List<ObjectList> objects); 
-    public delegate void            SortObjectsFunc(int levelNo, int listNo, List<ObjectRec> objects);
+    public delegate bool SetObjectsFunc(int levelNo, List<ObjectList> objects);
+    public delegate void SortObjectsFunc(int levelNo, int listNo, List<ObjectRec> objects);
 
-    public delegate LevelLayerData  GetLayoutFunc(int levelNo);
+    public delegate LevelLayerData GetLayoutFunc(int levelNo);
     public delegate bool SetLayoutFunc(LevelLayerData date, int levelNo);
 
     public delegate Dictionary<String, int> GetObjectDictionaryFunc(int listNo, int objNo);
 
-    public delegate int  ConvertScreenTileFunc(int val);
-    public delegate int  GetBigTileNoFromScreenFunc(int[] screenData, int index);
+    public delegate int ConvertScreenTileFunc(int val);
+    public delegate int GetBigTileNoFromScreenFunc(int[] screenData, int index);
     public delegate void SetBigTileToScreenFunc(int[] screenData, int index, int value);
 
     public delegate void DrawObjectFunc(Graphics g, ObjectRec curObject, int listNo, bool selected, float curScale, ImageList objectSprites, bool inactive, int leftMargin, int topMargin);
@@ -140,7 +139,7 @@ namespace CadEditor
             setBigBlocksFuncs = callFromScript<SetBigBlocksFunc[]>(asm, data, "*.setBigBlocksFuncs", new SetBigBlocksFunc[1]);
             getBigBlocksAddrFuncs = callFromScript<GetBigBlocksAddrFunc[]>(asm, data, "*.getBigBlocksAddrFuncs", new GetBigBlocksAddrFunc[1]);
 
-            getBlocksAddrFunc = callFromScript<GetBlocksAddrFunc> (asm, data, "*.getBlocksAddrFunc");
+            getBlocksAddrFunc = callFromScript<GetBlocksAddrFunc>(asm, data, "*.getBlocksAddrFunc");
             getPalFunc = callFromScript<GetPalFunc>(asm, data, "*.getPalFunc");
             getObjectsFunc = callFromScript<GetObjectsFunc>(asm, data, "*.getObjectsFunc");
             setObjectsFunc = callFromScript<SetObjectsFunc>(asm, data, "*.setObjectsFunc");
@@ -163,10 +162,10 @@ namespace CadEditor
             scrollsOffsetFromLayout = callFromScript(asm, data, "*.getScrollsOffsetFromLayout", 0);
             scrollByteArray = callFromScript(asm, data, "*.getScrollByteArray", new byte[0]);
 
-            blocksCount = callFromScript(asm, data, "*.getBlocksCount"   , 256);
+            blocksCount = callFromScript(asm, data, "*.getBlocksCount", 256);
             getBlocksCountFunc = callFromScript<GetBlocksCountFunc>(asm, data, "*.getBlocksCountFunc");
 
-            blocksPicturesFilename  = callFromScript(asm, data, "getBlocksFilename", "");
+            blocksPicturesFilename = callFromScript(asm, data, "getBlocksFilename", "");
 
             loadScreensFunc = callFromScript<LoadScreensFunc>(asm, data, "*.loadScreensFunc");
             saveScreensFunc = callFromScript<SaveScreensFunc>(asm, data, "*.saveScreensFunc");
@@ -178,7 +177,7 @@ namespace CadEditor
                     throw new Exception("File does not exists: " + ConfigScript.getBlocksPicturesFilename());
                 }
             }
-            blocksPicturesWidth = callFromScript(asm, data, "getPictureBlocksWidth", 32); 
+            blocksPicturesWidth = callFromScript(asm, data, "getPictureBlocksWidth", 32);
             usePicturesInstedBlocks = blocksPicturesFilename != "";
 
             blockTypeNames = callFromScript(asm, data, "getBlockTypeNames", defaultBlockTypeNames);
@@ -236,12 +235,12 @@ namespace CadEditor
 
         public static byte[] getVideoChunk(int videoPageId)
         {
-            return (getVideoChunkFunc ?? (_=>null))(videoPageId);
+            return (getVideoChunkFunc ?? (_ => null))(videoPageId);
         }
 
         public static void setVideoChunk(int videoPageId, byte[] videoChunk)
         {
-           setVideoChunkFunc(videoPageId, videoChunk);
+            setVideoChunkFunc(videoPageId, videoChunk);
         }
 
         public static BigBlock[] getBigBlocksRecursive(int hierarchyLevel, int bigBlockId)
@@ -264,25 +263,25 @@ namespace CadEditor
             return (getPalFunc ?? (_ => null))(palId);
         }
 
-         public static int convertScreenTile(int tile)
-         {
-             return (convertScreenTileFunc ?? (v=>v))(tile);
-         }
+        public static int convertScreenTile(int tile)
+        {
+            return (convertScreenTileFunc ?? (v => v))(tile);
+        }
 
-         public static int backConvertScreenTile(int tile)
-         {
-             return (backConvertScreenTileFunc ?? (v => v))(tile);
-         }
+        public static int backConvertScreenTile(int tile)
+        {
+            return (backConvertScreenTileFunc ?? (v => v))(tile);
+        }
 
-         public static int getBigTileNoFromScreen(int[] screenData, int index)
-         {
-             return getBigTileNoFromScreenFunc(screenData, index);
-         }
+        public static int getBigTileNoFromScreen(int[] screenData, int index)
+        {
+            return getBigTileNoFromScreenFunc(screenData, index);
+        }
 
-         public static void setBigTileToScreen(int[] screenData, int index, int value)
-         {
-             setBigTileToScreenFunc(screenData, index, value);
-         }
+        public static void setBigTileToScreen(int[] screenData, int index, int value)
+        {
+            setBigTileToScreenFunc(screenData, index, value);
+        }
 
         public static Screen[] loadScreens()
         {
@@ -320,7 +319,7 @@ namespace CadEditor
 
         public static int getBlocksCount(int blockId)
         {
-            return getBlocksCountFunc?.Invoke(blockId)?? blocksCount;
+            return getBlocksCountFunc?.Invoke(blockId) ?? blocksCount;
         }
 
         public static LevelRec getLevelRec(int i)
@@ -449,7 +448,7 @@ namespace CadEditor
         private static string configDirectory;
 
         public static string ProgramDirectory { get { return programStartDirectory; } }
-        public static string ConfigDirectory  { get { return configDirectory; } }
+        public static string ConfigDirectory { get { return configDirectory; } }
 
         public static OffsetRec palOffset;
         public static OffsetRec videoOffset;
@@ -534,8 +533,8 @@ namespace CadEditor
         public static string[] defaultBlockTypeNames = new[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "F" };
 
         //global editor settings
-        public static string  romName;
-        public static string  cfgName;
+        public static string romName;
+        public static string cfgName;
         public static Color[] nesColors;
 
         public static List<IPlugin> plugins = new List<IPlugin>();
