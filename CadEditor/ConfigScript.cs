@@ -71,13 +71,6 @@ namespace CadEditor
             }
         }
 
-        private static void addPlugin(string pluginName)
-        {
-            var plugin = PluginLoader.loadPlugin<IPlugin>(pluginName);
-            if (plugin != null)
-                plugins.Add(plugin);
-        }
-
         public static void loadPluginWithSilentCatch(Action action)
         {
             try
@@ -95,44 +88,7 @@ namespace CadEditor
             configDirectory = Path.GetDirectoryName(fileName) + "/";
 
             var asm = new AsmHelper(CSScript.LoadCode(File.ReadAllText(fileName)));
-            object data = null;
-            bool metaDataExists = true;
-            try
-            {
-                object metaData = null;
-                try
-                {
-                    metaData = asm.CreateObject("MetaData");
-                }
-                catch (Exception)
-                {
-                    metaDataExists = false;
-                }
-                if (metaDataExists)
-                {
-                    var scriptText = callFromScript(asm, metaData, "*.makeConfig", "");
-                    var patchDict = callFromScript(asm, metaData, "*.getPatchDictionary", new Dictionary<string, object>());
-                    scriptText = Utils.patchConfigTemplate(scriptText, patchDict);
-                    asm = new AsmHelper(CSScript.LoadCode(scriptText));
-                    data = asm.CreateObject("Data");
-                }
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show(e.Message);
-            }
-
-            if (!metaDataExists)
-            {
-                try
-                {
-                    data = asm.CreateObject("Data");
-                }
-                catch (Exception)
-                {
-                    return;
-                }
-            }
+            object data = asm.CreateObject("Data");
 
             screensOffset = new OffsetRec[1];
 
@@ -155,14 +111,6 @@ namespace CadEditor
             littleEndian = callFromScript(asm, data, "*.isLittleEndian", false);
             blockSize4x4 = callFromScript(asm, data, "*.isBlockSize4x4", false);
             getLevelRecsFunc = callFromScript<GetLevelRecsFunc>(asm, data, "*.getLevelRecsFunc", ConfigScript.getLevelRecsFuncDefault());
-
-            //todo: remove or change to many lists interface
-            minObjCoordX = callFromScript(asm, data, "*.getMinObjCoordX", 0);
-            minObjCoordY = callFromScript(asm, data, "*.getMinObjCoordY", 0);
-            minObjType   = callFromScript(asm, data, "*.getMinObjType"  , 0);
-            maxObjCoordX = callFromScript(asm, data, "*.getMaxObjCoordX", -1);
-            maxObjCoordY = callFromScript(asm, data, "*.getMaxObjCoordY", -1);
-            maxObjType   = callFromScript(asm, data, "*.getMaxObjType"  , -1); //256
 
             bigBlocksHierarchyCount = callFromScript<int>(asm, data, "*.getBigBlocksHierarchyCount", 1);
 
@@ -296,24 +244,9 @@ namespace CadEditor
            setVideoChunkFunc(videoPageId, videoChunk);
         }
 
-        /*public static BigBlock[] getBigBlocks(int bigBlockId)
-        {
-            return (getBigBlocksFuncs[0] ?? (_ => null))(bigBlockId);
-        }*/
-
         public static BigBlock[] getBigBlocksRecursive(int hierarchyLevel, int bigBlockId)
         {
             return (getBigBlocksFuncs[hierarchyLevel] ?? (_ => null))(bigBlockId);
-        }
-
-        /*public static void setBigBlocks(int bigTileIndex, BigBlock[] bigBlockIndexes)
-        {
-            setBigBlocksFuncs[0](bigTileIndex, bigBlockIndexes);
-        }*/
-
-        public static void setBigBlocksHierarchy(int hierarchyLevel, int bigTileIndex, BigBlock[] bigBlockIndexes)
-        {
-            setBigBlocksFuncs[hierarchyLevel](bigTileIndex, bigBlockIndexes);
         }
 
         public static ObjRec[] getBlocks(int bigBlockId)
@@ -329,21 +262,6 @@ namespace CadEditor
         public static byte[] getPal(int palId)
         {
             return (getPalFunc ?? (_ => null))(palId);
-        }
-
-        public static List<ObjectList> getObjects(int levelNo)
-        {
-            return (getObjectsFunc ?? (_ => null))(levelNo);
-        }
-
-        public static void setObjects(int levelNo, List<ObjectList> objects)
-        {
-            setObjectsFunc(levelNo, objects);
-        }
-        
-        public static void sortObjects(int levelNo, int listNo, List<ObjectRec> objects)
-        {
-            sortObjectsFunc(levelNo, listNo, objects);
         }
 
          public static int convertScreenTile(int tile)
@@ -364,22 +282,6 @@ namespace CadEditor
          public static void setBigTileToScreen(int[] screenData, int index, int value)
          {
              setBigTileToScreenFunc(screenData, index, value);
-         }
-
-        public static void drawObject(Graphics g, ObjectRec curObject, int listNo, bool selected, float curScale, ImageList objectSprites, bool inactive, int leftMargin, int topMargin)
-         {
-             if (drawObjectFunc != null)
-                 drawObjectFunc(g, curObject, listNo, selected, curScale, objectSprites, inactive, leftMargin, topMargin);
-             else
-                 Utils.defaultDrawObject(g, curObject, listNo, selected, curScale, objectSprites, inactive, leftMargin, topMargin);
-         }
-
-         public static void drawObjectBig(Graphics g, ObjectRec curObject, int listNo, bool selected, float curScale, Image[] objectSprites, bool inactive, int leftMargin, int topMargin)
-         {
-             if (drawObjectBigFunc != null)
-                 drawObjectBigFunc(g, curObject, listNo, selected, curScale, objectSprites, inactive, leftMargin, topMargin);
-             else
-                 Utils.defaultDrawObjectBig(g, curObject, listNo, selected, curScale, objectSprites, inactive, leftMargin, topMargin);   
          }
 
         public static Screen[] loadScreens()
@@ -406,21 +308,6 @@ namespace CadEditor
             }
         }
 
-        public static LevelLayerData getLayout(int levelNo)
-        {
-            return getLayoutFunc(levelNo);
-        }
-
-        public static bool setLayout(LevelLayerData layerData, int levelNo)
-        {
-            return (setLayoutFunc ?? ((_,__) => true))(layerData, levelNo);
-        }
-
-        public static Dictionary<String, int> getObjectDictionary(int listNo, int objType)
-        {
-            return (getObjectDictionaryFunc ?? ((_,__)=> null))(listNo, objType);
-        }
-
         public static void renderToMainScreen(Graphics g, int scale, int scrNo)
         {
             renderToMainScreenFunc?.Invoke(g, scale, scrNo);
@@ -436,24 +323,9 @@ namespace CadEditor
             return getBlocksCountFunc?.Invoke(blockId)?? blocksCount;
         }
 
-        public static IList<LevelRec> getLevelRecs()
-        {
-            return getLevelRecsFunc();
-        }
-
         public static LevelRec getLevelRec(int i)
         {
             return getLevelRecsFunc()[i];
-        }
-
-        public static int getMaxObjType()
-        {
-            return maxObjType;
-        }
-
-        public static int getMinObjType()
-        {
-            return minObjType;
         }
 
         public static string[] getBlockTypeNames()
@@ -489,11 +361,6 @@ namespace CadEditor
         public static string getBlocksPicturesFilename()
         {
             return configDirectory + blocksPicturesFilename;
-        }
-
-        public static bool isShowScrollsInLayout()
-        {
-            return showScrollsInLayout;
         }
 
         public static int getScrollsOffsetFromLayout()
@@ -533,11 +400,6 @@ namespace CadEditor
             return ConfigScript.getLevelRec(index).layoutAddr;
         }
 
-        public static int getScrollAddr(int index)
-        {
-            return getLayoutAddr(index) + ConfigScript.getScrollsOffsetFromLayout();
-        }
-
         public static int getTilesAddr(int id)
         {
             var getAddrFunc = ConfigScript.getBlocksAddrFunc;
@@ -566,26 +428,10 @@ namespace CadEditor
             return bigBlocksOffset.beginAddr + bigBlocksOffset.recSize * id;
         }
 
-        public static int getLevelWidth(int levelNo)
-        {
-            return ConfigScript.getLevelRec(levelNo).width;
-        }
-
-        public static int getLevelHeight(int levelNo)
-        {
-            return ConfigScript.getLevelRec(levelNo).height;
-        }
-
         public static int getbigBlocksHierarchyCount()
         {
             return bigBlocksHierarchyCount;
         }
-
-        public static byte[] getScrollByteArray()
-        {
-            return scrollByteArray;
-        }
-        //------------------------------------------------------------
 
         public static T callFromScript<T>(AsmHelper script, object data, string funcName, T defaultValue = default(T), params object[] funcParams)
         {
