@@ -140,27 +140,13 @@ namespace CadEditor
 
         private void setBlocks(bool needRebuildBlocks)
         {
-            //if using pictures
-            if (ConfigScript.usePicturesInstedBlocks)
-            {
-                if (needRebuildBlocks)
-                {
-                    //get block size from image
-                    int w = ConfigScript.getBlocksPicturesWidth();
-                    int h = 32;
-                    bigBlocks = UtilsGDI.setBlocksForPictures(curScale, w, h, curActiveViewType);
-                }
-            }
-            else
-            {
-                MapViewType smallObjectsType =
-                    curActiveViewType == MapViewType.SmallObjNumbers ? MapViewType.ObjNumbers :
-                      curActiveViewType == MapViewType.ObjType ? MapViewType.ObjType : MapViewType.Tiles;
+            MapViewType smallObjectsType =
+                curActiveViewType == MapViewType.SmallObjNumbers ? MapViewType.ObjNumbers :
+                    curActiveViewType == MapViewType.ObjType ? MapViewType.ObjType : MapViewType.Tiles;
 
-                if (needRebuildBlocks)
-                {
-                    bigBlocks = ConfigScript.videoNes.makeBigBlocks(curActiveVideoNo, curActiveBigBlockNo, curActiveBlockNo, curActivePalleteNo, smallObjectsType, curActiveViewType, ConfigScript.getbigBlocksHierarchyCount() - 1);
-                }
+            if (needRebuildBlocks)
+            {
+                bigBlocks = ConfigScript.videoNes.makeBigBlocks(curActiveVideoNo, curActiveBigBlockNo, curActiveBlockNo, curActivePalleteNo, smallObjectsType, curActiveViewType, ConfigScript.getbigBlocksHierarchyCount() - 1);
             }
 
             curActiveBlock = 0;

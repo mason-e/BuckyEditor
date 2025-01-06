@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Drawing;
+using System.Linq;
 //using System.Windows.Forms;
 
 using CadEditor;
@@ -194,8 +192,8 @@ namespace PluginVideoNes
             return bitmaps;
         }
 
-         public Image[] makeBigBlocks(int videoNo, int bigBlockNo, int blockNo, int palleteNo, MapViewType smallObjectsViewType = MapViewType.Tiles,
-           MapViewType curViewType = MapViewType.Tiles, int hierarchyLevel = 0)
+        public Image[] makeBigBlocks(int videoNo, int bigBlockNo, int blockNo, int palleteNo, MapViewType smallObjectsViewType = MapViewType.Tiles,
+          MapViewType curViewType = MapViewType.Tiles, int hierarchyLevel = 0)
         {
             BigBlock[] bigBlockIndexes = ConfigScript.getBigBlocksRecursive(hierarchyLevel, bigBlockNo);
             return makeBigBlocks(videoNo, bigBlockNo, blockNo, bigBlockIndexes, palleteNo, smallObjectsViewType, curViewType, hierarchyLevel);
@@ -221,7 +219,7 @@ namespace PluginVideoNes
             //tt version hardcode
             Image[][] smallBlocksAll = null;
 
-            bool smallBlockHasSubpals = bigBlockIndexes==null ? true : bigBlockIndexes[0].smallBlocksWithPal();
+            bool smallBlockHasSubpals = bigBlockIndexes == null ? true : bigBlockIndexes[0].smallBlocksWithPal();
             if (!smallBlockHasSubpals)
             {
                 smallBlocksAll = new Image[4][];
@@ -232,7 +230,7 @@ namespace PluginVideoNes
             }
             else
             {
-                smallBlocksAll = new Image[4][] { smallBlocksPack, smallBlocksPack, smallBlocksPack, smallBlocksPack } ;
+                smallBlocksAll = new Image[4][] { smallBlocksPack, smallBlocksPack, smallBlocksPack, smallBlocksPack };
             }
 
             for (int btileId = 0; btileId < blockCount; btileId++)

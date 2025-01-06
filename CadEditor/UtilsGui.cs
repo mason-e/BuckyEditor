@@ -28,19 +28,6 @@ namespace CadEditor
             cb.SelectedIndexChanged += ev;
         }
 
-        public static void setCbIndexWithoutUpdateLevel(ToolStripComboBox cb, EventHandler ev, int index = 0)
-        {
-            cb.SelectedIndexChanged -= ev;
-            cb.SelectedIndex = index;
-            cb.SelectedIndexChanged += ev;
-        }
-
-        public static void setCbCheckedWithoutUpdateLevel(CheckBox cb, EventHandler ev, bool index = false)
-        {
-            cb.CheckedChanged -= ev;
-            cb.Checked = index;
-            cb.CheckedChanged += ev;
-        }
 
         public static void resizeBlocksScreen(Image[] bigBlocks, PictureBox blocksScreen, int blockWidth, int blockHeight, float curScale)
         {

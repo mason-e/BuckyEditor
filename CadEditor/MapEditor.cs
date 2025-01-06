@@ -92,20 +92,6 @@ namespace CadEditor
             }
         }
 
-        public static Image screenToImage(Screen[] screens, int scrNo, RenderParams renderParams)
-        {
-            int tileSizeX = (int)(renderParams.bigBlocks[0].Width * renderParams.curScale);
-            int tileSizeY = (int)(renderParams.bigBlocks[0].Height * renderParams.curScale);
-
-            Image result = new Bitmap(renderParams.width * tileSizeX, renderParams.height * tileSizeY);
-
-            using (var g = Graphics.FromImage(result))
-            {
-                render(g, screens, scrNo, renderParams);
-            }
-            return result;
-        }
-
         public class RenderParams
         {
             public RenderParams()
