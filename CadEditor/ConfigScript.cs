@@ -93,20 +93,9 @@ namespace CadEditor
 
             palOffset = callFromScript(asm, data, "*.getPalOffset", new OffsetRec(0, 1, 0));
             videoOffset = callFromScript(asm, data, "*.getVideoOffset", new OffsetRec(0, 1, 0));
-            videoObjOffset = callFromScript(asm, data, "*.getVideoObjOffset", new OffsetRec(0, 1, 0));
             blocksOffset = callFromScript(asm, data, "*.getBlocksOffset", new OffsetRec(0, 1, 0));
             screensOffset[0] = callFromScript(asm, data, "*.getScreensOffset", new OffsetRec(0, 1, 0, -1, -1));
-            if ((screensOffset[0].beginAddr == 0) && (screensOffset[0].recSize == 0))
-            {
-                screensOffset = callFromScript(asm, data, "*.getScreensOffsetsForLevels", new OffsetRec[1]);
-            }
-            if ((screensOffset[0].width <= 0) || (screensOffset[0].height <= 0))
-            {
-                throw new Exception("Screen width and height must be defined and be positive numbers");
-            }
-            screenVertical = callFromScript(asm, data, "*.getScreenVertical", false);
             screenDataStride = callFromScript(asm, data, "*.getScreenDataStride", 1);
-            wordLen = callFromScript(asm, data, "*.getWordLen", 1);
             littleEndian = callFromScript(asm, data, "*.isLittleEndian", false);
             blockSize4x4 = callFromScript(asm, data, "*.isBlockSize4x4", false);
             getLevelRecsFunc = callFromScript<GetLevelRecsFunc>(asm, data, "*.getLevelRecsFunc", ConfigScript.getLevelRecsFuncDefault());
@@ -325,19 +314,9 @@ namespace CadEditor
             return blockTypeNames;
         }
 
-        public static bool getScreenVertical()
-        {
-            return screenVertical;
-        }
-
         public static int getScreenDataStride()
         {
             return screenDataStride;
-        }
-
-        public static int getWordLen()
-        {
-            return wordLen;
         }
 
         public static bool isLittleEndian()
@@ -429,14 +408,11 @@ namespace CadEditor
 
         public static OffsetRec palOffset;
         public static OffsetRec videoOffset;
-        public static OffsetRec videoObjOffset;
         public static OffsetRec blocksOffset;
         public static OffsetRec[] screensOffset;
         //public static OffsetRec boxesBackOffset;
         public static int levelsCount;
-        public static bool screenVertical;
         public static int screenDataStride;
-        public static int wordLen;
         public static bool littleEndian;
 
         public static bool useGbGraphics;

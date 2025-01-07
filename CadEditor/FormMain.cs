@@ -750,43 +750,20 @@ namespace CadEditor
                 bttOpen,
                 bttSave,
                 bttReload,
-                toolStripSeparator1,
-                //place for plugin
-                sToolButtons,
-
                 bttBlocks,
-                toolStripSeparator2,
-
-                toolStripSeparator3,
-
                 bttShowNei,
                 bttAxis,
                 bttShowBrush,
-                toolStripSeparator4,
-
                 bttScale,
-                toolStripSeparator5,
-
                 tbbShowPluginInfo,
             };
 
             toolStrip1.Items.AddRange(items);
         }
 
-        public void addSubeditorButton(ToolStripItem item)
-        {
-            toolStrip1.Items.Insert(toolStrip1.Items.IndexOf(bttBlocks) + 1, item);
-        }
-
         private void bttScale_ButtonClick(object sender, EventArgs e)
         {
             bttScale.ShowDropDown();
-        }
-
-        public void addToolButton(ToolStripItem item)
-        {
-            toolStrip1.Items.Insert(toolStrip1.Items.IndexOf(toolStripSeparator1) + 1, item);
-
         }
 
         private void tbbShowPluginInfo_Click(object sender, EventArgs e)

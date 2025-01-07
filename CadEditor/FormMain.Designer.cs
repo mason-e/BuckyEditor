@@ -54,15 +54,10 @@
             this.bttOpen = new System.Windows.Forms.ToolStripButton();
             this.bttSave = new System.Windows.Forms.ToolStripButton();
             this.bttReload = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.sToolButtons = new System.Windows.Forms.ToolStripSeparator();
             this.bttBlocks = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.bttShowNei = new System.Windows.Forms.ToolStripButton();
             this.bttAxis = new System.Windows.Forms.ToolStripButton();
             this.bttShowBrush = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.bttScale = new System.Windows.Forms.ToolStripSplitButton();
             this.x025ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.x05ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -70,7 +65,6 @@
             this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
             this.x3ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.x4ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.tbbShowPluginInfo = new System.Windows.Forms.ToolStripButton();
             this.tsLayer1 = new System.Windows.Forms.ToolStripMenuItem();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
@@ -243,7 +237,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(3, 120);
+            this.label9.Location = new System.Drawing.Point(3, 80);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(42, 13);
             this.label9.TabIndex = 48;
@@ -270,7 +264,7 @@
             "13",
             "14",
             "15"});
-            this.cbPaletteNo.Location = new System.Drawing.Point(7, 136);
+            this.cbPaletteNo.Location = new System.Drawing.Point(7, 96);
             this.cbPaletteNo.Name = "cbPaletteNo";
             this.cbPaletteNo.Size = new System.Drawing.Size(64, 21);
             this.cbPaletteNo.TabIndex = 47;
@@ -288,7 +282,7 @@
             "6",
             "7",
             "8"});
-            this.cbBlockNo.Location = new System.Drawing.Point(7, 96);
+            this.cbBlockNo.Location = new System.Drawing.Point(7, 56);
             this.cbBlockNo.Name = "cbBlockNo";
             this.cbBlockNo.Size = new System.Drawing.Size(64, 21);
             this.cbBlockNo.TabIndex = 45;
@@ -296,7 +290,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(3, 80);
+            this.label8.Location = new System.Drawing.Point(3, 40);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(37, 13);
             this.label8.TabIndex = 46;
@@ -356,17 +350,11 @@
             this.bttOpen,
             this.bttSave,
             this.bttReload,
-            this.toolStripSeparator1,
-            this.sToolButtons,
             this.bttBlocks,
-            this.toolStripSeparator2,
-            this.toolStripSeparator3,
             this.bttShowNei,
             this.bttAxis,
             this.bttShowBrush,
-            this.toolStripSeparator4,
             this.bttScale,
-            this.toolStripSeparator5,
             this.tbbShowPluginInfo});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
@@ -404,16 +392,6 @@
             this.bttReload.Text = "Reload";
             this.bttReload.Click += new System.EventHandler(this.bttReload_Click);
             // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 27);
-            // 
-            // sToolButtons
-            // 
-            this.sToolButtons.Name = "sToolButtons";
-            this.sToolButtons.Size = new System.Drawing.Size(6, 27);
-            // 
             // bttBlocks
             // 
             this.bttBlocks.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -423,16 +401,6 @@
             this.bttBlocks.Size = new System.Drawing.Size(24, 24);
             this.bttBlocks.Text = "Edit Blocks";
             this.bttBlocks.Click += new System.EventHandler(this.btSubeditor_Click);
-            // 
-            // toolStripSeparator2
-            // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 27);
-            // 
-            // toolStripSeparator3
-            // 
-            this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 27);
             // 
             // bttShowNei
             // 
@@ -472,11 +440,6 @@
             this.bttShowBrush.Size = new System.Drawing.Size(24, 24);
             this.bttShowBrush.Text = "Show active element";
             this.bttShowBrush.CheckedChanged += new System.EventHandler(this.bttShowBrush_CheckedChanged);
-            // 
-            // toolStripSeparator4
-            // 
-            this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(6, 27);
             // 
             // bttScale
             // 
@@ -531,11 +494,6 @@
             this.x4ToolStripMenuItem.Name = "x4ToolStripMenuItem";
             this.x4ToolStripMenuItem.Size = new System.Drawing.Size(101, 22);
             this.x4ToolStripMenuItem.Text = "x4";
-            // 
-            // toolStripSeparator5
-            // 
-            this.toolStripSeparator5.Name = "toolStripSeparator5";
-            this.toolStripSeparator5.Size = new System.Drawing.Size(6, 27);
             // 
             // tbbShowPluginInfo
             // 
@@ -703,18 +661,14 @@
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.ToolStripButton bttOpen;
         private System.Windows.Forms.ToolStripButton bttSave;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripButton bttBlocks;
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.Panel pnElements;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ToolStripSplitButton bttScale;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem2;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem3;
         private System.Windows.Forms.ToolStripButton bttShowNei;
         private System.Windows.Forms.ToolStripButton bttAxis;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
         private System.Windows.Forms.ToolStripMenuItem x3ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem x4ToolStripMenuItem;
         private System.Windows.Forms.ToolStripButton bttShowBrush;
@@ -722,7 +676,6 @@
         private System.Windows.Forms.ToolStripMenuItem x05ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem tsLayer1;
         private System.Windows.Forms.ToolStripButton bttReload;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
         private System.Windows.Forms.ToolStripButton tbbShowPluginInfo;
         private System.Windows.Forms.ComboBox cbGroup;
         private System.Windows.Forms.Label label7;
@@ -733,7 +686,6 @@
         private System.Windows.Forms.Panel pnBlocks;
         private System.Windows.Forms.PictureBox blocksScreen;
         private System.Windows.Forms.Panel pnViewScroll;
-        private System.Windows.Forms.ToolStripSeparator sToolButtons;
     }
 }
 

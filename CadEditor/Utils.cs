@@ -236,7 +236,6 @@ namespace CadEditor
         public static void saveScreensToOffset(OffsetRec screensRec, Screen[] screensData, int firstScreenIndex, int currentOffsetIndex, int layerNo)
         {
             var arrayToSave = Globals.romdata;
-            int wordLen = ConfigScript.getWordLen();
             bool littleEndian = ConfigScript.isLittleEndian();
             //write back tiles
             int dataStride = ConfigScript.getScreenDataStride();
@@ -245,29 +244,9 @@ namespace CadEditor
                 var curScrNo = firstScreenIndex + i;
                 var curScreen = screensData[curScrNo];
                 var dataToWrite = curScreen.layers[layerNo].data;
-                if (ConfigScript.getScreenVertical())
-                {
-                    dataToWrite = Utils.transpose(dataToWrite, screensRec.width, screensRec.height);
-                }
-                int addr = screensRec.beginAddr + i * screensRec.recSize * (dataStride * wordLen);
-                if (wordLen == 1)
-                {
-                    for (int x = 0; x < screensRec.recSize; x++)
-                        arrayToSave[addr + x * dataStride] = (byte)ConfigScript.backConvertScreenTile(dataToWrite[x]);
-                }
-                else if (wordLen == 2)
-                {
-                    if (littleEndian)
-                    {
-                        for (int x = 0; x < screensRec.recSize; x++)
-                            Utils.writeWordLE(arrayToSave, addr + x * (dataStride * wordLen), ConfigScript.backConvertScreenTile(dataToWrite[x]));
-                    }
-                    else
-                    {
-                        for (int x = 0; x < screensRec.recSize; x++)
-                            Utils.writeWord(arrayToSave, addr + x * (dataStride * wordLen), ConfigScript.backConvertScreenTile(dataToWrite[x]));
-                    }
-                }
+                int addr = screensRec.beginAddr + i * screensRec.recSize * dataStride;
+                for (int x = 0; x < screensRec.recSize; x++)
+                    arrayToSave[addr + x * dataStride] = (byte)ConfigScript.backConvertScreenTile(dataToWrite[x]);
             }
         }
 
