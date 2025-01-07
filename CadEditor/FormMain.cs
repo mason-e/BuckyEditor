@@ -92,11 +92,7 @@ namespace CadEditor
             UtilsGui.setCbIndexWithoutUpdateLevel(cbPaletteNo, cbLevel_SelectedIndexChanged);
             UtilsGui.setCbIndexWithoutUpdateLevel(cbViewType, cbLevel_SelectedIndexChanged);
 
-            cbGroup.Items.Clear();
-            foreach (var g in ConfigScript.getGroups())
-            {
-                cbGroup.Items.Add(g.name);
-            }
+
             dirty = false; updateSaveVisibility();
             showNeiScreens = true;
             showAxis = true;
@@ -111,8 +107,6 @@ namespace CadEditor
             tsLayer1.Enabled = true;
 
             curActiveLayer = 0;
-
-            pnGroups.Visible = ConfigScript.getGroups().Length > 0;
 
             updateScaleMenuItemsChecked(Array.FindIndex(scaleFactors, el => el == curScale)); //float comparasion with == is danger
 
@@ -779,18 +773,6 @@ namespace CadEditor
             MessageBox.Show(sb.ToString());
         }
 
-        private void cbGroup_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (cbGroup.SelectedIndex < 0)
-                return;
-            GroupRec g = ConfigScript.getGroup(cbGroup.SelectedIndex);
-            UtilsGui.setCbIndexWithoutUpdateLevel(cbVideoNo, cbLevel_SelectedIndexChanged, g.videoNo);
-            UtilsGui.setCbIndexWithoutUpdateLevel(cbBlockNo, cbLevel_SelectedIndexChanged, g.blockNo);
-            UtilsGui.setCbIndexWithoutUpdateLevel(cbPaletteNo, cbLevel_SelectedIndexChanged, g.palNo);
-            cbLevel_SelectedIndexChanged(cbVideoNo, new EventArgs());
-            if (g.firstScreen < 0 || g.firstScreen <= cbScreenNo.Items.Count)
-                cbScreenNo.SelectedIndex = g.firstScreen - 1;
-        }
 
         private void setWindowText()
         {

@@ -35,9 +35,6 @@
             this.label6 = new System.Windows.Forms.Label();
             this.cbScreenNo = new System.Windows.Forms.ComboBox();
             this.pnGeneric = new System.Windows.Forms.Panel();
-            this.pnGroups = new System.Windows.Forms.Panel();
-            this.label7 = new System.Windows.Forms.Label();
-            this.cbGroup = new System.Windows.Forms.ComboBox();
             this.cbAdvanced = new System.Windows.Forms.CheckBox();
             this.pnAdvancedParams = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
@@ -76,7 +73,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.mapScreen)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.activeBlock)).BeginInit();
             this.pnGeneric.SuspendLayout();
-            this.pnGroups.SuspendLayout();
             this.pnAdvancedParams.SuspendLayout();
             this.pnView.SuspendLayout();
             this.toolStrip1.SuspendLayout();
@@ -143,43 +139,12 @@
             // 
             // pnGeneric
             // 
-            this.pnGeneric.Controls.Add(this.pnGroups);
             this.pnGeneric.Controls.Add(this.cbAdvanced);
             this.pnGeneric.Controls.Add(this.pnAdvancedParams);
             this.pnGeneric.Location = new System.Drawing.Point(1, 213);
             this.pnGeneric.Name = "pnGeneric";
             this.pnGeneric.Size = new System.Drawing.Size(72, 239);
             this.pnGeneric.TabIndex = 42;
-            // 
-            // pnGroups
-            // 
-            this.pnGroups.Controls.Add(this.label7);
-            this.pnGroups.Controls.Add(this.cbGroup);
-            this.pnGroups.Location = new System.Drawing.Point(4, 192);
-            this.pnGroups.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.pnGroups.Name = "pnGroups";
-            this.pnGroups.Size = new System.Drawing.Size(68, 48);
-            this.pnGroups.TabIndex = 5;
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(3, 6);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(49, 13);
-            this.label7.TabIndex = 50;
-            this.label7.Text = "GROUP:";
-            // 
-            // cbGroup
-            // 
-            this.cbGroup.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbGroup.DropDownWidth = 200;
-            this.cbGroup.FormattingEnabled = true;
-            this.cbGroup.Location = new System.Drawing.Point(3, 24);
-            this.cbGroup.Name = "cbGroup";
-            this.cbGroup.Size = new System.Drawing.Size(64, 21);
-            this.cbGroup.TabIndex = 51;
-            this.cbGroup.SelectedIndexChanged += new System.EventHandler(this.cbGroup_SelectedIndexChanged);
             // 
             // cbAdvanced
             // 
@@ -201,7 +166,7 @@
             this.pnAdvancedParams.Controls.Add(this.cbBlockNo);
             this.pnAdvancedParams.Controls.Add(this.label8);
             this.pnAdvancedParams.Location = new System.Drawing.Point(2, 26);
-            this.pnAdvancedParams.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pnAdvancedParams.Margin = new System.Windows.Forms.Padding(2);
             this.pnAdvancedParams.Name = "pnAdvancedParams";
             this.pnAdvancedParams.Size = new System.Drawing.Size(70, 162);
             this.pnAdvancedParams.TabIndex = 5;
@@ -541,7 +506,7 @@
             this.pnBlocks.AutoScroll = true;
             this.pnBlocks.Controls.Add(this.blocksScreen);
             this.pnBlocks.Location = new System.Drawing.Point(3, 4);
-            this.pnBlocks.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pnBlocks.Margin = new System.Windows.Forms.Padding(2);
             this.pnBlocks.Name = "pnBlocks";
             this.pnBlocks.Size = new System.Drawing.Size(193, 509);
             this.pnBlocks.TabIndex = 61;
@@ -552,7 +517,7 @@
             this.blocksScreen.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.blocksScreen.Location = new System.Drawing.Point(2, 2);
-            this.blocksScreen.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.blocksScreen.Margin = new System.Windows.Forms.Padding(2);
             this.blocksScreen.Name = "blocksScreen";
             this.blocksScreen.Size = new System.Drawing.Size(188, 270);
             this.blocksScreen.TabIndex = 5;
@@ -584,7 +549,7 @@
             this.pnViewScroll.AutoScroll = true;
             this.pnViewScroll.Controls.Add(this.pnView);
             this.pnViewScroll.Location = new System.Drawing.Point(3, 6);
-            this.pnViewScroll.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pnViewScroll.Margin = new System.Windows.Forms.Padding(2);
             this.pnViewScroll.Name = "pnViewScroll";
             this.pnViewScroll.Size = new System.Drawing.Size(675, 506);
             this.pnViewScroll.TabIndex = 5;
@@ -620,8 +585,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.activeBlock)).EndInit();
             this.pnGeneric.ResumeLayout(false);
             this.pnGeneric.PerformLayout();
-            this.pnGroups.ResumeLayout(false);
-            this.pnGroups.PerformLayout();
             this.pnAdvancedParams.ResumeLayout(false);
             this.pnAdvancedParams.PerformLayout();
             this.pnView.ResumeLayout(false);
@@ -677,11 +640,8 @@
         private System.Windows.Forms.ToolStripMenuItem tsLayer1;
         private System.Windows.Forms.ToolStripButton bttReload;
         private System.Windows.Forms.ToolStripButton tbbShowPluginInfo;
-        private System.Windows.Forms.ComboBox cbGroup;
-        private System.Windows.Forms.Label label7;
         private System.Windows.Forms.CheckBox cbAdvanced;
         private System.Windows.Forms.Panel pnAdvancedParams;
-        private System.Windows.Forms.Panel pnGroups;
         private System.Windows.Forms.Label lbPalBytesAddr;
         private System.Windows.Forms.Panel pnBlocks;
         private System.Windows.Forms.PictureBox blocksScreen;

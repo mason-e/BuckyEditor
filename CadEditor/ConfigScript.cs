@@ -20,8 +20,6 @@ namespace CadEditor
 
     public delegate byte[] GetPalFunc(int palId);
 
-    public delegate GroupRec[] GetGroupsFunc();
-
     public delegate void RenderToMainScreenFunc(Graphics g, int curScale, int scrNo);
 
     public delegate int ConvertScreenTileFunc(int val);
@@ -115,10 +113,6 @@ namespace CadEditor
             saveScreensFunc = callFromScript<SaveScreensFunc>(asm, data, "*.saveScreensFunc");
 
             blocksPicturesWidth = callFromScript(asm, data, "getPictureBlocksWidth", 32);
-
-            blockTypeNames = callFromScript(asm, data, "getBlockTypeNames", defaultBlockTypeNames);
-
-            getGroupsFunc = callFromScript<GetGroupsFunc>(asm, data, "*.getGroupsFunc", () => new GroupRec[0]);
 
             palBytesAddr = callFromScript(asm, data, "*.getPalBytesAddr", -1);
             getPalBytesAddrFunc = callFromScript<GetPalBytesAddrFunc>(asm, data, "*.getPalBytesAddrFunc");
@@ -255,22 +249,12 @@ namespace CadEditor
 
         public static string[] getBlockTypeNames()
         {
-            return blockTypeNames;
+            return defaultBlockTypeNames;
         }
 
         public static int getBlocksPicturesWidth()
         {
             return blocksPicturesWidth;
-        }
-
-        public static GroupRec[] getGroups()
-        {
-            return getGroupsFunc();
-        }
-
-        public static GroupRec getGroup(int i)
-        {
-            return getGroups()[i];
         }
 
         public static int getPalBytesAddr(int blockId)
@@ -367,12 +351,9 @@ namespace CadEditor
 
         public static int blocksPicturesWidth;
 
-        public static GetGroupsFunc getGroupsFunc;
-
         public static int palBytesAddr;
         public static GetPalBytesAddrFunc getPalBytesAddrFunc;
 
-        public static string[] blockTypeNames;
         public static string[] defaultBlockTypeNames = new[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "F" };
 
         //global editor settings
