@@ -22,11 +22,6 @@ namespace CadEditor
             return result;
         }
 
-        public static GetLayoutFunc getDefaultLayoutFunc()
-        {
-            return getDefaultLayout;
-        }
-
         public static LevelLayerData getDefaultLayout(int curActiveLayout)
         {
             int[] layer = new int[1];

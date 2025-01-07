@@ -24,22 +24,9 @@ namespace CadEditor
 
     public delegate void RenderToMainScreenFunc(Graphics g, int curScale, int scrNo);
 
-    public delegate List<ObjectList> GetObjectsFunc(int levelNo);
-    public delegate bool SetObjectsFunc(int levelNo, List<ObjectList> objects);
-    public delegate void SortObjectsFunc(int levelNo, int listNo, List<ObjectRec> objects);
-
-    public delegate LevelLayerData GetLayoutFunc(int levelNo);
-    public delegate bool SetLayoutFunc(LevelLayerData date, int levelNo);
-
-    public delegate Dictionary<String, int> GetObjectDictionaryFunc(int listNo, int objNo);
-
     public delegate int ConvertScreenTileFunc(int val);
     public delegate int GetBigTileNoFromScreenFunc(int[] screenData, int index);
     public delegate void SetBigTileToScreenFunc(int[] screenData, int index, int value);
-
-    public delegate void DrawObjectFunc(Graphics g, ObjectRec curObject, int listNo, bool selected, float curScale, ImageList objectSprites, bool inactive, int leftMargin, int topMargin);
-    public delegate void DrawObjectBigFunc(Graphics g, ObjectRec curObject, int listNo, bool selected, float curScale, Image[] objectSprites, bool inactive, int leftMargin, int topMargin);
-    public delegate bool SelectObjectBigFunc(ObjectRec objRec, Image[] objectSprites, int x, int y);
 
     public delegate Screen[] LoadScreensFunc();
     public delegate void SaveScreensFunc(Screen[] screens);
@@ -114,44 +101,20 @@ namespace CadEditor
 
             getBlocksAddrFunc = callFromScript<GetBlocksAddrFunc>(asm, data, "*.getBlocksAddrFunc");
             getPalFunc = callFromScript<GetPalFunc>(asm, data, "*.getPalFunc");
-            getObjectsFunc = callFromScript<GetObjectsFunc>(asm, data, "*.getObjectsFunc");
-            setObjectsFunc = callFromScript<SetObjectsFunc>(asm, data, "*.setObjectsFunc");
-            sortObjectsFunc = callFromScript<SortObjectsFunc>(asm, data, "*.sortObjectsFunc");
-            getLayoutFunc = callFromScript<GetLayoutFunc>(asm, data, "*.getLayoutFunc", Utils.getDefaultLayoutFunc());
-            setLayoutFunc = callFromScript<SetLayoutFunc>(asm, data, "*.setLayoutFunc", null);
             convertScreenTileFunc = callFromScript<ConvertScreenTileFunc>(asm, data, "*.getConvertScreenTileFunc");
             backConvertScreenTileFunc = callFromScript<ConvertScreenTileFunc>(asm, data, "*.getBackConvertScreenTileFunc");
             getBigTileNoFromScreenFunc = callFromScript<GetBigTileNoFromScreenFunc>(asm, data, "*.getBigTileNoFromScreenFunc", Utils.getBigTileNoFromScreen);
             setBigTileToScreenFunc = callFromScript<SetBigTileToScreenFunc>(asm, data, "*.setBigTileToScreenFunc", Utils.setBigTileToScreen);
-            getObjectDictionaryFunc = callFromScript<GetObjectDictionaryFunc>(asm, data, "*.getObjectDictionaryFunc");
-
-            drawObjectFunc = callFromScript<DrawObjectFunc>(asm, data, "*.getDrawObjectFunc");
-            drawObjectBigFunc = callFromScript<DrawObjectBigFunc>(asm, data, "*.getDrawObjectBigFunc");
-            selectObjectBigFunc = callFromScript<SelectObjectBigFunc>(asm, data, "*.getSelectObjectBigFunc");
 
             renderToMainScreenFunc = callFromScript<RenderToMainScreenFunc>(asm, data, "*.getRenderToMainScreenFunc");
-
-            showScrollsInLayout = callFromScript(asm, data, "*.isShowScrollsInLayout", true);
-            scrollsOffsetFromLayout = callFromScript(asm, data, "*.getScrollsOffsetFromLayout", 0);
-            scrollByteArray = callFromScript(asm, data, "*.getScrollByteArray", new byte[0]);
 
             blocksCount = callFromScript(asm, data, "*.getBlocksCount", 256);
             getBlocksCountFunc = callFromScript<GetBlocksCountFunc>(asm, data, "*.getBlocksCountFunc");
 
-            blocksPicturesFilename = callFromScript(asm, data, "getBlocksFilename", "");
-
             loadScreensFunc = callFromScript<LoadScreensFunc>(asm, data, "*.loadScreensFunc");
             saveScreensFunc = callFromScript<SaveScreensFunc>(asm, data, "*.saveScreensFunc");
 
-            if (blocksPicturesFilename != "")
-            {
-                if (!File.Exists(ConfigScript.getBlocksPicturesFilename()))
-                {
-                    throw new Exception("File does not exists: " + ConfigScript.getBlocksPicturesFilename());
-                }
-            }
             blocksPicturesWidth = callFromScript(asm, data, "getPictureBlocksWidth", 32);
-            usePicturesInstedBlocks = blocksPicturesFilename != "";
 
             blockTypeNames = callFromScript(asm, data, "getBlockTypeNames", defaultBlockTypeNames);
 
@@ -300,16 +263,6 @@ namespace CadEditor
             return blocksPicturesWidth;
         }
 
-        public static string getBlocksPicturesFilename()
-        {
-            return configDirectory + blocksPicturesFilename;
-        }
-
-        public static int getScrollsOffsetFromLayout()
-        {
-            return scrollsOffsetFromLayout;
-        }
-
         public static GroupRec[] getGroups()
         {
             return getGroupsFunc();
@@ -399,13 +352,6 @@ namespace CadEditor
 
         public static GetPalFunc getPalFunc;
 
-        public static GetObjectsFunc getObjectsFunc;
-        public static SetObjectsFunc setObjectsFunc;
-        public static SortObjectsFunc sortObjectsFunc;
-
-        public static GetLayoutFunc getLayoutFunc;
-        public static SetLayoutFunc setLayoutFunc;
-        public static GetObjectDictionaryFunc getObjectDictionaryFunc;
         public static RenderToMainScreenFunc renderToMainScreenFunc;
 
         public static ConvertScreenTileFunc convertScreenTileFunc;
@@ -414,22 +360,12 @@ namespace CadEditor
         public static GetBigTileNoFromScreenFunc getBigTileNoFromScreenFunc;
         public static SetBigTileToScreenFunc setBigTileToScreenFunc;
 
-        public static DrawObjectFunc drawObjectFunc;
-        public static DrawObjectBigFunc drawObjectBigFunc;
-        public static SelectObjectBigFunc selectObjectBigFunc;
-
         public static LoadScreensFunc loadScreensFunc;
         public static SaveScreensFunc saveScreensFunc;
 
         public static float defaultScale;
 
-        public static bool showScrollsInLayout;
-        public static int scrollsOffsetFromLayout;
-        public static byte[] scrollByteArray;
-
-        public static bool usePicturesInstedBlocks;
         public static int blocksPicturesWidth;
-        private static string blocksPicturesFilename;
 
         public static GetGroupsFunc getGroupsFunc;
 
