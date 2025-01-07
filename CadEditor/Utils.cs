@@ -236,17 +236,14 @@ namespace CadEditor
         public static void saveScreensToOffset(OffsetRec screensRec, Screen[] screensData, int firstScreenIndex, int currentOffsetIndex, int layerNo)
         {
             var arrayToSave = Globals.romdata;
-            bool littleEndian = ConfigScript.isLittleEndian();
-            //write back tiles
-            int dataStride = ConfigScript.getScreenDataStride();
             for (int i = 0; i < screensRec.recCount; i++)
             {
                 var curScrNo = firstScreenIndex + i;
                 var curScreen = screensData[curScrNo];
                 var dataToWrite = curScreen.layers[layerNo].data;
-                int addr = screensRec.beginAddr + i * screensRec.recSize * dataStride;
+                int addr = screensRec.beginAddr + i * screensRec.recSize;
                 for (int x = 0; x < screensRec.recSize; x++)
-                    arrayToSave[addr + x * dataStride] = (byte)ConfigScript.backConvertScreenTile(dataToWrite[x]);
+                    arrayToSave[addr + x] = (byte)ConfigScript.backConvertScreenTile(dataToWrite[x]);
             }
         }
 

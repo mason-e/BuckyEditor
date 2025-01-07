@@ -60,17 +60,14 @@ namespace CadEditor
 
         public static int readBlockIndexFromMap(byte[] arrayWithData, int romAddr, int index)
         {
-            bool littleEndian = ConfigScript.isLittleEndian();
-            int dataStride = ConfigScript.getScreenDataStride();
-            return ConfigScript.convertScreenTile(arrayWithData[romAddr + index * dataStride]);
+            return ConfigScript.convertScreenTile(arrayWithData[romAddr + index]);
         }
 
         public static Screen getScreen(OffsetRec screenOffset, int screenIndex)
         {
             var result = new int[Math.Max(64, screenOffset.recSize)];
             var arrayWithData = Globals.romdata;
-            int dataStride = ConfigScript.getScreenDataStride();
-            int beginAddr = screenOffset.beginAddr + screenIndex * screenOffset.recSize * dataStride;
+            int beginAddr = screenOffset.beginAddr + screenIndex * screenOffset.recSize;
             for (int i = 0; i < screenOffset.recSize; i++)
                 result[i] = readBlockIndexFromMap(arrayWithData, beginAddr, i);
             //TODO: read layer2

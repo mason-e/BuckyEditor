@@ -21,7 +21,6 @@ namespace CadEditor
     public delegate byte[] GetPalFunc(int palId);
 
     public delegate GroupRec[] GetGroupsFunc();
-    public delegate IList<LevelRec> GetLevelRecsFunc();
 
     public delegate void RenderToMainScreenFunc(Graphics g, int curScale, int scrNo);
 
@@ -95,10 +94,6 @@ namespace CadEditor
             videoOffset = callFromScript(asm, data, "*.getVideoOffset", new OffsetRec(0, 1, 0));
             blocksOffset = callFromScript(asm, data, "*.getBlocksOffset", new OffsetRec(0, 1, 0));
             screensOffset[0] = callFromScript(asm, data, "*.getScreensOffset", new OffsetRec(0, 1, 0, -1, -1));
-            screenDataStride = callFromScript(asm, data, "*.getScreenDataStride", 1);
-            littleEndian = callFromScript(asm, data, "*.isLittleEndian", false);
-            blockSize4x4 = callFromScript(asm, data, "*.isBlockSize4x4", false);
-            getLevelRecsFunc = callFromScript<GetLevelRecsFunc>(asm, data, "*.getLevelRecsFunc", ConfigScript.getLevelRecsFuncDefault());
 
             bigBlocksHierarchyCount = callFromScript<int>(asm, data, "*.getBigBlocksHierarchyCount", 1);
 
@@ -112,10 +107,6 @@ namespace CadEditor
 
             getVideoChunkFunc = callFromScript<GetVideoChunkFunc>(asm, data, "*.getVideoChunkFunc");
             setVideoChunkFunc = callFromScript<SetVideoChunkFunc>(asm, data, "*.setVideoChunkFunc");
-
-            getBigBlocksFuncs = new GetBigBlocksFunc[bigBlocksHierarchyCount];
-            setBigBlocksFuncs = new SetBigBlocksFunc[bigBlocksHierarchyCount];
-            getBigBlocksAddrFuncs = new GetBigBlocksAddrFunc[bigBlocksHierarchyCount];
 
             getBigBlocksFuncs = callFromScript<GetBigBlocksFunc[]>(asm, data, "*.getBigBlocksFuncs", new GetBigBlocksFunc[1]);
             setBigBlocksFuncs = callFromScript<SetBigBlocksFunc[]>(asm, data, "*.setBigBlocksFuncs", new SetBigBlocksFunc[1]);
@@ -174,11 +165,6 @@ namespace CadEditor
             loadAllPlugins(asm, data);
 
             ConfigScript.videoNes.updateColorsFromConfig();
-        }
-
-        private static GetLevelRecsFunc getLevelRecsFuncDefault()
-        {
-            return () => { return new List<LevelRec>() { new LevelRec(0, 0, 1, 1, 0) }; };
         }
 
         private static void loadAllPlugins(AsmHelper asm, object data)
@@ -304,24 +290,9 @@ namespace CadEditor
             return getBlocksCountFunc?.Invoke(blockId) ?? blocksCount;
         }
 
-        public static LevelRec getLevelRec(int i)
-        {
-            return getLevelRecsFunc()[i];
-        }
-
         public static string[] getBlockTypeNames()
         {
             return blockTypeNames;
-        }
-
-        public static int getScreenDataStride()
-        {
-            return screenDataStride;
-        }
-
-        public static bool isLittleEndian()
-        {
-            return littleEndian;
         }
 
         public static int getBlocksPicturesWidth()
@@ -337,11 +308,6 @@ namespace CadEditor
         public static int getScrollsOffsetFromLayout()
         {
             return scrollsOffsetFromLayout;
-        }
-
-        public static bool isBlockSize4x4()
-        {
-            return blockSize4x4;
         }
 
         public static GroupRec[] getGroups()
@@ -365,11 +331,6 @@ namespace CadEditor
         }
 
         //------------------------------------------------------------
-
-        public static int getLayoutAddr(int index)
-        {
-            return ConfigScript.getLevelRec(index).layoutAddr;
-        }
 
         public static int getTilesAddr(int id)
         {
@@ -412,12 +373,7 @@ namespace CadEditor
         public static OffsetRec[] screensOffset;
         //public static OffsetRec boxesBackOffset;
         public static int levelsCount;
-        public static int screenDataStride;
-        public static bool littleEndian;
-
         public static bool useGbGraphics;
-        public static bool blockSize4x4;
-
         public static int minObjCoordX;
         public static int minObjCoordY;
         public static int minObjType;
@@ -426,7 +382,6 @@ namespace CadEditor
         public static int maxObjType;
 
         //public static IList<LevelRec> levelRecs;
-        public static GetLevelRecsFunc getLevelRecsFunc;
 
         public static GetVideoChunkFunc getVideoChunkFunc;
         public static SetVideoChunkFunc setVideoChunkFunc;

@@ -144,7 +144,7 @@ namespace CadEditor
 
             if (needRebuildBlocks)
             {
-                bigBlocks = ConfigScript.videoNes.makeBigBlocks(curActiveVideoNo, curActiveBigBlockNo, curActiveBlockNo, curActivePalleteNo, smallObjectsType, curActiveViewType, ConfigScript.getbigBlocksHierarchyCount() - 1);
+                bigBlocks = ConfigScript.videoNes.makeBigBlocks(curActiveVideoNo, curActiveBigBlockNo, curActiveBlockNo, curActivePalleteNo, smallObjectsType, curActiveViewType);
             }
 
             curActiveBlock = 0;
