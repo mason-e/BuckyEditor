@@ -308,17 +308,6 @@ namespace CadEditor
         public static OffsetRec videoOffset;
         public static OffsetRec blocksOffset;
         public static OffsetRec[] screensOffset;
-        //public static OffsetRec boxesBackOffset;
-        public static int levelsCount;
-        public static bool useGbGraphics;
-        public static int minObjCoordX;
-        public static int minObjCoordY;
-        public static int minObjType;
-        public static int maxObjCoordX;
-        public static int maxObjCoordY;
-        public static int maxObjType;
-
-        //public static IList<LevelRec> levelRecs;
 
         public static GetVideoChunkFunc getVideoChunkFunc;
         public static SetVideoChunkFunc setVideoChunkFunc;

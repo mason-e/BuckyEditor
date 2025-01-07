@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
-using System.Text.Json.Serialization;
 
 namespace CadEditor
 {
@@ -29,20 +27,6 @@ namespace CadEditor
         public int height;
     }
 
-    public struct LevelObjRec
-    {
-        public LevelObjRec(string name, int addrOfObjects, int addrOfPallete, int addrOfVideo)
-        {
-            this.name = name;
-            this.addrOfObjects = addrOfObjects;
-            this.addrOfPallete = addrOfPallete;
-            this.addrOfVideo = addrOfVideo;
-        }
-        public string name;
-        public int addrOfObjects;
-        public int addrOfPallete;
-        public int addrOfVideo;
-    }
 
     public class ObjRec : IEquatable<ObjRec>
     {
@@ -154,162 +138,6 @@ namespace CadEditor
         }
     }
 
-    public struct LevelRec
-    {
-        public LevelRec(int objectBeginAddr, int objCount)
-        {
-            this.objCount = objCount;
-            this.objectsBeginAddr = objectBeginAddr;
-            this.width = 0;
-            this.height = 0;
-            this.layoutAddr = 0;
-            this.name = "";
-            this.group = null;
-        }
-
-        public LevelRec(int objectsBeginAddr, int objCount, int width = 0, int height = 0, int layoutAddr = 0)
-        {
-            this.objCount = objCount;
-            this.objectsBeginAddr = objectsBeginAddr;
-            this.width = width;
-            this.height = height;
-            this.layoutAddr = layoutAddr;
-            this.name = "";
-            this.group = null;
-        }
-
-        public LevelRec(int objectsBeginAddr, int objCount, int width = 0, int height = 0, int layoutAddr = 0, string name = "")
-        {
-            this.objCount = objCount;
-            this.objectsBeginAddr = objectsBeginAddr;
-            this.width = width;
-            this.height = height;
-            this.layoutAddr = layoutAddr;
-            this.name = name;
-            this.group = null;
-        }
-
-        public LevelRec(int objectsBeginAddr, int objCount, int width = 0, int height = 0, int layoutAddr = 0, string name = "", GroupRec group = null)
-            : this(objectsBeginAddr, objCount, width, height, layoutAddr, name)
-        {
-            this.group = group;
-        }
-        public int objCount;
-        public int objectsBeginAddr;
-        public int width;
-        public int height;
-        public int layoutAddr;
-        public string name;
-        public GroupRec group;
-    }
-
-    public struct LevelLayerData
-    {
-        public LevelLayerData(int width, int height, int[] layer, int[] scroll, int[] dirs)
-        {
-            this.width = width;
-            this.height = height;
-            this.layer = layer;
-            this.scroll = scroll;
-            this.dirs = dirs;
-        }
-
-        public LevelLayerData(int width, int height, int[] layer)
-        {
-            this.width = width;
-            this.height = height;
-            this.layer = layer;
-            this.scroll = null;
-            this.dirs = null;
-        }
-
-        public int getDirForIndex(int index)
-        {
-            int line = index / width;
-            return dirs[line];
-        }
-        public int width;
-        public int height;
-        public int[] layer;
-        public int[] scroll;
-        public int[] dirs;
-    }
-
-    public class GroupRec
-    {
-        public string name;
-        public int videoNo;
-        public int bigBlockNo;
-        public int blockNo;
-        public int palNo;
-        public int firstScreen;
-
-        public GroupRec(string name, int videoNo, int bigBlockNo, int blockNo, int palNo, int firstScreen)
-        {
-            this.name = name;
-            this.videoNo = videoNo;
-            this.bigBlockNo = bigBlockNo;
-            this.blockNo = blockNo;
-            this.palNo = palNo;
-            this.firstScreen = firstScreen;
-        }
-    }
-
-    public class ObjectRec : IEquatable<ObjectRec>
-    {
-        [JsonConstructor]
-        public ObjectRec(int type, int sx, int sy, int x, int y, Dictionary<String, int> additionalData)
-            : this(type, sx, sy, x, y)
-        {
-            this.additionalData = additionalData;
-        }
-
-        public ObjectRec(int type, int sx, int sy, int x, int y)
-        {
-            this.type = type;
-            this.sx = sx;
-            this.sy = sy;
-            this.x = x;
-            this.y = y;
-            this.additionalData = null;
-        }
-
-        public ObjectRec(ObjectRec other)
-        {
-            this.type = other.type;
-            this.sx = other.sx;
-            this.sy = other.sy;
-            this.x = other.x;
-            this.y = other.y;
-            this.additionalData = new Dictionary<String, int>(other.additionalData);
-        }
-        public int type { get; set; }
-        public int x { get; set; }
-        public int y { get; set; }
-        public int sx { get; set; }
-        public int sy { get; set; }
-        public Dictionary<String, int> additionalData;
-
-        public static int fieldCount = 6;
-
-        bool IEquatable<ObjectRec>.Equals(ObjectRec other)
-        {
-            bool fieldsEq = (type == other.type) && (x == other.x) && (y == other.y) && (sx == other.sx) && (sy == other.sy);
-            if (!fieldsEq)
-            {
-                return false;
-            }
-            if (additionalData == null)
-            {
-                return other.additionalData == null;
-            }
-
-            //compare all values in dictionary
-            bool addDataEq = additionalData.SequenceEqual(other.additionalData);
-            return addDataEq;
-        }
-    }
-
     public enum MapViewType
     {
         Tiles,
@@ -317,44 +145,6 @@ namespace CadEditor
         ObjNumbers,
         SmallObjNumbers,
     };
-
-    public class BigBlockWithPal : BigBlock
-    {
-        public BigBlockWithPal(int w, int h)
-            : base(w, h)
-        {
-            palBytes = new int[indexes.Length];
-        }
-
-        public override int getPalBytes(int index)
-        {
-            return palBytes[index];
-        }
-
-        public override bool smallBlocksWithPal()
-        {
-            return false;
-        }
-
-        public override Bitmap makeBigBlock(Image[][] smallBlocksAll)
-        {
-            //calc size
-            var smallBlocks = smallBlocksAll[0];
-            int bWidth = smallBlocks[0].Width;
-            int bHeight = smallBlocks[0].Height;
-            var b = new Bitmap(bWidth * width, bHeight * height);
-            using (Graphics g = Graphics.FromImage(b))
-            {
-                g.DrawImage(smallBlocksAll[getPalBytes(0)][indexes[0]], new Rectangle(0, 0, bWidth, bHeight));
-                g.DrawImage(smallBlocksAll[getPalBytes(1)][indexes[1]], new Rectangle(bWidth, 0, bWidth, bHeight));
-                g.DrawImage(smallBlocksAll[getPalBytes(2)][indexes[2]], new Rectangle(0, bHeight, bWidth, bHeight));
-                g.DrawImage(smallBlocksAll[getPalBytes(3)][indexes[3]], new Rectangle(bWidth, bHeight, bWidth, bHeight));
-            }
-            return b;
-        }
-
-        public int[] palBytes;
-    }
 
     public class BigBlock : IEquatable<BigBlock>
     {
@@ -430,32 +220,6 @@ namespace CadEditor
         public int width;
         public int height;
     }
-
-    public class ObjectList : IEquatable<ObjectList>
-    {
-        public ObjectList()
-        {
-            objects = new List<ObjectRec>();
-            name = "Objects";
-        }
-        public List<ObjectRec> objects;
-        public string name;
-
-        bool IEquatable<ObjectList>.Equals(ObjectList other)
-        {
-            if (name != other.name)
-                return false;
-            return objects.SequenceEqual(other.objects);
-        }
-    }
-
-    public enum ToolType
-    {
-        Create,
-        Select,
-        Delete
-    }
-
 
     public class BlockLayer
     {
