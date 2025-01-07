@@ -151,38 +151,6 @@ namespace CadEditor
             }
         }
 
-        public static byte[] readLinearBigBlockData(int hierLevel, int bigTileIndex)
-        {
-            return readLinearBigBlockData(hierLevel, bigTileIndex, -1);
-        }
-
-        public static byte[] readLinearBigBlockData(int hierLevel, int bigTileIndex, int tileSize)
-        {
-            //if tileSize == -1, try read it from config
-            if (tileSize == -1)
-            {
-                tileSize = ConfigScript.isBlockSize4x4() ? 16 : 4;
-            }
-
-            int wordSize = 1;
-            int size = ConfigScript.getBigBlocksCount(hierLevel, bigTileIndex) * tileSize * wordSize;
-
-            byte[] bigBlockIndexes = new byte[size];
-            var bigBlocksAddr = ConfigScript.getBigTilesAddr(hierLevel, bigTileIndex);
-            for (int i = 0; i < size; i++)
-                bigBlockIndexes[i] = Globals.romdata[bigBlocksAddr + i];
-            return bigBlockIndexes;
-        }
-
-
-        public static void writeLinearBigBlockData(int hierLevel, int bigTileIndex, byte[] bigBlockIndexes)
-        {
-            int size = bigBlockIndexes.Length;
-            int addr = ConfigScript.getBigTilesAddr(hierLevel, bigTileIndex);
-            for (int i = 0; i < size; i++)
-                Globals.romdata[addr + i] = bigBlockIndexes[i];
-        }
-
         public static ObjRec[] getBlocksFromTiles16Pal1(int blockIndex)
         {
             return readBlocksLinearTiles16Pal1(Globals.romdata, ConfigScript.getTilesAddr(blockIndex), ConfigScript.getPalBytesAddr(blockIndex), ConfigScript.getBlocksCount(blockIndex));

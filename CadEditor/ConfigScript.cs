@@ -121,13 +121,6 @@ namespace CadEditor
             bigBlocksCounts[0] = callFromScript(asm, data, "*.getBigBlocksCount", bigBlocksCounts[0]);
             getBigBlocksCountFunc = callFromScript<GetBigBlocksCountFunc>(asm, data, "*.getBigBlocksCountFunc");
 
-            bigBlocksOffsets = new OffsetRec[bigBlocksHierarchyCount];
-            for (int hierLevel = 0; hierLevel < bigBlocksHierarchyCount; hierLevel++)
-            {
-                bigBlocksOffsets[hierLevel] = callFromScript(asm, data, "*.getBigBlocksOffsetHierarchy", new OffsetRec(0, 1, 0), hierLevel);
-            }
-            bigBlocksOffsets[0] = callFromScript(asm, data, "*.getBigBlocksOffset", bigBlocksOffsets[0]);
-
             getVideoChunkFunc = callFromScript<GetVideoChunkFunc>(asm, data, "*.getVideoChunkFunc");
             setVideoChunkFunc = callFromScript<SetVideoChunkFunc>(asm, data, "*.setVideoChunkFunc");
 
@@ -411,22 +404,6 @@ namespace CadEditor
             return ConfigScript.blocksOffset.beginAddr + ConfigScript.blocksOffset.recSize * id;
         }
 
-        public static int getBigTilesAddr(int hierarchyLevel, int id)
-        {
-            GetBigBlocksAddrFunc getAddrFunc = null;
-            if (hierarchyLevel < ConfigScript.getBigBlocksAddrFuncs.Length)
-            {
-                getAddrFunc = ConfigScript.getBigBlocksAddrFuncs[hierarchyLevel];
-            }
-            return getAddrFunc?.Invoke(id) ?? getBigTilesAddrDefault(hierarchyLevel, id);
-        }
-
-        private static int getBigTilesAddrDefault(int hierarchyLevel, int id)
-        {
-            var bigBlocksOffset = ConfigScript.bigBlocksOffsets[hierarchyLevel];
-            return bigBlocksOffset.beginAddr + bigBlocksOffset.recSize * id;
-        }
-
         public static int getbigBlocksHierarchyCount()
         {
             return bigBlocksHierarchyCount;
@@ -453,7 +430,6 @@ namespace CadEditor
         public static OffsetRec palOffset;
         public static OffsetRec videoOffset;
         public static OffsetRec videoObjOffset;
-        public static OffsetRec[] bigBlocksOffsets;
         public static OffsetRec blocksOffset;
         public static OffsetRec[] screensOffset;
         //public static OffsetRec boxesBackOffset;

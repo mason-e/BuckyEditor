@@ -85,11 +85,9 @@ namespace CadEditor
             resetScreens();
 
             UtilsGui.setCbItemsCount(cbVideoNo, ConfigScript.videoOffset.recCount);
-            UtilsGui.setCbItemsCount(cbBigBlockNo, ConfigScript.bigBlocksOffsets[0].recCount);
             UtilsGui.setCbItemsCount(cbBlockNo, ConfigScript.blocksOffset.recCount);
             UtilsGui.setCbItemsCount(cbPaletteNo, ConfigScript.palOffset.recCount);
             UtilsGui.setCbIndexWithoutUpdateLevel(cbVideoNo, cbLevel_SelectedIndexChanged);
-            UtilsGui.setCbIndexWithoutUpdateLevel(cbBigBlockNo, cbLevel_SelectedIndexChanged);
             UtilsGui.setCbIndexWithoutUpdateLevel(cbBlockNo, cbLevel_SelectedIndexChanged);
             UtilsGui.setCbIndexWithoutUpdateLevel(cbPaletteNo, cbLevel_SelectedIndexChanged);
             UtilsGui.setCbIndexWithoutUpdateLevel(cbViewType, cbLevel_SelectedIndexChanged);
@@ -399,7 +397,6 @@ namespace CadEditor
         private void changeLevelIndex(bool reloadBlocks = false)
         {
             curActiveVideoNo = cbVideoNo.SelectedIndex;
-            curActiveBigBlockNo = cbBigBlockNo.SelectedIndex;
             curActiveBlockNo = cbBlockNo.SelectedIndex;
             curActivePalleteNo = cbPaletteNo.SelectedIndex;
             curActiveViewType = (MapViewType)cbViewType.SelectedIndex;
@@ -811,7 +808,6 @@ namespace CadEditor
                 return;
             GroupRec g = ConfigScript.getGroup(cbGroup.SelectedIndex);
             UtilsGui.setCbIndexWithoutUpdateLevel(cbVideoNo, cbLevel_SelectedIndexChanged, g.videoNo);
-            UtilsGui.setCbIndexWithoutUpdateLevel(cbBigBlockNo, cbLevel_SelectedIndexChanged, g.bigBlockNo);
             UtilsGui.setCbIndexWithoutUpdateLevel(cbBlockNo, cbLevel_SelectedIndexChanged, g.blockNo);
             UtilsGui.setCbIndexWithoutUpdateLevel(cbPaletteNo, cbLevel_SelectedIndexChanged, g.palNo);
             cbLevel_SelectedIndexChanged(cbVideoNo, new EventArgs());
