@@ -40,7 +40,7 @@ namespace CadEditor
             curActivePal = formMain.curActivePalleteNo;
             UtilsGui.setCbIndexWithoutUpdateLevel(cbSubpalette, cbSubpalette_SelectedIndexChanged);
 
-            UtilsGui.setCbItemsCount(cbPanelNo, (ConfigScript.getBlocksCount(curActiveBigBlock) + BlocksPerPage - 1) / BlocksPerPage);
+            UtilsGui.setCbItemsCount(cbPanelNo, (ConfigScript.getBlocksCount() + BlocksPerPage - 1) / BlocksPerPage);
             UtilsGui.setCbIndexWithoutUpdateLevel(cbPanelNo, cbPanelNo_SelectedIndexChanged);
         }
 
@@ -296,7 +296,7 @@ namespace CadEditor
             //GUI
             mapObjects.Controls.Clear();
             mapObjects.SuspendLayout();
-            int endIndex = Math.Min(BlocksPerPage, ConfigScript.getBlocksCount(curActiveBigBlock));
+            int endIndex = Math.Min(BlocksPerPage, ConfigScript.getBlocksCount());
             var objectTypes = ConfigScript.getBlockTypeNames();
             for (int i = 0; i < endIndex; i++)
             {
@@ -361,7 +361,7 @@ namespace CadEditor
 
             mapObjects.SuspendLayout();
             int startIndex = curPageIndex * BlocksPerPage;
-            int endIndex = Math.Min(startIndex + BlocksPerPage, ConfigScript.getBlocksCount(curActiveBigBlock));
+            int endIndex = Math.Min(startIndex + BlocksPerPage, ConfigScript.getBlocksCount());
             int pi = 0;
             for (int i = startIndex; i < endIndex; i++, pi++)
             {
@@ -397,7 +397,7 @@ namespace CadEditor
         {
             if (MessageBox.Show("Are you sure want to clear all blocks?", "Clear", MessageBoxButtons.YesNo) != DialogResult.Yes)
                 return;
-            for (int i = 0; i < ConfigScript.getBlocksCount(curActiveBigBlock); i++)
+            for (int i = 0; i < ConfigScript.getBlocksCount(); i++)
                 objects[i] = new ObjRec(0, 0, 0, 0, 0, 0);
             dirty = true;
             refillPanel();

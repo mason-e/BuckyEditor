@@ -23,12 +23,6 @@ namespace CadEditor
                 int tileSizeY = (int)(renderParams.bigBlocks[0].Height * renderParams.curScale);
                 g.DrawRectangle(new Pen(Color.Green, 4.0f), new Rectangle(tileSizeX, 0, tileSizeX * renderParams.width, tileSizeY * renderParams.height));
             }
-
-            //Additional rendering  //float to int!
-            if (renderParams.additionalRenderEnabled)
-            {
-                ConfigScript.renderToMainScreen(g, (int)renderParams.curScale, scrNo);
-            }
         }
 
         private static void renderLayer(Graphics g, BlockLayer layer, RenderParams renderParams)

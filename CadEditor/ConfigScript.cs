@@ -9,7 +9,6 @@ namespace CadEditor
 {
     public delegate byte[] GetVideoChunkFunc(int videoPageId);
 
-    public delegate int GetBlocksCountFunc(int blockId);
 
     public delegate BigBlock[] GetBigBlocksFunc(int bigBlockId);
     public delegate void SetBigBlocksFunc(int bigTileIndex, BigBlock[] bigBlocks);
@@ -17,13 +16,8 @@ namespace CadEditor
 
     public delegate byte[] GetPalFunc(int palId);
 
-    public delegate void RenderToMainScreenFunc(Graphics g, int curScale, int scrNo);
-
     public delegate int GetBigTileNoFromScreenFunc(int[] screenData, int index);
     public delegate void SetBigTileToScreenFunc(int[] screenData, int index, int value);
-
-    public delegate Screen[] LoadScreensFunc();
-    public delegate void SaveScreensFunc(Screen[] screens);
 
     public delegate int GetPalBytesAddrFunc(int blockId);
 
@@ -95,20 +89,9 @@ namespace CadEditor
             getBigTileNoFromScreenFunc = callFromScript<GetBigTileNoFromScreenFunc>(asm, data, "*.getBigTileNoFromScreenFunc", Utils.getBigTileNoFromScreen);
             setBigTileToScreenFunc = callFromScript<SetBigTileToScreenFunc>(asm, data, "*.setBigTileToScreenFunc", Utils.setBigTileToScreen);
 
-            renderToMainScreenFunc = callFromScript<RenderToMainScreenFunc>(asm, data, "*.getRenderToMainScreenFunc"); // null
-
             blocksCount = callFromScript(asm, data, "*.getBlocksCount", 256);
-            getBlocksCountFunc = callFromScript<GetBlocksCountFunc>(asm, data, "*.getBlocksCountFunc"); // null
-
-            loadScreensFunc = callFromScript<LoadScreensFunc>(asm, data, "*.loadScreensFunc"); // null
-            saveScreensFunc = callFromScript<SaveScreensFunc>(asm, data, "*.saveScreensFunc"); // null
-
-            blocksPicturesWidth = callFromScript(asm, data, "getPictureBlocksWidth", 32);
 
             palBytesAddr = callFromScript(asm, data, "*.getPalBytesAddr", -1);
-            getPalBytesAddrFunc = callFromScript<GetPalBytesAddrFunc>(asm, data, "*.getPalBytesAddrFunc"); // null
-
-            defaultScale = callFromScript(asm, data, "*.getDefaultScale", -1.0f);
 
             loadAllPlugins(asm, data);
 
@@ -187,31 +170,12 @@ namespace CadEditor
 
         public static Screen[] loadScreens()
         {
-            if (loadScreensFunc != null)
-            {
-                return loadScreensFunc();
-            }
-            else
-            {
-                return Utils.loadScreensDiffSize();
-            }
+            return Utils.loadScreensDiffSize();
         }
 
         public static void saveScreens(Screen[] screens)
         {
-            if (saveScreensFunc != null)
-            {
-                saveScreensFunc(screens);
-            }
-            else
-            {
-                Utils.saveScreensDiffSize(screens);
-            }
-        }
-
-        public static void renderToMainScreen(Graphics g, int scale, int scrNo)
-        {
-            renderToMainScreenFunc?.Invoke(g, scale, scrNo);
+            Utils.saveScreensDiffSize(screens);
         }
 
         public static int getBigBlocksCount(int hierarchyLevel)
@@ -219,9 +183,9 @@ namespace CadEditor
             return bigBlocksCounts[hierarchyLevel];
         }
 
-        public static int getBlocksCount(int blockId)
+        public static int getBlocksCount()
         {
-            return getBlocksCountFunc?.Invoke(blockId) ?? blocksCount;
+            return blocksCount;
         }
 
         public static string[] getBlockTypeNames()
@@ -229,19 +193,9 @@ namespace CadEditor
             return defaultBlockTypeNames;
         }
 
-        public static int getBlocksPicturesWidth()
+        public static int getPalBytesAddr()
         {
-            return blocksPicturesWidth;
-        }
-
-        public static int getPalBytesAddr(int blockId)
-        {
-            return getPalBytesAddrFunc?.Invoke(blockId) ?? palBytesAddr;
-        }
-
-        public static float getDefaultScale()
-        {
-            return defaultScale;
+            return palBytesAddr;
         }
 
         //------------------------------------------------------------
@@ -288,21 +242,11 @@ namespace CadEditor
         public static GetBigBlocksAddrFunc[] getBigBlocksAddrFuncs;
 
         public static int blocksCount;
-        public static GetBlocksCountFunc getBlocksCountFunc;
 
         public static GetPalFunc getPalFunc;
 
-        public static RenderToMainScreenFunc renderToMainScreenFunc;
-
         public static GetBigTileNoFromScreenFunc getBigTileNoFromScreenFunc;
         public static SetBigTileToScreenFunc setBigTileToScreenFunc;
-
-        public static LoadScreensFunc loadScreensFunc;
-        public static SaveScreensFunc saveScreensFunc;
-
-        public static float defaultScale;
-
-        public static int blocksPicturesWidth;
 
         public static int palBytesAddr;
         public static GetPalBytesAddrFunc getPalBytesAddrFunc;

@@ -18,10 +18,6 @@ namespace CadEditor
         private void setDefaultScale()
         {
             curScale = 1;
-            if (ConfigScript.getDefaultScale() > 0)
-            {
-                curScale = ConfigScript.getDefaultScale();
-            }
         }
 
         private void Form1_Load(object sender, EventArgs e)
