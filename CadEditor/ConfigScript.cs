@@ -8,7 +8,6 @@ using CSScriptLibrary;
 namespace CadEditor
 {
     public delegate byte[] GetVideoChunkFunc(int videoPageId);
-    public delegate void SetVideoChunkFunc(int videoPageId, byte[] videoChunk);
 
     public delegate int GetBlocksAddrFunc(int blockId);
     public delegate int GetBlocksCountFunc(int blockId);
@@ -16,7 +15,6 @@ namespace CadEditor
     public delegate BigBlock[] GetBigBlocksFunc(int bigBlockId);
     public delegate void SetBigBlocksFunc(int bigTileIndex, BigBlock[] bigBlocks);
     public delegate int GetBigBlocksAddrFunc(int bigBlockId);
-    public delegate int GetBigBlocksCountFunc(int hierLevel, int bigBlockId);
 
     public delegate byte[] GetPalFunc(int palId);
 
@@ -88,34 +86,32 @@ namespace CadEditor
                 bigBlocksCounts[hierLevel] = callFromScript(asm, data, "*.getBigBlocksCountHierarchy", 256, hierLevel);
             }
             bigBlocksCounts[0] = callFromScript(asm, data, "*.getBigBlocksCount", bigBlocksCounts[0]);
-            getBigBlocksCountFunc = callFromScript<GetBigBlocksCountFunc>(asm, data, "*.getBigBlocksCountFunc");
 
             getVideoChunkFunc = callFromScript<GetVideoChunkFunc>(asm, data, "*.getVideoChunkFunc");
-            setVideoChunkFunc = callFromScript<SetVideoChunkFunc>(asm, data, "*.setVideoChunkFunc");
 
             getBigBlocksFuncs = callFromScript<GetBigBlocksFunc[]>(asm, data, "*.getBigBlocksFuncs", new GetBigBlocksFunc[1]);
             setBigBlocksFuncs = callFromScript<SetBigBlocksFunc[]>(asm, data, "*.setBigBlocksFuncs", new SetBigBlocksFunc[1]);
             getBigBlocksAddrFuncs = callFromScript<GetBigBlocksAddrFunc[]>(asm, data, "*.getBigBlocksAddrFuncs", new GetBigBlocksAddrFunc[1]);
 
-            getBlocksAddrFunc = callFromScript<GetBlocksAddrFunc>(asm, data, "*.getBlocksAddrFunc");
+            getBlocksAddrFunc = callFromScript<GetBlocksAddrFunc>(asm, data, "*.getBlocksAddrFunc"); // null
             getPalFunc = callFromScript<GetPalFunc>(asm, data, "*.getPalFunc");
-            convertScreenTileFunc = callFromScript<ConvertScreenTileFunc>(asm, data, "*.getConvertScreenTileFunc");
-            backConvertScreenTileFunc = callFromScript<ConvertScreenTileFunc>(asm, data, "*.getBackConvertScreenTileFunc");
+            convertScreenTileFunc = callFromScript<ConvertScreenTileFunc>(asm, data, "*.getConvertScreenTileFunc"); // null
+            backConvertScreenTileFunc = callFromScript<ConvertScreenTileFunc>(asm, data, "*.getBackConvertScreenTileFunc"); // null
             getBigTileNoFromScreenFunc = callFromScript<GetBigTileNoFromScreenFunc>(asm, data, "*.getBigTileNoFromScreenFunc", Utils.getBigTileNoFromScreen);
             setBigTileToScreenFunc = callFromScript<SetBigTileToScreenFunc>(asm, data, "*.setBigTileToScreenFunc", Utils.setBigTileToScreen);
 
-            renderToMainScreenFunc = callFromScript<RenderToMainScreenFunc>(asm, data, "*.getRenderToMainScreenFunc");
+            renderToMainScreenFunc = callFromScript<RenderToMainScreenFunc>(asm, data, "*.getRenderToMainScreenFunc"); // null
 
             blocksCount = callFromScript(asm, data, "*.getBlocksCount", 256);
-            getBlocksCountFunc = callFromScript<GetBlocksCountFunc>(asm, data, "*.getBlocksCountFunc");
+            getBlocksCountFunc = callFromScript<GetBlocksCountFunc>(asm, data, "*.getBlocksCountFunc"); // null
 
-            loadScreensFunc = callFromScript<LoadScreensFunc>(asm, data, "*.loadScreensFunc");
-            saveScreensFunc = callFromScript<SaveScreensFunc>(asm, data, "*.saveScreensFunc");
+            loadScreensFunc = callFromScript<LoadScreensFunc>(asm, data, "*.loadScreensFunc"); // null
+            saveScreensFunc = callFromScript<SaveScreensFunc>(asm, data, "*.saveScreensFunc"); // null
 
             blocksPicturesWidth = callFromScript(asm, data, "getPictureBlocksWidth", 32);
 
             palBytesAddr = callFromScript(asm, data, "*.getPalBytesAddr", -1);
-            getPalBytesAddrFunc = callFromScript<GetPalBytesAddrFunc>(asm, data, "*.getPalBytesAddrFunc");
+            getPalBytesAddrFunc = callFromScript<GetPalBytesAddrFunc>(asm, data, "*.getPalBytesAddrFunc"); // null
 
             defaultScale = callFromScript(asm, data, "*.getDefaultScale", -1.0f);
 
@@ -161,11 +157,6 @@ namespace CadEditor
         public static byte[] getVideoChunk(int videoPageId)
         {
             return (getVideoChunkFunc ?? (_ => null))(videoPageId);
-        }
-
-        public static void setVideoChunk(int videoPageId, byte[] videoChunk)
-        {
-            setVideoChunkFunc(videoPageId, videoChunk);
         }
 
         public static BigBlock[] getBigBlocksRecursive(int hierarchyLevel, int bigBlockId)
@@ -237,9 +228,9 @@ namespace CadEditor
             renderToMainScreenFunc?.Invoke(g, scale, scrNo);
         }
 
-        public static int getBigBlocksCount(int hierarchyLevel, int bigBlockId)
+        public static int getBigBlocksCount(int hierarchyLevel)
         {
-            return getBigBlocksCountFunc?.Invoke(hierarchyLevel, bigBlockId) ?? bigBlocksCounts[hierarchyLevel];
+            return bigBlocksCounts[hierarchyLevel];
         }
 
         public static int getBlocksCount(int blockId)
@@ -310,14 +301,11 @@ namespace CadEditor
         public static OffsetRec[] screensOffset;
 
         public static GetVideoChunkFunc getVideoChunkFunc;
-        public static SetVideoChunkFunc setVideoChunkFunc;
-
         public static int bigBlocksHierarchyCount;
         public static int[] bigBlocksCounts;
         public static GetBigBlocksFunc[] getBigBlocksFuncs;
         public static SetBigBlocksFunc[] setBigBlocksFuncs;
         public static GetBigBlocksAddrFunc[] getBigBlocksAddrFuncs;
-        public static GetBigBlocksCountFunc getBigBlocksCountFunc;
 
         public static int blocksCount;
         public static GetBlocksAddrFunc getBlocksAddrFunc;
