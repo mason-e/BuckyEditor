@@ -231,7 +231,7 @@ namespace CadEditor
                 var dataToWrite = curScreen.layers[layerNo].data;
                 int addr = screensRec.beginAddr + i * screensRec.recSize;
                 for (int x = 0; x < screensRec.recSize; x++)
-                    arrayToSave[addr + x] = (byte)ConfigScript.backConvertScreenTile(dataToWrite[x]);
+                    arrayToSave[addr + x] = (byte)dataToWrite[x];
             }
         }
 

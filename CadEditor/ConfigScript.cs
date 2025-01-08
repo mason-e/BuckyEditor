@@ -9,7 +9,6 @@ namespace CadEditor
 {
     public delegate byte[] GetVideoChunkFunc(int videoPageId);
 
-    public delegate int GetBlocksAddrFunc(int blockId);
     public delegate int GetBlocksCountFunc(int blockId);
 
     public delegate BigBlock[] GetBigBlocksFunc(int bigBlockId);
@@ -20,7 +19,6 @@ namespace CadEditor
 
     public delegate void RenderToMainScreenFunc(Graphics g, int curScale, int scrNo);
 
-    public delegate int ConvertScreenTileFunc(int val);
     public delegate int GetBigTileNoFromScreenFunc(int[] screenData, int index);
     public delegate void SetBigTileToScreenFunc(int[] screenData, int index, int value);
 
@@ -93,10 +91,7 @@ namespace CadEditor
             setBigBlocksFuncs = callFromScript<SetBigBlocksFunc[]>(asm, data, "*.setBigBlocksFuncs", new SetBigBlocksFunc[1]);
             getBigBlocksAddrFuncs = callFromScript<GetBigBlocksAddrFunc[]>(asm, data, "*.getBigBlocksAddrFuncs", new GetBigBlocksAddrFunc[1]);
 
-            getBlocksAddrFunc = callFromScript<GetBlocksAddrFunc>(asm, data, "*.getBlocksAddrFunc"); // null
             getPalFunc = callFromScript<GetPalFunc>(asm, data, "*.getPalFunc");
-            convertScreenTileFunc = callFromScript<ConvertScreenTileFunc>(asm, data, "*.getConvertScreenTileFunc"); // null
-            backConvertScreenTileFunc = callFromScript<ConvertScreenTileFunc>(asm, data, "*.getBackConvertScreenTileFunc"); // null
             getBigTileNoFromScreenFunc = callFromScript<GetBigTileNoFromScreenFunc>(asm, data, "*.getBigTileNoFromScreenFunc", Utils.getBigTileNoFromScreen);
             setBigTileToScreenFunc = callFromScript<SetBigTileToScreenFunc>(asm, data, "*.setBigTileToScreenFunc", Utils.setBigTileToScreen);
 
@@ -179,15 +174,6 @@ namespace CadEditor
             return (getPalFunc ?? (_ => null))(palId);
         }
 
-        public static int convertScreenTile(int tile)
-        {
-            return (convertScreenTileFunc ?? (v => v))(tile);
-        }
-
-        public static int backConvertScreenTile(int tile)
-        {
-            return (backConvertScreenTileFunc ?? (v => v))(tile);
-        }
 
         public static int getBigTileNoFromScreen(int[] screenData, int index)
         {
@@ -262,14 +248,8 @@ namespace CadEditor
 
         public static int getTilesAddr(int id)
         {
-            var getAddrFunc = ConfigScript.getBlocksAddrFunc;
-            return getAddrFunc?.Invoke(id) ?? getTilesAddrDefault(id);
-
-        }
-
-        private static int getTilesAddrDefault(int id)
-        {
             return ConfigScript.blocksOffset.beginAddr + ConfigScript.blocksOffset.recSize * id;
+
         }
 
         public static int getbigBlocksHierarchyCount()
@@ -308,15 +288,11 @@ namespace CadEditor
         public static GetBigBlocksAddrFunc[] getBigBlocksAddrFuncs;
 
         public static int blocksCount;
-        public static GetBlocksAddrFunc getBlocksAddrFunc;
         public static GetBlocksCountFunc getBlocksCountFunc;
 
         public static GetPalFunc getPalFunc;
 
         public static RenderToMainScreenFunc renderToMainScreenFunc;
-
-        public static ConvertScreenTileFunc convertScreenTileFunc;
-        public static ConvertScreenTileFunc backConvertScreenTileFunc;
 
         public static GetBigTileNoFromScreenFunc getBigTileNoFromScreenFunc;
         public static SetBigTileToScreenFunc setBigTileToScreenFunc;

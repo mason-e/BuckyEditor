@@ -58,18 +58,13 @@ namespace CadEditor
             return true;
         }
 
-        public static int readBlockIndexFromMap(byte[] arrayWithData, int romAddr, int index)
-        {
-            return ConfigScript.convertScreenTile(arrayWithData[romAddr + index]);
-        }
-
         public static Screen getScreen(OffsetRec screenOffset, int screenIndex)
         {
             var result = new int[Math.Max(64, screenOffset.recSize)];
             var arrayWithData = Globals.romdata;
             int beginAddr = screenOffset.beginAddr + screenIndex * screenOffset.recSize;
             for (int i = 0; i < screenOffset.recSize; i++)
-                result[i] = readBlockIndexFromMap(arrayWithData, beginAddr, i);
+                result[i] = arrayWithData[beginAddr + i];
             //TODO: read layer2
 
             int w = screenOffset.width;
