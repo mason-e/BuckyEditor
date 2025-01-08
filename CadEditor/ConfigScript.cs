@@ -70,14 +70,8 @@ namespace CadEditor
             blocksOffset = callFromScript(asm, data, "*.getBlocksOffset", new OffsetRec(0, 1, 0));
             screensOffset[0] = callFromScript(asm, data, "*.getScreensOffset", new OffsetRec(0, 1, 0, -1, -1));
 
-            bigBlocksHierarchyCount = callFromScript<int>(asm, data, "*.getBigBlocksHierarchyCount", 1);
-
-            bigBlocksCounts = new int[bigBlocksHierarchyCount];
-            for (int hierLevel = 0; hierLevel < bigBlocksHierarchyCount; hierLevel++)
-            {
-                bigBlocksCounts[hierLevel] = callFromScript(asm, data, "*.getBigBlocksCountHierarchy", 256, hierLevel);
-            }
-            bigBlocksCounts[0] = callFromScript(asm, data, "*.getBigBlocksCount", bigBlocksCounts[0]);
+            bigBlocksCounts = new int[1];
+            bigBlocksCounts[0] = callFromScript(asm, data, "*.getBigBlocksCount", 256);
 
             getVideoChunkFunc = callFromScript<GetVideoChunkFunc>(asm, data, "*.getVideoChunkFunc");
 
@@ -206,11 +200,6 @@ namespace CadEditor
 
         }
 
-        public static int getbigBlocksHierarchyCount()
-        {
-            return bigBlocksHierarchyCount;
-        }
-
         public static T callFromScript<T>(AsmHelper script, object data, string funcName, T defaultValue = default(T), params object[] funcParams)
         {
             try
@@ -235,7 +224,6 @@ namespace CadEditor
         public static OffsetRec[] screensOffset;
 
         public static GetVideoChunkFunc getVideoChunkFunc;
-        public static int bigBlocksHierarchyCount;
         public static int[] bigBlocksCounts;
         public static GetBigBlocksFunc[] getBigBlocksFuncs;
         public static SetBigBlocksFunc[] setBigBlocksFuncs;
