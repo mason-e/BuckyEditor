@@ -180,7 +180,7 @@ namespace PluginVideoNes
             byte[] videoChunk = ConfigScript.getVideoChunk(videoPageId);
             ObjRec[] objects = ConfigScript.getBlocks(tilesId);
 
-            byte[] palette = ConfigScript.getPal(palId);
+            byte[] palette = Utils.getPalFromRom(ConfigScript.paletteAddress);
             var range256 = Enumerable.Range(0, 256);
             var objStrip1 = range256.Select(i => makeImage(i, videoChunk, palette, 0)).ToArray();
             var objStrip2 = range256.Select(i => makeImage(i, videoChunk, palette, 1)).ToArray();

@@ -61,7 +61,7 @@ namespace CadEditor
 
         protected void setPal()
         {
-            palette = ConfigScript.getPal(curActivePal);
+            palette = Utils.getPalFromRom(ConfigScript.paletteAddress);
             //set image for pallete
             var b = new Bitmap(16 * 16, 16);
             using (Graphics g = Graphics.FromImage(b))

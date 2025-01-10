@@ -13,6 +13,5 @@ public class Data
   public int getBlocksCount()           { return 244; }
   public int getBigBlocksCount()        { return 244; }
   public int getPalBytesAddr()          { return 0x89e1; }
-  
-  public GetPalFunc           getPalFunc()           { return Utils.readPalFromBin(new[] {"pal1(a).bin"}); }
+  public int getPalAddress()            { return 0x117D3; }
 }

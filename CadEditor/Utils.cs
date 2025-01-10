@@ -296,6 +296,25 @@ namespace CadEditor
             return (int x) => { return readBinFile(fname[x]); };
         }
 
+        public static byte[] getPalFromRom(int startAddy)
+        {
+            byte[] romdata = Globals.romdata;
+            byte[] palette = new byte[16];
+            for (int i = 0; i < 16; i++)
+            {
+                // weird palette index math is because each palette should include four colors,
+                // but the ROM stores them three at a time since it omits the transparency color
+                if ((i + 1) % 4 == 1)
+                    palette[i] = 0x0F;
+                else
+                {
+                    palette[i] = romdata[startAddy + i - 1 - i / 4];
+                }
+            }            
+            
+            return palette;
+        }
+
         public static GetVideoChunkFunc getVideoChunk(string[] fname)
         {
             return (int x) => { return readVideoBankFromFile(fname[x], 0); };

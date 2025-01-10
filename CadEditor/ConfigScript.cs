@@ -79,7 +79,7 @@ namespace CadEditor
             setBigBlocksFuncs = callFromScript<SetBigBlocksFunc[]>(asm, data, "*.setBigBlocksFuncs", new SetBigBlocksFunc[1]);
             getBigBlocksAddrFuncs = callFromScript<GetBigBlocksAddrFunc[]>(asm, data, "*.getBigBlocksAddrFuncs", new GetBigBlocksAddrFunc[1]);
 
-            getPalFunc = callFromScript<GetPalFunc>(asm, data, "*.getPalFunc");
+            paletteAddress = callFromScript(asm, data, "*.getPalAddress", 0);
             getBigTileNoFromScreenFunc = callFromScript<GetBigTileNoFromScreenFunc>(asm, data, "*.getBigTileNoFromScreenFunc", Utils.getBigTileNoFromScreen);
             setBigTileToScreenFunc = callFromScript<SetBigTileToScreenFunc>(asm, data, "*.setBigTileToScreenFunc", Utils.setBigTileToScreen);
 
@@ -145,12 +145,6 @@ namespace CadEditor
         {
             Utils.setBlocksFromTiles16Pal1(bIndex, blocks);
         }
-
-        public static byte[] getPal(int palId)
-        {
-            return (getPalFunc ?? (_ => null))(palId);
-        }
-
 
         public static int getBigTileNoFromScreen(int[] screenData, int index)
         {
@@ -231,7 +225,7 @@ namespace CadEditor
 
         public static int blocksCount;
 
-        public static GetPalFunc getPalFunc;
+        public static int paletteAddress;
 
         public static GetBigTileNoFromScreenFunc getBigTileNoFromScreenFunc;
         public static SetBigTileToScreenFunc setBigTileToScreenFunc;
