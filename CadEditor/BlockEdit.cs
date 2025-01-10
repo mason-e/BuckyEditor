@@ -28,9 +28,9 @@ namespace CadEditor
 
         protected virtual void resetControls()
         {
-            UtilsGui.setCbItemsCount(cbVideo, ConfigScript.videoOffset.recCount);
+            UtilsGui.setCbItemsCount(cbVideo, 1);
             UtilsGui.setCbItemsCount(cbTileset, ConfigScript.blocksOffset.recCount);
-            UtilsGui.setCbItemsCount(cbPalette, ConfigScript.palOffset.recCount);
+            UtilsGui.setCbItemsCount(cbPalette, 1);
 
             UtilsGui.setCbIndexWithoutUpdateLevel(cbTileset, cbLevelSelect_SelectedIndexChanged, formMain.curActiveBigBlockNo);  //small blocks no?
             UtilsGui.setCbIndexWithoutUpdateLevel(cbVideo, VisibleOnlyChange_SelectedIndexChanged, formMain.curActiveVideoNo);

@@ -65,8 +65,6 @@ namespace CadEditor
 
             screensOffset = new OffsetRec[1];
 
-            palOffset = callFromScript(asm, data, "*.getPalOffset", new OffsetRec(0, 1, 0));
-            videoOffset = callFromScript(asm, data, "*.getVideoOffset", new OffsetRec(0, 1, 0));
             blocksOffset = callFromScript(asm, data, "*.getBlocksOffset", new OffsetRec(0, 1, 0));
             screensOffset[0] = callFromScript(asm, data, "*.getScreensOffset", new OffsetRec(0, 1, 0, -1, -1));
 
@@ -212,8 +210,6 @@ namespace CadEditor
         public static string ProgramDirectory { get { return programStartDirectory; } }
         public static string ConfigDirectory { get { return configDirectory; } }
 
-        public static OffsetRec palOffset;
-        public static OffsetRec videoOffset;
         public static OffsetRec blocksOffset;
         public static OffsetRec[] screensOffset;
 
