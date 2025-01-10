@@ -7,9 +7,6 @@ using CSScriptLibrary;
 
 namespace CadEditor
 {
-    public delegate byte[] GetVideoChunkFunc(int videoPageId);
-
-
     public delegate BigBlock[] GetBigBlocksFunc(int bigBlockId);
     public delegate void SetBigBlocksFunc(int bigTileIndex, BigBlock[] bigBlocks);
     public delegate int GetBigBlocksAddrFunc(int bigBlockId);
@@ -71,13 +68,12 @@ namespace CadEditor
             bigBlocksCounts = new int[1];
             bigBlocksCounts[0] = callFromScript(asm, data, "*.getBigBlocksCount", 256);
 
-            getVideoChunkFunc = callFromScript<GetVideoChunkFunc>(asm, data, "*.getVideoChunkFunc");
-
             getBigBlocksFuncs = callFromScript<GetBigBlocksFunc[]>(asm, data, "*.getBigBlocksFuncs", new GetBigBlocksFunc[1]);
             setBigBlocksFuncs = callFromScript<SetBigBlocksFunc[]>(asm, data, "*.setBigBlocksFuncs", new SetBigBlocksFunc[1]);
             getBigBlocksAddrFuncs = callFromScript<GetBigBlocksAddrFunc[]>(asm, data, "*.getBigBlocksAddrFuncs", new GetBigBlocksAddrFunc[1]);
 
             paletteAddress = callFromScript(asm, data, "*.getPalAddress", 0);
+            patternTableAddress = callFromScript(asm, data, "*.getPatternTableAddress", 0x20010);
             getBigTileNoFromScreenFunc = callFromScript<GetBigTileNoFromScreenFunc>(asm, data, "*.getBigTileNoFromScreenFunc", Utils.getBigTileNoFromScreen);
             setBigTileToScreenFunc = callFromScript<SetBigTileToScreenFunc>(asm, data, "*.setBigTileToScreenFunc", Utils.setBigTileToScreen);
 
@@ -122,11 +118,6 @@ namespace CadEditor
                 }
             }
             plugins.Reverse();
-        }
-
-        public static byte[] getVideoChunk(int videoPageId)
-        {
-            return (getVideoChunkFunc ?? (_ => null))(videoPageId);
         }
 
         public static BigBlock[] getBigBlocksRecursive(int hierarchyLevel, int bigBlockId)
@@ -213,7 +204,6 @@ namespace CadEditor
         public static OffsetRec blocksOffset;
         public static OffsetRec[] screensOffset;
 
-        public static GetVideoChunkFunc getVideoChunkFunc;
         public static int[] bigBlocksCounts;
         public static GetBigBlocksFunc[] getBigBlocksFuncs;
         public static SetBigBlocksFunc[] setBigBlocksFuncs;
@@ -221,6 +211,8 @@ namespace CadEditor
 
         public static int blocksCount;
 
+        public static int patternTableAddress;
+        
         public static int paletteAddress;
 
         public static GetBigTileNoFromScreenFunc getBigTileNoFromScreenFunc;

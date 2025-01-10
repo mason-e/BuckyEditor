@@ -296,7 +296,7 @@ namespace CadEditor
             return (int x) => { return readBinFile(fname[x]); };
         }
 
-        public static byte[] getPalFromRom(int startAddy)
+        public static byte[] getPalFromRom(int startAddress)
         {
             byte[] romdata = Globals.romdata;
             byte[] palette = new byte[16];
@@ -308,16 +308,21 @@ namespace CadEditor
                     palette[i] = 0x0F;
                 else
                 {
-                    palette[i] = romdata[startAddy + i - 1 - i / 4];
+                    palette[i] = romdata[startAddress + i - 1 - i / 4];
                 }
             }            
             
             return palette;
         }
 
-        public static GetVideoChunkFunc getVideoChunk(string[] fname)
+        public static byte[] getPatternTableFromRom(int startAddress)
         {
-            return (int x) => { return readVideoBankFromFile(fname[x], 0); };
+            byte[] romdata = Globals.romdata;
+            byte[] patternTable = new byte[4096]; // 256 tiles, each tile is 16 bytes
+            for (int i = 0; i < 4096; i++)
+                patternTable[i] = romdata[startAddress + i];
+            
+            return patternTable;
         }
     }
 }
