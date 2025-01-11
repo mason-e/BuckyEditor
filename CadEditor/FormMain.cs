@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.Text;
-using System.IO;
 using System.Windows.Forms;
 
 namespace CadEditor
@@ -21,10 +18,6 @@ namespace CadEditor
         private void setDefaultScale()
         {
             curScale = 1;
-            if (ConfigScript.getDefaultScale() > 0)
-            {
-                curScale = ConfigScript.getDefaultScale();
-            }
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -51,7 +44,7 @@ namespace CadEditor
                 resetControls();
             }
 
-            subeditorsDict = new Dictionary<ToolStripButton, Func<Form>> { 
+            subeditorsDict = new Dictionary<ToolStripButton, Func<Form>> {
                  { bttBlocks,       makeBlocksEditor },
             };
         }
@@ -87,21 +80,15 @@ namespace CadEditor
 
             resetScreens();
 
-            UtilsGui.setCbItemsCount(cbVideoNo, ConfigScript.videoOffset.recCount);
-            UtilsGui.setCbItemsCount(cbBigBlockNo, ConfigScript.bigBlocksOffsets[0].recCount);
+            UtilsGui.setCbItemsCount(cbVideoNo, 1);
             UtilsGui.setCbItemsCount(cbBlockNo, ConfigScript.blocksOffset.recCount);
-            UtilsGui.setCbItemsCount(cbPaletteNo, ConfigScript.palOffset.recCount);
+            UtilsGui.setCbItemsCount(cbPaletteNo, 1);
             UtilsGui.setCbIndexWithoutUpdateLevel(cbVideoNo, cbLevel_SelectedIndexChanged);
-            UtilsGui.setCbIndexWithoutUpdateLevel(cbBigBlockNo, cbLevel_SelectedIndexChanged);
             UtilsGui.setCbIndexWithoutUpdateLevel(cbBlockNo, cbLevel_SelectedIndexChanged);
             UtilsGui.setCbIndexWithoutUpdateLevel(cbPaletteNo, cbLevel_SelectedIndexChanged);
             UtilsGui.setCbIndexWithoutUpdateLevel(cbViewType, cbLevel_SelectedIndexChanged);
 
-            cbGroup.Items.Clear();
-            foreach (var g in ConfigScript.getGroups())
-            {
-                cbGroup.Items.Add(g.name);
-            }
+
             dirty = false; updateSaveVisibility();
             showNeiScreens = true;
             showAxis = true;
@@ -117,10 +104,8 @@ namespace CadEditor
 
             curActiveLayer = 0;
 
-            pnGroups.Visible = ConfigScript.getGroups().Length > 0;
-
             updateScaleMenuItemsChecked(Array.FindIndex(scaleFactors, el => el == curScale)); //float comparasion with == is danger
-            
+
             resetMapScreenSize();
         }
 
@@ -143,27 +128,13 @@ namespace CadEditor
 
         private void setBlocks(bool needRebuildBlocks)
         {
-            //if using pictures
-            if (ConfigScript.usePicturesInstedBlocks)
-            {
-                if (needRebuildBlocks)
-                {
-                    //get block size from image
-                    int w = ConfigScript.getBlocksPicturesWidth();
-                    int h = 32;
-                    bigBlocks = UtilsGDI.setBlocksForPictures(curScale, w, h, curActiveViewType);
-                }
-            }
-            else
-            {
-                MapViewType smallObjectsType =
-                    curActiveViewType == MapViewType.SmallObjNumbers ? MapViewType.ObjNumbers :
-                      curActiveViewType == MapViewType.ObjType ? MapViewType.ObjType : MapViewType.Tiles;
+            MapViewType smallObjectsType =
+                curActiveViewType == MapViewType.SmallObjNumbers ? MapViewType.ObjNumbers :
+                    curActiveViewType == MapViewType.ObjType ? MapViewType.ObjType : MapViewType.Tiles;
 
-                if (needRebuildBlocks)
-                {
-                    bigBlocks = ConfigScript.videoNes.makeBigBlocks(curActiveVideoNo, curActiveBigBlockNo, curActiveBlockNo, curActivePalleteNo, smallObjectsType, curActiveViewType, ConfigScript.getbigBlocksHierarchyCount() - 1);
-                }
+            if (needRebuildBlocks)
+            {
+                bigBlocks = ConfigScript.videoNes.makeBigBlocks(curActiveVideoNo, curActiveBigBlockNo, curActiveBlockNo, curActivePalleteNo, smallObjectsType, curActiveViewType);
             }
 
             curActiveBlock = 0;
@@ -235,7 +206,7 @@ namespace CadEditor
             }
             if (showNeiScreens && (screenNo < ConfigScript.screensOffset[0].recCount - 1) && screen.layers[0].showLayer)
             {
-                renderNeighbornLine(g, screenNo + 1, 0 , (width + 1) * tileSizeX);
+                renderNeighbornLine(g, screenNo + 1, 0, (width + 1) * tileSizeX);
             }
 
             //show brush
@@ -292,8 +263,8 @@ namespace CadEditor
 
             int width = screen.width;
 
-            int dx = ee.X / (int) (bigBlocks[0].Width * curScale) - 1;
-            int dy = ee.Y / (int) (bigBlocks[0].Height * curScale);
+            int dx = ee.X / (int)(bigBlocks[0].Width * curScale) - 1;
+            int dy = ee.Y / (int)(bigBlocks[0].Height * curScale);
 
             if (ea.Button == MouseButtons.Right)
             {
@@ -326,8 +297,8 @@ namespace CadEditor
             }
             var screen = getActiveScreen();
             int width = screen.width;
-            int dx = ee.X / (int) (bigBlocks[0].Width * curScale) - 1;
-            int dy = ee.Y / (int) (bigBlocks[0].Height * curScale);
+            int dx = ee.X / (int)(bigBlocks[0].Width * curScale) - 1;
+            int dy = ee.Y / (int)(bigBlocks[0].Height * curScale);
             lbCoords.Text = String.Format("Coords:({0},{1})", dx, dy);
 
             bool curDeltaChanged = curDx != dx || curDy != dy;
@@ -416,7 +387,6 @@ namespace CadEditor
         private void changeLevelIndex(bool reloadBlocks = false)
         {
             curActiveVideoNo = cbVideoNo.SelectedIndex;
-            curActiveBigBlockNo = cbBigBlockNo.SelectedIndex;
             curActiveBlockNo = cbBlockNo.SelectedIndex;
             curActivePalleteNo = cbPaletteNo.SelectedIndex;
             curActiveViewType = (MapViewType)cbViewType.SelectedIndex;
@@ -486,7 +456,7 @@ namespace CadEditor
             }
 
             return true;
-            
+
         }
 
         public void reloadGameType()
@@ -529,7 +499,7 @@ namespace CadEditor
         private FormClosedEventHandler subeditorClosed(ToolStripItem enabledAfterCloseButton)
         {
             return delegate
-            { 
+            {
                 enabledAfterCloseButton.Enabled = true;
                 reloadLevel(true, true);
             };
@@ -544,11 +514,11 @@ namespace CadEditor
                 f.FormClosed += subeditorClosed(b);
                 if (showDialog)
                 {
-                  f.ShowDialog();
+                    f.ShowDialog();
                 }
                 else
                 {
-                  f.Show();
+                    f.Show();
                 }
             }
         }
@@ -645,7 +615,7 @@ namespace CadEditor
                 }
                 int deltaX = selectionEndX - selectionBeginX + 1;
                 int deltaY = selectionEndY - selectionBeginY + 1;
-                int [][] tiles = new int[deltaY][];
+                int[][] tiles = new int[deltaY][];
                 for (int arrs = 0; arrs < tiles.Length; arrs++)
                     tiles[arrs] = new int[deltaX];
                 var curScreen = screens[screenNo];
@@ -653,7 +623,7 @@ namespace CadEditor
                 {
                     for (int j = 0; j < deltaY; j++)
                     {
-                        int index = (selectionBeginY + j)*curScreen.width + (selectionBeginX + i);
+                        int index = (selectionBeginY + j) * curScreen.width + (selectionBeginX + i);
                         tiles[j][i] = curScreen.layers[curActiveLayer].data[index];
                     }
                 }
@@ -694,7 +664,7 @@ namespace CadEditor
 
         private void FormMain_KeyDown(object sender, KeyEventArgs e)
         {
-            
+
         }
 
         private void blocksScreen_Paint(object sender, PaintEventArgs e)
@@ -704,7 +674,7 @@ namespace CadEditor
             var g = e.Graphics;
             g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.NearestNeighbor;
             g.PixelOffsetMode = System.Drawing.Drawing2D.PixelOffsetMode.Half;
-            
+
             var renderParams = new MapEditor.RenderParams
             {
                 bigBlocks = bigBlocks,
@@ -770,43 +740,20 @@ namespace CadEditor
                 bttOpen,
                 bttSave,
                 bttReload,
-                toolStripSeparator1,
-                //place for plugin
-                sToolButtons,
-
                 bttBlocks,
-                toolStripSeparator2,
-
-                toolStripSeparator3,
-
                 bttShowNei,
                 bttAxis,
                 bttShowBrush,
-                toolStripSeparator4,
-
                 bttScale,
-                toolStripSeparator5,
-
                 tbbShowPluginInfo,
             };
 
             toolStrip1.Items.AddRange(items);
         }
 
-        public void addSubeditorButton(ToolStripItem item)
-        {
-          toolStrip1.Items.Insert(toolStrip1.Items.IndexOf(bttBlocks)+1, item);
-        }
-
         private void bttScale_ButtonClick(object sender, EventArgs e)
         {
             bttScale.ShowDropDown();
-        }
-
-        public void addToolButton(ToolStripItem item)
-        {
-            toolStrip1.Items.Insert(toolStrip1.Items.IndexOf(toolStripSeparator1) + 1, item);
-
         }
 
         private void tbbShowPluginInfo_Click(object sender, EventArgs e)
@@ -822,19 +769,6 @@ namespace CadEditor
             MessageBox.Show(sb.ToString());
         }
 
-        private void cbGroup_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (cbGroup.SelectedIndex < 0)
-                return;
-            GroupRec g = ConfigScript.getGroup(cbGroup.SelectedIndex);
-            UtilsGui.setCbIndexWithoutUpdateLevel(cbVideoNo, cbLevel_SelectedIndexChanged, g.videoNo);
-            UtilsGui.setCbIndexWithoutUpdateLevel(cbBigBlockNo, cbLevel_SelectedIndexChanged, g.bigBlockNo);
-            UtilsGui.setCbIndexWithoutUpdateLevel(cbBlockNo, cbLevel_SelectedIndexChanged, g.blockNo);
-            UtilsGui.setCbIndexWithoutUpdateLevel(cbPaletteNo, cbLevel_SelectedIndexChanged, g.palNo);
-            cbLevel_SelectedIndexChanged(cbVideoNo, new EventArgs());
-            if (g.firstScreen < 0 || g.firstScreen <= cbScreenNo.Items.Count)
-              cbScreenNo.SelectedIndex = g.firstScreen - 1;
-        }
 
         private void setWindowText()
         {

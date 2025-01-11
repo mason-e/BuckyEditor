@@ -1,12 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using System.IO;
 using System.Windows.Forms;
-using System.Globalization;
-using System.Linq;
-
-using System.Drawing;
 
 namespace CadEditor
 {
@@ -32,7 +26,7 @@ namespace CadEditor
                 MessageBox.Show(ex.Message, "Load rom error");
                 return false;
             }
-            
+
             try
             {
                 ConfigScript.LoadFromFile(configFilename);
@@ -64,48 +58,17 @@ namespace CadEditor
             return true;
         }
 
-        public static int readBlockIndexFromMap(byte[] arrayWithData, int romAddr, int index)
-        {
-            int wordLen = ConfigScript.getWordLen();
-            bool littleEndian = ConfigScript.isLittleEndian();
-            int dataStride = ConfigScript.getScreenDataStride();
-            if (wordLen == 1)
-            {
-                return ConfigScript.convertScreenTile(arrayWithData[romAddr + index * dataStride]);
-            }
-            else if (wordLen == 2)
-            {
-                if (littleEndian)
-                {
-                    return ConfigScript.convertScreenTile(Utils.readWordLE(arrayWithData, romAddr + index * (dataStride * wordLen)));
-                }
-                else
-                {
-                    return ConfigScript.convertScreenTile(Utils.readWord(arrayWithData, romAddr + index * (dataStride * wordLen)));
-                }
-            }
-            return -1;
-        }
-
-        public static Screen getScreen(OffsetRec screenOffset,  int screenIndex)
+        public static Screen getScreen(OffsetRec screenOffset, int screenIndex)
         {
             var result = new int[Math.Max(64, screenOffset.recSize)];
             var arrayWithData = Globals.romdata;
-            int dataStride = ConfigScript.getScreenDataStride();
-            int wordLen = ConfigScript.getWordLen();
-            //bool littleEndian = ConfigScript.isLittleEndian();
-            int beginAddr = screenOffset.beginAddr + screenIndex * screenOffset.recSize * dataStride * wordLen;
+            int beginAddr = screenOffset.beginAddr + screenIndex * screenOffset.recSize;
             for (int i = 0; i < screenOffset.recSize; i++)
-                result[i] = readBlockIndexFromMap(arrayWithData, beginAddr, i);
+                result[i] = arrayWithData[beginAddr + i];
             //TODO: read layer2
 
             int w = screenOffset.width;
             int h = screenOffset.height;
-            if (ConfigScript.getScreenVertical())
-            {
-                Utils.swap(ref w, ref h);
-                result = Utils.transpose(result, w, h);
-            }
 
             return new Screen(new BlockLayer(result), w, h);
         }

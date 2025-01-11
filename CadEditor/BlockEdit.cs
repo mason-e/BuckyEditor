@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Text;
-using System.Windows.Forms;
 using System.Linq;
+using System.Windows.Forms;
 
 namespace CadEditor
 {
@@ -32,9 +28,9 @@ namespace CadEditor
 
         protected virtual void resetControls()
         {
-            UtilsGui.setCbItemsCount(cbVideo, ConfigScript.videoOffset.recCount);
+            UtilsGui.setCbItemsCount(cbVideo, 1);
             UtilsGui.setCbItemsCount(cbTileset, ConfigScript.blocksOffset.recCount);
-            UtilsGui.setCbItemsCount(cbPalette, ConfigScript.palOffset.recCount);
+            UtilsGui.setCbItemsCount(cbPalette, 1);
 
             UtilsGui.setCbIndexWithoutUpdateLevel(cbTileset, cbLevelSelect_SelectedIndexChanged, formMain.curActiveBigBlockNo);  //small blocks no?
             UtilsGui.setCbIndexWithoutUpdateLevel(cbVideo, VisibleOnlyChange_SelectedIndexChanged, formMain.curActiveVideoNo);
@@ -44,7 +40,7 @@ namespace CadEditor
             curActivePal = formMain.curActivePalleteNo;
             UtilsGui.setCbIndexWithoutUpdateLevel(cbSubpalette, cbSubpalette_SelectedIndexChanged);
 
-            UtilsGui.setCbItemsCount(cbPanelNo, (ConfigScript.getBlocksCount(curActiveBigBlock) + BlocksPerPage  - 1)/ BlocksPerPage);
+            UtilsGui.setCbItemsCount(cbPanelNo, (ConfigScript.getBlocksCount() + BlocksPerPage - 1) / BlocksPerPage);
             UtilsGui.setCbIndexWithoutUpdateLevel(cbPanelNo, cbPanelNo_SelectedIndexChanged);
         }
 
@@ -56,7 +52,7 @@ namespace CadEditor
             setObjects();
             reloadLevelEx();
             if (resetDirty)
-              dirty = false;
+                dirty = false;
         }
 
         protected virtual void reloadLevelEx()
@@ -65,7 +61,7 @@ namespace CadEditor
 
         protected void setPal()
         {
-            palette = ConfigScript.getPal(curActivePal);
+            palette = Utils.getPalFromRom(ConfigScript.paletteAddress);
             //set image for pallete
             var b = new Bitmap(16 * 16, 16);
             using (Graphics g = Graphics.FromImage(b))
@@ -99,16 +95,16 @@ namespace CadEditor
 
         protected void setVideo()
         {
-            var chunk = ConfigScript.getVideoChunk(curActiveVideo);
+            var chunk = Utils.getPatternTableFromRom(ConfigScript.patternTableAddress);
             for (int i = 0; i < 4; i++)
             {
-                videoSprites[i] = Enumerable.Range(0,256).Select(t => ((Bitmap)UtilsGDI.ResizeBitmap(ConfigScript.videoNes.makeImage(t, chunk, palette, i), 16, 16))).ToArray();
+                videoSprites[i] = Enumerable.Range(0, 256).Select(t => ((Bitmap)UtilsGDI.ResizeBitmap(ConfigScript.videoNes.makeImage(t, chunk, palette, i), 16, 16))).ToArray();
             }
         }
 
         protected void setVideoImage()
         {
-            var b = new Bitmap(TileSize*16, TileSize*16);
+            var b = new Bitmap(TileSize * 16, TileSize * 16);
             using (Graphics g = Graphics.FromImage(b))
             {
                 for (int i = 0; i < Globals.chunksCount; i++)
@@ -177,8 +173,8 @@ namespace CadEditor
             int y = e.Y / TileSize;
             PictureBox p = (PictureBox)sender;
             int objIndex = curPageIndex * BlocksPerPage + (int)p.Tag;
-            var obj = objects[ objIndex];
-            if (x >= 0 && x < obj.w && y>=0 && y < obj.h)
+            var obj = objects[objIndex];
+            if (x >= 0 && x < obj.w && y >= 0 && y < obj.h)
             {
                 if (left)
                 {
@@ -300,7 +296,7 @@ namespace CadEditor
             //GUI
             mapObjects.Controls.Clear();
             mapObjects.SuspendLayout();
-            int endIndex = Math.Min(BlocksPerPage, ConfigScript.getBlocksCount(curActiveBigBlock));
+            int endIndex = Math.Min(BlocksPerPage, ConfigScript.getBlocksCount());
             var objectTypes = ConfigScript.getBlockTypeNames();
             for (int i = 0; i < endIndex; i++)
             {
@@ -314,7 +310,7 @@ namespace CadEditor
                 lb.Location = new Point(curPanelX, 0);
                 lb.Size = new Size(32, 32);
                 lb.Tag = i;
-                lb.Text = String.Format("{0:X}",i);
+                lb.Text = String.Format("{0:X}", i);
                 fp.Controls.Add(lb);
                 curPanelX += lb.Size.Width;
                 //
@@ -343,7 +339,7 @@ namespace CadEditor
                 nudType.Location = new Point(curPanelX, 0);
                 nudType.Tag = i;
                 nudType.Minimum = 0;
-                nudType.Maximum = objectTypes.Length-1;
+                nudType.Maximum = objectTypes.Length - 1;
                 nudType.Hexadecimal = true;
                 nudType.ValueChanged += nudType_ValueChanged;
                 fp.Controls.Add(nudType);
@@ -365,7 +361,7 @@ namespace CadEditor
 
             mapObjects.SuspendLayout();
             int startIndex = curPageIndex * BlocksPerPage;
-            int endIndex = Math.Min(startIndex + BlocksPerPage, ConfigScript.getBlocksCount(curActiveBigBlock));
+            int endIndex = Math.Min(startIndex + BlocksPerPage, ConfigScript.getBlocksCount());
             int pi = 0;
             for (int i = startIndex; i < endIndex; i++, pi++)
             {
@@ -399,10 +395,10 @@ namespace CadEditor
 
         protected void btClear_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show("Are you sure want to clear all blocks?", "Clear", MessageBoxButtons.YesNo)!= DialogResult.Yes)
-              return;
-            for (int i = 0; i < ConfigScript.getBlocksCount(curActiveBigBlock); i++)
-                objects[i] = new ObjRec(0,0,0,0,0,0);
+            if (MessageBox.Show("Are you sure want to clear all blocks?", "Clear", MessageBoxButtons.YesNo) != DialogResult.Yes)
+                return;
+            for (int i = 0; i < ConfigScript.getBlocksCount(); i++)
+                objects[i] = new ObjRec(0, 0, 0, 0, 0, 0);
             dirty = true;
             refillPanel();
         }

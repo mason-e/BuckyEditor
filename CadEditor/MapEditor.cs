@@ -1,5 +1,4 @@
-﻿using System;
-using System.Drawing;
+﻿using System.Drawing;
 using System.Windows.Forms;
 
 namespace CadEditor
@@ -24,12 +23,6 @@ namespace CadEditor
                 int tileSizeY = (int)(renderParams.bigBlocks[0].Height * renderParams.curScale);
                 g.DrawRectangle(new Pen(Color.Green, 4.0f), new Rectangle(tileSizeX, 0, tileSizeX * renderParams.width, tileSizeY * renderParams.height));
             }
-
-            //Additional rendering  //float to int!
-            if (renderParams.additionalRenderEnabled)
-            {
-                ConfigScript.renderToMainScreen(g, (int) renderParams.curScale, scrNo);
-            }
         }
 
         private static void renderLayer(Graphics g, BlockLayer layer, RenderParams renderParams)
@@ -48,7 +41,7 @@ namespace CadEditor
             {
                 int bigBlockNo = ConfigScript.getBigTileNoFromScreen(layer.data, i);
                 Rectangle tileRect = new Rectangle((i % renderParams.width) * tileSizeX + renderParams.leftMargin, i / renderParams.width * tileSizeY + renderParams.topMargin, tileSizeX, tileSizeY);
-                renderParams.renderBlock(g,bigBlockNo, tileRect);
+                renderParams.renderBlock(g, bigBlockNo, tileRect);
             }
         }
 
@@ -91,20 +84,6 @@ namespace CadEditor
                     }
                 }
             }
-        }
-
-        public static Image screenToImage(Screen[] screens, int scrNo, RenderParams renderParams)
-        {
-            int tileSizeX = (int)(renderParams.bigBlocks[0].Width * renderParams.curScale);
-            int tileSizeY = (int)(renderParams.bigBlocks[0].Height * renderParams.curScale);
-
-            Image result = new Bitmap(renderParams.width * tileSizeX, renderParams.height * tileSizeY);
-
-            using (var g = Graphics.FromImage(result))
-            {
-                render(g, screens, scrNo, renderParams);
-            }
-            return result;
         }
 
         public class RenderParams
@@ -151,7 +130,7 @@ namespace CadEditor
                     return -1;
                 }
 
-                return (int) (bigBlocks[0].Width * curScale);
+                return (int)(bigBlocks[0].Width * curScale);
             }
 
             public int getTileSizeY()
@@ -161,7 +140,7 @@ namespace CadEditor
                     return -1;
                 }
 
-                return (int) (bigBlocks[0].Height * curScale);
+                return (int)(bigBlocks[0].Height * curScale);
             }
 
             public int getLayerSize()
@@ -171,7 +150,7 @@ namespace CadEditor
 
             public bool needRenderTileRect(Rectangle tileRect)
             {
-                return visibleRect == null || 
+                return visibleRect == null ||
                        visibleRect.Value.Contains(tileRect) ||
                        visibleRect.Value.IntersectsWith(tileRect);
             }

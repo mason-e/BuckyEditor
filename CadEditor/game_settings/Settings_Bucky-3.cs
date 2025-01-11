@@ -8,7 +8,6 @@ public class Data
   public OffsetRec getVideoOffset()     { return new OffsetRec(0x0 , 4   , 0x1000);  }
   public OffsetRec getPalOffset  ()     { return new OffsetRec(0x0 , 3   , 16); }
   public GetVideoChunkFunc    getVideoChunkFunc()    { return Utils.getVideoChunk(new[] {"chr3(a).bin", "chr3(aa).bin", "chr3(b).bin", "chr3(c).bin"}); }
-  public SetVideoChunkFunc    setVideoChunkFunc()    { return null; }
   
   public OffsetRec getBlocksOffset()    { return new OffsetRec(0xa181, 1  , 0x1000);  }
   public int getBlocksCount()           { return 244; }
