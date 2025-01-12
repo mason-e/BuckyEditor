@@ -82,23 +82,6 @@ namespace PluginVideoNes
             nesColors[0x3D] = Color.FromArgb(184, 184, 184);
             nesColors[0x3E] = Color.FromArgb(0, 0, 0);
             nesColors[0x3F] = Color.FromArgb(0, 0, 0);
-
-            cadObjectTypeColors[0x0] = Color.FromArgb(196, 0, 255, 0);
-            cadObjectTypeColors[0x1] = Color.FromArgb(196, 0, 255, 0);
-            cadObjectTypeColors[0x2] = Color.FromArgb(196, 0, 196, 0);
-            cadObjectTypeColors[0x3] = Color.FromArgb(196, 255, 0, 0);
-            cadObjectTypeColors[0x4] = Color.FromArgb(196, 255, 0, 0);
-            cadObjectTypeColors[0x5] = Color.FromArgb(196, 255, 0, 0);
-            cadObjectTypeColors[0x6] = Color.FromArgb(196, 0, 255, 0);
-            cadObjectTypeColors[0x7] = Color.FromArgb(196, 255, 255, 0);
-            cadObjectTypeColors[0x8] = Color.FromArgb(196, 255, 0, 0);
-            cadObjectTypeColors[0x9] = Color.FromArgb(196, 255, 0, 0);
-            cadObjectTypeColors[0xA] = Color.FromArgb(196, 255, 0, 0);
-            cadObjectTypeColors[0xB] = Color.FromArgb(196, 0, 0, 0);
-            cadObjectTypeColors[0xC] = Color.FromArgb(196, 255, 0, 0);
-            cadObjectTypeColors[0xD] = Color.FromArgb(196, 255, 0, 0);
-            cadObjectTypeColors[0xE] = Color.FromArgb(196, 0, 255, 255);
-            cadObjectTypeColors[0xF] = Color.FromArgb(196, 0, 255, 255);
         }
 
         public void updateColorsFromConfig()
@@ -158,20 +141,6 @@ namespace PluginVideoNes
 
             var mblock = UtilsGDI.GlueImages(images, obj.w, obj.h);
             using (Graphics g2 = Graphics.FromImage(mblock))
-            {
-                if (drawType == MapViewType.ObjType)
-                {
-                    int objType = obj.getType();
-                    var col = (objType < cadObjectTypeColors.Length) ? cadObjectTypeColors[objType] : cadObjectTypeColors[0];
-                    g2.FillRectangle(new SolidBrush(col), new Rectangle(0, 0, scaleInt16, scaleInt16));
-                    g2.DrawString(String.Format("{0:X}", obj.getType()), new Font("Arial", 6), Brushes.White, new Point(0, 0));
-                }
-                else if (drawType == MapViewType.ObjNumbers)
-                {
-                    g2.FillRectangle(new SolidBrush(Color.FromArgb(192, 255, 255, 255)), new Rectangle(0, 0, scaleInt16, scaleInt16));
-                    g2.DrawString(String.Format("{0:X}", index), new Font("Arial", 6), Brushes.Red, new Point(0, 0));
-                }
-            }
             return mblock;
         }
 
@@ -193,45 +162,16 @@ namespace PluginVideoNes
         }
 
         public Image[] makeBigBlocks(int videoNo, int bigBlockNo, int blockNo, int palleteNo, MapViewType smallObjectsViewType = MapViewType.Tiles,
-          MapViewType curViewType = MapViewType.Tiles, int hierarchyLevel = 0)
+            MapViewType curViewType = MapViewType.Tiles)
         {
-            BigBlock[] bigBlockIndexes = ConfigScript.getBigBlocksRecursive(hierarchyLevel, bigBlockNo);
-            return makeBigBlocks(videoNo, bigBlockNo, blockNo, bigBlockIndexes, palleteNo, smallObjectsViewType, curViewType, hierarchyLevel);
-        }
-
-        public Image[] makeBigBlocks(int videoNo, int bigBlockNo, int blockNo, BigBlock[] bigBlockIndexes, int palleteNo, MapViewType smallObjectsViewType = MapViewType.Tiles,
-            MapViewType curViewType = MapViewType.Tiles, int hierarchyLevel = 0)
-        {
-            int blockCount = ConfigScript.getBigBlocksCount(hierarchyLevel);
+            int blockCount = ConfigScript.getBlocksCount();
             var bigBlocks = new Image[blockCount];
 
             Image[] smallBlocksPack;
-            if (hierarchyLevel == 0)
-            {
-                smallBlocksPack = makeObjects(videoNo, blockNo, palleteNo, smallObjectsViewType);
-            }
-            else
-            {
-                var bigBlockIndexesPrev = ConfigScript.getBigBlocksRecursive(hierarchyLevel - 1, bigBlockNo);
-                smallBlocksPack = makeBigBlocks(videoNo, bigBlockNo, blockNo, bigBlockIndexesPrev, palleteNo, smallObjectsViewType, curViewType, hierarchyLevel - 1);
-            }
+            smallBlocksPack = makeObjects(videoNo, blockNo, palleteNo, smallObjectsViewType);
 
             //tt version hardcode
-            Image[][] smallBlocksAll = null;
-
-            bool smallBlockHasSubpals = bigBlockIndexes == null ? true : bigBlockIndexes[0].smallBlocksWithPal();
-            if (!smallBlockHasSubpals)
-            {
-                smallBlocksAll = new Image[4][];
-                for (int i = 0; i < 4; i++)
-                {
-                    smallBlocksAll[i] = makeObjects(videoNo, bigBlockNo, palleteNo, smallObjectsViewType, i);
-                }
-            }
-            else
-            {
-                smallBlocksAll = new Image[4][] { smallBlocksPack, smallBlocksPack, smallBlocksPack, smallBlocksPack };
-            }
+            Image[][] smallBlocksAll = new Image[4][] { smallBlocksPack, smallBlocksPack, smallBlocksPack, smallBlocksPack };
 
             for (int btileId = 0; btileId < blockCount; btileId++)
             {
@@ -262,6 +202,5 @@ namespace PluginVideoNes
         public static Color[] nesColors = new Color[nesColorsCount];
 
         const int CadObjtypesCount = 16;
-        public static Color[] cadObjectTypeColors = new Color[CadObjtypesCount];
     }
 }

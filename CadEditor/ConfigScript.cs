@@ -7,14 +7,7 @@ using CSScriptLibrary;
 
 namespace CadEditor
 {
-    public delegate BigBlock[] GetBigBlocksFunc(int bigBlockId);
-    public delegate void SetBigBlocksFunc(int bigTileIndex, BigBlock[] bigBlocks);
-    public delegate int GetBigBlocksAddrFunc(int bigBlockId);
-
     public delegate byte[] GetPalFunc(int palId);
-
-    public delegate int GetBigTileNoFromScreenFunc(int[] screenData, int index);
-    public delegate void SetBigTileToScreenFunc(int[] screenData, int index, int value);
 
     public delegate int GetPalBytesAddrFunc(int blockId);
 
@@ -65,17 +58,8 @@ namespace CadEditor
             blocksOffset = callFromScript(asm, data, "*.getBlocksOffset", new OffsetRec(0, 1, 0));
             screensOffset[0] = callFromScript(asm, data, "*.getScreensOffset", new OffsetRec(0, 1, 0, -1, -1));
 
-            bigBlocksCounts = new int[1];
-            bigBlocksCounts[0] = callFromScript(asm, data, "*.getBigBlocksCount", 256);
-
-            getBigBlocksFuncs = callFromScript<GetBigBlocksFunc[]>(asm, data, "*.getBigBlocksFuncs", new GetBigBlocksFunc[1]);
-            setBigBlocksFuncs = callFromScript<SetBigBlocksFunc[]>(asm, data, "*.setBigBlocksFuncs", new SetBigBlocksFunc[1]);
-            getBigBlocksAddrFuncs = callFromScript<GetBigBlocksAddrFunc[]>(asm, data, "*.getBigBlocksAddrFuncs", new GetBigBlocksAddrFunc[1]);
-
             paletteAddress = callFromScript(asm, data, "*.getPalAddress", 0);
             patternTableAddress = callFromScript(asm, data, "*.getPatternTableAddress", 0x20010);
-            getBigTileNoFromScreenFunc = callFromScript<GetBigTileNoFromScreenFunc>(asm, data, "*.getBigTileNoFromScreenFunc", Utils.getBigTileNoFromScreen);
-            setBigTileToScreenFunc = callFromScript<SetBigTileToScreenFunc>(asm, data, "*.setBigTileToScreenFunc", Utils.setBigTileToScreen);
 
             blocksCount = callFromScript(asm, data, "*.getBlocksCount", 256);
 
@@ -120,11 +104,6 @@ namespace CadEditor
             plugins.Reverse();
         }
 
-        public static BigBlock[] getBigBlocksRecursive(int hierarchyLevel, int bigBlockId)
-        {
-            return (getBigBlocksFuncs[hierarchyLevel] ?? (_ => null))(bigBlockId);
-        }
-
         public static ObjRec[] getBlocks(int bigBlockId)
         {
             return Utils.getBlocksFromTiles16Pal1(bigBlockId);
@@ -135,16 +114,6 @@ namespace CadEditor
             Utils.setBlocksFromTiles16Pal1(bIndex, blocks);
         }
 
-        public static int getBigTileNoFromScreen(int[] screenData, int index)
-        {
-            return getBigTileNoFromScreenFunc(screenData, index);
-        }
-
-        public static void setBigTileToScreen(int[] screenData, int index, int value)
-        {
-            setBigTileToScreenFunc(screenData, index, value);
-        }
-
         public static Screen[] loadScreens()
         {
             return Utils.loadScreensDiffSize();
@@ -153,11 +122,6 @@ namespace CadEditor
         public static void saveScreens(Screen[] screens)
         {
             Utils.saveScreensDiffSize(screens);
-        }
-
-        public static int getBigBlocksCount(int hierarchyLevel)
-        {
-            return bigBlocksCounts[hierarchyLevel];
         }
 
         public static int getBlocksCount()
@@ -204,19 +168,11 @@ namespace CadEditor
         public static OffsetRec blocksOffset;
         public static OffsetRec[] screensOffset;
 
-        public static int[] bigBlocksCounts;
-        public static GetBigBlocksFunc[] getBigBlocksFuncs;
-        public static SetBigBlocksFunc[] setBigBlocksFuncs;
-        public static GetBigBlocksAddrFunc[] getBigBlocksAddrFuncs;
-
         public static int blocksCount;
 
         public static int patternTableAddress;
         
         public static int paletteAddress;
-
-        public static GetBigTileNoFromScreenFunc getBigTileNoFromScreenFunc;
-        public static SetBigTileToScreenFunc setBigTileToScreenFunc;
 
         public static int palBytesAddr;
         public static GetPalBytesAddrFunc getPalBytesAddrFunc;

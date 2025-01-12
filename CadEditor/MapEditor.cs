@@ -39,7 +39,7 @@ namespace CadEditor
             int size = renderParams.getLayerSize();
             for (int i = 0; i < size; i++)
             {
-                int bigBlockNo = ConfigScript.getBigTileNoFromScreen(layer.data, i);
+                int bigBlockNo = Utils.getBigTileNoFromScreen(layer.data, i);
                 Rectangle tileRect = new Rectangle((i % renderParams.width) * tileSizeX + renderParams.leftMargin, i / renderParams.width * tileSizeY + renderParams.topMargin, tileSizeX, tileSizeY);
                 renderParams.renderBlock(g, bigBlockNo, tileRect);
             }

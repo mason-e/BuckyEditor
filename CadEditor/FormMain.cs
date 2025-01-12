@@ -163,7 +163,7 @@ namespace CadEditor
             {
                 if (i % width == line)
                 {
-                    int bigBlockNo = ConfigScript.getBigTileNoFromScreen(indexesPrev, i);
+                    int bigBlockNo = Utils.getBigTileNoFromScreen(indexesPrev, i);
                     if ((bigBlockNo >= 0) && (bigBlockNo < bigBlocks.Length))
                         g.DrawImage(bigBlocks[bigBlockNo], new Rectangle(x, i / width * tileSizeY, tileSizeX, tileSizeY));
                 }
@@ -272,7 +272,7 @@ namespace CadEditor
                     return;
                 int index = dy * width + dx;
                 var layer = getActiveLayer(screens[screenNo]);
-                curActiveBlock = ConfigScript.getBigTileNoFromScreen(layer.data, index);
+                curActiveBlock = Utils.getBigTileNoFromScreen(layer.data, index);
                 if (curActiveBlock != -1)
                 {
                     activeBlock.Image = bigBlocks[curActiveBlock];
@@ -315,8 +315,8 @@ namespace CadEditor
                     {
                         int index = dy * width;
                         var layer = getActiveLayer(screens[screenNo + 1]);
-                        curActiveBlock = ConfigScript.getBigTileNoFromScreen(layer.data, index);
-                        ConfigScript.setBigTileToScreen(layer.data, index, curActiveBlock);
+                        curActiveBlock = Utils.getBigTileNoFromScreen(layer.data, index);
+                        Utils.setBigTileToScreen(layer.data, index, curActiveBlock);
                         dirty = true; updateSaveVisibility();
                     }
                 }
@@ -327,7 +327,7 @@ namespace CadEditor
                         int index = dy * width + (width - 1);
 
                         var layer = getActiveLayer(screens[screenNo - 1]);
-                        ConfigScript.setBigTileToScreen(layer.data, index, curActiveBlock);
+                        Utils.setBigTileToScreen(layer.data, index, curActiveBlock);
                         dirty = true; updateSaveVisibility();
                     }
                 }
@@ -337,7 +337,7 @@ namespace CadEditor
                     var layer = getActiveLayer(screens[screenNo]);
                     if (index < layer.data.Length)
                     {
-                        ConfigScript.setBigTileToScreen(layer.data, index, curActiveBlock);
+                        Utils.setBigTileToScreen(layer.data, index, curActiveBlock);
                     }
                     dirty = true; updateSaveVisibility();
                 }
@@ -539,11 +539,6 @@ namespace CadEditor
         public Screen[] screens { get; private set; }
 
         public Image[] bigBlocks { get; private set; } = new Image[0];
-
-        public Image[] getBigBlockImages()
-        {
-            return bigBlocks;
-        }
 
         //warning! danger direct function. do not use it
         public void setScreens(Screen[] newScreens)
