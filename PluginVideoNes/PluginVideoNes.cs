@@ -193,28 +193,20 @@ namespace PluginVideoNes
         }
 
         public Image[] makeBigBlocks(int videoNo, int bigBlockNo, int blockNo, int palleteNo, MapViewType smallObjectsViewType = MapViewType.Tiles,
-          MapViewType curViewType = MapViewType.Tiles, int hierarchyLevel = 0)
+          MapViewType curViewType = MapViewType.Tiles)
         {
-            BigBlock[] bigBlockIndexes = ConfigScript.getBigBlocksRecursive(hierarchyLevel, bigBlockNo);
-            return makeBigBlocks(videoNo, bigBlockNo, blockNo, bigBlockIndexes, palleteNo, smallObjectsViewType, curViewType, hierarchyLevel);
+            BigBlock[] bigBlockIndexes = ConfigScript.getBigBlocksRecursive(bigBlockNo);
+            return makeBigBlocks(videoNo, bigBlockNo, blockNo, bigBlockIndexes, palleteNo, smallObjectsViewType, curViewType);
         }
 
         public Image[] makeBigBlocks(int videoNo, int bigBlockNo, int blockNo, BigBlock[] bigBlockIndexes, int palleteNo, MapViewType smallObjectsViewType = MapViewType.Tiles,
-            MapViewType curViewType = MapViewType.Tiles, int hierarchyLevel = 0)
+            MapViewType curViewType = MapViewType.Tiles)
         {
-            int blockCount = ConfigScript.getBigBlocksCount(hierarchyLevel);
+            int blockCount = ConfigScript.getBigBlocksCount();
             var bigBlocks = new Image[blockCount];
 
             Image[] smallBlocksPack;
-            if (hierarchyLevel == 0)
-            {
-                smallBlocksPack = makeObjects(videoNo, blockNo, palleteNo, smallObjectsViewType);
-            }
-            else
-            {
-                var bigBlockIndexesPrev = ConfigScript.getBigBlocksRecursive(hierarchyLevel - 1, bigBlockNo);
-                smallBlocksPack = makeBigBlocks(videoNo, bigBlockNo, blockNo, bigBlockIndexesPrev, palleteNo, smallObjectsViewType, curViewType, hierarchyLevel - 1);
-            }
+            smallBlocksPack = makeObjects(videoNo, blockNo, palleteNo, smallObjectsViewType);
 
             //tt version hardcode
             Image[][] smallBlocksAll = null;

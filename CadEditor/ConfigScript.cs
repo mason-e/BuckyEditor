@@ -120,9 +120,9 @@ namespace CadEditor
             plugins.Reverse();
         }
 
-        public static BigBlock[] getBigBlocksRecursive(int hierarchyLevel, int bigBlockId)
+        public static BigBlock[] getBigBlocksRecursive(int bigBlockId)
         {
-            return (getBigBlocksFuncs[hierarchyLevel] ?? (_ => null))(bigBlockId);
+            return (getBigBlocksFuncs[0] ?? (_ => null))(bigBlockId);
         }
 
         public static ObjRec[] getBlocks(int bigBlockId)
@@ -155,9 +155,9 @@ namespace CadEditor
             Utils.saveScreensDiffSize(screens);
         }
 
-        public static int getBigBlocksCount(int hierarchyLevel)
+        public static int getBigBlocksCount()
         {
-            return bigBlocksCounts[hierarchyLevel];
+            return bigBlocksCounts[0];
         }
 
         public static int getBlocksCount()
