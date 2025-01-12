@@ -24,8 +24,6 @@ namespace CadEditor
 
         public static int getBigTileNoFromScreen(int[] screenData, int index)
         {
-            if (index == -1)
-                return -1;
             return screenData[index];
         }
 
