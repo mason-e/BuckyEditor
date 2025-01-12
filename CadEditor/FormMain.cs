@@ -316,7 +316,7 @@ namespace CadEditor
                         int index = dy * width;
                         var layer = getActiveLayer(screens[screenNo + 1]);
                         curActiveBlock = Utils.getBigTileNoFromScreen(layer.data, index);
-                        ConfigScript.setBigTileToScreen(layer.data, index, curActiveBlock);
+                        Utils.setBigTileToScreen(layer.data, index, curActiveBlock);
                         dirty = true; updateSaveVisibility();
                     }
                 }
@@ -327,7 +327,7 @@ namespace CadEditor
                         int index = dy * width + (width - 1);
 
                         var layer = getActiveLayer(screens[screenNo - 1]);
-                        ConfigScript.setBigTileToScreen(layer.data, index, curActiveBlock);
+                        Utils.setBigTileToScreen(layer.data, index, curActiveBlock);
                         dirty = true; updateSaveVisibility();
                     }
                 }
@@ -337,7 +337,7 @@ namespace CadEditor
                     var layer = getActiveLayer(screens[screenNo]);
                     if (index < layer.data.Length)
                     {
-                        ConfigScript.setBigTileToScreen(layer.data, index, curActiveBlock);
+                        Utils.setBigTileToScreen(layer.data, index, curActiveBlock);
                     }
                     dirty = true; updateSaveVisibility();
                 }

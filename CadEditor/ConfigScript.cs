@@ -9,8 +9,6 @@ namespace CadEditor
 {
     public delegate byte[] GetPalFunc(int palId);
 
-    public delegate void SetBigTileToScreenFunc(int[] screenData, int index, int value);
-
     public delegate int GetPalBytesAddrFunc(int blockId);
 
     public class ConfigScript
@@ -62,7 +60,6 @@ namespace CadEditor
 
             paletteAddress = callFromScript(asm, data, "*.getPalAddress", 0);
             patternTableAddress = callFromScript(asm, data, "*.getPatternTableAddress", 0x20010);
-            setBigTileToScreenFunc = callFromScript<SetBigTileToScreenFunc>(asm, data, "*.setBigTileToScreenFunc", Utils.setBigTileToScreen);
 
             blocksCount = callFromScript(asm, data, "*.getBlocksCount", 256);
 
@@ -115,11 +112,6 @@ namespace CadEditor
         public static void setBlocks(int bIndex, ObjRec[] blocks)
         {
             Utils.setBlocksFromTiles16Pal1(bIndex, blocks);
-        }
-
-        public static void setBigTileToScreen(int[] screenData, int index, int value)
-        {
-            setBigTileToScreenFunc(screenData, index, value);
         }
 
         public static Screen[] loadScreens()
@@ -181,8 +173,6 @@ namespace CadEditor
         public static int patternTableAddress;
         
         public static int paletteAddress;
-
-        public static SetBigTileToScreenFunc setBigTileToScreenFunc;
 
         public static int palBytesAddr;
         public static GetPalBytesAddrFunc getPalBytesAddrFunc;
