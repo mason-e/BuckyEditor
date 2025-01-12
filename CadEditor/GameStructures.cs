@@ -157,37 +157,9 @@ namespace CadEditor
 
         public int getSize() { return width * height; }
 
-        public virtual Bitmap makeBigBlock(Image[][] smallBlockss)
-        {
-            var smallBlocks = smallBlockss[0];
-            int bWidth = smallBlocks[0].Width;
-            int bHeight = smallBlocks[0].Height;
-            var b = new Bitmap(bWidth * width, bHeight * height);
-            using (Graphics g = Graphics.FromImage(b))
-            {
-                for (int h = 0; h < height; h++)
-                {
-                    for (int w = 0; w < width; w++)
-                    {
-                        int sbX = w * bWidth;
-                        int sbY = h * bHeight;
-                        int idx = h * width + w;
-                        var r = new Rectangle(sbX, sbY, bWidth, bHeight);
-                        g.DrawImage(smallBlocks[indexes[idx]], r);
-                    }
-                }
-            }
-            return b;
-        }
-
         public virtual int getPalBytes(int index)
         {
             return 0;
-        }
-
-        public virtual bool smallBlocksWithPal()
-        {
-            return true;
         }
 
         bool IEquatable<BigBlock>.Equals(BigBlock other)

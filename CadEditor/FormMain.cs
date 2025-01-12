@@ -540,11 +540,6 @@ namespace CadEditor
 
         public Image[] bigBlocks { get; private set; } = new Image[0];
 
-        public Image[] getBigBlockImages()
-        {
-            return bigBlocks;
-        }
-
         //warning! danger direct function. do not use it
         public void setScreens(Screen[] newScreens)
         {
