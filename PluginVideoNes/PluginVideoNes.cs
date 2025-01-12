@@ -202,7 +202,7 @@ namespace PluginVideoNes
         public Image[] makeBigBlocks(int videoNo, int bigBlockNo, int blockNo, BigBlock[] bigBlockIndexes, int palleteNo, MapViewType smallObjectsViewType = MapViewType.Tiles,
             MapViewType curViewType = MapViewType.Tiles)
         {
-            int blockCount = ConfigScript.getBigBlocksCount();
+            int blockCount = ConfigScript.getBlocksCount();
             var bigBlocks = new Image[blockCount];
 
             Image[] smallBlocksPack;

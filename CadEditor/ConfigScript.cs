@@ -65,9 +65,6 @@ namespace CadEditor
             blocksOffset = callFromScript(asm, data, "*.getBlocksOffset", new OffsetRec(0, 1, 0));
             screensOffset[0] = callFromScript(asm, data, "*.getScreensOffset", new OffsetRec(0, 1, 0, -1, -1));
 
-            bigBlocksCounts = new int[1];
-            bigBlocksCounts[0] = callFromScript(asm, data, "*.getBigBlocksCount", 256);
-
             getBigBlocksFuncs = callFromScript<GetBigBlocksFunc[]>(asm, data, "*.getBigBlocksFuncs", new GetBigBlocksFunc[1]);
             setBigBlocksFuncs = callFromScript<SetBigBlocksFunc[]>(asm, data, "*.setBigBlocksFuncs", new SetBigBlocksFunc[1]);
             getBigBlocksAddrFuncs = callFromScript<GetBigBlocksAddrFunc[]>(asm, data, "*.getBigBlocksAddrFuncs", new GetBigBlocksAddrFunc[1]);
@@ -155,11 +152,6 @@ namespace CadEditor
             Utils.saveScreensDiffSize(screens);
         }
 
-        public static int getBigBlocksCount()
-        {
-            return bigBlocksCounts[0];
-        }
-
         public static int getBlocksCount()
         {
             return blocksCount;
@@ -204,7 +196,6 @@ namespace CadEditor
         public static OffsetRec blocksOffset;
         public static OffsetRec[] screensOffset;
 
-        public static int[] bigBlocksCounts;
         public static GetBigBlocksFunc[] getBigBlocksFuncs;
         public static SetBigBlocksFunc[] setBigBlocksFuncs;
         public static GetBigBlocksAddrFunc[] getBigBlocksAddrFuncs;
