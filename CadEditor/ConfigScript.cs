@@ -59,7 +59,7 @@ namespace CadEditor
             screensOffset[0] = callFromScript(asm, data, "*.getScreensOffset", new OffsetRec(0, 1, 0, -1, -1));
 
             paletteAddress = callFromScript(asm, data, "*.getPalAddress", 0);
-            patternTableAddress = callFromScript(asm, data, "*.getPatternTableAddress", 0x20010);
+            patternTableAddresses = callFromScript(asm, data, "*.getPatternTableAddresses", new int[1]);
 
             blocksCount = callFromScript(asm, data, "*.getBlocksCount", 256);
 
@@ -170,7 +170,7 @@ namespace CadEditor
 
         public static int blocksCount;
 
-        public static int patternTableAddress;
+        public static int[] patternTableAddresses;
         
         public static int paletteAddress;
 

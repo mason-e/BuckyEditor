@@ -9,5 +9,5 @@ public class Data
   public int getBlocksCount()           { return 85; }
   public int getPalBytesAddr()          { return 0x89e1; }
   public int getPalAddress()            { return 0x117D3; }
-  public int getPatternTableAddress()   { return 0x20010; }
+  public int[] getPatternTableAddresses()   { return new[] {0x0, 0x0800}; }
 }

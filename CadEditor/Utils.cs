@@ -313,12 +313,18 @@ namespace CadEditor
             return palette;
         }
 
-        public static byte[] getPatternTableFromRom(int startAddress)
+        public static byte[] getPatternTableFromRom(int[] startAddress)
         {
             byte[] romdata = Globals.romdata;
             byte[] patternTable = new byte[4096]; // 256 tiles, each tile is 16 bytes
-            for (int i = 0; i < 4096; i++)
-                patternTable[i] = romdata[startAddress + i];
+            // allows address indices that are relative to the CHR ROM
+            int firstHalfAddress = (startAddress[0] < 0x20010) ? startAddress[0] += 0x20010 : startAddress[0];
+            int secondHalfAddress = (startAddress[1] < 0x20010) ? startAddress[1] += 0x20010 : startAddress[1];
+            for (int i = 0; i < 2048; i++) 
+            {
+                patternTable[i] = romdata[firstHalfAddress + i];
+                patternTable[i + 2048] = romdata[secondHalfAddress + i];
+            } 
             
             return patternTable;
         }
