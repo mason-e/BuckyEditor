@@ -67,9 +67,6 @@ namespace CadEditor
         private void resetControls()
         {
             clearSubeditorButtons();
-            ConfigScript.plugins.ForEach((p) => p.addToolButton(this));
-            ConfigScript.plugins.ForEach((p) => p.addSubeditorButton(this));
-
             resetScreens();
 
             UtilsGui.setCbIndexWithoutUpdateLevel(cbViewType, cbLevel_SelectedIndexChanged);
@@ -116,7 +113,7 @@ namespace CadEditor
 
             if (needRebuildBlocks)
             {
-                bigBlocks = ConfigScript.videoNes.makeBigBlocks( curActiveBigBlockNo,  smallObjectsType, curActiveViewType);
+                bigBlocks = NesDrawing.makeBigBlocks( curActiveBigBlockNo,  smallObjectsType, curActiveViewType);
             }
 
             curActiveBlock = 0;
@@ -660,25 +657,10 @@ namespace CadEditor
                 bttBlocks,
                 bttShowNei,
                 bttGridlines,
-                tbbShowPluginInfo,
             };
 
             toolStrip1.Items.AddRange(items);
         }
-
-        private void tbbShowPluginInfo_Click(object sender, EventArgs e)
-        {
-            StringBuilder sb = new StringBuilder();
-            sb.Append("Loaded Plugins:\n\n");
-            foreach (var p in ConfigScript.plugins)
-            {
-                sb.Append(p.getName() + "\n");
-            }
-            if (ConfigScript.videoNes != null)
-                sb.Append(ConfigScript.videoNes.getName() + "\n");
-            MessageBox.Show(sb.ToString());
-        }
-
 
         private void setWindowText()
         {

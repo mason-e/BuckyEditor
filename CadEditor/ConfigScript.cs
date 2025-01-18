@@ -33,17 +33,6 @@ namespace CadEditor
             }
         }
 
-        public static void loadPluginWithSilentCatch(Action action)
-        {
-            try
-            {
-                action();
-            }
-            catch (Exception)
-            {
-            }
-        }
-
         public static void LoadFromFile(string fileName)
         {
             programStartDirectory = AppDomain.CurrentDomain.BaseDirectory + "/";
@@ -63,42 +52,6 @@ namespace CadEditor
             blocksCount = callFromScript(asm, data, "*.getBlocksCount", 256);
 
             palBytesAddr = callFromScript(asm, data, "*.getPalBytesAddr", -1);
-
-            loadAllPlugins(asm, data);
-        }
-
-        private static void loadAllPlugins(AsmHelper asm, object data)
-        {
-            cleanPlugins();
-            loadGlobalPlugins();
-            loadPluginsFromCurrentConfig(asm, data);
-        }
-
-        private static void cleanPlugins()
-        {
-            plugins.Clear();
-            videoNes = null;
-        }
-
-        private static void loadGlobalPlugins()
-        {
-            //auto load video plugins
-            loadPluginWithSilentCatch(() => videoNes = PluginLoader.loadPlugin<IVideoPluginNes>("PluginVideoNes.dll"));
-        }
-
-        private static void loadPluginsFromCurrentConfig(AsmHelper asm, object data)
-        {
-            string[] pluginNames = callFromScript(asm, data, "getPluginNames", new string[0]);
-            foreach (var pluginName in pluginNames)
-            {
-                var p = PluginLoader.loadPlugin<IPlugin>(pluginName);
-                if (p != null)
-                {
-                    p.loadFromConfig(asm, data);
-                    plugins.Add(p);
-                }
-            }
-            plugins.Reverse();
         }
 
         public static ObjRec[] getBlocks()
@@ -178,8 +131,5 @@ namespace CadEditor
         public static string romName;
         public static string cfgName;
         public static Color[] nesColors;
-
-        public static List<IPlugin> plugins = new List<IPlugin>();
-        public static IVideoPluginNes videoNes;
     }
 }

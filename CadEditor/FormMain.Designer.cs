@@ -51,7 +51,6 @@
             this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
             this.x3ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.x4ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.tbbShowPluginInfo = new System.Windows.Forms.ToolStripButton();
             this.tsLayer1 = new System.Windows.Forms.ToolStripMenuItem();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.pnBlocks = new System.Windows.Forms.Panel();
@@ -180,8 +179,7 @@
             this.bttReload,
             this.bttBlocks,
             this.bttShowNei,
-            this.bttGridlines,
-            this.tbbShowPluginInfo});
+            this.bttGridlines});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(1073, 27);
@@ -289,16 +287,6 @@
             this.x4ToolStripMenuItem.Name = "x4ToolStripMenuItem";
             this.x4ToolStripMenuItem.Size = new System.Drawing.Size(101, 22);
             this.x4ToolStripMenuItem.Text = "x4";
-            // 
-            // tbbShowPluginInfo
-            // 
-            this.tbbShowPluginInfo.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tbbShowPluginInfo.Image = ((System.Drawing.Image)(resources.GetObject("tbbShowPluginInfo.Image")));
-            this.tbbShowPluginInfo.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tbbShowPluginInfo.Name = "tbbShowPluginInfo";
-            this.tbbShowPluginInfo.Size = new System.Drawing.Size(24, 24);
-            this.tbbShowPluginInfo.Text = "Show plugins info";
-            this.tbbShowPluginInfo.Click += new System.EventHandler(this.tbbShowPluginInfo_Click);
             // 
             // tsLayer1
             // 
@@ -455,7 +443,6 @@
         private System.Windows.Forms.ToolStripMenuItem x05ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem tsLayer1;
         private System.Windows.Forms.ToolStripButton bttReload;
-        private System.Windows.Forms.ToolStripButton tbbShowPluginInfo;
         private System.Windows.Forms.Label lbPalBytesAddr;
         private System.Windows.Forms.Panel pnBlocks;
         private System.Windows.Forms.PictureBox blocksScreen;

@@ -85,7 +85,7 @@ namespace CadEditor
             var chunk = Utils.getPatternTableFromRom(ConfigScript.patternTableAddresses);
             for (int i = 0; i < 4; i++)
             {
-                videoSprites[i] = Enumerable.Range(0, 256).Select(t => ((Bitmap)UtilsGDI.ResizeBitmap(ConfigScript.videoNes.makeImage(t, chunk, palette, i), 16, 16))).ToArray();
+                videoSprites[i] = Enumerable.Range(0, 256).Select(t => (Bitmap)UtilsGDI.ResizeBitmap(NesDrawing.makeImage(t, chunk, palette, i), 16, 16)).ToArray();
             }
         }
 
@@ -200,7 +200,7 @@ namespace CadEditor
 
         public Image makeObjImage(int index)
         {
-            return ConfigScript.videoNes.makeObject(index, objects, videoSprites, MapViewType.Tiles);
+            return NesDrawing.makeObject(index, objects, videoSprites, MapViewType.Tiles);
         }
 
         protected void mapScreen_MouseClick(object sender, MouseEventArgs e)
