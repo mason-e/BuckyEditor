@@ -27,7 +27,6 @@ namespace CadEditor
                 object data = asm.CreateObject("Config");
                 romName = callFromScript(asm, data, "*.getFileName", "");
                 cfgName = callFromScript(asm, data, "*.getConfigName", "");
-                nesColors = callFromScript<Color[]>(asm, data, "*.getNesColors", null);
             }
             catch (Exception)
             {
@@ -66,8 +65,6 @@ namespace CadEditor
             palBytesAddr = callFromScript(asm, data, "*.getPalBytesAddr", -1);
 
             loadAllPlugins(asm, data);
-
-            ConfigScript.videoNes.updateColorsFromConfig();
         }
 
         private static void loadAllPlugins(AsmHelper asm, object data)

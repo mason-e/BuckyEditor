@@ -36,16 +36,12 @@ namespace CadEditor
 
     public interface IVideoPluginNes
     {
-        void updateColorsFromConfig();
-
         Image[] makeBigBlocks(int bigBlockNo, MapViewType smallObjectsViewType = MapViewType.Tiles,
             MapViewType curViewType = MapViewType.Tiles);
 
         Bitmap makeImage(int index, byte[] videoChunk, byte[] pallete, int subPalIndex, bool withAlpha = false);
 
         Bitmap makeObject(int index, ObjRec[] objects, Bitmap[][] objStrips, MapViewType drawType, int constantSubpal = -1);
-
-        Color[] defaultNesColors { get; set; }
 
         string getName();
     }

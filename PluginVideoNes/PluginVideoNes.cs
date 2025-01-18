@@ -128,7 +128,6 @@ namespace PluginVideoNes
         public Bitmap makeObject(int index, ObjRec[] objects, Bitmap[][] objStrips, MapViewType drawType, int constantSubpal = -1)
         {
             var obj = objects[index];
-            int scaleInt16 = 16;
             var images = new Image[obj.getSize()];
             for (int i = 0; i < obj.getSize(); i++)
             {
@@ -198,9 +197,6 @@ namespace PluginVideoNes
         }
 
         public static int nesColorsCount = 64;
-        public static int chunkCount = 256;
         public static Color[] nesColors = new Color[nesColorsCount];
-
-        const int CadObjtypesCount = 16;
     }
 }
