@@ -45,7 +45,6 @@
             this.bttBlocks = new System.Windows.Forms.ToolStripButton();
             this.bttShowNei = new System.Windows.Forms.ToolStripButton();
             this.bttGridlines = new System.Windows.Forms.ToolStripButton();
-            this.bttScale = new System.Windows.Forms.ToolStripSplitButton();
             this.x025ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.x05ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
@@ -182,7 +181,6 @@
             this.bttBlocks,
             this.bttShowNei,
             this.bttGridlines,
-            this.bttScale,
             this.tbbShowPluginInfo});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
@@ -255,24 +253,6 @@
             this.bttGridlines.Size = new System.Drawing.Size(24, 24);
             this.bttGridlines.Text = "Gridlines";
             this.bttGridlines.CheckedChanged += new System.EventHandler(this.cbShowGridlines_CheckedChanged);
-            // 
-            // bttScale
-            // 
-            this.bttScale.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.bttScale.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.x025ToolStripMenuItem,
-            this.x05ToolStripMenuItem,
-            this.toolStripMenuItem2,
-            this.toolStripMenuItem3,
-            this.x3ToolStripMenuItem,
-            this.x4ToolStripMenuItem});
-            this.bttScale.Image = ((System.Drawing.Image)(resources.GetObject("bttScale.Image")));
-            this.bttScale.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.bttScale.Name = "bttScale";
-            this.bttScale.Size = new System.Drawing.Size(36, 24);
-            this.bttScale.Text = "Scale";
-            this.bttScale.ButtonClick += new System.EventHandler(this.bttScale_ButtonClick);
-            this.bttScale.DropDownItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.bttScale_DropDownItemClicked);
             // 
             // x025ToolStripMenuItem
             // 
@@ -465,7 +445,6 @@
         private System.Windows.Forms.ToolStripButton bttBlocks;
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.Panel pnElements;
-        private System.Windows.Forms.ToolStripSplitButton bttScale;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem2;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem3;
         private System.Windows.Forms.ToolStripButton bttShowNei;

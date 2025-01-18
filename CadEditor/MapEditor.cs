@@ -19,8 +19,8 @@ namespace CadEditor
 
             if (renderParams.showBorder)
             {
-                int tileSizeX = (int)(renderParams.bigBlocks[0].Width * renderParams.curScale);
-                int tileSizeY = (int)(renderParams.bigBlocks[0].Height * renderParams.curScale);
+                int tileSizeX = renderParams.bigBlocks[0].Width;
+                int tileSizeY = renderParams.bigBlocks[0].Height;
                 g.DrawRectangle(new Pen(Color.Green, 4.0f), new Rectangle(tileSizeX, 0, tileSizeX * renderParams.width, tileSizeY * renderParams.height));
             }
         }
@@ -97,7 +97,6 @@ namespace CadEditor
             {
                 bigBlocks = other.bigBlocks;
                 visibleRect = other.visibleRect;
-                curScale = other.curScale;
                 showBorder = other.showBorder;
                 showBlocksGridlines = other.showBlocksGridlines;
                 leftMargin = other.leftMargin;
@@ -110,7 +109,6 @@ namespace CadEditor
 
             public Image[] bigBlocks { get; set; }
             public Rectangle? visibleRect { get; set; }
-            public float curScale { get; set; }
             public bool showBorder { get; set; }
             public bool showBlocksGridlines { get; set; }
             public int leftMargin { get; set; }
@@ -130,7 +128,7 @@ namespace CadEditor
                     return -1;
                 }
 
-                return (int)(bigBlocks[0].Width * curScale);
+                return bigBlocks[0].Width;
             }
 
             public int getTileSizeY()
@@ -140,7 +138,7 @@ namespace CadEditor
                     return -1;
                 }
 
-                return (int)(bigBlocks[0].Height * curScale);
+                return bigBlocks[0].Height;
             }
 
             public int getLayerSize()

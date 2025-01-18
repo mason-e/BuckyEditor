@@ -29,21 +29,19 @@ namespace CadEditor
         }
 
 
-        public static void resizeBlocksScreen(Image[] bigBlocks, PictureBox blocksScreen, int blockWidth, int blockHeight, float curScale)
+        public static void resizeBlocksScreen(Image[] bigBlocks, PictureBox blocksScreen, int blockWidth, int blockHeight)
         {
             if (bigBlocks.Length == 0)
             {
                 return;
             }
-            int tileSizeX = (int)(blockWidth * curScale);
-            int tileSizeY = (int)(blockHeight * curScale);
-            int blocksOnRow = blocksScreen.Width / tileSizeX;
+            int blocksOnRow = blocksScreen.Width / blockWidth;
             if (blocksOnRow == 0)
             {
                 blocksOnRow = 1;
             }
             int blocksOnCol = (int)Math.Ceiling(bigBlocks.Length * 1.0f / blocksOnRow);
-            blocksScreen.Height = blocksOnCol * tileSizeY;
+            blocksScreen.Height = blocksOnCol * blockHeight;
         }
 
         public delegate bool SaveFunction();

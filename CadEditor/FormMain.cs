@@ -13,13 +13,6 @@ namespace CadEditor
             InitializeComponent();
         }
 
-        readonly float[] scaleFactors = { 0.25f, 0.5f, 1.0f, 2.0f, 3.0f, 4.0f };
-
-        private void setDefaultScale()
-        {
-            curScale = 1;
-        }
-
         private void Form1_Load(object sender, EventArgs e)
         {
             KeyPreview = true;
@@ -38,7 +31,6 @@ namespace CadEditor
                     Close();
                     return;
                 }
-                setDefaultScale();
                 fileLoaded = true;
 
                 resetControls();
@@ -96,8 +88,6 @@ namespace CadEditor
 
             curActiveLayer = 0;
 
-            updateScaleMenuItemsChecked(Array.FindIndex(scaleFactors, el => el == curScale)); //float comparasion with == is danger
-
             resetMapScreenSize();
         }
 
@@ -106,7 +96,7 @@ namespace CadEditor
             if (bigBlocks.Length > 0)
             {
                 var screen = getActiveScreen();
-                mapScreen.Size = new Size((int)((screen.width + 2) * bigBlocks[0].Width * curScale), (int)(screen.height * bigBlocks[0].Height * curScale));
+                mapScreen.Size = new Size((screen.width + 2) * bigBlocks[0].Width, screen.height * bigBlocks[0].Height);
             }
         }
 
@@ -137,7 +127,7 @@ namespace CadEditor
         {
             if (bigBlocks.Length > 0)
             {
-                UtilsGui.resizeBlocksScreen(bigBlocks, blocksScreen, bigBlocks[0].Width, bigBlocks[0].Height, curScale);
+                UtilsGui.resizeBlocksScreen(bigBlocks, blocksScreen, bigBlocks[0].Width, bigBlocks[0].Height);
                 blocksScreen.Invalidate();
             }
         }
@@ -147,8 +137,8 @@ namespace CadEditor
             Screen prevScreen = screens[scrNo];
             int width = prevScreen.width;
             int height = prevScreen.height;
-            int tileSizeX = (int)(bigBlocks[0].Width * curScale);
-            int tileSizeY = (int)(bigBlocks[0].Height * curScale);
+            int tileSizeX = bigBlocks[0].Width;
+            int tileSizeY = bigBlocks[0].Height;
             int size = width * height;
             int[] indexesPrev = prevScreen.layers[0].data;
             for (int i = 0; i < size; i++)
@@ -175,14 +165,13 @@ namespace CadEditor
 
             int width = screen.width;
             int height = screen.height;
-            int tileSizeX = (int)(bigBlocks[0].Width * curScale);
-            int tileSizeY = (int)(bigBlocks[0].Height * curScale);
+            int tileSizeX = bigBlocks[0].Width;
+            int tileSizeY = bigBlocks[0].Height;
             var visibleRect = UtilsGui.getVisibleRectangle(pnView, mapScreen);
             MapEditor.render(e.Graphics, screens, screenNo, new MapEditor.RenderParams
             {
                 bigBlocks = bigBlocks,
                 visibleRect = visibleRect,
-                curScale = curScale,
                 showBlocksGridlines = showGridlines,
                 showBorder = true,
                 width = width,
@@ -244,8 +233,8 @@ namespace CadEditor
 
             int width = screen.width;
 
-            int dx = ee.X / (int)(bigBlocks[0].Width * curScale) - 1;
-            int dy = ee.Y / (int)(bigBlocks[0].Height * curScale);
+            int dx = ee.X / bigBlocks[0].Width - 1;
+            int dy = ee.Y / bigBlocks[0].Height;
 
             if (ea.Button == MouseButtons.Right)
             {
@@ -278,8 +267,8 @@ namespace CadEditor
             }
             var screen = getActiveScreen();
             int width = screen.width;
-            int dx = ee.X / (int)(bigBlocks[0].Width * curScale) - 1;
-            int dy = ee.Y / (int)(bigBlocks[0].Height * curScale);
+            int dx = ee.X / bigBlocks[0].Width - 1;
+            int dy = ee.Y / bigBlocks[0].Height;
             lbCoords.Text = String.Format("Coords:({0},{1})", dx, dy);
 
             bool curDeltaChanged = curDx != dx || curDy != dy;
@@ -355,14 +344,8 @@ namespace CadEditor
                 return;
             }
             updateSaveVisibility();
-            bool senderIsScale = sender == bttScale;
-            changeLevelIndex(!senderIsScale);
+            changeLevelIndex();
             var screen = getActiveScreen();
-            if (senderIsScale)
-            {
-                mapScreen.Size = new Size((int)((screen.width + 2) * bigBlocks[0].Width * curScale), (int)(screen.height * bigBlocks[0].Height * curScale));
-                updateBlocksImages();
-            }
         }
 
         private void changeLevelIndex(bool reloadBlocks = false)
@@ -422,7 +405,6 @@ namespace CadEditor
                     Close();
                     return false;
                 }
-                setDefaultScale();
                 fileLoaded = true;
                 resetControls();
                 setWindowText();
@@ -499,8 +481,6 @@ namespace CadEditor
 
         public bool additionalRenderEnabled { get; private set; } = true;
 
-        public float curScale { get; private set; } = 2.0f;
-
         public Screen[] screens { get; private set; }
 
         public Image[] bigBlocks { get; private set; } = new Image[0];
@@ -509,24 +489,6 @@ namespace CadEditor
         public void setScreens(Screen[] newScreens)
         {
             screens = newScreens;
-        }
-
-        private void updateScaleMenuItemsChecked(int index)
-        {
-            foreach (ToolStripMenuItem bttScaleDropDownItem in bttScale.DropDownItems)
-            {
-                bttScaleDropDownItem.Checked = false;
-            }
-
-            (bttScale.DropDownItems[index] as ToolStripMenuItem).Checked = true;
-        }
-
-        private void bttScale_DropDownItemClicked(object sender, ToolStripItemClickedEventArgs e)
-        {
-            int curScaleItemIndex = bttScale.DropDownItems.IndexOf(e.ClickedItem);
-            updateScaleMenuItemsChecked(curScaleItemIndex);
-            curScale = scaleFactors[curScaleItemIndex];
-            cbLevel_SelectedIndexChanged(bttScale, new EventArgs());
         }
 
         private void mapScreen_MouseDown(object sender, MouseEventArgs ea)
@@ -594,8 +556,8 @@ namespace CadEditor
 
         private void convertMouseToDxDy(Point e, out int dx, out int dy)
         {
-            dx = e.X / (int)(bigBlocks[0].Width * curScale) - 1;
-            dy = e.Y / (int)(bigBlocks[0].Height * curScale);
+            dx = e.X / bigBlocks[0].Width - 1;
+            dy = e.Y / bigBlocks[0].Height;
         }
 
         public void reloadCallback()
@@ -635,7 +597,6 @@ namespace CadEditor
             {
                 bigBlocks = bigBlocks,
                 visibleRect = UtilsGui.getVisibleRectangle(pnBlocks, blocksScreen),
-                curScale = curScale,
                 showBlocksGridlines = showGridlines,
                 renderBlockFunc = MapEditor.renderBlocksOnPanelFunc
             };
@@ -648,8 +609,8 @@ namespace CadEditor
         {
             var p = blocksScreen.PointToClient(Cursor.Position);
             int x = p.X, y = p.Y;
-            int tileSizeX = (int)(bigBlocks[0].Width * curScale);
-            int tileSizeY = (int)(bigBlocks[0].Height * curScale);
+            int tileSizeX = bigBlocks[0].Width;
+            int tileSizeY = bigBlocks[0].Height;
             int tx = x / tileSizeX, ty = y / tileSizeY;
             int maxtX = blocksScreen.Width / tileSizeX;
             int index = ty * maxtX + tx;
@@ -699,16 +660,10 @@ namespace CadEditor
                 bttBlocks,
                 bttShowNei,
                 bttGridlines,
-                bttScale,
                 tbbShowPluginInfo,
             };
 
             toolStrip1.Items.AddRange(items);
-        }
-
-        private void bttScale_ButtonClick(object sender, EventArgs e)
-        {
-            bttScale.ShowDropDown();
         }
 
         private void tbbShowPluginInfo_Click(object sender, EventArgs e)
