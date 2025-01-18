@@ -30,7 +30,6 @@ namespace CadEditor
         {
             UtilsGui.setCbItemsCount(cbPalette, 1);
 
-            curActiveBigBlock = formMain.curActiveBigBlockNo; //small blocks no?
             UtilsGui.setCbIndexWithoutUpdateLevel(cbSubpalette, cbSubpalette_SelectedIndexChanged);
 
             UtilsGui.setCbItemsCount(cbPanelNo, (ConfigScript.getBlocksCount() + BlocksPerPage - 1) / BlocksPerPage);
@@ -43,13 +42,8 @@ namespace CadEditor
             setVideo();
             setVideoImage();
             setObjects();
-            reloadLevelEx();
             if (resetDirty)
                 dirty = false;
-        }
-
-        protected virtual void reloadLevelEx()
-        {
         }
 
         protected void setPal()
@@ -110,8 +104,6 @@ namespace CadEditor
             mapScreen.Image = b;
         }
 
-        //generic
-        private int curActiveBigBlock;
         //editor
         protected int curSubpalIndex;
         protected int curActiveBlock;
@@ -242,7 +234,6 @@ namespace CadEditor
                     saveToFile();
             }
         }
-
 
         private void preparePanel()
         {

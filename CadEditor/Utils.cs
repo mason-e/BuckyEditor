@@ -32,40 +32,6 @@ namespace CadEditor
             screenData[index] = value;
         }
 
-        //strip ints to bytes
-        public static byte[] linearizeBigBlocks(BigBlock[] bigBlocks)
-        {
-            if ((bigBlocks == null) || (bigBlocks.Length == 0))
-            {
-                return new byte[0];
-            }
-            byte[] result = new byte[bigBlocks.Length * bigBlocks[0].getSize()];
-            for (int i = 0; i < bigBlocks.Length; i++)
-            {
-                int size = bigBlocks[i].getSize();
-                var byteIndexes = bigBlocks[i].indexes.Select(old => (byte)old).ToArray();
-                Array.Copy(byteIndexes, 0, result, i * size, size);
-            }
-            return result;
-        }
-
-        public static T[] unlinearizeBigBlocks<T>(byte[] data, int w, int h)
-            where T : BigBlock
-        {
-            if ((data == null) || (data.Length == 0))
-            {
-                return new T[0];
-            }
-            int size = w * h;
-            T[] result = new T[data.Length / size];
-            for (int i = 0; i < result.Length; i++)
-            {
-                result[i] = Activator.CreateInstance(typeof(T), w, h) as T;
-                Array.Copy(data, i * size, result[i].indexes, 0, size);
-            }
-            return result;
-        }
-
         public static bool getBit(byte b, int bit)
         {
             return (b & (1 << bit - 1)) != 0;
@@ -172,29 +138,6 @@ namespace CadEditor
             }
         }
 
-        //
-        public static int readWord(byte[] data, int addr)
-        {
-            return (short)(data[addr] << 8 | data[addr + 1]);
-        }
-
-        public static int readWordLE(byte[] data, int addr)
-        {
-            return (short)(data[addr + 1] << 8 | data[addr]);
-        }
-
-        public static void writeWord(byte[] data, int addr, int word)
-        {
-            data[addr] = (byte)(word >> 8);
-            data[addr + 1] = (byte)(word & 0xFF);
-        }
-
-        public static void writeWordLE(byte[] data, int addr, int word)
-        {
-            data[addr + 1] = (byte)(word >> 8);
-            data[addr] = (byte)(word & 0xFF);
-        }
-
         public static Screen[] loadScreensDiffSize()
         {
             var offsets = ConfigScript.screensOffset;
@@ -245,31 +188,6 @@ namespace CadEditor
             //todo: save all layers
         }
 
-        public static byte[] readVideoBankFromFile(string filename, int videoPageId)
-        {
-            try
-            {
-                filename = ConfigScript.ConfigDirectory + filename;
-
-                using (FileStream f = File.OpenRead(filename))
-                {
-
-                    byte[] videodata = new byte[(int)f.Length];
-                    f.Read(videodata, 0, (int)f.Length);
-                    byte[] ans = new byte[0x1000];
-                    int offset = videoPageId * 0x1000;
-                    for (int i = 0; i < ans.Length; i++)
-                        ans[i] = videodata[offset + i];
-                    return ans;
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-            return null;
-        }
-
         public static byte[] readBinFile(string filename)
         {
             try
@@ -287,11 +205,6 @@ namespace CadEditor
                 MessageBox.Show(ex.Message);
             }
             return null;
-        }
-
-        public static GetPalFunc readPalFromBin(string[] fname)
-        {
-            return (int x) => { return readBinFile(fname[x]); };
         }
 
         public static byte[] getPalFromRom(int startAddress)

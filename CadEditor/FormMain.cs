@@ -491,7 +491,6 @@ namespace CadEditor
             }
         }
 
-        public int curActiveBlockNo { get; private set; }
         public int curActiveBigBlockNo { get; private set; }
 
         public MapViewType curActiveViewType { get; private set; } = MapViewType.ObjType;

@@ -162,7 +162,6 @@ namespace CadEditor
         private static string programStartDirectory;
         private static string configDirectory;
 
-        public static string ProgramDirectory { get { return programStartDirectory; } }
         public static string ConfigDirectory { get { return configDirectory; } }
 
         public static OffsetRec blocksOffset;
@@ -175,7 +174,6 @@ namespace CadEditor
         public static int paletteAddress;
 
         public static int palBytesAddr;
-        public static GetPalBytesAddrFunc getPalBytesAddrFunc;
 
         public static string[] defaultBlockTypeNames = new[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "F" };
 
