@@ -3,14 +3,14 @@
 *.nes
 *.cache
 /.vs
-/CadEditor/packages
-/CadEditor/.vs
-/CadEditor/bin
-/CadEditor/obj
-/CadEditor/*.pdb
-/CadEditor/*.deb
+/BuckyEditor/packages
+/BuckyEditor/.vs
+/BuckyEditor/bin
+/BuckyEditor/obj
+/BuckyEditor/*.pdb
+/BuckyEditor/*.deb
 
 # stray files from build
-CadEditor/CadEditor.exe.config
-CadEditor/ConfigViewer.exe.config
-CadEditor/CSScriptLibrary.xml
+BuckyEditor/BuckyEditor.exe.config
+BuckyEditor/ConfigViewer.exe.config
+BuckyEditor/CSScriptLibrary.xml

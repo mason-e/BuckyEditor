@@ -1,6 +1,6 @@
 # BuckyEditor
 
-Fork of https://github.com/spiiin/CadEditor (obviously). Shout out to spiiin and all other original contributors!
+Fork of https://github.com/spiiin/BuckyEditor (obviously). Shout out to spiiin and all other original contributors!
 
 ## Objectives
 
@@ -20,7 +20,7 @@ To create a level editor that is tailored specifically to NES game Bucky O'Hare 
 
 ### Building and Running
 
-Currently I am not publishing any releases and building it myself. I build the CadEditor.sln solution to get all dependent binaries built. Then it should run from the .exe, or directly in VS debug mode.
+Currently I am not publishing any releases and building it myself. I build the BuckyEditor.sln solution to get all dependent binaries built. Then it should run from the .exe, or directly in VS debug mode.
 
 ### Using the Editor
 
