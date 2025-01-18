@@ -52,7 +52,7 @@ namespace CadEditor
             else
                 g.FillRectangle(Brushes.White, tileRect);
 
-            if (renderParams.showBlocksAxis)
+            if (renderParams.showBlocksGridlines)
             {
                 g.DrawRectangle(new Pen(Color.FromArgb(255, 255, 255, 255)), tileRect);
             }
@@ -99,7 +99,7 @@ namespace CadEditor
                 visibleRect = other.visibleRect;
                 curScale = other.curScale;
                 showBorder = other.showBorder;
-                showBlocksAxis = other.showBlocksAxis;
+                showBlocksGridlines = other.showBlocksGridlines;
                 leftMargin = other.leftMargin;
                 topMargin = other.topMargin;
                 width = other.width;
@@ -112,7 +112,7 @@ namespace CadEditor
             public Rectangle? visibleRect { get; set; }
             public float curScale { get; set; }
             public bool showBorder { get; set; }
-            public bool showBlocksAxis { get; set; }
+            public bool showBlocksGridlines { get; set; }
             public int leftMargin { get; set; }
             public int topMargin { get; set; }
             public int width { get; set; }
@@ -160,7 +160,7 @@ namespace CadEditor
                 if (bigBlockNo > -1 && bigBlockNo < bigBlocks.Length)
                 {
                     g.DrawImage(bigBlocks[bigBlockNo], tileRect);
-                    if (showBlocksAxis)
+                    if (showBlocksGridlines)
                     {
                         g.DrawRectangle(new Pen(Color.FromArgb(255, 255, 255, 255)), tileRect);
                     }

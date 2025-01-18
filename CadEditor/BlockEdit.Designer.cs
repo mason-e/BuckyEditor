@@ -49,7 +49,7 @@
             this.label8 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.btClear = new System.Windows.Forms.Button();
-            this.cbShowAxis = new System.Windows.Forms.CheckBox();
+            this.cbShowGridlines = new System.Windows.Forms.CheckBox();
             this.lbActive = new System.Windows.Forms.Label();
             this.lbPanelNo = new System.Windows.Forms.Label();
             this.cbPanelNo = new System.Windows.Forms.ComboBox();
@@ -233,19 +233,19 @@
             this.btClear.UseVisualStyleBackColor = true;
             this.btClear.Click += new System.EventHandler(this.btClear_Click);
             // 
-            // cbShowAxis
+            // cbShowGridlines
             // 
-            this.cbShowAxis.AutoSize = true;
-            this.cbShowAxis.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.cbShowAxis.Checked = true;
-            this.cbShowAxis.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cbShowAxis.Location = new System.Drawing.Point(505, 489);
-            this.cbShowAxis.Name = "cbShowAxis";
-            this.cbShowAxis.Size = new System.Drawing.Size(74, 17);
-            this.cbShowAxis.TabIndex = 27;
-            this.cbShowAxis.Text = "Show axis";
-            this.cbShowAxis.UseVisualStyleBackColor = true;
-            this.cbShowAxis.CheckedChanged += new System.EventHandler(this.cbShowAxis_CheckedChanged);
+            this.cbShowGridlines.AutoSize = true;
+            this.cbShowGridlines.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.cbShowGridlines.Checked = true;
+            this.cbShowGridlines.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cbShowGridlines.Location = new System.Drawing.Point(505, 489);
+            this.cbShowGridlines.Name = "cbShowGridlines";
+            this.cbShowGridlines.Size = new System.Drawing.Size(74, 17);
+            this.cbShowGridlines.TabIndex = 27;
+            this.cbShowGridlines.Text = "Show gridlines";
+            this.cbShowGridlines.UseVisualStyleBackColor = true;
+            this.cbShowGridlines.CheckedChanged += new System.EventHandler(this.cbShowGridlines_CheckedChanged);
             // 
             // lbActive
             // 
@@ -290,7 +290,7 @@
             this.Controls.Add(this.lbPanelNo);
             this.Controls.Add(this.cbPanelNo);
             this.Controls.Add(this.lbActive);
-            this.Controls.Add(this.cbShowAxis);
+            this.Controls.Add(this.cbShowGridlines);
             this.Controls.Add(this.btClear);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.label8);
@@ -341,7 +341,7 @@
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.Button btClear;
-        private System.Windows.Forms.CheckBox cbShowAxis;
+        private System.Windows.Forms.CheckBox cbShowGridlines;
         private System.Windows.Forms.Label lbActive;
         private System.Windows.Forms.Label lbPanelNo;
         private System.Windows.Forms.ComboBox cbPanelNo;

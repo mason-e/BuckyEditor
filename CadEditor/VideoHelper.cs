@@ -26,7 +26,7 @@ namespace CadEditor
             return source;
         }
 
-        /*public static Image addAxisRectangle(Image source)
+        /*public static Image addGridlinesRectangle(Image source)
         {
             using (Graphics g = Graphics.FromImage(source))
                 g.DrawRectangle(new Pen(Color.FromArgb(255, 255, 255, 255)), new Rectangle(0, 0, source.Width, source.Height));

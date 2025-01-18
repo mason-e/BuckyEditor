@@ -14,7 +14,7 @@ namespace CadEditor
 
         private void BlockEdit_Load(object sender, EventArgs e)
         {
-            showAxis = true;
+            showGridlines = true;
             cbSubpalette.DrawItem += new DrawItemEventHandler(cbSubpalette_DrawItemEvent);
             dirty = false;
 
@@ -124,7 +124,7 @@ namespace CadEditor
         protected Bitmap[][] videoSprites = new Bitmap[4][];
         protected bool dirty;
         protected bool readOnly;
-        protected bool showAxis;
+        protected bool showGridlines;
 
         private const int TileSize = 16;
 
@@ -352,9 +352,9 @@ namespace CadEditor
             refillPanel();
         }
 
-        protected void cbShowAxis_CheckedChanged(object sender, EventArgs e)
+        protected void cbShowGridlines_CheckedChanged(object sender, EventArgs e)
         {
-            showAxis = cbShowAxis.Checked;
+            showGridlines = cbShowGridlines.Checked;
             reloadLevel(false);
         }
 

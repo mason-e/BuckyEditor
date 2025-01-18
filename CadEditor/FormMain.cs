@@ -85,7 +85,7 @@ namespace CadEditor
 
             dirty = false; updateSaveVisibility();
             showNeiScreens = true;
-            showAxis = true;
+            showGridlines = true;
             showBrush = true;
             curActiveLayer = 0;
 
@@ -143,7 +143,7 @@ namespace CadEditor
             }
         }
 
-        private void renderNeighbornLine(Graphics g, int scrNo, int line, int x)
+        private void renderNeighborLine(Graphics g, int scrNo, int line, int x)
         {
             Screen prevScreen = screens[scrNo];
             int width = prevScreen.width;
@@ -184,7 +184,7 @@ namespace CadEditor
                 bigBlocks = bigBlocks,
                 visibleRect = visibleRect,
                 curScale = curScale,
-                showBlocksAxis = showAxis,
+                showBlocksGridlines = showGridlines,
                 showBorder = true,
                 width = width,
                 height = height,
@@ -195,11 +195,11 @@ namespace CadEditor
 
             if (showNeiScreens && (screenNo > 0) && screen.layers[0].showLayer)
             {
-                renderNeighbornLine(g, screenNo - 1, (width - 1), 0);
+                renderNeighborLine(g, screenNo - 1, (width - 1), 0);
             }
             if (showNeiScreens && (screenNo < ConfigScript.screensOffset[0].recCount - 1) && screen.layers[0].showLayer)
             {
-                renderNeighbornLine(g, screenNo + 1, 0, (width + 1) * tileSizeX);
+                renderNeighborLine(g, screenNo + 1, 0, (width + 1) * tileSizeX);
             }
 
             //show brush
@@ -412,7 +412,7 @@ namespace CadEditor
         }
 
 
-        private void cbShowNeighborns_CheckedChanged(object sender, EventArgs e)
+        private void cbShowNeighbors_CheckedChanged(object sender, EventArgs e)
         {
             showNeiScreens = bttShowNei.Checked;
             mapScreen.Invalidate();
@@ -468,9 +468,9 @@ namespace CadEditor
             bttSave.Enabled = dirty;
         }
 
-        private void cbShowAxis_CheckedChanged(object sender, EventArgs e)
+        private void cbShowGridlines_CheckedChanged(object sender, EventArgs e)
         {
-            showAxis = bttAxis.Checked;
+            showGridlines = bttGridlines.Checked;
             mapScreen.Invalidate();
             blocksScreen.Invalidate();
         }
@@ -511,7 +511,7 @@ namespace CadEditor
         public int curActiveBigBlockNo { get; private set; }
 
         public MapViewType curActiveViewType { get; private set; } = MapViewType.ObjType;
-        public bool showAxis { get; private set; }
+        public bool showGridlines { get; private set; }
         public int screenNo { get; private set; }
 
         public bool additionalRenderEnabled { get; private set; } = true;
@@ -653,7 +653,7 @@ namespace CadEditor
                 bigBlocks = bigBlocks,
                 visibleRect = UtilsGui.getVisibleRectangle(pnBlocks, blocksScreen),
                 curScale = curScale,
-                showBlocksAxis = showAxis,
+                showBlocksGridlines = showGridlines,
                 renderBlockFunc = MapEditor.renderBlocksOnPanelFunc
             };
 
@@ -715,7 +715,7 @@ namespace CadEditor
                 bttReload,
                 bttBlocks,
                 bttShowNei,
-                bttAxis,
+                bttGridlines,
                 bttShowBrush,
                 bttScale,
                 tbbShowPluginInfo,

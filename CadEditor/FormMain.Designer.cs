@@ -44,7 +44,7 @@
             this.bttReload = new System.Windows.Forms.ToolStripButton();
             this.bttBlocks = new System.Windows.Forms.ToolStripButton();
             this.bttShowNei = new System.Windows.Forms.ToolStripButton();
-            this.bttAxis = new System.Windows.Forms.ToolStripButton();
+            this.bttGridlines = new System.Windows.Forms.ToolStripButton();
             this.bttShowBrush = new System.Windows.Forms.ToolStripButton();
             this.bttScale = new System.Windows.Forms.ToolStripSplitButton();
             this.x025ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -182,7 +182,7 @@
             this.bttReload,
             this.bttBlocks,
             this.bttShowNei,
-            this.bttAxis,
+            this.bttGridlines,
             this.bttShowBrush,
             this.bttScale,
             this.tbbShowPluginInfo});
@@ -242,21 +242,21 @@
             this.bttShowNei.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.bttShowNei.Name = "bttShowNei";
             this.bttShowNei.Size = new System.Drawing.Size(24, 24);
-            this.bttShowNei.Text = "Show neighborns screens ";
-            this.bttShowNei.CheckedChanged += new System.EventHandler(this.cbShowNeighborns_CheckedChanged);
+            this.bttShowNei.Text = "Show neighboring screens ";
+            this.bttShowNei.CheckedChanged += new System.EventHandler(this.cbShowNeighbors_CheckedChanged);
             // 
-            // bttAxis
+            // bttGridlines
             // 
-            this.bttAxis.Checked = true;
-            this.bttAxis.CheckOnClick = true;
-            this.bttAxis.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.bttAxis.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.bttAxis.Image = ((System.Drawing.Image)(resources.GetObject("bttAxis.Image")));
-            this.bttAxis.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.bttAxis.Name = "bttAxis";
-            this.bttAxis.Size = new System.Drawing.Size(24, 24);
-            this.bttAxis.Text = "Axis";
-            this.bttAxis.CheckedChanged += new System.EventHandler(this.cbShowAxis_CheckedChanged);
+            this.bttGridlines.Checked = true;
+            this.bttGridlines.CheckOnClick = true;
+            this.bttGridlines.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.bttGridlines.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.bttGridlines.Image = ((System.Drawing.Image)(resources.GetObject("bttGridlines.Image")));
+            this.bttGridlines.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.bttGridlines.Name = "bttGridlines";
+            this.bttGridlines.Size = new System.Drawing.Size(24, 24);
+            this.bttGridlines.Text = "Gridlines";
+            this.bttGridlines.CheckedChanged += new System.EventHandler(this.cbShowGridlines_CheckedChanged);
             // 
             // bttShowBrush
             // 
@@ -484,7 +484,7 @@
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem2;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem3;
         private System.Windows.Forms.ToolStripButton bttShowNei;
-        private System.Windows.Forms.ToolStripButton bttAxis;
+        private System.Windows.Forms.ToolStripButton bttGridlines;
         private System.Windows.Forms.ToolStripMenuItem x3ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem x4ToolStripMenuItem;
         private System.Windows.Forms.ToolStripButton bttShowBrush;

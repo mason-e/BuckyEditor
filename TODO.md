@@ -18,4 +18,3 @@
 - Change all references to "Cad" to "Bucky"
 - Change all references to "Blocks" to "Metatiles"
 - Remove references to "Big Blocks"
-- Fix "neighborns", "axis"
