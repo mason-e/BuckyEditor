@@ -37,7 +37,6 @@
             this.cbSubpalette = new System.Windows.Forms.ComboBox();
             this.subpalSprites = new System.Windows.Forms.ImageList(this.components);
             this.mapObjects = new System.Windows.Forms.FlowLayoutPanel();
-            this.pnGeneric = new System.Windows.Forms.Panel();
             this.label17 = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
             this.cbPalette = new System.Windows.Forms.ComboBox();
@@ -56,7 +55,6 @@
             this.cbPanelNo = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.paletteMap)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.mapScreen)).BeginInit();
-            this.pnGeneric.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbActive)).BeginInit();
             this.SuspendLayout();
             // 
@@ -124,17 +122,6 @@
             this.mapObjects.Name = "mapObjects";
             this.mapObjects.Size = new System.Drawing.Size(370, 444);
             this.mapObjects.TabIndex = 10;
-            // 
-            // pnGeneric
-            // 
-            this.pnGeneric.Controls.Add(this.label17);
-            this.pnGeneric.Controls.Add(this.label15);
-            this.pnGeneric.Controls.Add(this.cbPalette);
-            this.pnGeneric.Controls.Add(this.label14);
-            this.pnGeneric.Location = new System.Drawing.Point(12, 29);
-            this.pnGeneric.Name = "pnGeneric";
-            this.pnGeneric.Size = new System.Drawing.Size(264, 87);
-            this.pnGeneric.TabIndex = 17;
             // 
             // label17
             // 
@@ -318,7 +305,6 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.mapScreen);
-            this.Controls.Add(this.pnGeneric);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
@@ -328,8 +314,6 @@
             this.Load += new System.EventHandler(this.BlockEdit_Load);
             ((System.ComponentModel.ISupportInitialize)(this.paletteMap)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.mapScreen)).EndInit();
-            this.pnGeneric.ResumeLayout(false);
-            this.pnGeneric.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbActive)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -352,7 +336,6 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.Panel pnGeneric;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.ComboBox cbPalette;
         private System.Windows.Forms.Label label14;

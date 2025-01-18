@@ -30,9 +30,7 @@ namespace CadEditor
         {
             UtilsGui.setCbItemsCount(cbPalette, 1);
 
-            UtilsGui.setCbIndexWithoutUpdateLevel(cbPalette, VisibleOnlyChange_SelectedIndexChanged, formMain.curActivePalleteNo);
             curActiveBigBlock = formMain.curActiveBigBlockNo; //small blocks no?
-            curActivePal = formMain.curActivePalleteNo;
             UtilsGui.setCbIndexWithoutUpdateLevel(cbSubpalette, cbSubpalette_SelectedIndexChanged);
 
             UtilsGui.setCbItemsCount(cbPanelNo, (ConfigScript.getBlocksCount() + BlocksPerPage - 1) / BlocksPerPage);
@@ -114,7 +112,6 @@ namespace CadEditor
 
         //generic
         private int curActiveBigBlock;
-        private int curActivePal;
         //editor
         protected int curSubpalIndex;
         protected int curActiveBlock;
@@ -342,7 +339,6 @@ namespace CadEditor
 
         private void VisibleOnlyChange_SelectedIndexChanged(object sender, EventArgs e)
         {
-            curActivePal = cbPalette.SelectedIndex;
             reloadLevel(false);
         }
 

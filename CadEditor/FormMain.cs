@@ -80,8 +80,6 @@ namespace CadEditor
 
             resetScreens();
 
-            UtilsGui.setCbItemsCount(cbPaletteNo, 1);
-            UtilsGui.setCbIndexWithoutUpdateLevel(cbPaletteNo, cbLevel_SelectedIndexChanged);
             UtilsGui.setCbIndexWithoutUpdateLevel(cbViewType, cbLevel_SelectedIndexChanged);
 
 
@@ -91,7 +89,6 @@ namespace CadEditor
             showBrush = true;
             curActiveLayer = 0;
 
-            reloadGameType();
             changeLevelIndex(true);
 
             bttBlocks.Enabled = true;
@@ -130,7 +127,7 @@ namespace CadEditor
 
             if (needRebuildBlocks)
             {
-                bigBlocks = ConfigScript.videoNes.makeBigBlocks( curActiveBigBlockNo,  curActivePalleteNo, smallObjectsType, curActiveViewType);
+                bigBlocks = ConfigScript.videoNes.makeBigBlocks( curActiveBigBlockNo,  smallObjectsType, curActiveViewType);
             }
 
             curActiveBlock = 0;
@@ -382,7 +379,6 @@ namespace CadEditor
 
         private void changeLevelIndex(bool reloadBlocks = false)
         {
-            curActivePalleteNo = cbPaletteNo.SelectedIndex;
             curActiveViewType = (MapViewType)cbViewType.SelectedIndex;
             reloadLevel(true, reloadBlocks);
         }
@@ -453,16 +449,10 @@ namespace CadEditor
 
         }
 
-        public void reloadGameType()
-        {
-            pnGeneric.Visible = true;
-        }
-
         private void btOpen_Click(object sender, EventArgs e)
         {
             if (openFile())
             {
-                reloadGameType();
                 changeLevelIndex();
             }
         }
@@ -519,7 +509,6 @@ namespace CadEditor
 
         public int curActiveBlockNo { get; private set; }
         public int curActiveBigBlockNo { get; private set; }
-        public int curActivePalleteNo { get; private set; }
 
         public MapViewType curActiveViewType { get; private set; } = MapViewType.ObjType;
         public bool showAxis { get; private set; }
@@ -645,10 +634,6 @@ namespace CadEditor
             }
         }
 
-        private void cbAdvanced_CheckedChanged(object sender, EventArgs e)
-        {
-            pnAdvancedParams.Visible = cbAdvanced.Checked;
-        }
 
         private void FormMain_KeyDown(object sender, KeyEventArgs e)
         {

@@ -144,7 +144,7 @@ namespace PluginVideoNes
             return mblock;
         }
 
-        private Bitmap[] makeObjects(int palId, MapViewType drawType, int constantSubpal = -1)
+        private Bitmap[] makeObjects(MapViewType drawType, int constantSubpal = -1)
         {
             byte[] videoChunk = Utils.getPatternTableFromRom(ConfigScript.patternTableAddresses);
             ObjRec[] objects = ConfigScript.getBlocks();
@@ -161,14 +161,14 @@ namespace PluginVideoNes
             return bitmaps;
         }
 
-        public Image[] makeBigBlocks(int bigBlockNo, int palleteNo, MapViewType smallObjectsViewType = MapViewType.Tiles,
+        public Image[] makeBigBlocks(int bigBlockNo, MapViewType smallObjectsViewType = MapViewType.Tiles,
             MapViewType curViewType = MapViewType.Tiles)
         {
             int blockCount = ConfigScript.getBlocksCount();
             var bigBlocks = new Image[blockCount];
 
             Image[] smallBlocksPack;
-            smallBlocksPack = makeObjects(palleteNo, smallObjectsViewType);
+            smallBlocksPack = makeObjects(smallObjectsViewType);
 
             //tt version hardcode
             Image[][] smallBlocksAll = new Image[4][] { smallBlocksPack, smallBlocksPack, smallBlocksPack, smallBlocksPack };
