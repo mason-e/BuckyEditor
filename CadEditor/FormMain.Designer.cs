@@ -37,12 +37,8 @@
             this.pnGeneric = new System.Windows.Forms.Panel();
             this.cbAdvanced = new System.Windows.Forms.CheckBox();
             this.pnAdvancedParams = new System.Windows.Forms.Panel();
-            this.label1 = new System.Windows.Forms.Label();
-            this.cbVideoNo = new System.Windows.Forms.ComboBox();
             this.label9 = new System.Windows.Forms.Label();
             this.cbPaletteNo = new System.Windows.Forms.ComboBox();
-            this.cbBlockNo = new System.Windows.Forms.ComboBox();
-            this.label8 = new System.Windows.Forms.Label();
             this.cbViewType = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
             this.pnView = new System.Windows.Forms.Panel();
@@ -159,45 +155,14 @@
             // 
             // pnAdvancedParams
             // 
-            this.pnAdvancedParams.Controls.Add(this.label1);
-            this.pnAdvancedParams.Controls.Add(this.cbVideoNo);
             this.pnAdvancedParams.Controls.Add(this.label9);
             this.pnAdvancedParams.Controls.Add(this.cbPaletteNo);
-            this.pnAdvancedParams.Controls.Add(this.cbBlockNo);
-            this.pnAdvancedParams.Controls.Add(this.label8);
             this.pnAdvancedParams.Location = new System.Drawing.Point(2, 26);
             this.pnAdvancedParams.Margin = new System.Windows.Forms.Padding(2);
             this.pnAdvancedParams.Name = "pnAdvancedParams";
             this.pnAdvancedParams.Size = new System.Drawing.Size(70, 162);
             this.pnAdvancedParams.TabIndex = 5;
             this.pnAdvancedParams.Visible = false;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(3, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(64, 13);
-            this.label1.TabIndex = 42;
-            this.label1.Text = "VideoBlock:";
-            // 
-            // cbVideoNo
-            // 
-            this.cbVideoNo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbVideoNo.FormattingEnabled = true;
-            this.cbVideoNo.Items.AddRange(new object[] {
-            "1",
-            "2",
-            "3",
-            "4",
-            "5",
-            "6",
-            "7",
-            "8"});
-            this.cbVideoNo.Location = new System.Drawing.Point(6, 16);
-            this.cbVideoNo.Name = "cbVideoNo";
-            this.cbVideoNo.Size = new System.Drawing.Size(64, 21);
-            this.cbVideoNo.TabIndex = 41;
             // 
             // label9
             // 
@@ -233,33 +198,6 @@
             this.cbPaletteNo.Name = "cbPaletteNo";
             this.cbPaletteNo.Size = new System.Drawing.Size(64, 21);
             this.cbPaletteNo.TabIndex = 47;
-            // 
-            // cbBlockNo
-            // 
-            this.cbBlockNo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbBlockNo.FormattingEnabled = true;
-            this.cbBlockNo.Items.AddRange(new object[] {
-            "1",
-            "2",
-            "3",
-            "4",
-            "5",
-            "6",
-            "7",
-            "8"});
-            this.cbBlockNo.Location = new System.Drawing.Point(7, 56);
-            this.cbBlockNo.Name = "cbBlockNo";
-            this.cbBlockNo.Size = new System.Drawing.Size(64, 21);
-            this.cbBlockNo.TabIndex = 45;
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(3, 40);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(37, 13);
-            this.label8.TabIndex = 46;
-            this.label8.Text = "Block:";
             // 
             // cbViewType
             // 
@@ -613,10 +551,6 @@
         private System.Windows.Forms.Panel pnGeneric;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.ComboBox cbPaletteNo;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.ComboBox cbBlockNo;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ComboBox cbVideoNo;
         private System.Windows.Forms.ComboBox cbViewType;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Panel pnView;

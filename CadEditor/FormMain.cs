@@ -80,11 +80,7 @@ namespace CadEditor
 
             resetScreens();
 
-            UtilsGui.setCbItemsCount(cbVideoNo, 1);
-            UtilsGui.setCbItemsCount(cbBlockNo, ConfigScript.blocksOffset.recCount);
             UtilsGui.setCbItemsCount(cbPaletteNo, 1);
-            UtilsGui.setCbIndexWithoutUpdateLevel(cbVideoNo, cbLevel_SelectedIndexChanged);
-            UtilsGui.setCbIndexWithoutUpdateLevel(cbBlockNo, cbLevel_SelectedIndexChanged);
             UtilsGui.setCbIndexWithoutUpdateLevel(cbPaletteNo, cbLevel_SelectedIndexChanged);
             UtilsGui.setCbIndexWithoutUpdateLevel(cbViewType, cbLevel_SelectedIndexChanged);
 
@@ -134,7 +130,7 @@ namespace CadEditor
 
             if (needRebuildBlocks)
             {
-                bigBlocks = ConfigScript.videoNes.makeBigBlocks(curActiveVideoNo, curActiveBigBlockNo, curActiveBlockNo, curActivePalleteNo, smallObjectsType, curActiveViewType);
+                bigBlocks = ConfigScript.videoNes.makeBigBlocks( curActiveBigBlockNo,  curActivePalleteNo, smallObjectsType, curActiveViewType);
             }
 
             curActiveBlock = 0;
@@ -386,8 +382,6 @@ namespace CadEditor
 
         private void changeLevelIndex(bool reloadBlocks = false)
         {
-            curActiveVideoNo = cbVideoNo.SelectedIndex;
-            curActiveBlockNo = cbBlockNo.SelectedIndex;
             curActivePalleteNo = cbPaletteNo.SelectedIndex;
             curActiveViewType = (MapViewType)cbViewType.SelectedIndex;
             reloadLevel(true, reloadBlocks);
@@ -523,7 +517,6 @@ namespace CadEditor
             }
         }
 
-        public int curActiveVideoNo { get; private set; }
         public int curActiveBlockNo { get; private set; }
         public int curActiveBigBlockNo { get; private set; }
         public int curActivePalleteNo { get; private set; }

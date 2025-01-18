@@ -28,15 +28,10 @@ namespace CadEditor
 
         protected virtual void resetControls()
         {
-            UtilsGui.setCbItemsCount(cbVideo, 1);
-            UtilsGui.setCbItemsCount(cbTileset, ConfigScript.blocksOffset.recCount);
             UtilsGui.setCbItemsCount(cbPalette, 1);
 
-            UtilsGui.setCbIndexWithoutUpdateLevel(cbTileset, cbLevelSelect_SelectedIndexChanged, formMain.curActiveBigBlockNo);  //small blocks no?
-            UtilsGui.setCbIndexWithoutUpdateLevel(cbVideo, VisibleOnlyChange_SelectedIndexChanged, formMain.curActiveVideoNo);
             UtilsGui.setCbIndexWithoutUpdateLevel(cbPalette, VisibleOnlyChange_SelectedIndexChanged, formMain.curActivePalleteNo);
             curActiveBigBlock = formMain.curActiveBigBlockNo; //small blocks no?
-            curActiveVideo = formMain.curActiveVideoNo;
             curActivePal = formMain.curActivePalleteNo;
             UtilsGui.setCbIndexWithoutUpdateLevel(cbSubpalette, cbSubpalette_SelectedIndexChanged);
 
@@ -89,7 +84,7 @@ namespace CadEditor
 
         private void setObjects()
         {
-            objects = ConfigScript.getBlocks(curActiveBigBlock);
+            objects = ConfigScript.getBlocks();
             refillPanel();
         }
 
@@ -118,7 +113,6 @@ namespace CadEditor
         }
 
         //generic
-        private int curActiveVideo;
         private int curActiveBigBlock;
         private int curActivePal;
         //editor
@@ -232,7 +226,7 @@ namespace CadEditor
 
         protected virtual bool saveToFile()
         {
-            ConfigScript.setBlocks(curActiveBigBlock, objects);
+            ConfigScript.setBlocks(objects);
             dirty = !Globals.flushToFile();
             return !dirty;
         }
@@ -240,37 +234,6 @@ namespace CadEditor
         protected void btSave_Click(object sender, EventArgs e)
         {
             saveToFile();
-        }
-
-        private void cbLevelSelect_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (cbTileset.SelectedIndex == -1)
-                return;
-            if (!readOnly && dirty)
-            {
-                DialogResult dr = MessageBox.Show("Tiles was changed. Do you want to save current tileset?", "Save", MessageBoxButtons.YesNoCancel);
-                if (dr == DialogResult.Cancel)
-                {
-                    returnCbLevelIndexes();
-                    return;
-                }
-                else if (dr == DialogResult.Yes)
-                {
-                    if (!saveToFile())
-                    {
-                        returnCbLevelIndexes();
-                        return;
-                    }
-                }
-                else
-                {
-                    dirty = false;
-                }
-            }
-            curActiveBigBlock = cbTileset.SelectedIndex;
-            curActiveBlock = 0;
-            curSubpalIndex = 0;
-            reloadLevel();
         }
 
         protected void BlockEdit_FormClosing(object sender, FormClosingEventArgs e)
@@ -283,13 +246,6 @@ namespace CadEditor
             }
         }
 
-
-        private void returnCbLevelIndexes()
-        {
-            cbTileset.SelectedIndexChanged -= cbLevelSelect_SelectedIndexChanged;
-            cbTileset.SelectedIndex = curActiveBigBlock;
-            cbTileset.SelectedIndexChanged += cbLevelSelect_SelectedIndexChanged;
-        }
 
         private void preparePanel()
         {
@@ -386,9 +342,6 @@ namespace CadEditor
 
         private void VisibleOnlyChange_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (cbVideo.SelectedIndex == -1 || cbPalette.SelectedIndex == -1)
-                return;
-            curActiveVideo = cbVideo.SelectedIndex;
             curActivePal = cbPalette.SelectedIndex;
             reloadLevel(false);
         }

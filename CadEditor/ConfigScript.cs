@@ -104,14 +104,14 @@ namespace CadEditor
             plugins.Reverse();
         }
 
-        public static ObjRec[] getBlocks(int bigBlockId)
+        public static ObjRec[] getBlocks()
         {
-            return Utils.getBlocksFromTiles16Pal1(bigBlockId);
+            return Utils.getBlocksFromTiles16Pal1();
         }
 
-        public static void setBlocks(int bIndex, ObjRec[] blocks)
+        public static void setBlocks(ObjRec[] blocks)
         {
-            Utils.setBlocksFromTiles16Pal1(bIndex, blocks);
+            Utils.setBlocksFromTiles16Pal1(blocks);
         }
 
         public static Screen[] loadScreens()
@@ -141,9 +141,9 @@ namespace CadEditor
 
         //------------------------------------------------------------
 
-        public static int getTilesAddr(int id)
+        public static int getTilesAddr()
         {
-            return ConfigScript.blocksOffset.beginAddr + ConfigScript.blocksOffset.recSize * id;
+            return ConfigScript.blocksOffset.beginAddr;
 
         }
 

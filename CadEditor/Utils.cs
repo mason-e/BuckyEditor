@@ -137,14 +137,14 @@ namespace CadEditor
             }
         }
 
-        public static ObjRec[] getBlocksFromTiles16Pal1(int blockIndex)
+        public static ObjRec[] getBlocksFromTiles16Pal1()
         {
-            return readBlocksLinearTiles16Pal1(Globals.romdata, ConfigScript.getTilesAddr(blockIndex), ConfigScript.getPalBytesAddr(), ConfigScript.getBlocksCount());
+            return readBlocksLinearTiles16Pal1(Globals.romdata, ConfigScript.getTilesAddr(), ConfigScript.getPalBytesAddr(), ConfigScript.getBlocksCount());
         }
 
-        public static void setBlocksFromTiles16Pal1(int blockIndex, ObjRec[] blocksData)
+        public static void setBlocksFromTiles16Pal1(ObjRec[] blocksData)
         {
-            writeBlocksLinearTiles16Pal1(blocksData, Globals.romdata, ConfigScript.getTilesAddr(blockIndex), ConfigScript.getPalBytesAddr(), ConfigScript.getBlocksCount());
+            writeBlocksLinearTiles16Pal1(blocksData, Globals.romdata, ConfigScript.getTilesAddr(), ConfigScript.getPalBytesAddr(), ConfigScript.getBlocksCount());
         }
 
         public static ObjRec[] readBlocksLinearTiles16Pal1(byte[] romdata, int addr, int palBytesAddr, int count)
