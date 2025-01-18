@@ -241,7 +241,7 @@
             this.cbShowGridlines.CheckState = System.Windows.Forms.CheckState.Checked;
             this.cbShowGridlines.Location = new System.Drawing.Point(505, 489);
             this.cbShowGridlines.Name = "cbShowGridlines";
-            this.cbShowGridlines.Size = new System.Drawing.Size(74, 17);
+            this.cbShowGridlines.Size = new System.Drawing.Size(94, 17);
             this.cbShowGridlines.TabIndex = 27;
             this.cbShowGridlines.Text = "Show gridlines";
             this.cbShowGridlines.UseVisualStyleBackColor = true;

@@ -42,10 +42,9 @@
             // 
             // btOpen
             // 
-            this.btOpen.Location = new System.Drawing.Point(16, 142);
-            this.btOpen.Margin = new System.Windows.Forms.Padding(4);
+            this.btOpen.Location = new System.Drawing.Point(12, 115);
             this.btOpen.Name = "btOpen";
-            this.btOpen.Size = new System.Drawing.Size(275, 28);
+            this.btOpen.Size = new System.Drawing.Size(206, 23);
             this.btOpen.TabIndex = 0;
             this.btOpen.Text = "Open";
             this.btOpen.UseVisualStyleBackColor = true;
@@ -54,29 +53,26 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(13, 75);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label1.Location = new System.Drawing.Point(10, 61);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(105, 17);
+            this.label1.Size = new System.Drawing.Size(80, 13);
             this.label1.TabIndex = 1;
             this.label1.Text = "ROM file name:";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(13, 27);
-            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label2.Location = new System.Drawing.Point(10, 22);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(113, 17);
+            this.label2.Size = new System.Drawing.Size(85, 13);
             this.label2.TabIndex = 2;
             this.label2.Text = "Config file name:";
             // 
             // tbFileName
             // 
-            this.tbFileName.Location = new System.Drawing.Point(126, 72);
-            this.tbFileName.Margin = new System.Windows.Forms.Padding(4);
+            this.tbFileName.Location = new System.Drawing.Point(94, 58);
             this.tbFileName.Name = "tbFileName";
-            this.tbFileName.Size = new System.Drawing.Size(430, 22);
+            this.tbFileName.Size = new System.Drawing.Size(324, 20);
             this.tbFileName.TabIndex = 6;
             // 
             // ofOpenDialog
@@ -85,10 +81,9 @@
             // 
             // btClose
             // 
-            this.btClose.Location = new System.Drawing.Point(299, 142);
-            this.btClose.Margin = new System.Windows.Forms.Padding(4);
+            this.btClose.Location = new System.Drawing.Point(224, 115);
             this.btClose.Name = "btClose";
-            this.btClose.Size = new System.Drawing.Size(257, 28);
+            this.btClose.Size = new System.Drawing.Size(193, 23);
             this.btClose.TabIndex = 5;
             this.btClose.Text = "Cancel";
             this.btClose.UseVisualStyleBackColor = true;
@@ -96,10 +91,9 @@
             // 
             // btConfigSelect
             // 
-            this.btConfigSelect.Location = new System.Drawing.Point(563, 25);
-            this.btConfigSelect.Margin = new System.Windows.Forms.Padding(4);
+            this.btConfigSelect.Location = new System.Drawing.Point(422, 20);
             this.btConfigSelect.Name = "btConfigSelect";
-            this.btConfigSelect.Size = new System.Drawing.Size(43, 24);
+            this.btConfigSelect.Size = new System.Drawing.Size(32, 20);
             this.btConfigSelect.TabIndex = 2;
             this.btConfigSelect.Text = "...";
             this.btConfigSelect.UseVisualStyleBackColor = true;
@@ -108,18 +102,18 @@
             // cbConfigName
             // 
             this.cbConfigName.FormattingEnabled = true;
-            this.cbConfigName.Location = new System.Drawing.Point(126, 25);
+            this.cbConfigName.Location = new System.Drawing.Point(94, 20);
+            this.cbConfigName.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.cbConfigName.MaxDropDownItems = 32;
             this.cbConfigName.Name = "cbConfigName";
-            this.cbConfigName.Size = new System.Drawing.Size(430, 24);
+            this.cbConfigName.Size = new System.Drawing.Size(324, 21);
             this.cbConfigName.TabIndex = 1;
             // 
             // btRomSelect
             // 
-            this.btRomSelect.Location = new System.Drawing.Point(563, 72);
-            this.btRomSelect.Margin = new System.Windows.Forms.Padding(4);
+            this.btRomSelect.Location = new System.Drawing.Point(422, 58);
             this.btRomSelect.Name = "btRomSelect";
-            this.btRomSelect.Size = new System.Drawing.Size(43, 24);
+            this.btRomSelect.Size = new System.Drawing.Size(32, 20);
             this.btRomSelect.TabIndex = 3;
             this.btRomSelect.Text = "...";
             this.btRomSelect.UseVisualStyleBackColor = true;
@@ -127,9 +121,9 @@
             // 
             // OpenFile
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(627, 185);
+            this.ClientSize = new System.Drawing.Size(470, 150);
             this.Controls.Add(this.btRomSelect);
             this.Controls.Add(this.cbConfigName);
             this.Controls.Add(this.btConfigSelect);
@@ -140,7 +134,6 @@
             this.Controls.Add(this.btOpen);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximizeBox = false;
             this.Name = "OpenFile";
             this.Text = "Open File";
