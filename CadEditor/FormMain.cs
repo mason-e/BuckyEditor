@@ -86,7 +86,6 @@ namespace CadEditor
             dirty = false; updateSaveVisibility();
             showNeiScreens = true;
             showGridlines = true;
-            showBrush = true;
             curActiveLayer = 0;
 
             changeLevelIndex(true);
@@ -202,9 +201,7 @@ namespace CadEditor
                 renderNeighborLine(g, screenNo + 1, 0, (width + 1) * tileSizeX);
             }
 
-            //show brush
-            bool altPressed = ModifierKeys == Keys.Alt;
-            if (showBrush && curActiveBlock != -1 && (curDx != Outside || curDy != Outside) && !altPressed)
+            if (curActiveBlock != -1 && (curDx != Outside || curDy != Outside))
             {
                 var tx = (curDx + 1) * tileSizeX;
                 var ty = curDy * tileSizeY;
@@ -212,14 +209,6 @@ namespace CadEditor
                 g.DrawImage(bigBlocks[curActiveBlock], tileRect);
             }
 
-            if (altPressed && selectionRect)
-            {
-                int x = Math.Min(selectionMouseX, selectionBeginMouseX);
-                int y = Math.Min(selectionMouseY, selectionBeginMouseY);
-                int w = Math.Abs(selectionMouseX - selectionBeginMouseX);
-                int h = Math.Abs(selectionMouseY - selectionBeginMouseY);
-                g.DrawRectangle(new Pen(Brushes.Black, 2.0f), new Rectangle(x, y, w, h));
-            }
         }
 
         //editor globals
@@ -228,7 +217,6 @@ namespace CadEditor
         //generic
         private bool dirty;
         private bool showNeiScreens;
-        private bool showBrush;
 
         public static bool fileLoaded;
 
@@ -475,10 +463,6 @@ namespace CadEditor
             blocksScreen.Invalidate();
         }
 
-        private void bttShowBrush_CheckedChanged(object sender, EventArgs e)
-        {
-            showBrush = bttShowBrush.Checked;
-        }
 
         private FormClosedEventHandler subeditorClosed(ToolStripItem enabledAfterCloseButton)
         {
@@ -716,7 +700,6 @@ namespace CadEditor
                 bttBlocks,
                 bttShowNei,
                 bttGridlines,
-                bttShowBrush,
                 bttScale,
                 tbbShowPluginInfo,
             };

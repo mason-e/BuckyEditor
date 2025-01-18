@@ -45,7 +45,6 @@
             this.bttBlocks = new System.Windows.Forms.ToolStripButton();
             this.bttShowNei = new System.Windows.Forms.ToolStripButton();
             this.bttGridlines = new System.Windows.Forms.ToolStripButton();
-            this.bttShowBrush = new System.Windows.Forms.ToolStripButton();
             this.bttScale = new System.Windows.Forms.ToolStripSplitButton();
             this.x025ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.x05ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -183,7 +182,6 @@
             this.bttBlocks,
             this.bttShowNei,
             this.bttGridlines,
-            this.bttShowBrush,
             this.bttScale,
             this.tbbShowPluginInfo});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
@@ -257,19 +255,6 @@
             this.bttGridlines.Size = new System.Drawing.Size(24, 24);
             this.bttGridlines.Text = "Gridlines";
             this.bttGridlines.CheckedChanged += new System.EventHandler(this.cbShowGridlines_CheckedChanged);
-            // 
-            // bttShowBrush
-            // 
-            this.bttShowBrush.Checked = true;
-            this.bttShowBrush.CheckOnClick = true;
-            this.bttShowBrush.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.bttShowBrush.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.bttShowBrush.Image = ((System.Drawing.Image)(resources.GetObject("bttShowBrush.Image")));
-            this.bttShowBrush.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.bttShowBrush.Name = "bttShowBrush";
-            this.bttShowBrush.Size = new System.Drawing.Size(24, 24);
-            this.bttShowBrush.Text = "Show active element";
-            this.bttShowBrush.CheckedChanged += new System.EventHandler(this.bttShowBrush_CheckedChanged);
             // 
             // bttScale
             // 
@@ -487,7 +472,6 @@
         private System.Windows.Forms.ToolStripButton bttGridlines;
         private System.Windows.Forms.ToolStripMenuItem x3ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem x4ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripButton bttShowBrush;
         private System.Windows.Forms.ToolStripMenuItem x025ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem x05ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem tsLayer1;
