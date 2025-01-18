@@ -1,6 +1,6 @@
 # BuckyEditor
 
-Fork of https://github.com/spiiin/BuckyEditor (obviously). Shout out to spiiin and all other original contributors!
+Fork of https://github.com/spiiin/CadEditor (obviously). Shout out to spiiin and all other original contributors!
 
 ## Objectives
 
