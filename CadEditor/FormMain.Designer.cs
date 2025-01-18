@@ -159,7 +159,7 @@
             this.pnView.Controls.Add(this.mapScreen);
             this.pnView.Location = new System.Drawing.Point(3, 3);
             this.pnView.Name = "pnView";
-            this.pnView.Size = new System.Drawing.Size(669, 500);
+            this.pnView.Size = new System.Drawing.Size(669, 400);
             this.pnView.TabIndex = 53;
             // 
             // lbCoords
