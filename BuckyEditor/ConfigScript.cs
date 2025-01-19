@@ -41,9 +41,9 @@ namespace BuckyEditor
             var asm = new AsmHelper(CSScript.LoadCode(File.ReadAllText(fileName)));
             object data = asm.CreateObject("Data");
 
+            metatileAddress = callFromScript(asm, data, "*.getMetatileAddress", 0);
             screensOffset = new OffsetRec[1];
 
-            blocksOffset = callFromScript(asm, data, "*.getBlocksOffset", new OffsetRec(0, 1, 0));
             screensOffset[0] = callFromScript(asm, data, "*.getScreensOffset", new OffsetRec(0, 1, 0, -1, -1));
 
             paletteAddress = callFromScript(asm, data, "*.getPalAddress", 0);
@@ -91,9 +91,9 @@ namespace BuckyEditor
 
         //------------------------------------------------------------
 
-        public static int getTilesAddr()
+        public static int getMetatileAddress()
         {
-            return ConfigScript.blocksOffset.beginAddr;
+            return metatileAddress;
 
         }
 
@@ -114,7 +114,8 @@ namespace BuckyEditor
 
         public static string ConfigDirectory { get { return configDirectory; } }
 
-        public static OffsetRec blocksOffset;
+        public static int metatileAddress;
+
         public static OffsetRec[] screensOffset;
 
         public static int blocksCount;

@@ -105,12 +105,12 @@ namespace BuckyEditor
 
         public static ObjRec[] getBlocksFromTiles16Pal1()
         {
-            return readBlocksLinearTiles16Pal1(Globals.romdata, ConfigScript.getTilesAddr(), ConfigScript.getPalBytesAddr(), ConfigScript.getBlocksCount());
+            return readBlocksLinearTiles16Pal1(Globals.romdata, ConfigScript.getMetatileAddress(), ConfigScript.getPalBytesAddr(), ConfigScript.getBlocksCount());
         }
 
         public static void setBlocksFromTiles16Pal1(ObjRec[] blocksData)
         {
-            writeBlocksLinearTiles16Pal1(blocksData, Globals.romdata, ConfigScript.getTilesAddr(), ConfigScript.getPalBytesAddr(), ConfigScript.getBlocksCount());
+            writeBlocksLinearTiles16Pal1(blocksData, Globals.romdata, ConfigScript.getMetatileAddress(), ConfigScript.getPalBytesAddr(), ConfigScript.getBlocksCount());
         }
 
         public static ObjRec[] readBlocksLinearTiles16Pal1(byte[] romdata, int addr, int palBytesAddr, int count)
@@ -161,7 +161,6 @@ namespace BuckyEditor
             return screens;
         }
 
-        //save screensData from firstScreenIndex to ConfigScript.screensOffset[currentOffset]
         public static void saveScreensToOffset(OffsetRec screensRec, Screen[] screensData, int firstScreenIndex, int currentOffsetIndex, int layerNo)
         {
             var arrayToSave = Globals.romdata;

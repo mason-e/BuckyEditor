@@ -6,7 +6,7 @@ public class Data
 { 
   public OffsetRec getScreensOffset()  { return new OffsetRec(0xfa72, 2 , 8*6, 8, 6);   }
   
-  public OffsetRec getBlocksOffset()    { return new OffsetRec(0xe3fd, 1  , 0x1000);  }
+  public int getMetatileAddress()    { return 0xe3fd; }
   public int getBlocksCount()           { return 180; }
   public int getPalBytesAddr()          { return 0xf12d; }
   public int getPalAddress()            { return 0x11AFD; } 
