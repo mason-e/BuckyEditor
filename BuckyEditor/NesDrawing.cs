@@ -6,7 +6,7 @@ namespace BuckyEditor
 {
     public static class NesDrawing
     {
-        public static Bitmap makeImage(int index, byte[] videoChunk, byte[] pallete, int subPalIndex, bool withAlpha = false)
+        public static Bitmap makeImage(int index, byte[] videoChunk, byte[] palette, int subPalIndex, bool withAlpha = false)
         {
             Bitmap res = new Bitmap(8, 8);
             using (Graphics g = Graphics.FromImage(res))
@@ -22,7 +22,7 @@ namespace BuckyEditor
                         int palIndex = mixBits(bitHi, bitLo);
                         int fullPalIndex = subPalIndex * 4 + palIndex;
                         bool isBackColor = fullPalIndex % 4 == 0;
-                        int colorNo = pallete[isBackColor ? 0 : fullPalIndex];
+                        int colorNo = palette[isBackColor ? 0 : fullPalIndex];
                         Color c = (withAlpha && isBackColor) ? Color.FromArgb(0) : Globals.mesenColors[colorNo];
                         res.SetPixel(pixel, line, c);
                     }
@@ -50,7 +50,7 @@ namespace BuckyEditor
                 int x = i % obj.w;
                 int y = i / obj.w;
                 int pali = (y >> 1) * (obj.w >> 1) + (x >> 1);
-                var objStrip = constantSubpal == -1 ? objStrips[obj.getSubpallete(pali)] : objStrips[constantSubpal];
+                var objStrip = constantSubpal == -1 ? objStrips[obj.getSubpalette(pali)] : objStrips[constantSubpal];
                 images[i] = objStrip[obj.indexes[i]];
             }
 

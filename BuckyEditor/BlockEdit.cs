@@ -274,16 +274,6 @@ namespace BuckyEditor
                 cbColor.SelectedIndexChanged += cbColor_SelectedIndexChanged;
                 fp.Controls.Add(cbColor);
                 curPanelX += cbColor.Size.Width;
-                //
-                NumericUpDown nudType = new NumericUpDown();
-                nudType.Size = cbSubpalette.Size;
-                nudType.Location = new Point(curPanelX, 0);
-                nudType.Tag = i;
-                nudType.Minimum = 0;
-                nudType.Maximum = objectTypes.Length - 1;
-                nudType.Hexadecimal = true;
-                nudType.ValueChanged += nudType_ValueChanged;
-                fp.Controls.Add(nudType);
 
                 mapObjects.Controls.Add(fp);
             }
@@ -313,9 +303,7 @@ namespace BuckyEditor
                 PictureBox pb = (PictureBox)p.Controls[1];
                 pb.Image = makeObjImage(i);
                 ComboBox cbColor = (ComboBox)p.Controls[2];
-                cbColor.SelectedIndex = objects[i].getSubpallete();
-                NumericUpDown nudType = (NumericUpDown)p.Controls[3];
-                nudType.Value = objects[i].getType();
+                cbColor.SelectedIndex = objects[i].getSubpalette();
             }
             for (; pi < mapObjects.Controls.Count; pi++)
             {

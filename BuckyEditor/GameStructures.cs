@@ -74,13 +74,13 @@ namespace BuckyEditor
             return w * h;
         }
 
-        public virtual int getSubpallete(int i)
+        public virtual int getSubpalette(int i)
 
         {
             return palBytes[i] & 0x3;
         }
 
-        public virtual int getSubpallete()
+        public virtual int getSubpalette()
         {
             return palBytes[0] & 0x3;
         }
