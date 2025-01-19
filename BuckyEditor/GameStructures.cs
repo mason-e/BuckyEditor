@@ -4,30 +4,6 @@ using System.Linq;
 
 namespace BuckyEditor
 {
-    public struct OffsetRec
-    {
-        public OffsetRec(int beginAddr, int recCount, int recSize, int width = 0, int height = 0)
-        {
-            this.beginAddr = beginAddr;
-            this.recCount = recCount;
-            this.recSize = recSize;
-            this.width = width;
-            this.height = height;
-        }
-
-        public override string ToString()
-        {
-            return String.Format("Start address:0x{0:X}. Records count:{1}, Record Size:{2}", beginAddr, recCount, recSize);
-        }
-
-        public int beginAddr;
-        public int recCount;
-        public int recSize;
-        public int width;
-        public int height;
-    }
-
-
     public class ObjRec : IEquatable<ObjRec>
     {
         public ObjRec(int w, int h, int type, int[] indexes, int[] palBytes)

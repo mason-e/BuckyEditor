@@ -140,51 +140,49 @@ namespace BuckyEditor
 
         public static Screen[] loadScreensDiffSize()
         {
-            var offsets = ConfigScript.screensOffset;
             int totalCount = 0;
-            int count = offsets.Length;
+            int count = 1;
             for (int i = 0; i < count; i++)
             {
-                totalCount += offsets[i].recCount;
+                totalCount += ConfigScript.screenCount;
             }
             var screens = new Screen[totalCount];
 
             int currentScreen = 0;
             for (int i = 0; i < count; i++)
             {
-                for (int scrI = 0; scrI < offsets[i].recCount; scrI++)
+                for (int scrI = 0; scrI < ConfigScript.screenCount; scrI++)
                 {
-                    var screen = Globals.getScreen(offsets[i], scrI);
+                    var screen = Globals.getScreen(scrI);
                     screens[currentScreen++] = screen;
                 }
             }
             return screens;
         }
 
-        public static void saveScreensToOffset(OffsetRec screensRec, Screen[] screensData, int firstScreenIndex, int currentOffsetIndex, int layerNo)
+        public static void saveScreensToOffset(Screen[] screensData, int firstScreenIndex, int currentOffsetIndex, int layerNo)
         {
             var arrayToSave = Globals.romdata;
-            for (int i = 0; i < screensRec.recCount; i++)
+            for (int i = 0; i < ConfigScript.screenCount; i++)
             {
                 var curScrNo = firstScreenIndex + i;
                 var curScreen = screensData[curScrNo];
                 var dataToWrite = curScreen.layers[layerNo].data;
-                int addr = screensRec.beginAddr + i * screensRec.recSize;
-                for (int x = 0; x < screensRec.recSize; x++)
+                int addr = ConfigScript.levelStartAddress + i * ConfigScript.screenSize;
+                for (int x = 0; x < ConfigScript.screenSize; x++)
                     arrayToSave[addr + x] = (byte)dataToWrite[x];
             }
         }
 
         public static void saveScreensDiffSize(Screen[] screensData)
         {
-            int offsetsCount = ConfigScript.screensOffset.Length;
+            int offsetsCount = 0;
             int currentScreenIndex = 0;
             for (int currentOffsetIndex = 0; currentOffsetIndex < offsetsCount; currentOffsetIndex++)
             {
-                saveScreensToOffset(ConfigScript.screensOffset[currentOffsetIndex], screensData, currentScreenIndex, currentOffsetIndex, 0);
-                currentScreenIndex += ConfigScript.screensOffset[currentOffsetIndex].recCount;
+                saveScreensToOffset(screensData, currentScreenIndex, currentOffsetIndex, 0);
+                currentScreenIndex += ConfigScript.screenCount;
             }
-            //todo: save all layers
         }
 
         public static byte[] readBinFile(string filename)

@@ -59,19 +59,15 @@ namespace BuckyEditor
             return true;
         }
 
-        public static Screen getScreen(OffsetRec screenOffset, int screenIndex)
+        public static Screen getScreen(int screenIndex)
         {
-            var result = new int[Math.Max(64, screenOffset.recSize)];
+            var result = new int[Math.Max(64, ConfigScript.screenSize)];
             var arrayWithData = Globals.romdata;
-            int beginAddr = screenOffset.beginAddr + screenIndex * screenOffset.recSize;
-            for (int i = 0; i < screenOffset.recSize; i++)
+            int beginAddr = ConfigScript.levelStartAddress + screenIndex * ConfigScript.screenSize;
+            for (int i = 0; i < ConfigScript.screenSize; i++)
                 result[i] = arrayWithData[beginAddr + i];
-            //TODO: read layer2
 
-            int w = screenOffset.width;
-            int h = screenOffset.height;
-
-            return new Screen(new BlockLayer(result), w, h);
+            return new Screen(new BlockLayer(result), 8, ConfigScript.screenHeight);
         }
 
         public static byte[] romdata;

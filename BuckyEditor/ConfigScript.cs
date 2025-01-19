@@ -42,9 +42,10 @@ namespace BuckyEditor
             object data = asm.CreateObject("Data");
 
             metatileAddress = callFromScript(asm, data, "*.getMetatileAddress", 0);
-            screensOffset = new OffsetRec[1];
-
-            screensOffset[0] = callFromScript(asm, data, "*.getScreensOffset", new OffsetRec(0, 1, 0, -1, -1));
+            levelStartAddress = callFromScript(asm, data, "*.getLevelStartAddr", 0);
+            screenCount = callFromScript(asm, data, "*.getScreenCount", 1);
+            screenHeight = callFromScript(asm, data, "*.getScreenHeight", 6);
+            screenSize = screenHeight * 8; // all screens are 8 metatiles wide
 
             paletteAddress = callFromScript(asm, data, "*.getPalAddress", 0);
             patternTableAddresses = callFromScript(asm, data, "*.getPatternTableAddresses", new int[1]);
@@ -116,7 +117,13 @@ namespace BuckyEditor
 
         public static int metatileAddress;
 
-        public static OffsetRec[] screensOffset;
+        public static int levelStartAddress;
+
+        public static int screenCount;
+
+        public static int screenHeight;
+
+        public static int screenSize;
 
         public static int blocksCount;
 

@@ -3,8 +3,8 @@ using System;
 
 public class Data 
 { 
-  public OffsetRec getScreensOffset()  { return new OffsetRec(0x9060, 2 , 8*6, 8, 6);   }
-  
+  public int getLevelStartAddr() { return 0x9060; }
+  public int getScreenCount() { return 2; }
   public int getMetatileAddress()    { return 0x8011; }
   public int getBlocksCount()           { return 157; }
   public int getPalBytesAddr()          { return 0x89e1; }

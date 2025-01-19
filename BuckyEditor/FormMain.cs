@@ -177,7 +177,7 @@ namespace BuckyEditor
             {
                 renderNeighborLine(g, screenNo - 1, (width - 1), 0);
             }
-            if (showNeiScreens && (screenNo < ConfigScript.screensOffset[0].recCount - 1) && screen.layers[0].showLayer)
+            if (showNeiScreens && (screenNo < ConfigScript.screenCount - 1) && screen.layers[0].showLayer)
             {
                 renderNeighborLine(g, screenNo + 1, 0, (width + 1) * tileSizeX);
             }
@@ -273,7 +273,7 @@ namespace BuckyEditor
             {
                 if (dx == width)
                 {
-                    if (screenNo < ConfigScript.screensOffset[0].recCount - 1)
+                    if (screenNo < ConfigScript.screenCount - 1)
                     {
                         int index = dy * width;
                         var layer = getActiveLayer(screens[screenNo + 1]);
