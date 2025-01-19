@@ -31,17 +31,17 @@ namespace BuckyEditor
             return res;
         }
 
-        private static Bitmap[] makeObjects(ObjRec[] objects, Bitmap[][] objStrips, MapViewType drawType, int constantSubpal = -1)
+        private static Bitmap[] makeObjects(ObjRec[] objects, Bitmap[][] objStrips, int constantSubpal = -1)
         {
             var ans = new Bitmap[objects.Length];
             for (int index = 0; index < objects.Length; index++)
             {
-                ans[index] = makeObject(index, objects, objStrips, drawType, constantSubpal);
+                ans[index] = makeObject(index, objects, objStrips, constantSubpal);
             }
             return ans;
         }
 
-        public static Bitmap makeObject(int index, ObjRec[] objects, Bitmap[][] objStrips, MapViewType drawType, int constantSubpal = -1)
+        public static Bitmap makeObject(int index, ObjRec[] objects, Bitmap[][] objStrips, int constantSubpal = -1)
         {
             var obj = objects[index];
             var images = new Image[obj.getSize()];
@@ -59,7 +59,7 @@ namespace BuckyEditor
             return mblock;
         }
 
-        private static Bitmap[] makeObjects(MapViewType drawType, int constantSubpal = -1)
+        private static Bitmap[] makeObjects(int constantSubpal = -1)
         {
             byte[] videoChunk = Utils.getPatternTableFromRom(ConfigScript.patternTableAddresses);
             ObjRec[] objects = ConfigScript.getBlocks();
@@ -72,18 +72,17 @@ namespace BuckyEditor
             var objStrip4 = range256.Select(i => makeImage(i, videoChunk, palette, 3)).ToArray();
             var objStrips = new[] { objStrip1, objStrip2, objStrip3, objStrip4 };
 
-            var bitmaps = makeObjects(objects, objStrips, drawType, constantSubpal);
+            var bitmaps = makeObjects(objects, objStrips, constantSubpal);
             return bitmaps;
         }
 
-        public static Image[] makeBigBlocks(int bigBlockNo, MapViewType smallObjectsViewType = MapViewType.Tiles,
-            MapViewType curViewType = MapViewType.Tiles)
+        public static Image[] makeBigBlocks(int bigBlockNo, bool drawNumbers)
         {
             int blockCount = ConfigScript.getBlocksCount();
             var bigBlocks = new Image[blockCount];
 
             Image[] smallBlocksPack;
-            smallBlocksPack = makeObjects(smallObjectsViewType);
+            smallBlocksPack = makeObjects();
 
             //tt version hardcode
             Image[][] smallBlocksAll = new Image[4][] { smallBlocksPack, smallBlocksPack, smallBlocksPack, smallBlocksPack };
@@ -94,7 +93,7 @@ namespace BuckyEditor
                 var sb = smallBlocksPack[btileId];
                 //scale for small blocks
                 b = UtilsGDI.ResizeBitmap(sb, (int)(sb.Width * 2), (int)(sb.Height * 2));
-                if (curViewType == MapViewType.ObjNumbers)
+                if (drawNumbers)
                     b = VideoHelper.addObjNumber(b, btileId);
                 bigBlocks[btileId] = b;
             }

@@ -34,8 +34,6 @@
             this.lbActiveBlock = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.cbScreenNo = new System.Windows.Forms.ComboBox();
-            this.cbViewType = new System.Windows.Forms.ComboBox();
-            this.label4 = new System.Windows.Forms.Label();
             this.pnView = new System.Windows.Forms.Panel();
             this.lbCoords = new System.Windows.Forms.Label();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
@@ -58,6 +56,7 @@
             this.pnElements = new System.Windows.Forms.Panel();
             this.pnViewScroll = new System.Windows.Forms.Panel();
             this.lbPalBytesAddr = new System.Windows.Forms.Label();
+            this.cbShowAddress = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.mapScreen)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.activeBlock)).BeginInit();
             this.pnView.SuspendLayout();
@@ -122,30 +121,6 @@
             this.cbScreenNo.Size = new System.Drawing.Size(64, 21);
             this.cbScreenNo.TabIndex = 27;
             this.cbScreenNo.SelectedIndexChanged += new System.EventHandler(this.cbScreenNo_SelectedIndexChanged);
-            // 
-            // cbViewType
-            // 
-            this.cbViewType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbViewType.DropDownWidth = 128;
-            this.cbViewType.FormattingEnabled = true;
-            this.cbViewType.Items.AddRange(new object[] {
-            "Blocks",
-            "Block types",
-            "Block numbers",
-            "Small blocks numbers"});
-            this.cbViewType.Location = new System.Drawing.Point(3, 186);
-            this.cbViewType.Name = "cbViewType";
-            this.cbViewType.Size = new System.Drawing.Size(64, 21);
-            this.cbViewType.TabIndex = 45;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(0, 170);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(56, 13);
-            this.label4.TabIndex = 44;
-            this.label4.Text = "View type:";
             // 
             // pnView
             // 
@@ -345,11 +320,10 @@
             // 
             // pnElements
             // 
+            this.pnElements.Controls.Add(this.cbShowAddress);
             this.pnElements.Controls.Add(this.lbCoords);
             this.pnElements.Controls.Add(this.lbActiveBlock);
-            this.pnElements.Controls.Add(this.label4);
             this.pnElements.Controls.Add(this.activeBlock);
-            this.pnElements.Controls.Add(this.cbViewType);
             this.pnElements.Controls.Add(this.label6);
             this.pnElements.Controls.Add(this.cbScreenNo);
             this.pnElements.Dock = System.Windows.Forms.DockStyle.Right;
@@ -380,6 +354,17 @@
             this.lbPalBytesAddr.TabIndex = 60;
             this.lbPalBytesAddr.Text = "Pal byte addr:";
             this.lbPalBytesAddr.Visible = false;
+            // 
+            // cbShowAddress
+            // 
+            this.cbShowAddress.CheckAlign = System.Drawing.ContentAlignment.TopLeft;
+            this.cbShowAddress.Location = new System.Drawing.Point(5, 307);
+            this.cbShowAddress.Name = "cbShowAddress";
+            this.cbShowAddress.Size = new System.Drawing.Size(71, 44);
+            this.cbShowAddress.TabIndex = 57;
+            this.cbShowAddress.Text = "Show Metatile Address";
+            this.cbShowAddress.UseVisualStyleBackColor = true;
+            this.cbShowAddress.CheckedChanged += new System.EventHandler(this.cbShowAddress_CheckedChanged);
             // 
             // FormMain
             // 
@@ -423,8 +408,6 @@
         private System.Windows.Forms.Label lbActiveBlock;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.ComboBox cbScreenNo;
-        private System.Windows.Forms.ComboBox cbViewType;
-        private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Panel pnView;
         private System.Windows.Forms.Label lbCoords;
         private System.Windows.Forms.ToolStrip toolStrip1;
@@ -447,6 +430,7 @@
         private System.Windows.Forms.Panel pnBlocks;
         private System.Windows.Forms.PictureBox blocksScreen;
         private System.Windows.Forms.Panel pnViewScroll;
+        private System.Windows.Forms.CheckBox cbShowAddress;
     }
 }
 

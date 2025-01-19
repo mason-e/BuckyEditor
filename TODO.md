@@ -13,6 +13,5 @@
 
 - Display issues with the currently loaded level in editor instead of file comments
 - Simplify getScreensOffset function (dimensions go into it twice)
-- Make showing block address a toggle checkmark instead of
 - Change all references to "Blocks" to "Metatiles"
 - Remove references to "Big Blocks"

@@ -138,14 +138,6 @@ namespace BuckyEditor
         }
     }
 
-    public enum MapViewType
-    {
-        Tiles,
-        ObjType,
-        ObjNumbers,
-        SmallObjNumbers,
-    };
-
     public class BigBlock : IEquatable<BigBlock>
     {
         public BigBlock(int w, int h)

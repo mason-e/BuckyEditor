@@ -187,17 +187,9 @@ namespace BuckyEditor
             dirty = true;
         }
 
-        protected void nudType_ValueChanged(object sender, EventArgs e)
-        {
-            NumericUpDown nudType = (NumericUpDown)sender;
-            int index = curPageIndex * BlocksPerPage + (int)nudType.Tag;
-            objects[index].type = (int)nudType.Value;
-            dirty = true;
-        }
-
         public Image makeObjImage(int index)
         {
-            return NesDrawing.makeObject(index, objects, videoSprites, MapViewType.Tiles);
+            return NesDrawing.makeObject(index, objects, videoSprites);
         }
 
         protected void mapScreen_MouseClick(object sender, MouseEventArgs e)

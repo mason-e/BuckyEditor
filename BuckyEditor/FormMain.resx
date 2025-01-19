@@ -154,19 +154,19 @@
     <value>
         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
-        T1ga9aOomLntut0USyoyohNhIZEpKKSpTHd37/xMk2VI5lIsP1IrZ2j5kfjZ/MLSaS63t3OOt6jogRfu
+        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
-        pZa7oaDuMxTU9kH6kw7Qo9LZkJj8adYkniK5LCdyWACUXNFGSg4y5O/RWETv/VI35L7ogfyaXnC+GQaX
-        2wMtvVPwYWAaXO2joEsQveoY4eWh+OJ5BYcW1XHCBiqgsTiydWkuf0LmKwi7UAAqzg4KHi2eu+OcQSgj
+        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
-        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
+        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
 </value>
   </data>
   <data name="bttBlocks.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
@@ -212,7 +212,7 @@
 </value>
   </data>
   <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>25</value>
+    <value>64</value>
   </metadata>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>

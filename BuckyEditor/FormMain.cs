@@ -69,9 +69,6 @@ namespace BuckyEditor
             clearSubeditorButtons();
             resetScreens();
 
-            UtilsGui.setCbIndexWithoutUpdateLevel(cbViewType, cbLevel_SelectedIndexChanged);
-
-
             dirty = false; updateSaveVisibility();
             showNeiScreens = true;
             showGridlines = true;
@@ -107,13 +104,11 @@ namespace BuckyEditor
 
         private void setBlocks(bool needRebuildBlocks)
         {
-            MapViewType smallObjectsType =
-                curActiveViewType == MapViewType.SmallObjNumbers ? MapViewType.ObjNumbers :
-                    curActiveViewType == MapViewType.ObjType ? MapViewType.ObjType : MapViewType.Tiles;
+            bool drawNumbers = cbShowAddress.Checked;
 
             if (needRebuildBlocks)
             {
-                bigBlocks = NesDrawing.makeBigBlocks( curActiveBigBlockNo,  smallObjectsType, curActiveViewType);
+                bigBlocks = NesDrawing.makeBigBlocks( curActiveBigBlockNo, drawNumbers);
             }
 
             curActiveBlock = 0;
@@ -333,21 +328,8 @@ namespace BuckyEditor
             return !dirty;
         }
 
-        private void cbLevel_SelectedIndexChanged(object sender, EventArgs ev)
-        {
-            if (!UtilsGui.askToSave(ref dirty, saveToFile, returnCbLevelIndex))
-            {
-                updateSaveVisibility();
-                return;
-            }
-            updateSaveVisibility();
-            changeLevelIndex();
-            var screen = getActiveScreen();
-        }
-
         private void changeLevelIndex(bool reloadBlocks = false)
         {
-            curActiveViewType = (MapViewType)cbViewType.SelectedIndex;
             reloadLevel(true, reloadBlocks);
         }
 
@@ -472,7 +454,6 @@ namespace BuckyEditor
 
         public int curActiveBigBlockNo { get; private set; }
 
-        public MapViewType curActiveViewType { get; private set; } = MapViewType.ObjType;
         public bool showGridlines { get; private set; }
         public int screenNo { get; private set; }
 
@@ -632,6 +613,11 @@ namespace BuckyEditor
         {
             splitContainer1.Width = Width - 21;
             splitContainer1.Height = Height - 81;
+        }
+
+        private void cbShowAddress_CheckedChanged(object sender, EventArgs e)
+        {
+            reloadLevel(true, true);
         }
 
         private void FormMain_LocationChanged(object sender, EventArgs e)
