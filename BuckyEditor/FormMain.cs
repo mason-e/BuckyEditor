@@ -52,6 +52,8 @@ namespace BuckyEditor
         {
             screens = ConfigScript.loadScreens();
             lbChangeScreen.Text = $"Screen {screenNo + 1} of {ConfigScript.screenCount}";
+            if (screenNo > ConfigScript.screenCount)
+                screenNo = 0;
             if (ConfigScript.screenCount == 1)
             {
                 btScreenNext.Enabled = false;
