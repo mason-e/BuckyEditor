@@ -51,17 +51,17 @@ namespace BuckyEditor
         private void resetScreens()
         {
             screens = ConfigScript.loadScreens();
-            int count = screens.Length;
-
-            int oldScreenNo = cbScreenNo.SelectedIndex;
-            cbScreenNo.Items.Clear();
-            for (int i = 0; i < count; i++)
-                cbScreenNo.Items.Add(String.Format("{0:X}", i + 1));
-
-            if (oldScreenNo == -1)
-                cbScreenNo.SelectedIndex = 0;
-            else if (oldScreenNo < cbScreenNo.Items.Count)
-                cbScreenNo.SelectedIndex = oldScreenNo;
+            lbChangeScreen.Text = $"Screen {screenNo + 1} of {ConfigScript.screenCount}";
+            if (ConfigScript.screenCount == 1)
+            {
+                btScreenNext.Enabled = false;
+                btScreenPrev.Enabled = false;
+            }
+            else 
+            {
+                btScreenNext.Enabled = true;
+                btScreenPrev.Enabled = true;
+            }
         }
 
         private void resetControls()
@@ -352,11 +352,22 @@ namespace BuckyEditor
             subeditorOpen(subeditorsDict[button](), button);
         }
 
-        private void cbScreenNo_SelectedIndexChanged(object sender, EventArgs e)
+        private void btScreenNext_Click(object sender, EventArgs e)
         {
-            if (cbScreenNo.SelectedIndex == -1)
-                return;
-            screenNo = cbScreenNo.SelectedIndex;
+            if (screenNo == ConfigScript.screenCount - 1)
+                screenNo = 0;
+            else screenNo++;
+            lbChangeScreen.Text = $"Screen {screenNo + 1} of {ConfigScript.screenCount}";
+            resetMapScreenSize();
+            mapScreen.Invalidate();
+        }
+
+        private void btScreenPrev_Click(object sender, EventArgs e)
+        {
+            if (screenNo == 0)
+                screenNo = ConfigScript.screenCount - 1;
+            else screenNo--;
+            lbChangeScreen.Text = $"Screen {screenNo + 1} of {ConfigScript.screenCount}";
             resetMapScreenSize();
             mapScreen.Invalidate();
         }
