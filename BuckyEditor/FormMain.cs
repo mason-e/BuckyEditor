@@ -52,6 +52,7 @@ namespace BuckyEditor
         {
             screens = ConfigScript.loadScreens();
             lbChangeScreen.Text = $"Screen {screenNo + 1} of {ConfigScript.screenCount}";
+            lbChangePalette.Text = $"Palette {palNo + 1} of {ConfigScript.paletteAddresses.Length}";
             if (screenNo > ConfigScript.screenCount)
                 screenNo = 0;
             if (ConfigScript.screenCount == 1)
@@ -63,6 +64,16 @@ namespace BuckyEditor
             {
                 btScreenNext.Enabled = true;
                 btScreenPrev.Enabled = true;
+            }
+            if (ConfigScript.paletteAddresses.Length == 1)
+            {
+                btPaletteNext.Enabled = false;
+                btPalettePrev.Enabled = false;
+            }
+            else 
+            {
+                btPaletteNext.Enabled = true;
+                btPalettePrev.Enabled = true;
             }
         }
 
@@ -110,7 +121,7 @@ namespace BuckyEditor
 
             if (needRebuildBlocks)
             {
-                bigBlocks = NesDrawing.makeBigBlocks( curActiveBigBlockNo, drawNumbers);
+                bigBlocks = NesDrawing.makeBigBlocks(drawNumbers, palNo);
             }
 
             curActiveBlock = 0;
@@ -374,6 +385,23 @@ namespace BuckyEditor
             mapScreen.Invalidate();
         }
 
+        private void btPaletteNext_Click(object sender, EventArgs e)
+        {
+            if (palNo == ConfigScript.paletteAddresses.Length - 1)
+                palNo = 0;
+            else palNo++;
+            lbChangePalette.Text = $"Palette {palNo + 1} of {ConfigScript.paletteAddresses.Length}";
+            reloadLevel(true, true);
+        }
+
+        private void btPalettePrev_Click(object sender, EventArgs e)
+        {
+            if (palNo == 0)
+                palNo = ConfigScript.paletteAddresses.Length - 1;
+            else palNo--;
+            lbChangePalette.Text = $"Palette {palNo + 1} of {ConfigScript.paletteAddresses.Length}";
+            reloadLevel(true, true);
+        }
 
         private void cbShowNeighbors_CheckedChanged(object sender, EventArgs e)
         {
@@ -465,10 +493,9 @@ namespace BuckyEditor
             }
         }
 
-        public int curActiveBigBlockNo { get; private set; }
-
         public bool showGridlines { get; private set; }
         public int screenNo { get; private set; }
+        public int palNo { get; private set; }
 
         public bool additionalRenderEnabled { get; private set; } = true;
 

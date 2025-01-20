@@ -47,8 +47,8 @@ namespace BuckyEditor
             screenHeight = callFromScript(asm, data, "*.getScreenHeight", 6);
             screenSize = screenHeight * 8; // all screens are 8 metatiles wide
 
-            paletteAddress = callFromScript(asm, data, "*.getPalAddress", 0);
-            patternTableAddresses = callFromScript(asm, data, "*.getPatternTableAddresses", new int[1]);
+            paletteAddresses = callFromScript(asm, data, "*.getPalAddresses", new int[] {0});
+            patternTableAddresses = callFromScript(asm, data, "*.getPatternTableAddresses", new int[] {0});
 
             blocksCount = callFromScript(asm, data, "*.getBlocksCount", 256);
 
@@ -129,7 +129,7 @@ namespace BuckyEditor
 
         public static int[] patternTableAddresses;
         
-        public static int paletteAddress;
+        public static int[] paletteAddresses;
 
         public static int palBytesAddr;
 

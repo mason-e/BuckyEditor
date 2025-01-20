@@ -8,6 +8,6 @@ public class Data
   public int getMetatileAddress()    { return 0x8011; }
   public int getBlocksCount()           { return 85; }
   public int getPalBytesAddr()          { return 0x89e1; }
-  public int getPalAddress()            { return 0x117E5; }
+  public int[] getPalAddresses()            { return 0x117E5; }
   public int[] getPatternTableAddresses()   { return new[] {0x0, 0x0800}; }
 }

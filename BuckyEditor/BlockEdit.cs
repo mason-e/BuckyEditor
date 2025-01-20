@@ -45,7 +45,7 @@ namespace BuckyEditor
 
         protected void setPal()
         {
-            palette = Utils.getPalFromRom(ConfigScript.paletteAddress);
+            palette = Utils.getPalFromRom(ConfigScript.paletteAddresses[0]);
             //set image for pallete
             var b = new Bitmap(16 * 16, 16);
             using (Graphics g = Graphics.FromImage(b))

@@ -31,17 +31,17 @@ namespace BuckyEditor
             return res;
         }
 
-        private static Bitmap[] makeObjects(ObjRec[] objects, Bitmap[][] objStrips, int constantSubpal = -1)
+        private static Bitmap[] makeObjects(ObjRec[] objects, Bitmap[][] objStrips)
         {
             var ans = new Bitmap[objects.Length];
             for (int index = 0; index < objects.Length; index++)
             {
-                ans[index] = makeObject(index, objects, objStrips, constantSubpal);
+                ans[index] = makeObject(index, objects, objStrips);
             }
             return ans;
         }
 
-        public static Bitmap makeObject(int index, ObjRec[] objects, Bitmap[][] objStrips, int constantSubpal = -1)
+        public static Bitmap makeObject(int index, ObjRec[] objects, Bitmap[][] objStrips)
         {
             var obj = objects[index];
             var images = new Image[obj.getSize()];
@@ -50,7 +50,7 @@ namespace BuckyEditor
                 int x = i % obj.w;
                 int y = i / obj.w;
                 int pali = (y >> 1) * (obj.w >> 1) + (x >> 1);
-                var objStrip = constantSubpal == -1 ? objStrips[obj.getSubpalette(pali)] : objStrips[constantSubpal];
+                var objStrip =  objStrips[obj.getSubpalette(pali)];
                 images[i] = objStrip[obj.indexes[i]];
             }
 
@@ -59,12 +59,12 @@ namespace BuckyEditor
             return mblock;
         }
 
-        private static Bitmap[] makeObjects(int constantSubpal = -1)
+        private static Bitmap[] makeObjects(int palIndex)
         {
             byte[] videoChunk = Utils.getPatternTableFromRom(ConfigScript.patternTableAddresses);
             ObjRec[] objects = ConfigScript.getBlocks();
 
-            byte[] palette = Utils.getPalFromRom(ConfigScript.paletteAddress);
+            byte[] palette = Utils.getPalFromRom(ConfigScript.paletteAddresses[palIndex]);
             var range256 = Enumerable.Range(0, 256);
             var objStrip1 = range256.Select(i => makeImage(i, videoChunk, palette, 0)).ToArray();
             var objStrip2 = range256.Select(i => makeImage(i, videoChunk, palette, 1)).ToArray();
@@ -72,17 +72,17 @@ namespace BuckyEditor
             var objStrip4 = range256.Select(i => makeImage(i, videoChunk, palette, 3)).ToArray();
             var objStrips = new[] { objStrip1, objStrip2, objStrip3, objStrip4 };
 
-            var bitmaps = makeObjects(objects, objStrips, constantSubpal);
+            var bitmaps = makeObjects(objects, objStrips);
             return bitmaps;
         }
 
-        public static Image[] makeBigBlocks(int bigBlockNo, bool drawNumbers)
+        public static Image[] makeBigBlocks(bool drawNumbers, int palIndex)
         {
             int blockCount = ConfigScript.getBlocksCount();
             var bigBlocks = new Image[blockCount];
 
             Image[] smallBlocksPack;
-            smallBlocksPack = makeObjects();
+            smallBlocksPack = makeObjects(palIndex);
 
             //tt version hardcode
             Image[][] smallBlocksAll = new Image[4][] { smallBlocksPack, smallBlocksPack, smallBlocksPack, smallBlocksPack };

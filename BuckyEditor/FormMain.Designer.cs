@@ -32,7 +32,6 @@
             this.mapScreen = new System.Windows.Forms.PictureBox();
             this.activeBlock = new System.Windows.Forms.PictureBox();
             this.lbActiveBlock = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
             this.pnView = new System.Windows.Forms.Panel();
             this.lbCoords = new System.Windows.Forms.Label();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
@@ -109,15 +108,6 @@
             this.lbActiveBlock.Size = new System.Drawing.Size(49, 13);
             this.lbActiveBlock.TabIndex = 16;
             this.lbActiveBlock.Text = "Active: ()";
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(0, 83);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(61, 13);
-            this.label6.TabIndex = 26;
-            this.label6.Text = "Screen No:";
             // 
             // pnView
             // 
@@ -321,7 +311,6 @@
             this.pnElements.Controls.Add(this.lbCoords);
             this.pnElements.Controls.Add(this.lbActiveBlock);
             this.pnElements.Controls.Add(this.activeBlock);
-            this.pnElements.Controls.Add(this.label6);
             this.pnElements.Dock = System.Windows.Forms.DockStyle.Right;
             this.pnElements.Location = new System.Drawing.Point(294, 0);
             this.pnElements.Name = "pnElements";
@@ -408,6 +397,7 @@
             this.btPalettePrev.Size = new System.Drawing.Size(64, 32);
             this.btPalettePrev.TabIndex = 62;
             this.btPalettePrev.UseVisualStyleBackColor = true;
+            this.btPalettePrev.Click += new System.EventHandler(this.btPalettePrev_Click);
             // 
             // btScreenPrev
             // 
@@ -436,6 +426,7 @@
             this.btPaletteNext.Size = new System.Drawing.Size(64, 32);
             this.btPaletteNext.TabIndex = 59;
             this.btPaletteNext.UseVisualStyleBackColor = true;
+            this.btPaletteNext.Click += new System.EventHandler(this.btPaletteNext_Click);
             // 
             // btScreenNext
             // 
@@ -487,7 +478,6 @@
         private System.Windows.Forms.PictureBox mapScreen;
         private System.Windows.Forms.PictureBox activeBlock;
         private System.Windows.Forms.Label lbActiveBlock;
-        private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Panel pnView;
         private System.Windows.Forms.Label lbCoords;
         private System.Windows.Forms.ToolStrip toolStrip1;
