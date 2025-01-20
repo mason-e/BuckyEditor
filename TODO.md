@@ -1,6 +1,7 @@
 ## Critical
 
 - Restore ability to change palette on screens that use multiple
+    - In main screen, needed now in metatile editor
 - Restore ability to change pattern table on screens that use multiple
 
 ## High Priority
