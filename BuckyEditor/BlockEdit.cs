@@ -79,7 +79,7 @@ namespace BuckyEditor
 
         protected void setVideo()
         {
-            var chunk = Utils.getPatternTableFromRom(ConfigScript.patternTableAddresses);
+            var chunk = Utils.getPatternTableFromRom(ConfigScript.patternTableFirstHalfAddr[0], ConfigScript.patternTableSecondHalfAddr[0]);
             for (int i = 0; i < 4; i++)
             {
                 videoSprites[i] = Enumerable.Range(0, 256).Select(t => (Bitmap)UtilsGDI.ResizeBitmap(NesDrawing.makeImage(t, chunk, palette, i), 16, 16)).ToArray();

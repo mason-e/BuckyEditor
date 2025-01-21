@@ -48,7 +48,9 @@ namespace BuckyEditor
             screenSize = screenHeight * 8; // all screens are 8 metatiles wide
 
             paletteAddresses = callFromScript(asm, data, "*.getPalAddresses", new int[] {0});
-            patternTableAddresses = callFromScript(asm, data, "*.getPatternTableAddresses", new int[] {0});
+            patternTableFirstHalfAddr = callFromScript(asm, data, "*.getPatternTableFirstHalfAddr", new int[] {0});
+            patternTableSecondHalfAddr = callFromScript(asm, data, "*.getPatternTableSecondHalfAddr", new int[] {0});
+            patternTableSize = Math.Max(patternTableFirstHalfAddr.Length, patternTableSecondHalfAddr.Length);
 
             blocksCount = callFromScript(asm, data, "*.getBlocksCount", 256);
 
@@ -127,7 +129,11 @@ namespace BuckyEditor
 
         public static int blocksCount;
 
-        public static int[] patternTableAddresses;
+        public static int[] patternTableFirstHalfAddr;
+
+        public static int[] patternTableSecondHalfAddr;
+
+        public static int patternTableSize;
         
         public static int[] paletteAddresses;
 

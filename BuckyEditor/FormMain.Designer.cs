@@ -54,7 +54,7 @@
             this.pnElements = new System.Windows.Forms.Panel();
             this.cbShowAddress = new System.Windows.Forms.CheckBox();
             this.pnViewScroll = new System.Windows.Forms.Panel();
-            this.label1 = new System.Windows.Forms.Label();
+            this.lbChangePt = new System.Windows.Forms.Label();
             this.lbChangePalette = new System.Windows.Forms.Label();
             this.lbChangeScreen = new System.Windows.Forms.Label();
             this.btPatternPrev = new System.Windows.Forms.Button();
@@ -334,7 +334,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.pnViewScroll.AutoScroll = true;
-            this.pnViewScroll.Controls.Add(this.label1);
+            this.pnViewScroll.Controls.Add(this.lbChangePt);
             this.pnViewScroll.Controls.Add(this.lbChangePalette);
             this.pnViewScroll.Controls.Add(this.lbChangeScreen);
             this.pnViewScroll.Controls.Add(this.btPatternPrev);
@@ -350,15 +350,15 @@
             this.pnViewScroll.Size = new System.Drawing.Size(675, 529);
             this.pnViewScroll.TabIndex = 5;
             // 
-            // label1
+            // lbChangePt
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(250, 487);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(189, 22);
-            this.label1.TabIndex = 66;
-            this.label1.Text = "Pattern Table 1 of ?";
+            this.lbChangePt.AutoSize = true;
+            this.lbChangePt.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbChangePt.Location = new System.Drawing.Point(250, 487);
+            this.lbChangePt.Name = "lbChangePt";
+            this.lbChangePt.Size = new System.Drawing.Size(189, 22);
+            this.lbChangePt.TabIndex = 66;
+            this.lbChangePt.Text = "Pattern Table 1 of ?";
             // 
             // lbChangePalette
             // 
@@ -388,6 +388,7 @@
             this.btPatternPrev.Size = new System.Drawing.Size(64, 32);
             this.btPatternPrev.TabIndex = 63;
             this.btPatternPrev.UseVisualStyleBackColor = true;
+            this.btPatternPrev.Click += new System.EventHandler(this.btPatternPrev_Click);
             // 
             // btPalettePrev
             // 
@@ -417,6 +418,7 @@
             this.btPatternNext.Size = new System.Drawing.Size(64, 32);
             this.btPatternNext.TabIndex = 60;
             this.btPatternNext.UseVisualStyleBackColor = true;
+            this.btPatternNext.Click += new System.EventHandler(this.btPatternNext_Click);
             // 
             // btPaletteNext
             // 
@@ -508,7 +510,7 @@
         private System.Windows.Forms.Button btPaletteNext;
         private System.Windows.Forms.Label lbChangePalette;
         private System.Windows.Forms.Label lbChangeScreen;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lbChangePt;
     }
 }
 

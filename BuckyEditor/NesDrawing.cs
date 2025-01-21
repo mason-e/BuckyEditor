@@ -59,9 +59,19 @@ namespace BuckyEditor
             return mblock;
         }
 
-        private static Bitmap[] makeObjects(int palIndex)
+        private static Bitmap[] makeObjects(int palIndex, int patternTableIndex)
         {
-            byte[] videoChunk = Utils.getPatternTableFromRom(ConfigScript.patternTableAddresses);
+            // All of the pattern tables in the game only have up to one half that
+            // can change for the current screen. All but one have the second half that changes,
+            // so default to assuming the second half is the bigger one. 
+            int firstHalf = ConfigScript.patternTableFirstHalfAddr[0];
+            int secondHalf = ConfigScript.patternTableSecondHalfAddr[patternTableIndex];
+            if (ConfigScript.patternTableFirstHalfAddr.Length > ConfigScript.patternTableSecondHalfAddr.Length)
+            {
+                firstHalf = ConfigScript.patternTableFirstHalfAddr[patternTableIndex];
+                secondHalf = ConfigScript.patternTableSecondHalfAddr[0];
+            }
+            byte[] videoChunk = Utils.getPatternTableFromRom(firstHalf, secondHalf);
             ObjRec[] objects = ConfigScript.getBlocks();
 
             byte[] palette = Utils.getPalFromRom(ConfigScript.paletteAddresses[palIndex]);
@@ -76,13 +86,13 @@ namespace BuckyEditor
             return bitmaps;
         }
 
-        public static Image[] makeBigBlocks(bool drawNumbers, int palIndex)
+        public static Image[] makeBigBlocks(bool drawNumbers, int palIndex, int patternTableIndex)
         {
             int blockCount = ConfigScript.getBlocksCount();
             var bigBlocks = new Image[blockCount];
 
             Image[] smallBlocksPack;
-            smallBlocksPack = makeObjects(palIndex);
+            smallBlocksPack = makeObjects(palIndex, patternTableIndex);
 
             //tt version hardcode
             Image[][] smallBlocksAll = new Image[4][] { smallBlocksPack, smallBlocksPack, smallBlocksPack, smallBlocksPack };

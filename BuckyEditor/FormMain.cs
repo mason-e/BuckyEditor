@@ -53,6 +53,7 @@ namespace BuckyEditor
             screens = ConfigScript.loadScreens();
             lbChangeScreen.Text = $"Screen {screenNo + 1} of {ConfigScript.screenCount}";
             lbChangePalette.Text = $"Palette {palNo + 1} of {ConfigScript.paletteAddresses.Length}";
+            lbChangePt.Text = $"Pattern Table {patternTableNo + 1} of {ConfigScript.patternTableSize}";
             if (screenNo > ConfigScript.screenCount)
                 screenNo = 0;
             if (ConfigScript.screenCount == 1)
@@ -74,6 +75,16 @@ namespace BuckyEditor
             {
                 btPaletteNext.Enabled = true;
                 btPalettePrev.Enabled = true;
+            }
+            if (ConfigScript.patternTableFirstHalfAddr.Length == 1 && ConfigScript.patternTableSecondHalfAddr.Length == 1)
+            {
+                btPatternNext.Enabled = false;
+                btPatternPrev.Enabled = false;
+            }
+            else
+            {
+                btPatternNext.Enabled = true;
+                btPatternPrev.Enabled = true;
             }
         }
 
@@ -121,7 +132,7 @@ namespace BuckyEditor
 
             if (needRebuildBlocks)
             {
-                bigBlocks = NesDrawing.makeBigBlocks(drawNumbers, palNo);
+                bigBlocks = NesDrawing.makeBigBlocks(drawNumbers, palNo, patternTableNo);
             }
 
             curActiveBlock = 0;
@@ -403,6 +414,24 @@ namespace BuckyEditor
             reloadLevel(true, true);
         }
 
+        private void btPatternNext_Click(object sender, EventArgs e)
+        {
+            if (patternTableNo == ConfigScript.patternTableSize - 1)
+                patternTableNo = 0;
+            else patternTableNo++;
+            lbChangePalette.Text = $"Pattern Table {patternTableNo + 1} of {ConfigScript.paletteAddresses.Length}";
+            reloadLevel(true, true);
+        }
+
+        private void btPatternPrev_Click(object sender, EventArgs e)
+        {
+            if (patternTableNo == 0)
+                patternTableNo = ConfigScript.patternTableSize - 1;
+            else patternTableNo++;
+            lbChangePalette.Text = $"Pattern Table {patternTableNo + 1} of {ConfigScript.paletteAddresses.Length}";
+            reloadLevel(true, true);
+        }
+
         private void cbShowNeighbors_CheckedChanged(object sender, EventArgs e)
         {
             showNeiScreens = bttShowNei.Checked;
@@ -496,6 +525,7 @@ namespace BuckyEditor
         public bool showGridlines { get; private set; }
         public int screenNo { get; private set; }
         public int palNo { get; private set; }
+        public int patternTableNo { get; private set; }
 
         public bool additionalRenderEnabled { get; private set; } = true;
 
