@@ -48,9 +48,13 @@
             this.label7 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.lbActive = new System.Windows.Forms.Label();
+            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.bttSave = new System.Windows.Forms.ToolStripButton();
+            this.bttGridlines = new System.Windows.Forms.ToolStripButton();
             ((System.ComponentModel.ISupportInitialize)(this.paletteMap)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.mapScreen)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbActive)).BeginInit();
+            this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // paletteMap
@@ -174,13 +178,10 @@
             // 
             // btSave
             // 
-            this.btSave.Location = new System.Drawing.Point(12, 4);
+            this.btSave.Location = new System.Drawing.Point(0, 0);
             this.btSave.Name = "btSave";
-            this.btSave.Size = new System.Drawing.Size(59, 23);
-            this.btSave.TabIndex = 0;
-            this.btSave.Text = "save";
-            this.btSave.UseVisualStyleBackColor = true;
-            this.btSave.Click += new System.EventHandler(this.btSave_Click);
+            this.btSave.Size = new System.Drawing.Size(75, 23);
+            this.btSave.TabIndex = 30;
             // 
             // label6
             // 
@@ -218,11 +219,46 @@
             this.lbActive.TabIndex = 28;
             this.lbActive.Text = "()";
             // 
+            // toolStrip1
+            // 
+            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.bttSave,
+            this.bttGridlines});
+            this.toolStrip1.Location = new System.Drawing.Point(0, 0);
+            this.toolStrip1.Name = "toolStrip1";
+            this.toolStrip1.Size = new System.Drawing.Size(668, 25);
+            this.toolStrip1.TabIndex = 29;
+            this.toolStrip1.Text = "toolStrip1";
+            // 
+            // bttSave
+            // 
+            this.bttSave.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.bttSave.Image = ((System.Drawing.Image)(resources.GetObject("bttSave.Image")));
+            this.bttSave.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.bttSave.Name = "bttSave";
+            this.bttSave.Size = new System.Drawing.Size(24, 24);
+            this.bttSave.ToolTipText = "Save";
+            this.bttSave.Click += new System.EventHandler(this.bttSave_Click);
+            // 
+            // bttGridlines
+            // 
+            this.bttGridlines.Checked = true;
+            this.bttGridlines.CheckOnClick = true;
+            this.bttGridlines.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.bttGridlines.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.bttGridlines.Image = ((System.Drawing.Image)(resources.GetObject("bttGridlines.Image")));
+            this.bttGridlines.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.bttGridlines.Name = "bttGridlines";
+            this.bttGridlines.Size = new System.Drawing.Size(24, 24);
+            this.bttGridlines.ToolTipText = "Gridlines";
+            this.bttGridlines.CheckedChanged += new System.EventHandler(this.bttGridlines_CheckedChanged);
+            // 
             // BlockEdit
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(668, 515);
+            this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.lbActive);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.label7);
@@ -246,6 +282,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.paletteMap)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.mapScreen)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbActive)).EndInit();
+            this.toolStrip1.ResumeLayout(false);
+            this.toolStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -271,5 +309,8 @@
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.Label lbActive;
+        private System.Windows.Forms.ToolStrip toolStrip1;
+        private System.Windows.Forms.ToolStripButton bttSave;
+        private System.Windows.Forms.ToolStripButton bttGridlines;
     }
 }

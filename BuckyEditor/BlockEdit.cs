@@ -95,7 +95,12 @@ namespace BuckyEditor
                 {
                     int x = i % 16;
                     int y = i / 16;
-                    g.DrawImage(videoSprites[curSubpalIndex][i], new Rectangle(x * TileSize, y * TileSize, TileSize, TileSize));
+                    Rectangle tileRect = new Rectangle(x * TileSize, y * TileSize, TileSize, TileSize);
+                    g.DrawImage(videoSprites[curSubpalIndex][i], tileRect);
+                    if (showGridlines)
+                    {
+                        g.DrawRectangle(new Pen(Color.FromArgb(255, 255, 255, 255)), tileRect);
+                    }
                 }
             }
             mapScreen.Image = b;
@@ -209,7 +214,7 @@ namespace BuckyEditor
             return !dirty;
         }
 
-        protected void btSave_Click(object sender, EventArgs e)
+        protected void bttSave_Click(object sender, EventArgs e)
         {
             saveToFile();
         }
@@ -314,6 +319,11 @@ namespace BuckyEditor
         {
             formMain = f;
         }
-
+        
+        private void bttGridlines_CheckedChanged(object sender, EventArgs e)
+        {
+            showGridlines = bttGridlines.Checked;
+            setVideoImage();
+        }
     }
 }
