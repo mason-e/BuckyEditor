@@ -61,11 +61,9 @@ namespace BuckyEditor
 
         private static Bitmap[] makeObjects(int palIndex, int patternTableIndex)
         {
-            // All of the pattern tables in the game only have up to one half that
-            // can change for the current screen. All but one have the second half that changes,
-            // so default to assuming the second half is the bigger one. 
-            int firstHalf = ConfigScript.patternTableFirstHalfAddr[0];
-            int secondHalf = ConfigScript.patternTableSecondHalfAddr[patternTableIndex];
+            bool moreinSecondHalf = ConfigScript.patternTableSecondHalfAddr.Length > ConfigScript.patternTableFirstHalfAddr.Length;
+            int firstHalf = moreinSecondHalf ? ConfigScript.patternTableFirstHalfAddr[0] : ConfigScript.patternTableFirstHalfAddr[patternTableIndex];
+            int secondHalf = moreinSecondHalf ? ConfigScript.patternTableSecondHalfAddr[patternTableIndex] : ConfigScript.patternTableSecondHalfAddr[0];
             if (ConfigScript.patternTableFirstHalfAddr.Length > ConfigScript.patternTableSecondHalfAddr.Length)
             {
                 firstHalf = ConfigScript.patternTableFirstHalfAddr[patternTableIndex];

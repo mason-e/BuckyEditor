@@ -10,5 +10,6 @@ public class Data
   public int getBlocksCount()           { return 124; }
   public int getPalBytesAddr()          { return 0xdaa8; }
   public int[] getPalAddresses()            { return new[] {0x11971, 0x11983, 0x11995}; } 
-  public int[] getPatternTableAddresses()   { return new[] {0x5000, 0x7800}; }
+  public int[] getPatternTableFirstHalfAddr() { return new[] {0x5000}; }
+  public int[] getPatternTableSecondHalfAddr() { return new[] {0x7800}; }
 }

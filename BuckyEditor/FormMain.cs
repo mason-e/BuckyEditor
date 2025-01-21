@@ -54,8 +54,12 @@ namespace BuckyEditor
             lbChangeScreen.Text = $"Screen {screenNo + 1} of {ConfigScript.screenCount}";
             lbChangePalette.Text = $"Palette {palNo + 1} of {ConfigScript.paletteAddresses.Length}";
             lbChangePt.Text = $"Pattern Table {patternTableNo + 1} of {ConfigScript.patternTableSize}";
-            if (screenNo > ConfigScript.screenCount)
+            if (screenNo > ConfigScript.screenCount - 1)
                 screenNo = 0;
+            if (palNo > ConfigScript.paletteAddresses.Length - 1)
+                palNo = 0;
+            if (patternTableNo > ConfigScript.patternTableSize - 1)
+                patternTableNo = 0;
             if (ConfigScript.screenCount == 1)
             {
                 btScreenNext.Enabled = false;
@@ -427,7 +431,7 @@ namespace BuckyEditor
         {
             if (patternTableNo == 0)
                 patternTableNo = ConfigScript.patternTableSize - 1;
-            else patternTableNo++;
+            else patternTableNo--;
             lbChangePalette.Text = $"Pattern Table {patternTableNo + 1} of {ConfigScript.paletteAddresses.Length}";
             reloadLevel(true, true);
         }
