@@ -160,28 +160,16 @@ namespace BuckyEditor
             return screens;
         }
 
-        public static void saveScreensToOffset(Screen[] screensData, int firstScreenIndex, int currentOffsetIndex, int layerNo)
+        public static void saveScreensDiffSize(Screen[] screensData)
         {
             var arrayToSave = Globals.romdata;
             for (int i = 0; i < ConfigScript.screenCount; i++)
             {
-                var curScrNo = firstScreenIndex + i;
-                var curScreen = screensData[curScrNo];
-                var dataToWrite = curScreen.layers[layerNo].data;
+                var curScreen = screensData[i];
+                var dataToWrite = curScreen.layers[0].data;
                 int addr = ConfigScript.levelStartAddress + i * ConfigScript.screenSize;
                 for (int x = 0; x < ConfigScript.screenSize; x++)
                     arrayToSave[addr + x] = (byte)dataToWrite[x];
-            }
-        }
-
-        public static void saveScreensDiffSize(Screen[] screensData)
-        {
-            int offsetsCount = 0;
-            int currentScreenIndex = 0;
-            for (int currentOffsetIndex = 0; currentOffsetIndex < offsetsCount; currentOffsetIndex++)
-            {
-                saveScreensToOffset(screensData, currentScreenIndex, currentOffsetIndex, 0);
-                currentScreenIndex += ConfigScript.screenCount;
             }
         }
 

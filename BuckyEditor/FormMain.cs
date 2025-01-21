@@ -352,7 +352,8 @@ namespace BuckyEditor
         private bool saveToFile()
         {
             ConfigScript.saveScreens(screens);
-            dirty = !Globals.flushToFile(); updateSaveVisibility();
+            dirty = !Globals.flushToFile(); 
+            updateSaveVisibility();
             return !dirty;
         }
 

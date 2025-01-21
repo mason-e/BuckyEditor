@@ -1,12 +1,14 @@
 ## Critical
 
-- Restore ability to change palette on screens that use multiple
-    - In main screen, needed now in metatile editor
-- Restore ability to change pattern table on screens that use multiple
 
 ## High Priority
 
-- Change pattern table and palette for currently loaded section to arrows instead of dropdowns (removes "Advanced" menu)
+- Metatile Editor show gridlines option
+- Metatile Editor show tile address option
+- Can change palette and pattern table on main screen but not block editor
+    - Option A: Duplicate main editor flow (buttons, etc.)
+    - Option B: Find way to pass through from main form
+    - Option C: Leave it because it shouldn't affect metatile composition
 - Pre load config files into dropdown options (first level, then section) rather than a loading pop-up
 - Investigate the palette assigning functions - seems like it was meant to work, but doesn't
 
@@ -15,3 +17,4 @@
 - Display issues with the currently loaded level in editor instead of file comments
 - Change all references to "Blocks" to "Metatiles"
 - Remove references to "Big Blocks"
+- Remove anything to do with layers
