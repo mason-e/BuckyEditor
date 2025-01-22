@@ -41,6 +41,7 @@
             this.bttBlocks = new System.Windows.Forms.ToolStripButton();
             this.bttShowNei = new System.Windows.Forms.ToolStripButton();
             this.bttGridlines = new System.Windows.Forms.ToolStripButton();
+            this.bttShowAddress = new System.Windows.Forms.ToolStripButton();
             this.x025ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.x05ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
@@ -52,7 +53,6 @@
             this.pnBlocks = new System.Windows.Forms.Panel();
             this.blocksScreen = new System.Windows.Forms.PictureBox();
             this.pnElements = new System.Windows.Forms.Panel();
-            this.cbShowAddress = new System.Windows.Forms.CheckBox();
             this.pnViewScroll = new System.Windows.Forms.Panel();
             this.lbChangePt = new System.Windows.Forms.Label();
             this.lbChangePalette = new System.Windows.Forms.Label();
@@ -141,7 +141,8 @@
             this.bttReload,
             this.bttBlocks,
             this.bttShowNei,
-            this.bttGridlines});
+            this.bttGridlines,
+            this.bttShowAddress});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(1073, 27);
@@ -213,6 +214,17 @@
             this.bttGridlines.Size = new System.Drawing.Size(24, 24);
             this.bttGridlines.Text = "Gridlines";
             this.bttGridlines.CheckedChanged += new System.EventHandler(this.cbShowGridlines_CheckedChanged);
+            // 
+            // bttShowAddress
+            // 
+            this.bttShowAddress.CheckOnClick = true;
+            this.bttShowAddress.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.bttShowAddress.Image = ((System.Drawing.Image)(resources.GetObject("bttShowAddress.Image")));
+            this.bttShowAddress.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.bttShowAddress.Name = "bttShowAddress";
+            this.bttShowAddress.Size = new System.Drawing.Size(24, 24);
+            this.bttShowAddress.ToolTipText = "Show Metatile Address";
+            this.bttShowAddress.Click += new System.EventHandler(this.bttShowAddress_CheckedChanged);
             // 
             // x025ToolStripMenuItem
             // 
@@ -307,7 +319,6 @@
             // 
             // pnElements
             // 
-            this.pnElements.Controls.Add(this.cbShowAddress);
             this.pnElements.Controls.Add(this.lbCoords);
             this.pnElements.Controls.Add(this.lbActiveBlock);
             this.pnElements.Controls.Add(this.activeBlock);
@@ -316,17 +327,6 @@
             this.pnElements.Name = "pnElements";
             this.pnElements.Size = new System.Drawing.Size(77, 518);
             this.pnElements.TabIndex = 5;
-            // 
-            // cbShowAddress
-            // 
-            this.cbShowAddress.CheckAlign = System.Drawing.ContentAlignment.TopLeft;
-            this.cbShowAddress.Location = new System.Drawing.Point(5, 307);
-            this.cbShowAddress.Name = "cbShowAddress";
-            this.cbShowAddress.Size = new System.Drawing.Size(71, 44);
-            this.cbShowAddress.TabIndex = 57;
-            this.cbShowAddress.Text = "Show Metatile Address";
-            this.cbShowAddress.UseVisualStyleBackColor = true;
-            this.cbShowAddress.CheckedChanged += new System.EventHandler(this.cbShowAddress_CheckedChanged);
             // 
             // pnViewScroll
             // 
@@ -501,7 +501,6 @@
         private System.Windows.Forms.Panel pnBlocks;
         private System.Windows.Forms.PictureBox blocksScreen;
         private System.Windows.Forms.Panel pnViewScroll;
-        private System.Windows.Forms.CheckBox cbShowAddress;
         private System.Windows.Forms.Button btScreenNext;
         private System.Windows.Forms.Button btPatternPrev;
         private System.Windows.Forms.Button btPalettePrev;
@@ -511,6 +510,7 @@
         private System.Windows.Forms.Label lbChangePalette;
         private System.Windows.Forms.Label lbChangeScreen;
         private System.Windows.Forms.Label lbChangePt;
+        private System.Windows.Forms.ToolStripButton bttShowAddress;
     }
 }
 

@@ -132,7 +132,7 @@ namespace BuckyEditor
 
         private void setBlocks(bool needRebuildBlocks)
         {
-            bool drawNumbers = cbShowAddress.Checked;
+            bool drawNumbers = bttShowAddress.Checked;
 
             if (needRebuildBlocks)
             {
@@ -690,7 +690,7 @@ namespace BuckyEditor
             splitContainer1.Height = Height - 81;
         }
 
-        private void cbShowAddress_CheckedChanged(object sender, EventArgs e)
+        private void bttShowAddress_CheckedChanged(object sender, EventArgs e)
         {
             reloadLevel(true, true);
         }
@@ -718,6 +718,7 @@ namespace BuckyEditor
                 bttBlocks,
                 bttShowNei,
                 bttGridlines,
+                bttShowAddress,
             };
 
             toolStrip1.Items.AddRange(items);

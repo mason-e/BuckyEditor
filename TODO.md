@@ -3,9 +3,6 @@
 
 ## High Priority
 
-- Change metatile checkbox to toolstrip button
-    - Need to create image
-- Metatile Editor show tile address option
 - Can change palette and pattern table on main screen but not block editor
     - Option A: Duplicate main editor flow (buttons, etc.)
     - Option B: Find way to pass through from main form
