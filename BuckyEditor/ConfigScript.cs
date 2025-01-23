@@ -77,11 +77,6 @@ namespace BuckyEditor
             Utils.saveScreensDiffSize(screens);
         }
 
-        public static string[] getBlockTypeNames()
-        {
-            return defaultBlockTypeNames;
-        }
-
         public static int getPalBytesAddr()
         {
             return palBytesAddr;
@@ -133,8 +128,6 @@ namespace BuckyEditor
         public static int[] paletteAddresses;
 
         public static int palBytesAddr;
-
-        public static string[] defaultBlockTypeNames = new[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "F" };
 
         //global editor settings
         public static string romName;

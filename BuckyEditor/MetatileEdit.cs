@@ -108,10 +108,7 @@ namespace BuckyEditor
 
         //editor
         protected int curSubpalIndex;
-        protected int curActiveBlock;
-
-        protected int curPageIndex;
-        private const int BlocksPerPage = 256;
+        protected int curSelectedTile;
 
         protected byte[] palette = new byte[Globals.palLen];
         protected ObjRec[] objects = new ObjRec[256];
@@ -157,13 +154,13 @@ namespace BuckyEditor
             int x = e.X / TileSize;
             int y = e.Y / TileSize;
             PictureBox p = (PictureBox)sender;
-            int objIndex = curPageIndex * BlocksPerPage + (int)p.Tag;
+            int objIndex = (int)p.Tag;
             var obj = objects[objIndex];
             if (x >= 0 && x < obj.w && y >= 0 && y < obj.h)
             {
                 if (left)
                 {
-                    obj.indexes[y * obj.w + x] = curActiveBlock;
+                    obj.indexes[y * obj.w + x] = curSelectedTile;
                 }
                 else
                 {
@@ -173,12 +170,12 @@ namespace BuckyEditor
                     if (++curPal > 3) { curPal = 0; }
                     obj.palBytes[palIndex] = curPal;
                     //action 2
-                    curActiveBlock = obj.indexes[y * obj.w + x];
+                    curSelectedTile = obj.indexes[y * obj.w + x];
                 }
             }
             p.Image = makeObjImage(objIndex);
-            pbActive.Image = videoSprites[curSubpalIndex][curActiveBlock];
-            lbActive.Text = String.Format("({0:X})", curActiveBlock);
+            pbActive.Image = videoSprites[curSubpalIndex][curSelectedTile];
+            lbActive.Text = String.Format("({0:X})", curSelectedTile);
             dirty = true;
         }
 
@@ -186,7 +183,7 @@ namespace BuckyEditor
         {
             ComboBox cb = (ComboBox)sender;
             PictureBox pb = (PictureBox)cb.Tag;
-            int index = curPageIndex * BlocksPerPage + (int)pb.Tag;
+            int index = (int)pb.Tag;
             objects[index].palBytes[0] = cb.SelectedIndex;
             pb.Image = makeObjImage(index);
             dirty = true;
@@ -201,9 +198,9 @@ namespace BuckyEditor
         {
             int x = e.X / TileSize;
             int y = e.Y / TileSize;
-            curActiveBlock = y * TileSize + x;
-            pbActive.Image = videoSprites[curSubpalIndex][curActiveBlock];
-            lbActive.Text = String.Format("({0:X})", curActiveBlock);
+            curSelectedTile = y * TileSize + x;
+            pbActive.Image = videoSprites[curSubpalIndex][curSelectedTile];
+            lbActive.Text = String.Format("({0:X})", curSelectedTile);
             dirty = true;
         }
 
@@ -234,7 +231,6 @@ namespace BuckyEditor
             //GUI
             mapObjects.Controls.Clear();
             mapObjects.SuspendLayout();
-            var objectTypes = ConfigScript.getBlockTypeNames();
             for (int i = 0; i < ConfigScript.metatileCount; i++)
             {
                 var obj = objects[i];
@@ -287,9 +283,8 @@ namespace BuckyEditor
             }
 
             mapObjects.SuspendLayout();
-            int startIndex = curPageIndex * BlocksPerPage;
             int pi = 0;
-            for (int i = startIndex; i < ConfigScript.metatileCount; i++, pi++)
+            for (int i = 0; i < ConfigScript.metatileCount; i++, pi++)
             {
                 Panel p = (Panel)mapObjects.Controls[pi];
                 p.Visible = true;

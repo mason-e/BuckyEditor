@@ -3,14 +3,14 @@
 
 ## High Priority
 
-- Show address of individual tiles somehow. Maybe on mouseover?
-- Show addresses within editors
+- Show address of individual tiles somehow in metatile editor. Maybe on mouseover?
+    - Trying to display the addresses in a grid next to the picture, but need a find a way to get those address valeus
+- Show addresses of metatiles, palette bytes, etc. within editors
 - Can change palette and pattern table on main screen but not metatile editor
     - Option A: Duplicate main editor flow (buttons, etc.)
     - Option B: Find way to pass through from main form
     - Option C: Leave it because it shouldn't affect metatile composition
 - Pre load config files into dropdown options (first level, then section) rather than a loading pop-up
-- Investigate the palette assigning functions - seems like it was meant to work, but doesn't
 
 ## Nice to Have
 
