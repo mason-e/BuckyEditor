@@ -105,12 +105,12 @@ namespace BuckyEditor
 
         public static ObjRec[] getBlocksFromTiles16Pal1()
         {
-            return readBlocksLinearTiles16Pal1(Globals.romdata, ConfigScript.getTilesAddr(), ConfigScript.getPalBytesAddr(), ConfigScript.getBlocksCount());
+            return readBlocksLinearTiles16Pal1(Globals.romdata, ConfigScript.getMetatileAddress(), ConfigScript.getPalBytesAddr(), ConfigScript.getBlocksCount());
         }
 
         public static void setBlocksFromTiles16Pal1(ObjRec[] blocksData)
         {
-            writeBlocksLinearTiles16Pal1(blocksData, Globals.romdata, ConfigScript.getTilesAddr(), ConfigScript.getPalBytesAddr(), ConfigScript.getBlocksCount());
+            writeBlocksLinearTiles16Pal1(blocksData, Globals.romdata, ConfigScript.getMetatileAddress(), ConfigScript.getPalBytesAddr(), ConfigScript.getBlocksCount());
         }
 
         public static ObjRec[] readBlocksLinearTiles16Pal1(byte[] romdata, int addr, int palBytesAddr, int count)
@@ -140,52 +140,37 @@ namespace BuckyEditor
 
         public static Screen[] loadScreensDiffSize()
         {
-            var offsets = ConfigScript.screensOffset;
             int totalCount = 0;
-            int count = offsets.Length;
+            int count = 1;
             for (int i = 0; i < count; i++)
             {
-                totalCount += offsets[i].recCount;
+                totalCount += ConfigScript.screenCount;
             }
             var screens = new Screen[totalCount];
 
             int currentScreen = 0;
             for (int i = 0; i < count; i++)
             {
-                for (int scrI = 0; scrI < offsets[i].recCount; scrI++)
+                for (int scrI = 0; scrI < ConfigScript.screenCount; scrI++)
                 {
-                    var screen = Globals.getScreen(offsets[i], scrI);
+                    var screen = Globals.getScreen(scrI);
                     screens[currentScreen++] = screen;
                 }
             }
             return screens;
         }
 
-        //save screensData from firstScreenIndex to ConfigScript.screensOffset[currentOffset]
-        public static void saveScreensToOffset(OffsetRec screensRec, Screen[] screensData, int firstScreenIndex, int currentOffsetIndex, int layerNo)
-        {
-            var arrayToSave = Globals.romdata;
-            for (int i = 0; i < screensRec.recCount; i++)
-            {
-                var curScrNo = firstScreenIndex + i;
-                var curScreen = screensData[curScrNo];
-                var dataToWrite = curScreen.layers[layerNo].data;
-                int addr = screensRec.beginAddr + i * screensRec.recSize;
-                for (int x = 0; x < screensRec.recSize; x++)
-                    arrayToSave[addr + x] = (byte)dataToWrite[x];
-            }
-        }
-
         public static void saveScreensDiffSize(Screen[] screensData)
         {
-            int offsetsCount = ConfigScript.screensOffset.Length;
-            int currentScreenIndex = 0;
-            for (int currentOffsetIndex = 0; currentOffsetIndex < offsetsCount; currentOffsetIndex++)
+            var arrayToSave = Globals.romdata;
+            for (int i = 0; i < ConfigScript.screenCount; i++)
             {
-                saveScreensToOffset(ConfigScript.screensOffset[currentOffsetIndex], screensData, currentScreenIndex, currentOffsetIndex, 0);
-                currentScreenIndex += ConfigScript.screensOffset[currentOffsetIndex].recCount;
+                var curScreen = screensData[i];
+                var dataToWrite = curScreen.layers[0].data;
+                int addr = ConfigScript.levelStartAddress + i * ConfigScript.screenSize;
+                for (int x = 0; x < ConfigScript.screenSize; x++)
+                    arrayToSave[addr + x] = (byte)dataToWrite[x];
             }
-            //todo: save all layers
         }
 
         public static byte[] readBinFile(string filename)
@@ -226,13 +211,13 @@ namespace BuckyEditor
             return palette;
         }
 
-        public static byte[] getPatternTableFromRom(int[] startAddress)
+        public static byte[] getPatternTableFromRom(int firstHalfAddr, int secondHalfAddr)
         {
             byte[] romdata = Globals.romdata;
             byte[] patternTable = new byte[4096]; // 256 tiles, each tile is 16 bytes
             // allows address indices that are relative to the CHR ROM
-            int firstHalfAddress = (startAddress[0] < 0x20010) ? startAddress[0] += 0x20010 : startAddress[0];
-            int secondHalfAddress = (startAddress[1] < 0x20010) ? startAddress[1] += 0x20010 : startAddress[1];
+            int firstHalfAddress = (firstHalfAddr < 0x20010) ? firstHalfAddr += 0x20010 : firstHalfAddr;
+            int secondHalfAddress = (secondHalfAddr < 0x20010) ? secondHalfAddr += 0x20010 : secondHalfAddr;
             for (int i = 0; i < 2048; i++) 
             {
                 patternTable[i] = romdata[firstHalfAddress + i];

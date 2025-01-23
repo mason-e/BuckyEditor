@@ -3,11 +3,12 @@ using System;
 
 public class Data 
 { 
-  public OffsetRec getScreensOffset()  { return new OffsetRec(0xdd6d, 5 , 8*6, 8, 6);   }
-  
-  public OffsetRec getBlocksOffset()    { return new OffsetRec(0xd2d8, 1  , 0x1000);  }
+  public int getLevelStartAddr() { return 0xdd6d; }
+  public int getScreenCount() { return 5; }
+  public int getMetatileAddress()    { return 0xd2d8; }
   public int getBlocksCount()           { return 124; }
   public int getPalBytesAddr()          { return 0xdaa8; }
-  public int getPalAddress()            { return 0x11A01; } 
-  public int[] getPatternTableAddresses()   { return new[] {0x5000, 0x0}; }
+  public int[] getPalAddresses()            { return new[] {0x11A01}; } 
+  public int[] getPatternTableFirstHalfAddr() { return new[] {0x5000}; }
+  public int[] getPatternTableSecondHalfAddr() { return new[] { 0x0000, 0x1D800, 0x1D000, 0x1C800, 0x1C000, 0x1B800, 0x1B000, 0x1A800, 0x1A000, 0xF800, 0xF000, 0xE800, 0xE000, 0x8000, 0x7000, 0x0800 }; }
 }

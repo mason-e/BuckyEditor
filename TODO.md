@@ -1,18 +1,22 @@
 ## Critical
 
-- Restore ability to change palette on screens that use multiple
-- Restore ability to change pattern table on screens that use multiple
 
 ## High Priority
 
-- Change screen, pattern table and palette for currently loaded section to arrows instead of dropdowns (removes "Advanced" menu)
+- Show address of individual tiles somehow. Maybe on mouseover?
+- Lock from resizing and fix displayed area size
+- Show addresses within editors
+- Can change palette and pattern table on main screen but not block editor
+    - Option A: Duplicate main editor flow (buttons, etc.)
+    - Option B: Find way to pass through from main form
+    - Option C: Leave it because it shouldn't affect metatile composition
 - Pre load config files into dropdown options (first level, then section) rather than a loading pop-up
 - Investigate the palette assigning functions - seems like it was meant to work, but doesn't
 
 ## Nice to Have
 
+- Clean up unused image icons
 - Display issues with the currently loaded level in editor instead of file comments
-- Simplify getScreensOffset function (dimensions go into it twice)
-- Make showing block address a toggle checkmark instead of
 - Change all references to "Blocks" to "Metatiles"
 - Remove references to "Big Blocks"
+- Remove anything to do with layers

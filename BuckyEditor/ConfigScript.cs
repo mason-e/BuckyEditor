@@ -41,13 +41,16 @@ namespace BuckyEditor
             var asm = new AsmHelper(CSScript.LoadCode(File.ReadAllText(fileName)));
             object data = asm.CreateObject("Data");
 
-            screensOffset = new OffsetRec[1];
+            metatileAddress = callFromScript(asm, data, "*.getMetatileAddress", 0);
+            levelStartAddress = callFromScript(asm, data, "*.getLevelStartAddr", 0);
+            screenCount = callFromScript(asm, data, "*.getScreenCount", 1);
+            screenHeight = callFromScript(asm, data, "*.getScreenHeight", 6);
+            screenSize = screenHeight * 8; // all screens are 8 metatiles wide
 
-            blocksOffset = callFromScript(asm, data, "*.getBlocksOffset", new OffsetRec(0, 1, 0));
-            screensOffset[0] = callFromScript(asm, data, "*.getScreensOffset", new OffsetRec(0, 1, 0, -1, -1));
-
-            paletteAddress = callFromScript(asm, data, "*.getPalAddress", 0);
-            patternTableAddresses = callFromScript(asm, data, "*.getPatternTableAddresses", new int[1]);
+            paletteAddresses = callFromScript(asm, data, "*.getPalAddresses", new int[] {0});
+            patternTableFirstHalfAddr = callFromScript(asm, data, "*.getPatternTableFirstHalfAddr", new int[] {0});
+            patternTableSecondHalfAddr = callFromScript(asm, data, "*.getPatternTableSecondHalfAddr", new int[] {0});
+            patternTableSize = Math.Max(patternTableFirstHalfAddr.Length, patternTableSecondHalfAddr.Length);
 
             blocksCount = callFromScript(asm, data, "*.getBlocksCount", 256);
 
@@ -91,9 +94,9 @@ namespace BuckyEditor
 
         //------------------------------------------------------------
 
-        public static int getTilesAddr()
+        public static int getMetatileAddress()
         {
-            return ConfigScript.blocksOffset.beginAddr;
+            return metatileAddress;
 
         }
 
@@ -114,14 +117,25 @@ namespace BuckyEditor
 
         public static string ConfigDirectory { get { return configDirectory; } }
 
-        public static OffsetRec blocksOffset;
-        public static OffsetRec[] screensOffset;
+        public static int metatileAddress;
+
+        public static int levelStartAddress;
+
+        public static int screenCount;
+
+        public static int screenHeight;
+
+        public static int screenSize;
 
         public static int blocksCount;
 
-        public static int[] patternTableAddresses;
+        public static int[] patternTableFirstHalfAddr;
+
+        public static int[] patternTableSecondHalfAddr;
+
+        public static int patternTableSize;
         
-        public static int paletteAddress;
+        public static int[] paletteAddresses;
 
         public static int palBytesAddr;
 

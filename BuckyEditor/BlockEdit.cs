@@ -31,9 +31,6 @@ namespace BuckyEditor
             UtilsGui.setCbItemsCount(cbPalette, 1);
 
             UtilsGui.setCbIndexWithoutUpdateLevel(cbSubpalette, cbSubpalette_SelectedIndexChanged);
-
-            UtilsGui.setCbItemsCount(cbPanelNo, (ConfigScript.getBlocksCount() + BlocksPerPage - 1) / BlocksPerPage);
-            UtilsGui.setCbIndexWithoutUpdateLevel(cbPanelNo, cbPanelNo_SelectedIndexChanged);
         }
 
         protected void reloadLevel(bool resetDirty = true)
@@ -48,7 +45,7 @@ namespace BuckyEditor
 
         protected void setPal()
         {
-            palette = Utils.getPalFromRom(ConfigScript.paletteAddress);
+            palette = Utils.getPalFromRom(ConfigScript.paletteAddresses[0]);
             //set image for pallete
             var b = new Bitmap(16 * 16, 16);
             using (Graphics g = Graphics.FromImage(b))
@@ -82,7 +79,7 @@ namespace BuckyEditor
 
         protected void setVideo()
         {
-            var chunk = Utils.getPatternTableFromRom(ConfigScript.patternTableAddresses);
+            var chunk = Utils.getPatternTableFromRom(ConfigScript.patternTableFirstHalfAddr[0], ConfigScript.patternTableSecondHalfAddr[0]);
             for (int i = 0; i < 4; i++)
             {
                 videoSprites[i] = Enumerable.Range(0, 256).Select(t => (Bitmap)UtilsGDI.ResizeBitmap(NesDrawing.makeImage(t, chunk, palette, i), 16, 16)).ToArray();
@@ -98,7 +95,12 @@ namespace BuckyEditor
                 {
                     int x = i % 16;
                     int y = i / 16;
-                    g.DrawImage(videoSprites[curSubpalIndex][i], new Rectangle(x * TileSize, y * TileSize, TileSize, TileSize));
+                    Rectangle tileRect = new Rectangle(x * TileSize, y * TileSize, TileSize, TileSize);
+                    g.DrawImage(videoSprites[curSubpalIndex][i], tileRect);
+                    if (showGridlines)
+                    {
+                        g.DrawRectangle(new Pen(Color.FromArgb(255, 255, 255, 255)), tileRect);
+                    }
                 }
             }
             mapScreen.Image = b;
@@ -190,17 +192,9 @@ namespace BuckyEditor
             dirty = true;
         }
 
-        protected void nudType_ValueChanged(object sender, EventArgs e)
-        {
-            NumericUpDown nudType = (NumericUpDown)sender;
-            int index = curPageIndex * BlocksPerPage + (int)nudType.Tag;
-            objects[index].type = (int)nudType.Value;
-            dirty = true;
-        }
-
         public Image makeObjImage(int index)
         {
-            return NesDrawing.makeObject(index, objects, videoSprites, MapViewType.Tiles);
+            return NesDrawing.makeObject(index, objects, videoSprites);
         }
 
         protected void mapScreen_MouseClick(object sender, MouseEventArgs e)
@@ -220,7 +214,7 @@ namespace BuckyEditor
             return !dirty;
         }
 
-        protected void btSave_Click(object sender, EventArgs e)
+        protected void bttSave_Click(object sender, EventArgs e)
         {
             saveToFile();
         }
@@ -277,16 +271,6 @@ namespace BuckyEditor
                 cbColor.SelectedIndexChanged += cbColor_SelectedIndexChanged;
                 fp.Controls.Add(cbColor);
                 curPanelX += cbColor.Size.Width;
-                //
-                NumericUpDown nudType = new NumericUpDown();
-                nudType.Size = cbSubpalette.Size;
-                nudType.Location = new Point(curPanelX, 0);
-                nudType.Tag = i;
-                nudType.Minimum = 0;
-                nudType.Maximum = objectTypes.Length - 1;
-                nudType.Hexadecimal = true;
-                nudType.ValueChanged += nudType_ValueChanged;
-                fp.Controls.Add(nudType);
 
                 mapObjects.Controls.Add(fp);
             }
@@ -316,9 +300,7 @@ namespace BuckyEditor
                 PictureBox pb = (PictureBox)p.Controls[1];
                 pb.Image = makeObjImage(i);
                 ComboBox cbColor = (ComboBox)p.Controls[2];
-                cbColor.SelectedIndex = objects[i].getSubpallete();
-                NumericUpDown nudType = (NumericUpDown)p.Controls[3];
-                nudType.Value = objects[i].getType();
+                cbColor.SelectedIndex = objects[i].getSubpalette();
             }
             for (; pi < mapObjects.Controls.Count; pi++)
             {
@@ -333,31 +315,15 @@ namespace BuckyEditor
             reloadLevel(false);
         }
 
-        protected void btClear_Click(object sender, EventArgs e)
-        {
-            if (MessageBox.Show("Are you sure want to clear all blocks?", "Clear", MessageBoxButtons.YesNo) != DialogResult.Yes)
-                return;
-            for (int i = 0; i < ConfigScript.getBlocksCount(); i++)
-                objects[i] = new ObjRec(0, 0, 0, 0, 0, 0);
-            dirty = true;
-            refillPanel();
-        }
-
-        protected void cbShowGridlines_CheckedChanged(object sender, EventArgs e)
-        {
-            showGridlines = cbShowGridlines.Checked;
-            reloadLevel(false);
-        }
-
         public void setFormMain(FormMain f)
         {
             formMain = f;
         }
-
-        private void cbPanelNo_SelectedIndexChanged(object sender, EventArgs e)
+        
+        private void bttGridlines_CheckedChanged(object sender, EventArgs e)
         {
-            curPageIndex = cbPanelNo.SelectedIndex;
-            reloadLevel(false);
+            showGridlines = bttGridlines.Checked;
+            setVideoImage();
         }
     }
 }

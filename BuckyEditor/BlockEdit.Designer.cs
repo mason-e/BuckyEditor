@@ -46,21 +46,20 @@
             this.btSave = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
-            this.btClear = new System.Windows.Forms.Button();
-            this.cbShowGridlines = new System.Windows.Forms.CheckBox();
             this.lbActive = new System.Windows.Forms.Label();
-            this.lbPanelNo = new System.Windows.Forms.Label();
-            this.cbPanelNo = new System.Windows.Forms.ComboBox();
+            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.bttSave = new System.Windows.Forms.ToolStripButton();
+            this.bttGridlines = new System.Windows.Forms.ToolStripButton();
             ((System.ComponentModel.ISupportInitialize)(this.paletteMap)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.mapScreen)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbActive)).BeginInit();
+            this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // paletteMap
             // 
-            this.paletteMap.Location = new System.Drawing.Point(15, 135);
+            this.paletteMap.Location = new System.Drawing.Point(15, 52);
             this.paletteMap.Name = "paletteMap";
             this.paletteMap.Size = new System.Drawing.Size(256, 16);
             this.paletteMap.TabIndex = 0;
@@ -68,7 +67,7 @@
             // 
             // mapScreen
             // 
-            this.mapScreen.Location = new System.Drawing.Point(15, 178);
+            this.mapScreen.Location = new System.Drawing.Point(15, 95);
             this.mapScreen.Name = "mapScreen";
             this.mapScreen.Size = new System.Drawing.Size(256, 256);
             this.mapScreen.TabIndex = 6;
@@ -78,7 +77,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(9, 119);
+            this.label1.Location = new System.Drawing.Point(9, 36);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(42, 13);
             this.label1.TabIndex = 7;
@@ -87,7 +86,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(12, 154);
+            this.label2.Location = new System.Drawing.Point(12, 71);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(106, 13);
             this.label2.TabIndex = 8;
@@ -103,7 +102,7 @@
             "2",
             "3",
             "4"});
-            this.cbSubpalette.Location = new System.Drawing.Point(118, 151);
+            this.cbSubpalette.Location = new System.Drawing.Point(118, 68);
             this.cbSubpalette.Name = "cbSubpalette";
             this.cbSubpalette.Size = new System.Drawing.Size(90, 21);
             this.cbSubpalette.TabIndex = 9;
@@ -163,7 +162,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(214, 154);
+            this.label4.Location = new System.Drawing.Point(214, 71);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(40, 13);
             this.label4.TabIndex = 13;
@@ -171,7 +170,7 @@
             // 
             // pbActive
             // 
-            this.pbActive.Location = new System.Drawing.Point(255, 151);
+            this.pbActive.Location = new System.Drawing.Point(255, 68);
             this.pbActive.Name = "pbActive";
             this.pbActive.Size = new System.Drawing.Size(16, 16);
             this.pbActive.TabIndex = 14;
@@ -179,13 +178,10 @@
             // 
             // btSave
             // 
-            this.btSave.Location = new System.Drawing.Point(12, 4);
+            this.btSave.Location = new System.Drawing.Point(0, 0);
             this.btSave.Name = "btSave";
-            this.btSave.Size = new System.Drawing.Size(59, 23);
-            this.btSave.TabIndex = 0;
-            this.btSave.Text = "save";
-            this.btSave.UseVisualStyleBackColor = true;
-            this.btSave.Click += new System.EventHandler(this.btSave_Click);
+            this.btSave.Size = new System.Drawing.Size(75, 23);
+            this.btSave.TabIndex = 30;
             // 
             // label6
             // 
@@ -199,20 +195,11 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(375, 11);
+            this.label7.Location = new System.Drawing.Point(392, 11);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(42, 13);
+            this.label7.Size = new System.Drawing.Size(43, 13);
             this.label7.TabIndex = 18;
-            this.label7.Text = "Pallete:";
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(436, 11);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(34, 13);
-            this.label8.TabIndex = 19;
-            this.label8.Text = "Type:";
+            this.label7.Text = "Palette:";
             // 
             // label10
             // 
@@ -223,77 +210,57 @@
             this.label10.TabIndex = 21;
             this.label10.Text = "No:";
             // 
-            // btClear
-            // 
-            this.btClear.Location = new System.Drawing.Point(585, 485);
-            this.btClear.Name = "btClear";
-            this.btClear.Size = new System.Drawing.Size(75, 23);
-            this.btClear.TabIndex = 23;
-            this.btClear.Text = "Clear all";
-            this.btClear.UseVisualStyleBackColor = true;
-            this.btClear.Click += new System.EventHandler(this.btClear_Click);
-            // 
-            // cbShowGridlines
-            // 
-            this.cbShowGridlines.AutoSize = true;
-            this.cbShowGridlines.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.cbShowGridlines.Checked = true;
-            this.cbShowGridlines.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cbShowGridlines.Location = new System.Drawing.Point(505, 489);
-            this.cbShowGridlines.Name = "cbShowGridlines";
-            this.cbShowGridlines.Size = new System.Drawing.Size(94, 17);
-            this.cbShowGridlines.TabIndex = 27;
-            this.cbShowGridlines.Text = "Show gridlines";
-            this.cbShowGridlines.UseVisualStyleBackColor = true;
-            this.cbShowGridlines.CheckedChanged += new System.EventHandler(this.cbShowGridlines_CheckedChanged);
-            // 
             // lbActive
             // 
             this.lbActive.AutoSize = true;
-            this.lbActive.Location = new System.Drawing.Point(271, 151);
+            this.lbActive.Location = new System.Drawing.Point(271, 68);
             this.lbActive.Name = "lbActive";
             this.lbActive.Size = new System.Drawing.Size(13, 13);
             this.lbActive.TabIndex = 28;
             this.lbActive.Text = "()";
             // 
-            // lbPanelNo
+            // toolStrip1
             // 
-            this.lbPanelNo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.lbPanelNo.AutoSize = true;
-            this.lbPanelNo.Location = new System.Drawing.Point(290, 490);
-            this.lbPanelNo.Name = "lbPanelNo";
-            this.lbPanelNo.Size = new System.Drawing.Size(32, 13);
-            this.lbPanelNo.TabIndex = 62;
-            this.lbPanelNo.Text = "Page";
+            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.bttSave,
+            this.bttGridlines});
+            this.toolStrip1.Location = new System.Drawing.Point(0, 0);
+            this.toolStrip1.Name = "toolStrip1";
+            this.toolStrip1.Size = new System.Drawing.Size(668, 25);
+            this.toolStrip1.TabIndex = 29;
+            this.toolStrip1.Text = "toolStrip1";
             // 
-            // cbPanelNo
+            // bttSave
             // 
-            this.cbPanelNo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.cbPanelNo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbPanelNo.FormattingEnabled = true;
-            this.cbPanelNo.Items.AddRange(new object[] {
-            "0",
-            "1",
-            "2",
-            "3"});
-            this.cbPanelNo.Location = new System.Drawing.Point(324, 488);
-            this.cbPanelNo.Name = "cbPanelNo";
-            this.cbPanelNo.Size = new System.Drawing.Size(44, 21);
-            this.cbPanelNo.TabIndex = 61;
-            this.cbPanelNo.SelectedIndexChanged += new System.EventHandler(this.cbPanelNo_SelectedIndexChanged);
+            this.bttSave.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.bttSave.Image = ((System.Drawing.Image)(resources.GetObject("bttSave.Image")));
+            this.bttSave.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.bttSave.Name = "bttSave";
+            this.bttSave.Size = new System.Drawing.Size(24, 24);
+            this.bttSave.ToolTipText = "Save";
+            this.bttSave.Click += new System.EventHandler(this.bttSave_Click);
+            // 
+            // bttGridlines
+            // 
+            this.bttGridlines.Checked = true;
+            this.bttGridlines.CheckOnClick = true;
+            this.bttGridlines.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.bttGridlines.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.bttGridlines.Image = ((System.Drawing.Image)(resources.GetObject("bttGridlines.Image")));
+            this.bttGridlines.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.bttGridlines.Name = "bttGridlines";
+            this.bttGridlines.Size = new System.Drawing.Size(24, 24);
+            this.bttGridlines.ToolTipText = "Gridlines";
+            this.bttGridlines.CheckedChanged += new System.EventHandler(this.bttGridlines_CheckedChanged);
             // 
             // BlockEdit
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(668, 515);
-            this.Controls.Add(this.lbPanelNo);
-            this.Controls.Add(this.cbPanelNo);
+            this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.lbActive);
-            this.Controls.Add(this.cbShowGridlines);
-            this.Controls.Add(this.btClear);
             this.Controls.Add(this.label10);
-            this.Controls.Add(this.label8);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.btSave);
@@ -315,6 +282,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.paletteMap)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.mapScreen)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbActive)).EndInit();
+            this.toolStrip1.ResumeLayout(false);
+            this.toolStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -334,16 +303,14 @@
         private System.Windows.Forms.Button btSave;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.ComboBox cbPalette;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label label17;
-        private System.Windows.Forms.Button btClear;
-        private System.Windows.Forms.CheckBox cbShowGridlines;
         private System.Windows.Forms.Label lbActive;
-        private System.Windows.Forms.Label lbPanelNo;
-        private System.Windows.Forms.ComboBox cbPanelNo;
+        private System.Windows.Forms.ToolStrip toolStrip1;
+        private System.Windows.Forms.ToolStripButton bttSave;
+        private System.Windows.Forms.ToolStripButton bttGridlines;
     }
 }

@@ -6,7 +6,7 @@ namespace BuckyEditor
 {
     public static class NesDrawing
     {
-        public static Bitmap makeImage(int index, byte[] videoChunk, byte[] pallete, int subPalIndex, bool withAlpha = false)
+        public static Bitmap makeImage(int index, byte[] videoChunk, byte[] palette, int subPalIndex, bool withAlpha = false)
         {
             Bitmap res = new Bitmap(8, 8);
             using (Graphics g = Graphics.FromImage(res))
@@ -22,7 +22,7 @@ namespace BuckyEditor
                         int palIndex = mixBits(bitHi, bitLo);
                         int fullPalIndex = subPalIndex * 4 + palIndex;
                         bool isBackColor = fullPalIndex % 4 == 0;
-                        int colorNo = pallete[isBackColor ? 0 : fullPalIndex];
+                        int colorNo = palette[isBackColor ? 0 : fullPalIndex];
                         Color c = (withAlpha && isBackColor) ? Color.FromArgb(0) : Globals.mesenColors[colorNo];
                         res.SetPixel(pixel, line, c);
                     }
@@ -31,17 +31,17 @@ namespace BuckyEditor
             return res;
         }
 
-        private static Bitmap[] makeObjects(ObjRec[] objects, Bitmap[][] objStrips, MapViewType drawType, int constantSubpal = -1)
+        private static Bitmap[] makeObjects(ObjRec[] objects, Bitmap[][] objStrips)
         {
             var ans = new Bitmap[objects.Length];
             for (int index = 0; index < objects.Length; index++)
             {
-                ans[index] = makeObject(index, objects, objStrips, drawType, constantSubpal);
+                ans[index] = makeObject(index, objects, objStrips);
             }
             return ans;
         }
 
-        public static Bitmap makeObject(int index, ObjRec[] objects, Bitmap[][] objStrips, MapViewType drawType, int constantSubpal = -1)
+        public static Bitmap makeObject(int index, ObjRec[] objects, Bitmap[][] objStrips)
         {
             var obj = objects[index];
             var images = new Image[obj.getSize()];
@@ -50,7 +50,7 @@ namespace BuckyEditor
                 int x = i % obj.w;
                 int y = i / obj.w;
                 int pali = (y >> 1) * (obj.w >> 1) + (x >> 1);
-                var objStrip = constantSubpal == -1 ? objStrips[obj.getSubpallete(pali)] : objStrips[constantSubpal];
+                var objStrip =  objStrips[obj.getSubpalette(pali)];
                 images[i] = objStrip[obj.indexes[i]];
             }
 
@@ -59,12 +59,20 @@ namespace BuckyEditor
             return mblock;
         }
 
-        private static Bitmap[] makeObjects(MapViewType drawType, int constantSubpal = -1)
+        private static Bitmap[] makeObjects(int palIndex, int patternTableIndex)
         {
-            byte[] videoChunk = Utils.getPatternTableFromRom(ConfigScript.patternTableAddresses);
+            bool moreinSecondHalf = ConfigScript.patternTableSecondHalfAddr.Length > ConfigScript.patternTableFirstHalfAddr.Length;
+            int firstHalf = moreinSecondHalf ? ConfigScript.patternTableFirstHalfAddr[0] : ConfigScript.patternTableFirstHalfAddr[patternTableIndex];
+            int secondHalf = moreinSecondHalf ? ConfigScript.patternTableSecondHalfAddr[patternTableIndex] : ConfigScript.patternTableSecondHalfAddr[0];
+            if (ConfigScript.patternTableFirstHalfAddr.Length > ConfigScript.patternTableSecondHalfAddr.Length)
+            {
+                firstHalf = ConfigScript.patternTableFirstHalfAddr[patternTableIndex];
+                secondHalf = ConfigScript.patternTableSecondHalfAddr[0];
+            }
+            byte[] videoChunk = Utils.getPatternTableFromRom(firstHalf, secondHalf);
             ObjRec[] objects = ConfigScript.getBlocks();
 
-            byte[] palette = Utils.getPalFromRom(ConfigScript.paletteAddress);
+            byte[] palette = Utils.getPalFromRom(ConfigScript.paletteAddresses[palIndex]);
             var range256 = Enumerable.Range(0, 256);
             var objStrip1 = range256.Select(i => makeImage(i, videoChunk, palette, 0)).ToArray();
             var objStrip2 = range256.Select(i => makeImage(i, videoChunk, palette, 1)).ToArray();
@@ -72,18 +80,17 @@ namespace BuckyEditor
             var objStrip4 = range256.Select(i => makeImage(i, videoChunk, palette, 3)).ToArray();
             var objStrips = new[] { objStrip1, objStrip2, objStrip3, objStrip4 };
 
-            var bitmaps = makeObjects(objects, objStrips, drawType, constantSubpal);
+            var bitmaps = makeObjects(objects, objStrips);
             return bitmaps;
         }
 
-        public static Image[] makeBigBlocks(int bigBlockNo, MapViewType smallObjectsViewType = MapViewType.Tiles,
-            MapViewType curViewType = MapViewType.Tiles)
+        public static Image[] makeBigBlocks(bool drawNumbers, int palIndex, int patternTableIndex)
         {
             int blockCount = ConfigScript.getBlocksCount();
             var bigBlocks = new Image[blockCount];
 
             Image[] smallBlocksPack;
-            smallBlocksPack = makeObjects(smallObjectsViewType);
+            smallBlocksPack = makeObjects(palIndex, patternTableIndex);
 
             //tt version hardcode
             Image[][] smallBlocksAll = new Image[4][] { smallBlocksPack, smallBlocksPack, smallBlocksPack, smallBlocksPack };
@@ -94,7 +101,7 @@ namespace BuckyEditor
                 var sb = smallBlocksPack[btileId];
                 //scale for small blocks
                 b = UtilsGDI.ResizeBitmap(sb, (int)(sb.Width * 2), (int)(sb.Height * 2));
-                if (curViewType == MapViewType.ObjNumbers)
+                if (drawNumbers)
                     b = VideoHelper.addObjNumber(b, btileId);
                 bigBlocks[btileId] = b;
             }

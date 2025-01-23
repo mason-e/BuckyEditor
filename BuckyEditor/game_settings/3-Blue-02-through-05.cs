@@ -5,11 +5,12 @@ using System;
 // reverse order in memory of how they show in game
 public class Data 
 { 
-  public OffsetRec getScreensOffset()  { return new OffsetRec(0xa98F, 7 , 8*6, 8, 6);   }
-  
-  public OffsetRec getBlocksOffset()    { return new OffsetRec(0xa181, 1  , 0x1000);  }
+  public int getLevelStartAddr() { return 0xa98f; }
+  public int getScreenCount() { return 7; }
+  public int getMetatileAddress()    { return 0xa181; }
   public int getBlocksCount()           { return 85; }
   public int getPalBytesAddr()          { return 0xa7c1; }
-  public int getPalAddress()            { return 0x118BD; }
-  public int[] getPatternTableAddresses()   { return new[] {0x12000, 0x3800}; }
+  public int[] getPalAddresses()            { return new[] {0x118BD}; }
+  public int[] getPatternTableFirstHalfAddr() { return new[] {0x12000, 0x12800, 0x13000, 0x13800}; }
+  public int[] getPatternTableSecondHalfAddr() { return new[] {0x3800}; }
 }

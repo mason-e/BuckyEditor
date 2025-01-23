@@ -32,10 +32,6 @@
             this.mapScreen = new System.Windows.Forms.PictureBox();
             this.activeBlock = new System.Windows.Forms.PictureBox();
             this.lbActiveBlock = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.cbScreenNo = new System.Windows.Forms.ComboBox();
-            this.cbViewType = new System.Windows.Forms.ComboBox();
-            this.label4 = new System.Windows.Forms.Label();
             this.pnView = new System.Windows.Forms.Panel();
             this.lbCoords = new System.Windows.Forms.Label();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
@@ -45,6 +41,7 @@
             this.bttBlocks = new System.Windows.Forms.ToolStripButton();
             this.bttShowNei = new System.Windows.Forms.ToolStripButton();
             this.bttGridlines = new System.Windows.Forms.ToolStripButton();
+            this.bttShowAddress = new System.Windows.Forms.ToolStripButton();
             this.x025ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.x05ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
@@ -57,7 +54,15 @@
             this.blocksScreen = new System.Windows.Forms.PictureBox();
             this.pnElements = new System.Windows.Forms.Panel();
             this.pnViewScroll = new System.Windows.Forms.Panel();
-            this.lbPalBytesAddr = new System.Windows.Forms.Label();
+            this.lbChangePt = new System.Windows.Forms.Label();
+            this.lbChangePalette = new System.Windows.Forms.Label();
+            this.lbChangeScreen = new System.Windows.Forms.Label();
+            this.btPatternPrev = new System.Windows.Forms.Button();
+            this.btPalettePrev = new System.Windows.Forms.Button();
+            this.btScreenPrev = new System.Windows.Forms.Button();
+            this.btPatternNext = new System.Windows.Forms.Button();
+            this.btPaletteNext = new System.Windows.Forms.Button();
+            this.btScreenNext = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.mapScreen)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.activeBlock)).BeginInit();
             this.pnView.SuspendLayout();
@@ -104,49 +109,6 @@
             this.lbActiveBlock.TabIndex = 16;
             this.lbActiveBlock.Text = "Active: ()";
             // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(0, 83);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(61, 13);
-            this.label6.TabIndex = 26;
-            this.label6.Text = "Screen No:";
-            // 
-            // cbScreenNo
-            // 
-            this.cbScreenNo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbScreenNo.FormattingEnabled = true;
-            this.cbScreenNo.Location = new System.Drawing.Point(3, 99);
-            this.cbScreenNo.Name = "cbScreenNo";
-            this.cbScreenNo.Size = new System.Drawing.Size(64, 21);
-            this.cbScreenNo.TabIndex = 27;
-            this.cbScreenNo.SelectedIndexChanged += new System.EventHandler(this.cbScreenNo_SelectedIndexChanged);
-            // 
-            // cbViewType
-            // 
-            this.cbViewType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbViewType.DropDownWidth = 128;
-            this.cbViewType.FormattingEnabled = true;
-            this.cbViewType.Items.AddRange(new object[] {
-            "Blocks",
-            "Block types",
-            "Block numbers",
-            "Small blocks numbers"});
-            this.cbViewType.Location = new System.Drawing.Point(3, 186);
-            this.cbViewType.Name = "cbViewType";
-            this.cbViewType.Size = new System.Drawing.Size(64, 21);
-            this.cbViewType.TabIndex = 45;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(0, 170);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(56, 13);
-            this.label4.TabIndex = 44;
-            this.label4.Text = "View type:";
-            // 
             // pnView
             // 
             this.pnView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -179,7 +141,8 @@
             this.bttReload,
             this.bttBlocks,
             this.bttShowNei,
-            this.bttGridlines});
+            this.bttGridlines,
+            this.bttShowAddress});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(1073, 27);
@@ -251,6 +214,17 @@
             this.bttGridlines.Size = new System.Drawing.Size(24, 24);
             this.bttGridlines.Text = "Gridlines";
             this.bttGridlines.CheckedChanged += new System.EventHandler(this.cbShowGridlines_CheckedChanged);
+            // 
+            // bttShowAddress
+            // 
+            this.bttShowAddress.CheckOnClick = true;
+            this.bttShowAddress.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.bttShowAddress.Image = ((System.Drawing.Image)(resources.GetObject("bttShowAddress.Image")));
+            this.bttShowAddress.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.bttShowAddress.Name = "bttShowAddress";
+            this.bttShowAddress.Size = new System.Drawing.Size(24, 24);
+            this.bttShowAddress.ToolTipText = "Show Metatile Address";
+            this.bttShowAddress.Click += new System.EventHandler(this.bttShowAddress_CheckedChanged);
             // 
             // x025ToolStripMenuItem
             // 
@@ -347,11 +321,7 @@
             // 
             this.pnElements.Controls.Add(this.lbCoords);
             this.pnElements.Controls.Add(this.lbActiveBlock);
-            this.pnElements.Controls.Add(this.label4);
             this.pnElements.Controls.Add(this.activeBlock);
-            this.pnElements.Controls.Add(this.cbViewType);
-            this.pnElements.Controls.Add(this.label6);
-            this.pnElements.Controls.Add(this.cbScreenNo);
             this.pnElements.Dock = System.Windows.Forms.DockStyle.Right;
             this.pnElements.Location = new System.Drawing.Point(294, 0);
             this.pnElements.Name = "pnElements";
@@ -364,29 +334,117 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.pnViewScroll.AutoScroll = true;
+            this.pnViewScroll.Controls.Add(this.lbChangePt);
+            this.pnViewScroll.Controls.Add(this.lbChangePalette);
+            this.pnViewScroll.Controls.Add(this.lbChangeScreen);
+            this.pnViewScroll.Controls.Add(this.btPatternPrev);
+            this.pnViewScroll.Controls.Add(this.btPalettePrev);
+            this.pnViewScroll.Controls.Add(this.btScreenPrev);
+            this.pnViewScroll.Controls.Add(this.btPatternNext);
+            this.pnViewScroll.Controls.Add(this.btPaletteNext);
+            this.pnViewScroll.Controls.Add(this.btScreenNext);
             this.pnViewScroll.Controls.Add(this.pnView);
             this.pnViewScroll.Location = new System.Drawing.Point(3, 6);
             this.pnViewScroll.Margin = new System.Windows.Forms.Padding(2);
             this.pnViewScroll.Name = "pnViewScroll";
-            this.pnViewScroll.Size = new System.Drawing.Size(675, 506);
+            this.pnViewScroll.Size = new System.Drawing.Size(675, 529);
             this.pnViewScroll.TabIndex = 5;
             // 
-            // lbPalBytesAddr
+            // lbChangePt
             // 
-            this.lbPalBytesAddr.AutoSize = true;
-            this.lbPalBytesAddr.Location = new System.Drawing.Point(516, 7);
-            this.lbPalBytesAddr.Name = "lbPalBytesAddr";
-            this.lbPalBytesAddr.Size = new System.Drawing.Size(72, 13);
-            this.lbPalBytesAddr.TabIndex = 60;
-            this.lbPalBytesAddr.Text = "Pal byte addr:";
-            this.lbPalBytesAddr.Visible = false;
+            this.lbChangePt.AutoSize = true;
+            this.lbChangePt.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbChangePt.Location = new System.Drawing.Point(250, 487);
+            this.lbChangePt.Name = "lbChangePt";
+            this.lbChangePt.Size = new System.Drawing.Size(189, 22);
+            this.lbChangePt.TabIndex = 66;
+            this.lbChangePt.Text = "Pattern Table 1 of ?";
+            // 
+            // lbChangePalette
+            // 
+            this.lbChangePalette.AutoSize = true;
+            this.lbChangePalette.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbChangePalette.Location = new System.Drawing.Point(276, 453);
+            this.lbChangePalette.Name = "lbChangePalette";
+            this.lbChangePalette.Size = new System.Drawing.Size(129, 22);
+            this.lbChangePalette.TabIndex = 65;
+            this.lbChangePalette.Text = "Palette 1 of ?";
+            // 
+            // lbChangeScreen
+            // 
+            this.lbChangeScreen.AutoSize = true;
+            this.lbChangeScreen.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbChangeScreen.Location = new System.Drawing.Point(276, 420);
+            this.lbChangeScreen.Name = "lbChangeScreen";
+            this.lbChangeScreen.Size = new System.Drawing.Size(132, 22);
+            this.lbChangeScreen.TabIndex = 64;
+            this.lbChangeScreen.Text = "Screen 1 of ?";
+            // 
+            // btPatternPrev
+            // 
+            this.btPatternPrev.Image = ((System.Drawing.Image)(resources.GetObject("btPatternPrev.Image")));
+            this.btPatternPrev.Location = new System.Drawing.Point(106, 484);
+            this.btPatternPrev.Name = "btPatternPrev";
+            this.btPatternPrev.Size = new System.Drawing.Size(64, 32);
+            this.btPatternPrev.TabIndex = 63;
+            this.btPatternPrev.UseVisualStyleBackColor = true;
+            this.btPatternPrev.Click += new System.EventHandler(this.btPatternPrev_Click);
+            // 
+            // btPalettePrev
+            // 
+            this.btPalettePrev.Image = ((System.Drawing.Image)(resources.GetObject("btPalettePrev.Image")));
+            this.btPalettePrev.Location = new System.Drawing.Point(106, 450);
+            this.btPalettePrev.Name = "btPalettePrev";
+            this.btPalettePrev.Size = new System.Drawing.Size(64, 32);
+            this.btPalettePrev.TabIndex = 62;
+            this.btPalettePrev.UseVisualStyleBackColor = true;
+            this.btPalettePrev.Click += new System.EventHandler(this.btPalettePrev_Click);
+            // 
+            // btScreenPrev
+            // 
+            this.btScreenPrev.Image = ((System.Drawing.Image)(resources.GetObject("btScreenPrev.Image")));
+            this.btScreenPrev.Location = new System.Drawing.Point(106, 417);
+            this.btScreenPrev.Name = "btScreenPrev";
+            this.btScreenPrev.Size = new System.Drawing.Size(64, 32);
+            this.btScreenPrev.TabIndex = 61;
+            this.btScreenPrev.UseVisualStyleBackColor = true;
+            this.btScreenPrev.Click += new System.EventHandler(this.btScreenPrev_Click);
+            // 
+            // btPatternNext
+            // 
+            this.btPatternNext.Image = ((System.Drawing.Image)(resources.GetObject("btPatternNext.Image")));
+            this.btPatternNext.Location = new System.Drawing.Point(509, 484);
+            this.btPatternNext.Name = "btPatternNext";
+            this.btPatternNext.Size = new System.Drawing.Size(64, 32);
+            this.btPatternNext.TabIndex = 60;
+            this.btPatternNext.UseVisualStyleBackColor = true;
+            this.btPatternNext.Click += new System.EventHandler(this.btPatternNext_Click);
+            // 
+            // btPaletteNext
+            // 
+            this.btPaletteNext.Image = ((System.Drawing.Image)(resources.GetObject("btPaletteNext.Image")));
+            this.btPaletteNext.Location = new System.Drawing.Point(509, 450);
+            this.btPaletteNext.Name = "btPaletteNext";
+            this.btPaletteNext.Size = new System.Drawing.Size(64, 32);
+            this.btPaletteNext.TabIndex = 59;
+            this.btPaletteNext.UseVisualStyleBackColor = true;
+            this.btPaletteNext.Click += new System.EventHandler(this.btPaletteNext_Click);
+            // 
+            // btScreenNext
+            // 
+            this.btScreenNext.Image = ((System.Drawing.Image)(resources.GetObject("btScreenNext.Image")));
+            this.btScreenNext.Location = new System.Drawing.Point(509, 417);
+            this.btScreenNext.Name = "btScreenNext";
+            this.btScreenNext.Size = new System.Drawing.Size(64, 32);
+            this.btScreenNext.TabIndex = 58;
+            this.btScreenNext.UseVisualStyleBackColor = true;
+            this.btScreenNext.Click += new System.EventHandler(this.btScreenNext_Click);
             // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1073, 548);
-            this.Controls.Add(this.lbPalBytesAddr);
+            this.ClientSize = new System.Drawing.Size(1073, 573);
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.toolStrip1);
             this.DoubleBuffered = true;
@@ -412,6 +470,7 @@
             this.pnElements.ResumeLayout(false);
             this.pnElements.PerformLayout();
             this.pnViewScroll.ResumeLayout(false);
+            this.pnViewScroll.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -421,10 +480,6 @@
         private System.Windows.Forms.PictureBox mapScreen;
         private System.Windows.Forms.PictureBox activeBlock;
         private System.Windows.Forms.Label lbActiveBlock;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.ComboBox cbScreenNo;
-        private System.Windows.Forms.ComboBox cbViewType;
-        private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Panel pnView;
         private System.Windows.Forms.Label lbCoords;
         private System.Windows.Forms.ToolStrip toolStrip1;
@@ -443,10 +498,19 @@
         private System.Windows.Forms.ToolStripMenuItem x05ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem tsLayer1;
         private System.Windows.Forms.ToolStripButton bttReload;
-        private System.Windows.Forms.Label lbPalBytesAddr;
         private System.Windows.Forms.Panel pnBlocks;
         private System.Windows.Forms.PictureBox blocksScreen;
         private System.Windows.Forms.Panel pnViewScroll;
+        private System.Windows.Forms.Button btScreenNext;
+        private System.Windows.Forms.Button btPatternPrev;
+        private System.Windows.Forms.Button btPalettePrev;
+        private System.Windows.Forms.Button btScreenPrev;
+        private System.Windows.Forms.Button btPatternNext;
+        private System.Windows.Forms.Button btPaletteNext;
+        private System.Windows.Forms.Label lbChangePalette;
+        private System.Windows.Forms.Label lbChangeScreen;
+        private System.Windows.Forms.Label lbChangePt;
+        private System.Windows.Forms.ToolStripButton bttShowAddress;
     }
 }
 

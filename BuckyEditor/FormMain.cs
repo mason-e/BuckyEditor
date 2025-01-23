@@ -51,26 +51,51 @@ namespace BuckyEditor
         private void resetScreens()
         {
             screens = ConfigScript.loadScreens();
-            int count = screens.Length;
-
-            int oldScreenNo = cbScreenNo.SelectedIndex;
-            cbScreenNo.Items.Clear();
-            for (int i = 0; i < count; i++)
-                cbScreenNo.Items.Add(String.Format("{0:X}", i + 1));
-
-            if (oldScreenNo == -1)
-                cbScreenNo.SelectedIndex = 0;
-            else if (oldScreenNo < cbScreenNo.Items.Count)
-                cbScreenNo.SelectedIndex = oldScreenNo;
+            lbChangeScreen.Text = $"Screen {screenNo + 1} of {ConfigScript.screenCount}";
+            lbChangePalette.Text = $"Palette {palNo + 1} of {ConfigScript.paletteAddresses.Length}";
+            lbChangePt.Text = $"Pattern Table {patternTableNo + 1} of {ConfigScript.patternTableSize}";
+            if (screenNo > ConfigScript.screenCount - 1)
+                screenNo = 0;
+            if (palNo > ConfigScript.paletteAddresses.Length - 1)
+                palNo = 0;
+            if (patternTableNo > ConfigScript.patternTableSize - 1)
+                patternTableNo = 0;
+            if (ConfigScript.screenCount == 1)
+            {
+                btScreenNext.Enabled = false;
+                btScreenPrev.Enabled = false;
+            }
+            else 
+            {
+                btScreenNext.Enabled = true;
+                btScreenPrev.Enabled = true;
+            }
+            if (ConfigScript.paletteAddresses.Length == 1)
+            {
+                btPaletteNext.Enabled = false;
+                btPalettePrev.Enabled = false;
+            }
+            else 
+            {
+                btPaletteNext.Enabled = true;
+                btPalettePrev.Enabled = true;
+            }
+            if (ConfigScript.patternTableFirstHalfAddr.Length == 1 && ConfigScript.patternTableSecondHalfAddr.Length == 1)
+            {
+                btPatternNext.Enabled = false;
+                btPatternPrev.Enabled = false;
+            }
+            else
+            {
+                btPatternNext.Enabled = true;
+                btPatternPrev.Enabled = true;
+            }
         }
 
         private void resetControls()
         {
             clearSubeditorButtons();
             resetScreens();
-
-            UtilsGui.setCbIndexWithoutUpdateLevel(cbViewType, cbLevel_SelectedIndexChanged);
-
 
             dirty = false; updateSaveVisibility();
             showNeiScreens = true;
@@ -107,13 +132,11 @@ namespace BuckyEditor
 
         private void setBlocks(bool needRebuildBlocks)
         {
-            MapViewType smallObjectsType =
-                curActiveViewType == MapViewType.SmallObjNumbers ? MapViewType.ObjNumbers :
-                    curActiveViewType == MapViewType.ObjType ? MapViewType.ObjType : MapViewType.Tiles;
+            bool drawNumbers = bttShowAddress.Checked;
 
             if (needRebuildBlocks)
             {
-                bigBlocks = NesDrawing.makeBigBlocks( curActiveBigBlockNo,  smallObjectsType, curActiveViewType);
+                bigBlocks = NesDrawing.makeBigBlocks(drawNumbers, palNo, patternTableNo);
             }
 
             curActiveBlock = 0;
@@ -182,7 +205,7 @@ namespace BuckyEditor
             {
                 renderNeighborLine(g, screenNo - 1, (width - 1), 0);
             }
-            if (showNeiScreens && (screenNo < ConfigScript.screensOffset[0].recCount - 1) && screen.layers[0].showLayer)
+            if (showNeiScreens && (screenNo < ConfigScript.screenCount - 1) && screen.layers[0].showLayer)
             {
                 renderNeighborLine(g, screenNo + 1, 0, (width + 1) * tileSizeX);
             }
@@ -278,7 +301,7 @@ namespace BuckyEditor
             {
                 if (dx == width)
                 {
-                    if (screenNo < ConfigScript.screensOffset[0].recCount - 1)
+                    if (screenNo < ConfigScript.screenCount - 1)
                     {
                         int index = dy * width;
                         var layer = getActiveLayer(screens[screenNo + 1]);
@@ -329,25 +352,13 @@ namespace BuckyEditor
         private bool saveToFile()
         {
             ConfigScript.saveScreens(screens);
-            dirty = !Globals.flushToFile(); updateSaveVisibility();
-            return !dirty;
-        }
-
-        private void cbLevel_SelectedIndexChanged(object sender, EventArgs ev)
-        {
-            if (!UtilsGui.askToSave(ref dirty, saveToFile, returnCbLevelIndex))
-            {
-                updateSaveVisibility();
-                return;
-            }
+            dirty = !Globals.flushToFile(); 
             updateSaveVisibility();
-            changeLevelIndex();
-            var screen = getActiveScreen();
+            return !dirty;
         }
 
         private void changeLevelIndex(bool reloadBlocks = false)
         {
-            curActiveViewType = (MapViewType)cbViewType.SelectedIndex;
             reloadLevel(true, reloadBlocks);
         }
 
@@ -370,15 +381,61 @@ namespace BuckyEditor
             subeditorOpen(subeditorsDict[button](), button);
         }
 
-        private void cbScreenNo_SelectedIndexChanged(object sender, EventArgs e)
+        private void btScreenNext_Click(object sender, EventArgs e)
         {
-            if (cbScreenNo.SelectedIndex == -1)
-                return;
-            screenNo = cbScreenNo.SelectedIndex;
+            if (screenNo == ConfigScript.screenCount - 1)
+                screenNo = 0;
+            else screenNo++;
+            lbChangeScreen.Text = $"Screen {screenNo + 1} of {ConfigScript.screenCount}";
             resetMapScreenSize();
             mapScreen.Invalidate();
         }
 
+        private void btScreenPrev_Click(object sender, EventArgs e)
+        {
+            if (screenNo == 0)
+                screenNo = ConfigScript.screenCount - 1;
+            else screenNo--;
+            lbChangeScreen.Text = $"Screen {screenNo + 1} of {ConfigScript.screenCount}";
+            resetMapScreenSize();
+            mapScreen.Invalidate();
+        }
+
+        private void btPaletteNext_Click(object sender, EventArgs e)
+        {
+            if (palNo == ConfigScript.paletteAddresses.Length - 1)
+                palNo = 0;
+            else palNo++;
+            lbChangePalette.Text = $"Palette {palNo + 1} of {ConfigScript.paletteAddresses.Length}";
+            reloadLevel(true, true);
+        }
+
+        private void btPalettePrev_Click(object sender, EventArgs e)
+        {
+            if (palNo == 0)
+                palNo = ConfigScript.paletteAddresses.Length - 1;
+            else palNo--;
+            lbChangePalette.Text = $"Palette {palNo + 1} of {ConfigScript.paletteAddresses.Length}";
+            reloadLevel(true, true);
+        }
+
+        private void btPatternNext_Click(object sender, EventArgs e)
+        {
+            if (patternTableNo == ConfigScript.patternTableSize - 1)
+                patternTableNo = 0;
+            else patternTableNo++;
+            lbChangePalette.Text = $"Pattern Table {patternTableNo + 1} of {ConfigScript.paletteAddresses.Length}";
+            reloadLevel(true, true);
+        }
+
+        private void btPatternPrev_Click(object sender, EventArgs e)
+        {
+            if (patternTableNo == 0)
+                patternTableNo = ConfigScript.patternTableSize - 1;
+            else patternTableNo--;
+            lbChangePalette.Text = $"Pattern Table {patternTableNo + 1} of {ConfigScript.paletteAddresses.Length}";
+            reloadLevel(true, true);
+        }
 
         private void cbShowNeighbors_CheckedChanged(object sender, EventArgs e)
         {
@@ -470,11 +527,10 @@ namespace BuckyEditor
             }
         }
 
-        public int curActiveBigBlockNo { get; private set; }
-
-        public MapViewType curActiveViewType { get; private set; } = MapViewType.ObjType;
         public bool showGridlines { get; private set; }
         public int screenNo { get; private set; }
+        public int palNo { get; private set; }
+        public int patternTableNo { get; private set; }
 
         public bool additionalRenderEnabled { get; private set; } = true;
 
@@ -634,6 +690,11 @@ namespace BuckyEditor
             splitContainer1.Height = Height - 81;
         }
 
+        private void bttShowAddress_CheckedChanged(object sender, EventArgs e)
+        {
+            reloadLevel(true, true);
+        }
+
         private void FormMain_LocationChanged(object sender, EventArgs e)
         {
             OnResize(e);
@@ -657,6 +718,7 @@ namespace BuckyEditor
                 bttBlocks,
                 bttShowNei,
                 bttGridlines,
+                bttShowAddress,
             };
 
             toolStrip1.Items.AddRange(items);
