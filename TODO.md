@@ -4,7 +4,6 @@
 ## High Priority
 
 - Show address of individual tiles somehow. Maybe on mouseover?
-- Lock from resizing and fix displayed area size
 - Show addresses within editors
 - Can change palette and pattern table on main screen but not block editor
     - Option A: Duplicate main editor flow (buttons, etc.)
@@ -15,7 +14,7 @@
 
 ## Nice to Have
 
-- Clean up unused image icons
+- Keyboard navigation
 - Display issues with the currently loaded level in editor instead of file comments
 - Change all references to "Blocks" to "Metatiles"
 - Remove references to "Big Blocks"

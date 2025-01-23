@@ -118,7 +118,7 @@
             this.pnView.Controls.Add(this.mapScreen);
             this.pnView.Location = new System.Drawing.Point(3, 3);
             this.pnView.Name = "pnView";
-            this.pnView.Size = new System.Drawing.Size(669, 400);
+            this.pnView.Size = new System.Drawing.Size(669, 375);
             this.pnView.TabIndex = 53;
             // 
             // lbCoords
@@ -448,7 +448,9 @@
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.toolStrip1);
             this.DoubleBuffered = true;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
             this.Name = "FormMain";
             this.Text = "-";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormMain_FormClosing);
