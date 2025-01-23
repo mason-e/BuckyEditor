@@ -38,7 +38,7 @@
             this.bttOpen = new System.Windows.Forms.ToolStripButton();
             this.bttSave = new System.Windows.Forms.ToolStripButton();
             this.bttReload = new System.Windows.Forms.ToolStripButton();
-            this.bttBlocks = new System.Windows.Forms.ToolStripButton();
+            this.bttMetatiles = new System.Windows.Forms.ToolStripButton();
             this.bttShowNei = new System.Windows.Forms.ToolStripButton();
             this.bttGridlines = new System.Windows.Forms.ToolStripButton();
             this.bttShowAddress = new System.Windows.Forms.ToolStripButton();
@@ -139,7 +139,7 @@
             this.bttOpen,
             this.bttSave,
             this.bttReload,
-            this.bttBlocks,
+            this.bttMetatiles,
             this.bttShowNei,
             this.bttGridlines,
             this.bttShowAddress});
@@ -179,15 +179,15 @@
             this.bttReload.Text = "Reload";
             this.bttReload.Click += new System.EventHandler(this.bttReload_Click);
             // 
-            // bttBlocks
+            // bttMetatiles
             // 
-            this.bttBlocks.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.bttBlocks.Image = ((System.Drawing.Image)(resources.GetObject("bttBlocks.Image")));
-            this.bttBlocks.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.bttBlocks.Name = "bttBlocks";
-            this.bttBlocks.Size = new System.Drawing.Size(24, 24);
-            this.bttBlocks.Text = "Edit Blocks";
-            this.bttBlocks.Click += new System.EventHandler(this.btSubeditor_Click);
+            this.bttMetatiles.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.bttMetatiles.Image = ((System.Drawing.Image)(resources.GetObject("bttMetatiles.Image")));
+            this.bttMetatiles.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.bttMetatiles.Name = "bttMetatiles";
+            this.bttMetatiles.Size = new System.Drawing.Size(24, 24);
+            this.bttMetatiles.Text = "Edit Metatiles";
+            this.bttMetatiles.Click += new System.EventHandler(this.btSubeditor_Click);
             // 
             // bttShowNei
             // 
@@ -487,7 +487,7 @@
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.ToolStripButton bttOpen;
         private System.Windows.Forms.ToolStripButton bttSave;
-        private System.Windows.Forms.ToolStripButton bttBlocks;
+        private System.Windows.Forms.ToolStripButton bttMetatiles;
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.Panel pnElements;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem2;

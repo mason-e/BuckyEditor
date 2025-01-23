@@ -37,13 +37,13 @@ namespace BuckyEditor
             }
 
             subeditorsDict = new Dictionary<ToolStripButton, Func<Form>> {
-                 { bttBlocks,       makeBlocksEditor },
+                 { bttMetatiles,       makeBlocksEditor },
             };
         }
 
         private Form makeBlocksEditor()
         {
-            var f = new BlockEdit();
+            var f = new MetatileEdit();
             f.setFormMain(this);
             return f;
         }
@@ -104,7 +104,7 @@ namespace BuckyEditor
 
             changeLevelIndex(true);
 
-            bttBlocks.Enabled = true;
+            bttMetatiles.Enabled = true;
 
             tsLayer1.Enabled = true;
 
@@ -715,7 +715,7 @@ namespace BuckyEditor
                 bttOpen,
                 bttSave,
                 bttReload,
-                bttBlocks,
+                bttMetatiles,
                 bttShowNei,
                 bttGridlines,
                 bttShowAddress,

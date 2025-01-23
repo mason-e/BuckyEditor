@@ -1,6 +1,6 @@
 ﻿namespace BuckyEditor
 {
-    partial class BlockEdit
+    partial class MetatileEdit
     {
         /// <summary>
         /// Required designer variable.
@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BlockEdit));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MetatileEdit));
             this.paletteMap = new System.Windows.Forms.PictureBox();
             this.mapScreen = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -236,7 +236,7 @@
             this.bttSave.Image = ((System.Drawing.Image)(resources.GetObject("bttSave.Image")));
             this.bttSave.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.bttSave.Name = "bttSave";
-            this.bttSave.Size = new System.Drawing.Size(24, 24);
+            this.bttSave.Size = new System.Drawing.Size(23, 22);
             this.bttSave.ToolTipText = "Save";
             this.bttSave.Click += new System.EventHandler(this.bttSave_Click);
             // 
@@ -249,11 +249,11 @@
             this.bttGridlines.Image = ((System.Drawing.Image)(resources.GetObject("bttGridlines.Image")));
             this.bttGridlines.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.bttGridlines.Name = "bttGridlines";
-            this.bttGridlines.Size = new System.Drawing.Size(24, 24);
+            this.bttGridlines.Size = new System.Drawing.Size(23, 22);
             this.bttGridlines.ToolTipText = "Gridlines";
             this.bttGridlines.CheckedChanged += new System.EventHandler(this.bttGridlines_CheckedChanged);
             // 
-            // BlockEdit
+            // MetatileEdit
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -275,8 +275,8 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
-            this.Name = "BlockEdit";
-            this.Text = "Blocks Editor";
+            this.Name = "MetatileEdit";
+            this.Text = "Metatile Editor";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.BlockEdit_FormClosing);
             this.Load += new System.EventHandler(this.BlockEdit_Load);
             ((System.ComponentModel.ISupportInitialize)(this.paletteMap)).EndInit();

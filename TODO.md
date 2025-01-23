@@ -5,7 +5,7 @@
 
 - Show address of individual tiles somehow. Maybe on mouseover?
 - Show addresses within editors
-- Can change palette and pattern table on main screen but not block editor
+- Can change palette and pattern table on main screen but not metatile editor
     - Option A: Duplicate main editor flow (buttons, etc.)
     - Option B: Find way to pass through from main form
     - Option C: Leave it because it shouldn't affect metatile composition

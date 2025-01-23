@@ -67,11 +67,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BlockEdit.cs">
+    <Compile Include="MetatileEdit.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="BlockEdit.Designer.cs">
-      <DependentUpon>BlockEdit.cs</DependentUpon>
+    <Compile Include="MetatileEdit.Designer.cs">
+      <DependentUpon>MetatileEdit.cs</DependentUpon>
     </Compile>
     <Compile Include="ConfigScript.cs" />
     <Compile Include="FormMain.cs">
@@ -96,8 +96,8 @@
     <Compile Include="UtilsGdi.cs" />
     <Compile Include="UtilsGui.cs" />
     <Compile Include="VideoHelper.cs" />
-    <EmbeddedResource Include="BlockEdit.resx">
-      <DependentUpon>BlockEdit.cs</DependentUpon>
+    <EmbeddedResource Include="MetatileEdit.resx">
+      <DependentUpon>MetatileEdit.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormMain.resx">
       <DependentUpon>FormMain.cs</DependentUpon>

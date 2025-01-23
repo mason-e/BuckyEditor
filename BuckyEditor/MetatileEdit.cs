@@ -5,9 +5,9 @@ using System.Windows.Forms;
 
 namespace BuckyEditor
 {
-    public partial class BlockEdit : Form
+    public partial class MetatileEdit : Form
     {
-        public BlockEdit()
+        public MetatileEdit()
         {
             InitializeComponent();
         }
