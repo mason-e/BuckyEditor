@@ -86,7 +86,7 @@ namespace BuckyEditor
 
         public static Image[] makeBigBlocks(bool drawNumbers, int palIndex, int patternTableIndex)
         {
-            int blockCount = ConfigScript.getBlocksCount();
+            int blockCount = ConfigScript.metatileCount;
             var bigBlocks = new Image[blockCount];
 
             Image[] smallBlocksPack;

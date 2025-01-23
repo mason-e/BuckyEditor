@@ -105,12 +105,12 @@ namespace BuckyEditor
 
         public static ObjRec[] getBlocksFromTiles16Pal1()
         {
-            return readBlocksLinearTiles16Pal1(Globals.romdata, ConfigScript.getMetatileAddress(), ConfigScript.getPalBytesAddr(), ConfigScript.getBlocksCount());
+            return readBlocksLinearTiles16Pal1(Globals.romdata, ConfigScript.getMetatileAddress(), ConfigScript.getPalBytesAddr(), ConfigScript.metatileCount);
         }
 
         public static void setBlocksFromTiles16Pal1(ObjRec[] blocksData)
         {
-            writeBlocksLinearTiles16Pal1(blocksData, Globals.romdata, ConfigScript.getMetatileAddress(), ConfigScript.getPalBytesAddr(), ConfigScript.getBlocksCount());
+            writeBlocksLinearTiles16Pal1(blocksData, Globals.romdata, ConfigScript.getMetatileAddress(), ConfigScript.getPalBytesAddr(), ConfigScript.metatileCount);
         }
 
         public static ObjRec[] readBlocksLinearTiles16Pal1(byte[] romdata, int addr, int palBytesAddr, int count)

@@ -7,7 +7,7 @@ public class Data
   public int getScreenCount() { return 1; }
   public int getScreenHeight() { return 14; }
   public int getMetatileAddress()    { return 0x8011; }
-  public int getBlocksCount()           { return 157; }
+  public int getMetatileCount()           { return 157; }
   public int getPalBytesAddr()          { return 0x89e1; }
   public int[] getPalAddresses()            { return new[] {0x1182D}; }
   public int[] getPatternTableFirstHalfAddr() { return new[] {0x1F000}; }
