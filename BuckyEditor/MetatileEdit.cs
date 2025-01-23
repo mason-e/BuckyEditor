@@ -21,9 +21,6 @@ namespace BuckyEditor
             reloadLevel();
             preparePanel();
             resetControls();
-
-            //rebuild video
-            reloadLevel();
         }
 
         protected virtual void resetControls()
@@ -36,8 +33,8 @@ namespace BuckyEditor
         protected void reloadLevel(bool resetDirty = true)
         {
             setPal();
-            setVideo();
-            setVideoImage();
+            setTileDefinitions();
+            setTileDisplay();
             setObjects();
             if (resetDirty)
                 dirty = false;
@@ -77,30 +74,31 @@ namespace BuckyEditor
             refillPanel();
         }
 
-        protected void setVideo()
+        protected void setTileDefinitions()
         {
-            var chunk = Utils.getPatternTableFromRom(ConfigScript.patternTableFirstHalfAddr[0], ConfigScript.patternTableSecondHalfAddr[0]);
+            var patternTable = Utils.getPatternTableFromRom(ConfigScript.patternTableFirstHalfAddr[0], ConfigScript.patternTableSecondHalfAddr[0]);
             for (int i = 0; i < 4; i++)
             {
-                videoSprites[i] = Enumerable.Range(0, 256).Select(t => (Bitmap)UtilsGDI.ResizeBitmap(NesDrawing.makeImage(t, chunk, palette, i), 16, 16)).ToArray();
+                tiles[i] = Enumerable.Range(0, 256).Select(t => (Bitmap)UtilsGDI.ResizeBitmap(NesDrawing.makeImage(t, patternTable, palette, i), 16, 16)).ToArray();
             }
         }
 
-        protected void setVideoImage()
+        protected void setTileDisplay()
         {
             var b = new Bitmap(TileSize * 16, TileSize * 16);
             using (Graphics g = Graphics.FromImage(b))
             {
-                for (int i = 0; i < Globals.chunksCount; i++)
+                for (int i = 0; i < 256; i++)
                 {
                     int x = i % 16;
                     int y = i / 16;
                     Rectangle tileRect = new Rectangle(x * TileSize, y * TileSize, TileSize, TileSize);
-                    g.DrawImage(videoSprites[curSubpalIndex][i], tileRect);
+                    g.DrawImage(tiles[curSubpalIndex][i], tileRect);
                     if (showGridlines)
                     {
                         g.DrawRectangle(new Pen(Color.FromArgb(255, 255, 255, 255)), tileRect);
                     }
+                    Console.WriteLine($"Drawing {(byte)i} tile to screen");
                 }
             }
             mapScreen.Image = b;
@@ -112,7 +110,7 @@ namespace BuckyEditor
 
         protected byte[] palette = new byte[Globals.palLen];
         protected ObjRec[] objects = new ObjRec[256];
-        protected Bitmap[][] videoSprites = new Bitmap[4][];
+        protected Bitmap[][] tiles = new Bitmap[4][];
         protected bool dirty;
         protected bool readOnly;
         protected bool showGridlines;
@@ -128,7 +126,7 @@ namespace BuckyEditor
             if (cbSubpalette.SelectedIndex == -1)
                 return;
             curSubpalIndex = cbSubpalette.SelectedIndex;
-            setVideoImage();
+            setTileDisplay();
         }
 
         protected void cbSubpalette_DrawItemEvent(object sender, DrawItemEventArgs e)
@@ -174,7 +172,7 @@ namespace BuckyEditor
                 }
             }
             p.Image = makeObjImage(objIndex);
-            pbActive.Image = videoSprites[curSubpalIndex][curSelectedTile];
+            pbActive.Image = tiles[curSubpalIndex][curSelectedTile];
             lbActive.Text = String.Format("({0:X})", curSelectedTile);
             dirty = true;
         }
@@ -191,7 +189,7 @@ namespace BuckyEditor
 
         public Image makeObjImage(int index)
         {
-            return NesDrawing.makeObject(index, objects, videoSprites);
+            return NesDrawing.makeObject(index, objects, tiles);
         }
 
         protected void mapScreen_MouseClick(object sender, MouseEventArgs e)
@@ -199,7 +197,7 @@ namespace BuckyEditor
             int x = e.X / TileSize;
             int y = e.Y / TileSize;
             curSelectedTile = y * TileSize + x;
-            pbActive.Image = videoSprites[curSubpalIndex][curSelectedTile];
+            pbActive.Image = tiles[curSubpalIndex][curSelectedTile];
             lbActive.Text = String.Format("({0:X})", curSelectedTile);
             dirty = true;
         }
@@ -316,7 +314,7 @@ namespace BuckyEditor
         private void bttGridlines_CheckedChanged(object sender, EventArgs e)
         {
             showGridlines = bttGridlines.Checked;
-            setVideoImage();
+            setTileDisplay();
         }
     }
 }

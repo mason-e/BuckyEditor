@@ -71,8 +71,6 @@ namespace BuckyEditor
         }
 
         public static byte[] romdata;
-        public static int chunksCount = 256;
-        public static int videoPageSize = 4096;
         public static int palLen = 16;
 
         public static Color[] mesenColors = new[] {
