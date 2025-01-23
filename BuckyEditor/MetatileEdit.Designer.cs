@@ -51,6 +51,10 @@
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.bttSave = new System.Windows.Forms.ToolStripButton();
             this.bttGridlines = new System.Windows.Forms.ToolStripButton();
+            this.lbColumnAddrBottom = new System.Windows.Forms.Label();
+            this.lbColumnAddrTop = new System.Windows.Forms.Label();
+            this.lbRowAddrLeft = new System.Windows.Forms.Label();
+            this.lbRowAddrRight = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.paletteMap)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.mapScreen)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbActive)).BeginInit();
@@ -59,7 +63,7 @@
             // 
             // paletteMap
             // 
-            this.paletteMap.Location = new System.Drawing.Point(15, 52);
+            this.paletteMap.Location = new System.Drawing.Point(29, 52);
             this.paletteMap.Name = "paletteMap";
             this.paletteMap.Size = new System.Drawing.Size(256, 16);
             this.paletteMap.TabIndex = 0;
@@ -67,7 +71,7 @@
             // 
             // mapScreen
             // 
-            this.mapScreen.Location = new System.Drawing.Point(15, 95);
+            this.mapScreen.Location = new System.Drawing.Point(28, 112);
             this.mapScreen.Name = "mapScreen";
             this.mapScreen.Size = new System.Drawing.Size(256, 256);
             this.mapScreen.TabIndex = 6;
@@ -77,7 +81,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(9, 36);
+            this.label1.Location = new System.Drawing.Point(23, 36);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(42, 13);
             this.label1.TabIndex = 7;
@@ -86,7 +90,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(12, 71);
+            this.label2.Location = new System.Drawing.Point(26, 71);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(106, 13);
             this.label2.TabIndex = 8;
@@ -102,7 +106,7 @@
             "2",
             "3",
             "4"});
-            this.cbSubpalette.Location = new System.Drawing.Point(118, 68);
+            this.cbSubpalette.Location = new System.Drawing.Point(132, 68);
             this.cbSubpalette.Name = "cbSubpalette";
             this.cbSubpalette.Size = new System.Drawing.Size(90, 21);
             this.cbSubpalette.TabIndex = 9;
@@ -117,7 +121,7 @@
             // mapObjects
             // 
             this.mapObjects.AutoScroll = true;
-            this.mapObjects.Location = new System.Drawing.Point(290, 35);
+            this.mapObjects.Location = new System.Drawing.Point(314, 35);
             this.mapObjects.Name = "mapObjects";
             this.mapObjects.Size = new System.Drawing.Size(370, 444);
             this.mapObjects.TabIndex = 10;
@@ -162,7 +166,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(214, 71);
+            this.label4.Location = new System.Drawing.Point(228, 71);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(40, 13);
             this.label4.TabIndex = 13;
@@ -170,7 +174,7 @@
             // 
             // pbActive
             // 
-            this.pbActive.Location = new System.Drawing.Point(255, 68);
+            this.pbActive.Location = new System.Drawing.Point(269, 68);
             this.pbActive.Name = "pbActive";
             this.pbActive.Size = new System.Drawing.Size(16, 16);
             this.pbActive.TabIndex = 14;
@@ -213,7 +217,7 @@
             // lbActive
             // 
             this.lbActive.AutoSize = true;
-            this.lbActive.Location = new System.Drawing.Point(271, 68);
+            this.lbActive.Location = new System.Drawing.Point(285, 68);
             this.lbActive.Name = "lbActive";
             this.lbActive.Size = new System.Drawing.Size(13, 13);
             this.lbActive.TabIndex = 28;
@@ -226,7 +230,7 @@
             this.bttGridlines});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(668, 25);
+            this.toolStrip1.Size = new System.Drawing.Size(699, 25);
             this.toolStrip1.TabIndex = 29;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -253,11 +257,55 @@
             this.bttGridlines.ToolTipText = "Gridlines";
             this.bttGridlines.CheckedChanged += new System.EventHandler(this.bttGridlines_CheckedChanged);
             // 
+            // lbColumnAddrBottom
+            // 
+            this.lbColumnAddrBottom.AutoSize = true;
+            this.lbColumnAddrBottom.Font = new System.Drawing.Font("Courier New", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbColumnAddrBottom.Location = new System.Drawing.Point(30, 370);
+            this.lbColumnAddrBottom.Name = "lbColumnAddrBottom";
+            this.lbColumnAddrBottom.Size = new System.Drawing.Size(255, 16);
+            this.lbColumnAddrBottom.TabIndex = 31;
+            this.lbColumnAddrBottom.Text = "0 1 2 3 4 5 6 7 8 9 A B C D E F";
+            // 
+            // lbColumnAddrTop
+            // 
+            this.lbColumnAddrTop.AutoSize = true;
+            this.lbColumnAddrTop.Font = new System.Drawing.Font("Courier New", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbColumnAddrTop.Location = new System.Drawing.Point(30, 94);
+            this.lbColumnAddrTop.Name = "lbColumnAddrTop";
+            this.lbColumnAddrTop.Size = new System.Drawing.Size(255, 16);
+            this.lbColumnAddrTop.TabIndex = 32;
+            this.lbColumnAddrTop.Text = "0 1 2 3 4 5 6 7 8 9 A B C D E F";
+            // 
+            // lbRowAddrLeft
+            // 
+            this.lbRowAddrLeft.AutoSize = true;
+            this.lbRowAddrLeft.Font = new System.Drawing.Font("Courier New", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbRowAddrLeft.Location = new System.Drawing.Point(12, 113);
+            this.lbRowAddrLeft.Name = "lbRowAddrLeft";
+            this.lbRowAddrLeft.Size = new System.Drawing.Size(15, 256);
+            this.lbRowAddrLeft.TabIndex = 33;
+            this.lbRowAddrLeft.Text = "0\r\n1\r\n2\r\n3\r\n4\r\n5\r\n6\r\n7\r\n8\r\n9\r\nA\r\nB\r\nC\r\nD\r\nE\r\nF";
+            // 
+            // lbRowAddrRight
+            // 
+            this.lbRowAddrRight.AutoSize = true;
+            this.lbRowAddrRight.Font = new System.Drawing.Font("Courier New", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbRowAddrRight.Location = new System.Drawing.Point(287, 113);
+            this.lbRowAddrRight.Name = "lbRowAddrRight";
+            this.lbRowAddrRight.Size = new System.Drawing.Size(15, 256);
+            this.lbRowAddrRight.TabIndex = 34;
+            this.lbRowAddrRight.Text = "0\r\n1\r\n2\r\n3\r\n4\r\n5\r\n6\r\n7\r\n8\r\n9\r\nA\r\nB\r\nC\r\nD\r\nE\r\nF";
+            // 
             // MetatileEdit
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(668, 515);
+            this.ClientSize = new System.Drawing.Size(699, 515);
+            this.Controls.Add(this.lbRowAddrRight);
+            this.Controls.Add(this.lbRowAddrLeft);
+            this.Controls.Add(this.lbColumnAddrTop);
+            this.Controls.Add(this.lbColumnAddrBottom);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.lbActive);
             this.Controls.Add(this.label10);
@@ -312,5 +360,9 @@
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.ToolStripButton bttSave;
         private System.Windows.Forms.ToolStripButton bttGridlines;
+        private System.Windows.Forms.Label lbColumnAddrBottom;
+        private System.Windows.Forms.Label lbColumnAddrTop;
+        private System.Windows.Forms.Label lbRowAddrLeft;
+        private System.Windows.Forms.Label lbRowAddrRight;
     }
 }

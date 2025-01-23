@@ -259,18 +259,18 @@ namespace BuckyEditor
                 pb.MouseClick += pb_MouseClick;
                 fp.Controls.Add(pb);
                 curPanelX += pb.Size.Width + 6;
-                //
-                ComboBox cbColor = new ComboBox();
-                cbColor.Size = cbSubpalette.Size;
-                cbColor.Location = new Point(curPanelX, 0);
-                cbColor.Tag = pb;
-                cbColor.DrawMode = DrawMode.OwnerDrawVariable;
-                cbColor.DrawItem += cbSubpalette_DrawItemEvent;
-                cbColor.Items.AddRange(subPalItems);
-                cbColor.DropDownStyle = ComboBoxStyle.DropDownList;
-                cbColor.SelectedIndexChanged += cbColor_SelectedIndexChanged;
-                fp.Controls.Add(cbColor);
-                curPanelX += cbColor.Size.Width;
+                // TODO: disabled this for now since it didn't function correctly out of the box
+                // ComboBox cbColor = new ComboBox();
+                // cbColor.Size = cbSubpalette.Size;
+                // cbColor.Location = new Point(curPanelX, 0);
+                // cbColor.Tag = pb;
+                // cbColor.DrawMode = DrawMode.OwnerDrawVariable;
+                // cbColor.DrawItem += cbSubpalette_DrawItemEvent;
+                // cbColor.Items.AddRange(subPalItems);
+                // cbColor.DropDownStyle = ComboBoxStyle.DropDownList;
+                // cbColor.SelectedIndexChanged += cbColor_SelectedIndexChanged;
+                // fp.Controls.Add(cbColor);
+                // curPanelX += cbColor.Size.Width;
 
                 mapObjects.Controls.Add(fp);
             }
@@ -299,8 +299,8 @@ namespace BuckyEditor
                 lb.Text = String.Format("{0:X}", i);
                 PictureBox pb = (PictureBox)p.Controls[1];
                 pb.Image = makeObjImage(i);
-                ComboBox cbColor = (ComboBox)p.Controls[2];
-                cbColor.SelectedIndex = objects[i].getSubpalette();
+                // ComboBox cbColor = (ComboBox)p.Controls[2];
+                // cbColor.SelectedIndex = objects[i].getSubpalette();
             }
             for (; pi < mapObjects.Controls.Count; pi++)
             {
