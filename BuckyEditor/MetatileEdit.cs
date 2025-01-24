@@ -98,7 +98,6 @@ namespace BuckyEditor
                     {
                         g.DrawRectangle(new Pen(Color.FromArgb(255, 255, 255, 255)), tileRect);
                     }
-                    Console.WriteLine($"Drawing {(byte)i} tile to screen");
                 }
             }
             mapScreen.Image = b;
@@ -177,16 +176,6 @@ namespace BuckyEditor
             dirty = true;
         }
 
-        protected void cbColor_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            ComboBox cb = (ComboBox)sender;
-            PictureBox pb = (PictureBox)cb.Tag;
-            int index = (int)pb.Tag;
-            objects[index].palBytes[0] = cb.SelectedIndex;
-            pb.Image = makeObjImage(index);
-            dirty = true;
-        }
-
         public Image makeObjImage(int index)
         {
             return NesDrawing.makeObject(index, objects, tiles);
@@ -212,6 +201,7 @@ namespace BuckyEditor
         protected void bttSave_Click(object sender, EventArgs e)
         {
             saveToFile();
+            reloadLevel();
         }
 
         protected void BlockEdit_FormClosing(object sender, FormClosingEventArgs e)
@@ -252,24 +242,35 @@ namespace BuckyEditor
                 pb.MouseClick += pb_MouseClick;
                 fp.Controls.Add(pb);
                 curPanelX += pb.Size.Width + 6;
-                // TODO: disabled this for now since it didn't function correctly out of the box
-                // ComboBox cbColor = new ComboBox();
-                // cbColor.Size = cbSubpalette.Size;
-                // cbColor.Location = new Point(curPanelX, 0);
-                // cbColor.Tag = pb;
-                // cbColor.DrawMode = DrawMode.OwnerDrawVariable;
-                // cbColor.DrawItem += cbSubpalette_DrawItemEvent;
-                // cbColor.Items.AddRange(subPalItems);
-                // cbColor.DropDownStyle = ComboBoxStyle.DropDownList;
-                // cbColor.SelectedIndexChanged += cbColor_SelectedIndexChanged;
-                // fp.Controls.Add(cbColor);
-                // curPanelX += cbColor.Size.Width;
+                //
+                Label ad = new Label();
+                ad.Location = new Point(curPanelX, 0);
+                ad.Size = new Size (76, 64);
+                ad.Tag = i;
+                ad.Text = getTileAddresses(obj);
+                fp.Controls.Add(ad);
 
                 mapObjects.Controls.Add(fp);
             }
             mapObjects.ResumeLayout();
 
             refillPanel();
+        }
+
+        private string getTileAddresses(ObjRec metatile)
+        {
+            int[] tileNumbers = metatile.indexes;
+            string tileGrid ="";
+            for (int i = 0; i < 16; i++)
+            {
+                tileGrid += tileNumbers[i].ToString("X");
+                if ((i + 1) % 4 == 0)
+                    tileGrid += "\n";
+                else
+                    tileGrid += " ";
+
+            }
+            return tileGrid;
         }
 
         protected virtual void refillPanel()
@@ -290,8 +291,9 @@ namespace BuckyEditor
                 lb.Text = String.Format("{0:X}", i);
                 PictureBox pb = (PictureBox)p.Controls[1];
                 pb.Image = makeObjImage(i);
-                // ComboBox cbColor = (ComboBox)p.Controls[2];
-                // cbColor.SelectedIndex = objects[i].getSubpalette();
+                Label ad = (Label)p.Controls[2];
+                ad.Text = getTileAddresses(objects[i]);
+
             }
             for (; pi < mapObjects.Controls.Count; pi++)
             {

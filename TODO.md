@@ -3,8 +3,6 @@
 
 ## High Priority
 
-- Show address of individual tiles somehow in metatile editor. Maybe on mouseover?
-    - Trying to display the addresses in a grid next to the picture, but need a find a way to get those address valeus
 - Show addresses of metatiles, palette bytes, etc. within editors
 - Can change palette and pattern table on main screen but not metatile editor
     - Option A: Duplicate main editor flow (buttons, etc.)
@@ -16,6 +14,9 @@
 
 - Keyboard navigation
 - Display issues with the currently loaded level in editor instead of file comments
-- Change all references to "Blocks" to "Metatiles"
-- Remove references to "Big Blocks"
+- Fix confusing references
+    - "Tiles" for 8x8 pixel units
+    - "Metatiles" for 4x4 clusters of tiles
+    - "Pattern table" for the ROM data that makes up tiles
+    - Remove anything about "blocks", "video", "chunk", etc.
 - Remove anything to do with layers

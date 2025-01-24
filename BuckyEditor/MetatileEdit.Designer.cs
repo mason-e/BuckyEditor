@@ -55,6 +55,7 @@
             this.lbColumnAddrTop = new System.Windows.Forms.Label();
             this.lbRowAddrLeft = new System.Windows.Forms.Label();
             this.lbRowAddrRight = new System.Windows.Forms.Label();
+            this.lbTileWarning = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.paletteMap)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.mapScreen)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbActive)).BeginInit();
@@ -297,11 +298,21 @@
             this.lbRowAddrRight.TabIndex = 34;
             this.lbRowAddrRight.Text = "0\r\n1\r\n2\r\n3\r\n4\r\n5\r\n6\r\n7\r\n8\r\n9\r\nA\r\nB\r\nC\r\nD\r\nE\r\nF";
             // 
+            // lbTileWarning
+            // 
+            this.lbTileWarning.AutoSize = true;
+            this.lbTileWarning.Location = new System.Drawing.Point(417, 19);
+            this.lbTileWarning.Name = "lbTileWarning";
+            this.lbTileWarning.Size = new System.Drawing.Size(197, 13);
+            this.lbTileWarning.TabIndex = 35;
+            this.lbTileWarning.Text = "Note: Tile address only updates on save";
+            // 
             // MetatileEdit
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(699, 515);
+            this.Controls.Add(this.lbTileWarning);
             this.Controls.Add(this.lbRowAddrRight);
             this.Controls.Add(this.lbRowAddrLeft);
             this.Controls.Add(this.lbColumnAddrTop);
@@ -364,5 +375,6 @@
         private System.Windows.Forms.Label lbColumnAddrTop;
         private System.Windows.Forms.Label lbRowAddrLeft;
         private System.Windows.Forms.Label lbRowAddrRight;
+        private System.Windows.Forms.Label lbTileWarning;
     }
 }
