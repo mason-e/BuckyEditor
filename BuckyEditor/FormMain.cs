@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 using System.Text;
 using System.Windows.Forms;
 
@@ -242,6 +243,8 @@ namespace BuckyEditor
         private bool selectionRect;
 
         private Dictionary<ToolStripButton, Func<Form>> subeditorsDict;
+
+        private string settingsDir = $"{Directory.GetCurrentDirectory()}/game_settings";
 
         private void mapScreen_MouseClick(object sender, MouseEventArgs ea)
         {
@@ -695,6 +698,29 @@ namespace BuckyEditor
             reloadLevel(true, true);
         }
 
+        private void cbStage_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string[] files = getConfigsForCurrentStage();
+            cbSection.Items.Clear();
+            cbSection.Items.AddRange(files);
+            cbSection.SelectedIndex = 0;
+        }
+
+        private void cbSection_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            btLoadConfig.Enabled = true;
+        }
+
+        private void btLoadConfig_Click(object sender, EventArgs e)
+        {
+            string filePath = $"{settingsDir}/{cbStage.SelectedItem}\\{cbSection.SelectedItem}";
+            if (Globals.loadData(Properties.Settings.Default["FileName"].ToString(), filePath))
+            {
+                resetControls();
+                reloadLevel(true, true);
+            }
+        }
+
         private void FormMain_LocationChanged(object sender, EventArgs e)
         {
             OnResize(e);
@@ -727,6 +753,17 @@ namespace BuckyEditor
         private void setWindowText()
         {
             Text = String.Format("Bucky Editor - {0}", OpenFile.fileName);
+        }
+
+        private string[] getConfigsForCurrentStage()
+        {
+            string[] files = Directory.GetFiles($"{settingsDir}/{cbStage.SelectedItem}");
+            string[] strippedFiles = new string[files.Length];
+            for (int i = 0; i < files.Length; i++)
+            {
+                strippedFiles[i] = files[i].Replace($"{settingsDir}/{cbStage.SelectedItem}\\", "");
+            }
+            return strippedFiles;
         }
 
         private Screen getActiveScreen()

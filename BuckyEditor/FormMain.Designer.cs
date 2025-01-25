@@ -53,6 +53,11 @@
             this.pnBlocks = new System.Windows.Forms.Panel();
             this.blocksScreen = new System.Windows.Forms.PictureBox();
             this.pnElements = new System.Windows.Forms.Panel();
+            this.lbLoad = new System.Windows.Forms.Label();
+            this.lbSection = new System.Windows.Forms.Label();
+            this.lbStage = new System.Windows.Forms.Label();
+            this.cbSection = new System.Windows.Forms.ComboBox();
+            this.cbStage = new System.Windows.Forms.ComboBox();
             this.pnViewScroll = new System.Windows.Forms.Panel();
             this.lbChangePt = new System.Windows.Forms.Label();
             this.lbChangePalette = new System.Windows.Forms.Label();
@@ -63,6 +68,7 @@
             this.btPatternNext = new System.Windows.Forms.Button();
             this.btPaletteNext = new System.Windows.Forms.Button();
             this.btScreenNext = new System.Windows.Forms.Button();
+            this.btLoadConfig = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.mapScreen)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.activeBlock)).BeginInit();
             this.pnView.SuspendLayout();
@@ -319,6 +325,12 @@
             // 
             // pnElements
             // 
+            this.pnElements.Controls.Add(this.btLoadConfig);
+            this.pnElements.Controls.Add(this.lbLoad);
+            this.pnElements.Controls.Add(this.lbSection);
+            this.pnElements.Controls.Add(this.lbStage);
+            this.pnElements.Controls.Add(this.cbSection);
+            this.pnElements.Controls.Add(this.cbStage);
             this.pnElements.Controls.Add(this.lbCoords);
             this.pnElements.Controls.Add(this.lbActiveBlock);
             this.pnElements.Controls.Add(this.activeBlock);
@@ -327,6 +339,62 @@
             this.pnElements.Name = "pnElements";
             this.pnElements.Size = new System.Drawing.Size(77, 518);
             this.pnElements.TabIndex = 5;
+            // 
+            // lbLoad
+            // 
+            this.lbLoad.AutoSize = true;
+            this.lbLoad.Location = new System.Drawing.Point(2, 202);
+            this.lbLoad.Name = "lbLoad";
+            this.lbLoad.Size = new System.Drawing.Size(56, 13);
+            this.lbLoad.TabIndex = 61;
+            this.lbLoad.Text = "3. Reload:";
+            // 
+            // lbSection
+            // 
+            this.lbSection.AutoSize = true;
+            this.lbSection.Location = new System.Drawing.Point(2, 148);
+            this.lbSection.Name = "lbSection";
+            this.lbSection.Size = new System.Drawing.Size(58, 13);
+            this.lbSection.TabIndex = 60;
+            this.lbSection.Text = "2. Section:";
+            // 
+            // lbStage
+            // 
+            this.lbStage.AutoSize = true;
+            this.lbStage.Location = new System.Drawing.Point(2, 95);
+            this.lbStage.Name = "lbStage";
+            this.lbStage.Size = new System.Drawing.Size(50, 13);
+            this.lbStage.TabIndex = 59;
+            this.lbStage.Text = "1. Stage:";
+            // 
+            // cbSection
+            // 
+            this.cbSection.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbSection.FormattingEnabled = true;
+            this.cbSection.Location = new System.Drawing.Point(2, 164);
+            this.cbSection.Name = "cbSection";
+            this.cbSection.Size = new System.Drawing.Size(67, 21);
+            this.cbSection.TabIndex = 58;
+            this.cbSection.SelectedIndexChanged += new System.EventHandler(this.cbSection_SelectedIndexChanged);
+            // 
+            // cbStage
+            // 
+            this.cbStage.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbStage.FormattingEnabled = true;
+            this.cbStage.Items.AddRange(new object[] {
+            "Green",
+            "Red",
+            "Blue",
+            "Yellow",
+            "Cell",
+            "Chute",
+            "Tanker",
+            "Escape"});
+            this.cbStage.Location = new System.Drawing.Point(2, 111);
+            this.cbStage.Name = "cbStage";
+            this.cbStage.Size = new System.Drawing.Size(67, 21);
+            this.cbStage.TabIndex = 57;
+            this.cbStage.SelectedIndexChanged += new System.EventHandler(this.cbStage_SelectedIndexChanged);
             // 
             // pnViewScroll
             // 
@@ -440,6 +508,17 @@
             this.btScreenNext.UseVisualStyleBackColor = true;
             this.btScreenNext.Click += new System.EventHandler(this.btScreenNext_Click);
             // 
+            // btLoadConfig
+            // 
+            this.btLoadConfig.Enabled = false;
+            this.btLoadConfig.Location = new System.Drawing.Point(2, 218);
+            this.btLoadConfig.Name = "btLoadConfig";
+            this.btLoadConfig.Size = new System.Drawing.Size(67, 21);
+            this.btLoadConfig.TabIndex = 62;
+            this.btLoadConfig.Text = "Load Cfg.";
+            this.btLoadConfig.UseVisualStyleBackColor = true;
+            this.btLoadConfig.Click += new System.EventHandler(this.btLoadConfig_Click);
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -513,6 +592,12 @@
         private System.Windows.Forms.Label lbChangeScreen;
         private System.Windows.Forms.Label lbChangePt;
         private System.Windows.Forms.ToolStripButton bttShowAddress;
+        private System.Windows.Forms.ComboBox cbStage;
+        private System.Windows.Forms.ComboBox cbSection;
+        private System.Windows.Forms.Label lbLoad;
+        private System.Windows.Forms.Label lbSection;
+        private System.Windows.Forms.Label lbStage;
+        private System.Windows.Forms.Button btLoadConfig;
     }
 }
 
