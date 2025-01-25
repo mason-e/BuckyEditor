@@ -6,7 +6,7 @@ namespace BuckyEditor
 {
     public static class NesDrawing
     {
-        public static Bitmap makeImage(int index, byte[] videoChunk, byte[] palette, int subPalIndex, bool withAlpha = false)
+        public static Bitmap makeImage(int index, byte[] patternTable, byte[] palette, int subPalIndex, bool withAlpha = false)
         {
             Bitmap res = new Bitmap(8, 8);
             using (Graphics g = Graphics.FromImage(res))
@@ -17,8 +17,8 @@ namespace BuckyEditor
                 {
                     for (int pixel = 0; pixel < 8; pixel++)
                     {
-                        bool bitLo = Utils.getBit(videoChunk[beginIndex + line], 8 - pixel);
-                        bool bitHi = Utils.getBit(videoChunk[beginIndex + line + 8], 8 - pixel);
+                        bool bitLo = Utils.getBit(patternTable[beginIndex + line], 8 - pixel);
+                        bool bitHi = Utils.getBit(patternTable[beginIndex + line + 8], 8 - pixel);
                         int palIndex = mixBits(bitHi, bitLo);
                         int fullPalIndex = subPalIndex * 4 + palIndex;
                         bool isBackColor = fullPalIndex % 4 == 0;
@@ -69,15 +69,15 @@ namespace BuckyEditor
                 firstHalf = ConfigScript.patternTableFirstHalfAddr[patternTableIndex];
                 secondHalf = ConfigScript.patternTableSecondHalfAddr[0];
             }
-            byte[] videoChunk = Utils.getPatternTableFromRom(firstHalf, secondHalf);
+            byte[] patternTable = Utils.getPatternTableFromRom(firstHalf, secondHalf);
             ObjRec[] objects = ConfigScript.getBlocks();
 
             byte[] palette = Utils.getPalFromRom(ConfigScript.paletteAddresses[palIndex]);
             var range256 = Enumerable.Range(0, 256);
-            var objStrip1 = range256.Select(i => makeImage(i, videoChunk, palette, 0)).ToArray();
-            var objStrip2 = range256.Select(i => makeImage(i, videoChunk, palette, 1)).ToArray();
-            var objStrip3 = range256.Select(i => makeImage(i, videoChunk, palette, 2)).ToArray();
-            var objStrip4 = range256.Select(i => makeImage(i, videoChunk, palette, 3)).ToArray();
+            var objStrip1 = range256.Select(i => makeImage(i, patternTable, palette, 0)).ToArray();
+            var objStrip2 = range256.Select(i => makeImage(i, patternTable, palette, 1)).ToArray();
+            var objStrip3 = range256.Select(i => makeImage(i, patternTable, palette, 2)).ToArray();
+            var objStrip4 = range256.Select(i => makeImage(i, patternTable, palette, 3)).ToArray();
             var objStrips = new[] { objStrip1, objStrip2, objStrip3, objStrip4 };
 
             var bitmaps = makeObjects(objects, objStrips);
@@ -86,7 +86,7 @@ namespace BuckyEditor
 
         public static Image[] makeBigBlocks(bool drawNumbers, int palIndex, int patternTableIndex)
         {
-            int blockCount = ConfigScript.getBlocksCount();
+            int blockCount = ConfigScript.metatileCount;
             var bigBlocks = new Image[blockCount];
 
             Image[] smallBlocksPack;

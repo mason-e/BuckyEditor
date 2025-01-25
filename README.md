@@ -28,6 +28,8 @@ Currently functions similarly to the original editor, minus the configurations f
 
 In the main editor you pick out existing metatiles and place them into the selected screen. There is also a subeditor you can load to edit the metatiles by placing new tiles in. There is no functionality to edit tiles themselves, I use a different program for that.
 
+I didn't realize at first that it had the functionality to set the palette on each "quadrant" of a metatile by right-clicking the quadrant in the metatile editor, so I thought that's worth writing down here. 
+
 ## Limitations
 
 - Editor loads level details how they are stored in memory, which isn't always exactly how they are displayed in game
@@ -38,4 +40,3 @@ In the main editor you pick out existing metatiles and place them into the selec
 - Valid metatiles can vary act to act for a given level, but they're all grouped together per level. There isn't an indication of which ones are valid, but invalid ones usually look pretty obviously garbled
 - No sprites (i.e player charcter, enemy, certain scenery effects) at all
 - No editing of metatile "physics" properties (i.e. solid, air, dropdown, deadly)
-- No editing of metatile palette selection - some leftover functionality here from original program, but it doesn't work right

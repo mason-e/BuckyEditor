@@ -105,12 +105,12 @@ namespace BuckyEditor
 
         public static ObjRec[] getBlocksFromTiles16Pal1()
         {
-            return readBlocksLinearTiles16Pal1(Globals.romdata, ConfigScript.getMetatileAddress(), ConfigScript.getPalBytesAddr(), ConfigScript.getBlocksCount());
+            return readBlocksLinearTiles16Pal1(Globals.romdata, ConfigScript.getMetatileAddress(), ConfigScript.getPalBytesAddr(), ConfigScript.metatileCount);
         }
 
         public static void setBlocksFromTiles16Pal1(ObjRec[] blocksData)
         {
-            writeBlocksLinearTiles16Pal1(blocksData, Globals.romdata, ConfigScript.getMetatileAddress(), ConfigScript.getPalBytesAddr(), ConfigScript.getBlocksCount());
+            writeBlocksLinearTiles16Pal1(blocksData, Globals.romdata, ConfigScript.getMetatileAddress(), ConfigScript.getPalBytesAddr(), ConfigScript.metatileCount);
         }
 
         public static ObjRec[] readBlocksLinearTiles16Pal1(byte[] romdata, int addr, int palBytesAddr, int count)
@@ -171,25 +171,6 @@ namespace BuckyEditor
                 for (int x = 0; x < ConfigScript.screenSize; x++)
                     arrayToSave[addr + x] = (byte)dataToWrite[x];
             }
-        }
-
-        public static byte[] readBinFile(string filename)
-        {
-            try
-            {
-                filename = ConfigScript.ConfigDirectory + filename;
-                using (FileStream f = File.OpenRead(filename))
-                {
-                    byte[] d = new byte[(int)f.Length];
-                    f.Read(d, 0, (int)f.Length);
-                    return d;
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-            return null;
         }
 
         public static byte[] getPalFromRom(int startAddress)

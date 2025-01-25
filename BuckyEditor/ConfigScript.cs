@@ -52,7 +52,7 @@ namespace BuckyEditor
             patternTableSecondHalfAddr = callFromScript(asm, data, "*.getPatternTableSecondHalfAddr", new int[] {0});
             patternTableSize = Math.Max(patternTableFirstHalfAddr.Length, patternTableSecondHalfAddr.Length);
 
-            blocksCount = callFromScript(asm, data, "*.getBlocksCount", 256);
+            metatileCount = callFromScript(asm, data, "*.getMetatileCount", 256);
 
             palBytesAddr = callFromScript(asm, data, "*.getPalBytesAddr", -1);
         }
@@ -75,16 +75,6 @@ namespace BuckyEditor
         public static void saveScreens(Screen[] screens)
         {
             Utils.saveScreensDiffSize(screens);
-        }
-
-        public static int getBlocksCount()
-        {
-            return blocksCount;
-        }
-
-        public static string[] getBlockTypeNames()
-        {
-            return defaultBlockTypeNames;
         }
 
         public static int getPalBytesAddr()
@@ -127,7 +117,7 @@ namespace BuckyEditor
 
         public static int screenSize;
 
-        public static int blocksCount;
+        public static int metatileCount;
 
         public static int[] patternTableFirstHalfAddr;
 
@@ -138,8 +128,6 @@ namespace BuckyEditor
         public static int[] paletteAddresses;
 
         public static int palBytesAddr;
-
-        public static string[] defaultBlockTypeNames = new[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "F" };
 
         //global editor settings
         public static string romName;
