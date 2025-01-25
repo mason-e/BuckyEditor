@@ -8,10 +8,10 @@
     - Option A: Duplicate main editor flow (buttons, etc.)
     - Option B: Find way to pass through from main form
     - Option C: Leave it because it shouldn't affect metatile composition
-- Pre load config files into dropdown options (first level, then section) rather than a loading pop-up
 
 ## Nice to Have
 
+- Better management of variables
 - Keyboard navigation
 - Display issues with the currently loaded level in editor instead of file comments
 - Fix confusing references

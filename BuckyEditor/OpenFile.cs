@@ -1,6 +1,4 @@
 ﻿using System;
-using System.IO;
-using System.Linq;
 using System.Windows.Forms;
 
 namespace BuckyEditor
@@ -21,43 +19,15 @@ namespace BuckyEditor
             }
         }
 
-        private void tbConfigName_Click(object sender, EventArgs e)
-        {
-            ofOpenDialog.Filter = "Config files|*.cs";
-            if (ofOpenDialog.ShowDialog() == DialogResult.OK)
-            {
-                cbConfigName.Text = ofOpenDialog.FileName;
-                updateCbConfigInDirectory(cbConfigName.Text);
-            }
-        }
-
-        private void updateCbConfigInDirectory(string text)
-        {
-            try
-            {
-                var dirName = Path.GetDirectoryName(text);
-                if (dirName != null)
-                {
-                    cbConfigName.DropDownWidth = 600;
-                    cbConfigName.Items.Clear();
-                    cbConfigName.Items.AddRange(Directory.EnumerateFiles(dirName, "Settings_*.cs").ToArray());
-                }
-            }
-            catch (Exception)
-            {
-                ;
-            }
-        }
-
         private void btOpen_Click(object sender, EventArgs e)
         {
             fileName = tbFileName.Text;
-            configName = cbConfigName.Text;
+            string lastConfig = Properties.Settings.Default["ConfigName"].ToString();
+            configName = lastConfig != "" ? lastConfig : $"{FormMain.settingsDir}\\Green\\g1.cs";
             DialogResult = DialogResult.OK;
             Close();
 
             Properties.Settings.Default["FileName"] = fileName;
-            Properties.Settings.Default["ConfigName"] = configName;
             Properties.Settings.Default.Save();
         }
 
@@ -72,29 +42,7 @@ namespace BuckyEditor
 
         private void OpenFile_Load(object sender, EventArgs e)
         {
-            if (Properties.Settings.Default["FileName"].ToString() != "")
-                tbFileName.Text = Properties.Settings.Default["FileName"].ToString();
-            if (Properties.Settings.Default["ConfigName"].ToString() != "")
-            {
-                cbConfigName.Text = Properties.Settings.Default["ConfigName"].ToString();
-            }
-
-            if (fileName == "" && ConfigScript.romName != "")
-                tbFileName.Text = ConfigScript.romName;
-            if (configName == "" && ConfigScript.cfgName != "")
-            {
-                cbConfigName.Text = ConfigScript.cfgName;
-            }
-
-            ofOpenDialog.InitialDirectory = Environment.CurrentDirectory;
-            if (fileName != "")
-                tbFileName.Text = fileName;
-            if (configName != "")
-            {
-                cbConfigName.Text = configName;
-            }
-
-            updateCbConfigInDirectory(cbConfigName.Text);
+            tbFileName.Text = Properties.Settings.Default["FileName"].ToString();
         }
     }
 }
