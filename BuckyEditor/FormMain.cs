@@ -52,9 +52,6 @@ namespace BuckyEditor
         private void resetScreens()
         {
             screens = ConfigScript.loadScreens();
-            lbChangeScreen.Text = $"Screen {screenNo + 1} of {ConfigScript.screenCount}";
-            lbChangePalette.Text = $"Palette {palNo + 1} of {ConfigScript.paletteAddresses.Length}";
-            lbChangePt.Text = $"Pattern Table {patternTableNo + 1} of {ConfigScript.patternTableSize}";
             if (screenNo > ConfigScript.screenCount - 1)
                 screenNo = 0;
             if (palNo > ConfigScript.paletteAddresses.Length - 1)
@@ -91,6 +88,9 @@ namespace BuckyEditor
                 btPatternNext.Enabled = true;
                 btPatternPrev.Enabled = true;
             }
+            lbChangeScreen.Text = $"Screen {screenNo + 1} of {ConfigScript.screenCount}";
+            lbChangePalette.Text = $"Palette {palNo + 1} of {ConfigScript.paletteAddresses.Length} ({ConfigScript.paletteAddresses[palNo]:X})";
+            lbChangePt.Text = $"Pattern Table {patternTableNo + 1} of {ConfigScript.patternTableSize}";
         }
 
         private void resetControls()
@@ -409,7 +409,7 @@ namespace BuckyEditor
             if (palNo == ConfigScript.paletteAddresses.Length - 1)
                 palNo = 0;
             else palNo++;
-            lbChangePalette.Text = $"Palette {palNo + 1} of {ConfigScript.paletteAddresses.Length}";
+            lbChangePalette.Text = $"Palette {palNo + 1} of {ConfigScript.paletteAddresses.Length} ({ConfigScript.paletteAddresses[palNo]:X})";
             reloadLevel(true, true);
         }
 
@@ -418,7 +418,7 @@ namespace BuckyEditor
             if (palNo == 0)
                 palNo = ConfigScript.paletteAddresses.Length - 1;
             else palNo--;
-            lbChangePalette.Text = $"Palette {palNo + 1} of {ConfigScript.paletteAddresses.Length}";
+            lbChangePalette.Text = $"Palette {palNo + 1} of {ConfigScript.paletteAddresses.Length} ({ConfigScript.paletteAddresses[palNo]:X})";
             reloadLevel(true, true);
         }
 
@@ -427,7 +427,7 @@ namespace BuckyEditor
             if (patternTableNo == ConfigScript.patternTableSize - 1)
                 patternTableNo = 0;
             else patternTableNo++;
-            lbChangePalette.Text = $"Pattern Table {patternTableNo + 1} of {ConfigScript.paletteAddresses.Length}";
+            lbChangePalette.Text = $"Pattern Table {patternTableNo + 1} of {ConfigScript.patternTableSize}";
             reloadLevel(true, true);
         }
 
@@ -436,7 +436,7 @@ namespace BuckyEditor
             if (patternTableNo == 0)
                 patternTableNo = ConfigScript.patternTableSize - 1;
             else patternTableNo--;
-            lbChangePalette.Text = $"Pattern Table {patternTableNo + 1} of {ConfigScript.paletteAddresses.Length}";
+            lbChangePalette.Text = $"Pattern Table {patternTableNo + 1} of {ConfigScript.patternTableSize}";
             reloadLevel(true, true);
         }
 

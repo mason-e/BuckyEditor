@@ -53,6 +53,7 @@
             this.pnBlocks = new System.Windows.Forms.Panel();
             this.blocksScreen = new System.Windows.Forms.PictureBox();
             this.pnElements = new System.Windows.Forms.Panel();
+            this.btLoadConfig = new System.Windows.Forms.Button();
             this.lbLoad = new System.Windows.Forms.Label();
             this.lbSection = new System.Windows.Forms.Label();
             this.lbStage = new System.Windows.Forms.Label();
@@ -68,7 +69,6 @@
             this.btPatternNext = new System.Windows.Forms.Button();
             this.btPaletteNext = new System.Windows.Forms.Button();
             this.btScreenNext = new System.Windows.Forms.Button();
-            this.btLoadConfig = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.mapScreen)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.activeBlock)).BeginInit();
             this.pnView.SuspendLayout();
@@ -340,6 +340,17 @@
             this.pnElements.Size = new System.Drawing.Size(77, 518);
             this.pnElements.TabIndex = 5;
             // 
+            // btLoadConfig
+            // 
+            this.btLoadConfig.Enabled = false;
+            this.btLoadConfig.Location = new System.Drawing.Point(2, 218);
+            this.btLoadConfig.Name = "btLoadConfig";
+            this.btLoadConfig.Size = new System.Drawing.Size(67, 21);
+            this.btLoadConfig.TabIndex = 62;
+            this.btLoadConfig.Text = "Load Cfg.";
+            this.btLoadConfig.UseVisualStyleBackColor = true;
+            this.btLoadConfig.Click += new System.EventHandler(this.btLoadConfig_Click);
+            // 
             // lbLoad
             // 
             this.lbLoad.AutoSize = true;
@@ -420,33 +431,33 @@
             // 
             // lbChangePt
             // 
-            this.lbChangePt.AutoSize = true;
             this.lbChangePt.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbChangePt.Location = new System.Drawing.Point(250, 487);
+            this.lbChangePt.Location = new System.Drawing.Point(176, 487);
             this.lbChangePt.Name = "lbChangePt";
-            this.lbChangePt.Size = new System.Drawing.Size(189, 22);
+            this.lbChangePt.Size = new System.Drawing.Size(327, 22);
             this.lbChangePt.TabIndex = 66;
             this.lbChangePt.Text = "Pattern Table 1 of ?";
+            this.lbChangePt.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // lbChangePalette
             // 
-            this.lbChangePalette.AutoSize = true;
             this.lbChangePalette.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbChangePalette.Location = new System.Drawing.Point(276, 453);
+            this.lbChangePalette.Location = new System.Drawing.Point(180, 453);
             this.lbChangePalette.Name = "lbChangePalette";
-            this.lbChangePalette.Size = new System.Drawing.Size(129, 22);
+            this.lbChangePalette.Size = new System.Drawing.Size(323, 22);
             this.lbChangePalette.TabIndex = 65;
             this.lbChangePalette.Text = "Palette 1 of ?";
+            this.lbChangePalette.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // lbChangeScreen
             // 
-            this.lbChangeScreen.AutoSize = true;
             this.lbChangeScreen.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbChangeScreen.Location = new System.Drawing.Point(276, 420);
+            this.lbChangeScreen.Location = new System.Drawing.Point(184, 420);
             this.lbChangeScreen.Name = "lbChangeScreen";
-            this.lbChangeScreen.Size = new System.Drawing.Size(132, 22);
+            this.lbChangeScreen.Size = new System.Drawing.Size(319, 22);
             this.lbChangeScreen.TabIndex = 64;
             this.lbChangeScreen.Text = "Screen 1 of ?";
+            this.lbChangeScreen.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // btPatternPrev
             // 
@@ -508,17 +519,6 @@
             this.btScreenNext.UseVisualStyleBackColor = true;
             this.btScreenNext.Click += new System.EventHandler(this.btScreenNext_Click);
             // 
-            // btLoadConfig
-            // 
-            this.btLoadConfig.Enabled = false;
-            this.btLoadConfig.Location = new System.Drawing.Point(2, 218);
-            this.btLoadConfig.Name = "btLoadConfig";
-            this.btLoadConfig.Size = new System.Drawing.Size(67, 21);
-            this.btLoadConfig.TabIndex = 62;
-            this.btLoadConfig.Text = "Load Cfg.";
-            this.btLoadConfig.UseVisualStyleBackColor = true;
-            this.btLoadConfig.Click += new System.EventHandler(this.btLoadConfig_Click);
-            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -551,7 +551,6 @@
             this.pnElements.ResumeLayout(false);
             this.pnElements.PerformLayout();
             this.pnViewScroll.ResumeLayout(false);
-            this.pnViewScroll.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
