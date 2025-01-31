@@ -713,13 +713,16 @@ namespace BuckyEditor
 
         private void btLoadConfig_Click(object sender, EventArgs e)
         {
-            string filePath = $"{settingsDir}\\{cbStage.SelectedItem}\\{cbSection.SelectedItem}";
-            if (Globals.loadData(Properties.Settings.Default["FileName"].ToString(), filePath))
+            if (UtilsGui.askToSave(ref dirty, saveToFile, returnCbLevelIndex))
             {
-                Properties.Settings.Default["ConfigName"] = filePath;
-                Properties.Settings.Default.Save();
-                resetControls();
-                reloadLevel(true, true);
+                string filePath = $"{settingsDir}\\{cbStage.SelectedItem}\\{cbSection.SelectedItem}";
+                if (Globals.loadData(Properties.Settings.Default["FileName"].ToString(), filePath))
+                {
+                    Properties.Settings.Default["ConfigName"] = filePath;
+                    Properties.Settings.Default.Save();
+                    resetControls();
+                    reloadLevel(true, true);
+                }
             }
         }
 

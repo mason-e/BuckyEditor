@@ -1,5 +1,5 @@
 ## Critical
-
+- Bug fix: Too many controls fully reload the level. Showing address, changing palette, changing pattern table
 
 ## High Priority
 
