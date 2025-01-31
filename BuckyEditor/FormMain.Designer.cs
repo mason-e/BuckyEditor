@@ -42,13 +42,6 @@
             this.bttShowNei = new System.Windows.Forms.ToolStripButton();
             this.bttGridlines = new System.Windows.Forms.ToolStripButton();
             this.bttShowAddress = new System.Windows.Forms.ToolStripButton();
-            this.x025ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.x05ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
-            this.x3ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.x4ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsLayer1 = new System.Windows.Forms.ToolStripMenuItem();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.pnBlocks = new System.Windows.Forms.Panel();
             this.blocksScreen = new System.Windows.Forms.PictureBox();
@@ -231,48 +224,6 @@
             this.bttShowAddress.Size = new System.Drawing.Size(24, 24);
             this.bttShowAddress.ToolTipText = "Show Metatile Address";
             this.bttShowAddress.Click += new System.EventHandler(this.bttShowAddress_CheckedChanged);
-            // 
-            // x025ToolStripMenuItem
-            // 
-            this.x025ToolStripMenuItem.Name = "x025ToolStripMenuItem";
-            this.x025ToolStripMenuItem.Size = new System.Drawing.Size(101, 22);
-            this.x025ToolStripMenuItem.Text = "x0.25";
-            // 
-            // x05ToolStripMenuItem
-            // 
-            this.x05ToolStripMenuItem.Name = "x05ToolStripMenuItem";
-            this.x05ToolStripMenuItem.Size = new System.Drawing.Size(101, 22);
-            this.x05ToolStripMenuItem.Text = "x0.5";
-            // 
-            // toolStripMenuItem2
-            // 
-            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(101, 22);
-            this.toolStripMenuItem2.Text = "x1";
-            // 
-            // toolStripMenuItem3
-            // 
-            this.toolStripMenuItem3.Name = "toolStripMenuItem3";
-            this.toolStripMenuItem3.Size = new System.Drawing.Size(101, 22);
-            this.toolStripMenuItem3.Text = "x2";
-            // 
-            // x3ToolStripMenuItem
-            // 
-            this.x3ToolStripMenuItem.Name = "x3ToolStripMenuItem";
-            this.x3ToolStripMenuItem.Size = new System.Drawing.Size(101, 22);
-            this.x3ToolStripMenuItem.Text = "x3";
-            // 
-            // x4ToolStripMenuItem
-            // 
-            this.x4ToolStripMenuItem.Name = "x4ToolStripMenuItem";
-            this.x4ToolStripMenuItem.Size = new System.Drawing.Size(101, 22);
-            this.x4ToolStripMenuItem.Text = "x4";
-            // 
-            // tsLayer1
-            // 
-            this.tsLayer1.Name = "tsLayer1";
-            this.tsLayer1.Size = new System.Drawing.Size(170, 26);
-            this.tsLayer1.Text = "Layer 1";
             // 
             // splitContainer1
             // 
@@ -568,15 +519,8 @@
         private System.Windows.Forms.ToolStripButton bttMetatiles;
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.Panel pnElements;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem2;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem3;
         private System.Windows.Forms.ToolStripButton bttShowNei;
         private System.Windows.Forms.ToolStripButton bttGridlines;
-        private System.Windows.Forms.ToolStripMenuItem x3ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem x4ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem x025ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem x05ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem tsLayer1;
         private System.Windows.Forms.ToolStripButton bttReload;
         private System.Windows.Forms.Panel pnBlocks;
         private System.Windows.Forms.PictureBox blocksScreen;

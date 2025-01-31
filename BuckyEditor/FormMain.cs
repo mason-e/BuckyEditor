@@ -106,8 +106,6 @@ namespace BuckyEditor
 
             bttMetatiles.Enabled = true;
 
-            tsLayer1.Enabled = true;
-
             resetMapScreenSize();
         }
 
