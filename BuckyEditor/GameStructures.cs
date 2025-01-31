@@ -177,14 +177,13 @@ namespace BuckyEditor
     {
         public Screen(BlockLayer layer, int width, int height)
         {
-            layers = new BlockLayer[1];
-            layers[0] = layer;
+            this.layer = layer;
             this.width = width;
             this.height = height;
         }
-        public BlockLayer[] layers;
 
         public int width;
         public int height;
+        public BlockLayer layer;
     }
 }

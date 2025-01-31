@@ -10,12 +10,7 @@ namespace BuckyEditor
             g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.NearestNeighbor;
             g.PixelOffsetMode = System.Drawing.Drawing2D.PixelOffsetMode.Half;
 
-            var curScreen = screens[scrNo];
-            for (int layerIndex = 0; layerIndex < curScreen.layers.Length; layerIndex++)
-            {
-                var layer = screens[scrNo].layers[layerIndex];
-                renderLayer(g, layer, renderParams);
-            }
+            renderLayer(g, screens[scrNo].layer, renderParams);
 
             if (renderParams.showBorder)
             {

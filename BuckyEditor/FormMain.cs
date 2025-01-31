@@ -101,15 +101,12 @@ namespace BuckyEditor
             dirty = false; updateSaveVisibility();
             showNeiScreens = true;
             showGridlines = true;
-            curActiveLayer = 0;
 
             changeLevelIndex(true);
 
             bttMetatiles.Enabled = true;
 
             tsLayer1.Enabled = true;
-
-            curActiveLayer = 0;
 
             resetMapScreenSize();
         }
@@ -161,7 +158,7 @@ namespace BuckyEditor
             int tileSizeX = bigBlocks[0].Width;
             int tileSizeY = bigBlocks[0].Height;
             int size = width * height;
-            int[] indexesPrev = prevScreen.layers[0].data;
+            int[] indexesPrev = prevScreen.layer.data;
             for (int i = 0; i < size; i++)
             {
                 if (i % width == line)
@@ -202,11 +199,11 @@ namespace BuckyEditor
                 topMargin = 0
             });
 
-            if (showNeiScreens && (screenNo > 0) && screen.layers[0].showLayer)
+            if (showNeiScreens && (screenNo > 0) && screen.layer.showLayer)
             {
                 renderNeighborLine(g, screenNo - 1, (width - 1), 0);
             }
-            if (showNeiScreens && (screenNo < ConfigScript.screenCount - 1) && screen.layers[0].showLayer)
+            if (showNeiScreens && (screenNo < ConfigScript.screenCount - 1) && screen.layer.showLayer)
             {
                 renderNeighborLine(g, screenNo + 1, 0, (width + 1) * tileSizeX);
             }
@@ -234,8 +231,6 @@ namespace BuckyEditor
         private int curDx = Outside;
         private int curDy = Outside;
         private bool curClicked;
-
-        private int curActiveLayer;
 
         //select rect if alt pressed
         private int selectionBeginX, selectionBeginY, selectionEndX, selectionEndY;
@@ -602,7 +597,7 @@ namespace BuckyEditor
                     for (int j = 0; j < deltaY; j++)
                     {
                         int index = (selectionBeginY + j) * curScreen.width + (selectionBeginX + i);
-                        tiles[j][i] = curScreen.layers[curActiveLayer].data[index];
+                        tiles[j][i] = curScreen.layer.data[index];
                     }
                 }
             }
@@ -778,7 +773,7 @@ namespace BuckyEditor
 
         private BlockLayer getActiveLayer(Screen curScreen)
         {
-            return curScreen.layers[curActiveLayer];
+            return curScreen.layer;
         }
     }
 }
