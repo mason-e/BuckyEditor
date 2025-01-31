@@ -67,7 +67,7 @@ namespace BuckyEditor
             for (int i = 0; i < ConfigScript.screenSize; i++)
                 result[i] = arrayWithData[beginAddr + i];
 
-            return new Screen(new BlockLayer(result), 8, ConfigScript.screenHeight);
+            return new Screen(result, 8, ConfigScript.screenHeight);
         }
 
         public static byte[] romdata;

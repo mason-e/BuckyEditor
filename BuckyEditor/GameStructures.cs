@@ -161,29 +161,17 @@ namespace BuckyEditor
         public int height;
     }
 
-    public class BlockLayer
-    {
-        public int[] data;
-        public bool showLayer;
-
-        public BlockLayer(int[] data)
-        {
-            this.data = data;
-            showLayer = true;
-        }
-    }
-
     public class Screen
     {
-        public Screen(BlockLayer layer, int width, int height)
+        public Screen(int[] data, int width, int height)
         {
-            this.layer = layer;
+            this.data = data;
             this.width = width;
             this.height = height;
         }
 
         public int width;
         public int height;
-        public BlockLayer layer;
+        public int[] data;
     }
 }

@@ -10,7 +10,7 @@ namespace BuckyEditor
             g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.NearestNeighbor;
             g.PixelOffsetMode = System.Drawing.Drawing2D.PixelOffsetMode.Half;
 
-            renderLayer(g, screens[scrNo].layer, renderParams);
+            renderLayer(g, screens[scrNo].data, renderParams);
 
             if (renderParams.showBorder)
             {
@@ -20,21 +20,15 @@ namespace BuckyEditor
             }
         }
 
-        private static void renderLayer(Graphics g, BlockLayer layer, RenderParams renderParams)
+        private static void renderLayer(Graphics g, int[] screenData, RenderParams renderParams)
         {
-            bool needRenderLayer = layer != null && layer.showLayer;
-            if (!needRenderLayer)
-            {
-                return;
-            }
-
             int tileSizeX = renderParams.getTileSizeX();
             int tileSizeY = renderParams.getTileSizeY();
 
             int size = renderParams.getLayerSize();
             for (int i = 0; i < size; i++)
             {
-                int bigBlockNo = Utils.getBigTileNoFromScreen(layer.data, i);
+                int bigBlockNo = Utils.getBigTileNoFromScreen(screenData, i);
                 Rectangle tileRect = new Rectangle((i % renderParams.width) * tileSizeX + renderParams.leftMargin, i / renderParams.width * tileSizeY + renderParams.topMargin, tileSizeX, tileSizeY);
                 renderParams.renderBlock(g, bigBlockNo, tileRect);
             }

@@ -158,7 +158,7 @@ namespace BuckyEditor
             int tileSizeX = bigBlocks[0].Width;
             int tileSizeY = bigBlocks[0].Height;
             int size = width * height;
-            int[] indexesPrev = prevScreen.layer.data;
+            int[] indexesPrev = prevScreen.data;
             for (int i = 0; i < size; i++)
             {
                 if (i % width == line)
@@ -199,11 +199,11 @@ namespace BuckyEditor
                 topMargin = 0
             });
 
-            if (showNeiScreens && (screenNo > 0) && screen.layer.showLayer)
+            if (showNeiScreens && (screenNo > 0))
             {
                 renderNeighborLine(g, screenNo - 1, (width - 1), 0);
             }
-            if (showNeiScreens && (screenNo < ConfigScript.screenCount - 1) && screen.layer.showLayer)
+            if (showNeiScreens && (screenNo < ConfigScript.screenCount - 1))
             {
                 renderNeighborLine(g, screenNo + 1, 0, (width + 1) * tileSizeX);
             }
@@ -259,8 +259,7 @@ namespace BuckyEditor
                 if (dx == width || dx == -1)
                     return;
                 int index = dy * width + dx;
-                var layer = getActiveLayer(screens[screenNo]);
-                curActiveBlock = Utils.getBigTileNoFromScreen(layer.data, index);
+                curActiveBlock = Utils.getBigTileNoFromScreen(screens[screenNo].data, index);
                 if (curActiveBlock != -1)
                 {
                     activeBlock.Image = bigBlocks[curActiveBlock];
@@ -302,9 +301,8 @@ namespace BuckyEditor
                     if (screenNo < ConfigScript.screenCount - 1)
                     {
                         int index = dy * width;
-                        var layer = getActiveLayer(screens[screenNo + 1]);
-                        curActiveBlock = Utils.getBigTileNoFromScreen(layer.data, index);
-                        Utils.setBigTileToScreen(layer.data, index, curActiveBlock);
+                        curActiveBlock = Utils.getBigTileNoFromScreen(screens[screenNo + 1].data, index);
+                        Utils.setBigTileToScreen(screens[screenNo + 1].data, index, curActiveBlock);
                         dirty = true; updateSaveVisibility();
                     }
                 }
@@ -314,18 +312,16 @@ namespace BuckyEditor
                     {
                         int index = dy * width + (width - 1);
 
-                        var layer = getActiveLayer(screens[screenNo - 1]);
-                        Utils.setBigTileToScreen(layer.data, index, curActiveBlock);
+                        Utils.setBigTileToScreen(screens[screenNo -1].data, index, curActiveBlock);
                         dirty = true; updateSaveVisibility();
                     }
                 }
                 else
                 {
                     int index = dy * width + dx;
-                    var layer = getActiveLayer(screens[screenNo]);
-                    if (index < layer.data.Length)
+                    if (index < screens[screenNo].data.Length)
                     {
-                        Utils.setBigTileToScreen(layer.data, index, curActiveBlock);
+                        Utils.setBigTileToScreen(screens[screenNo].data, index, curActiveBlock);
                     }
                     dirty = true; updateSaveVisibility();
                 }
@@ -597,7 +593,7 @@ namespace BuckyEditor
                     for (int j = 0; j < deltaY; j++)
                     {
                         int index = (selectionBeginY + j) * curScreen.width + (selectionBeginX + i);
-                        tiles[j][i] = curScreen.layer.data[index];
+                        tiles[j][i] = curScreen.data[index];
                     }
                 }
             }
@@ -769,11 +765,6 @@ namespace BuckyEditor
         private Screen getActiveScreen()
         {
             return screens[screenNo];
-        }
-
-        private BlockLayer getActiveLayer(Screen curScreen)
-        {
-            return curScreen.layer;
         }
     }
 }

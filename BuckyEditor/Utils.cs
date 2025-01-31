@@ -162,7 +162,7 @@ namespace BuckyEditor
             for (int i = 0; i < ConfigScript.screenCount; i++)
             {
                 var curScreen = screensData[i];
-                var dataToWrite = curScreen.layer.data;
+                var dataToWrite = curScreen.data;
                 int addr = ConfigScript.levelStartAddress + i * ConfigScript.screenSize;
                 for (int x = 0; x < ConfigScript.screenSize; x++)
                     arrayToSave[addr + x] = (byte)dataToWrite[x];
