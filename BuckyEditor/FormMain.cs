@@ -56,8 +56,10 @@ namespace BuckyEditor
                 screenNo = 0;
             if (palNo > ConfigScript.paletteAddresses.Length - 1)
                 palNo = 0;
-            if (patternTableNo > ConfigScript.patternTableSize - 1)
-                patternTableNo = 0;
+            if (patternTable1No > ConfigScript.patternTableFirstHalfAddr.Length - 1)
+                patternTable1No = 0;
+            if (patternTable2No > ConfigScript.patternTableSecondHalfAddr.Length - 1)
+                patternTable2No = 0;
             if (ConfigScript.screenCount == 1)
             {
                 btScreenNext.Enabled = false;
@@ -78,19 +80,29 @@ namespace BuckyEditor
                 btPaletteNext.Enabled = true;
                 btPalettePrev.Enabled = true;
             }
-            if (ConfigScript.patternTableFirstHalfAddr.Length == 1 && ConfigScript.patternTableSecondHalfAddr.Length == 1)
+            if (ConfigScript.patternTableFirstHalfAddr.Length == 1)
             {
-                btPatternNext.Enabled = false;
-                btPatternPrev.Enabled = false;
+                btPattern1Next.Enabled = false;
+                btPattern1Prev.Enabled = false;
             }
             else
             {
-                btPatternNext.Enabled = true;
-                btPatternPrev.Enabled = true;
+                btPattern1Next.Enabled = true;
+                btPattern1Prev.Enabled = true;
+            }
+            if (ConfigScript.patternTableSecondHalfAddr.Length == 1)
+            {
+                btPattern2Next.Enabled = false;
+                btPattern2Prev.Enabled = false;
+            }
+            else{
+                btPattern2Next.Enabled = true;
+                btPattern2Prev.Enabled = true;
             }
             lbChangeScreen.Text = $"Screen {screenNo + 1} of {ConfigScript.screenCount}";
             lbChangePalette.Text = $"Palette {palNo + 1} of {ConfigScript.paletteAddresses.Length} ({ConfigScript.paletteAddresses[palNo]:X})";
-            lbChangePt.Text = $"Pattern Table {patternTableNo + 1} of {ConfigScript.patternTableSize}";
+            lbChangePt1.Text = $"Pattern Table A {patternTable1No + 1} of {ConfigScript.patternTableFirstHalfAddr.Length} ({ConfigScript.patternTableFirstHalfAddr[patternTable1No]:X})";
+            lbChangePt2.Text = $"Pattern Table B {patternTable2No + 1} of {ConfigScript.patternTableSecondHalfAddr.Length} ({ConfigScript.patternTableSecondHalfAddr[patternTable2No]:X})";
         }
 
         private void resetControls()
@@ -132,7 +144,7 @@ namespace BuckyEditor
 
             if (needRebuildBlocks)
             {
-                bigBlocks = NesDrawing.makeBigBlocks(drawNumbers, palNo, patternTableNo);
+                bigBlocks = NesDrawing.makeBigBlocks(drawNumbers, palNo, patternTable1No, patternTable2No);
             }
 
             curActiveBlock = 0;
@@ -411,21 +423,39 @@ namespace BuckyEditor
             reloadLevel(false, true);
         }
 
-        private void btPatternNext_Click(object sender, EventArgs e)
+        private void btPattern1Next_Click(object sender, EventArgs e)
         {
-            if (patternTableNo == ConfigScript.patternTableSize - 1)
-                patternTableNo = 0;
-            else patternTableNo++;
-            lbChangePt.Text = $"Pattern Table {patternTableNo + 1} of {ConfigScript.patternTableSize}";
+            if (patternTable1No == ConfigScript.patternTableFirstHalfAddr.Length - 1)
+                patternTable1No = 0;
+            else patternTable1No++;
+            lbChangePt1.Text = $"Pattern Table A {patternTable1No + 1} of {ConfigScript.patternTableFirstHalfAddr.Length} ({ConfigScript.patternTableFirstHalfAddr[patternTable1No]:X})";
             reloadLevel(false, true);
         }
 
-        private void btPatternPrev_Click(object sender, EventArgs e)
+        private void btPattern1Prev_Click(object sender, EventArgs e)
         {
-            if (patternTableNo == 0)
-                patternTableNo = ConfigScript.patternTableSize - 1;
-            else patternTableNo--;
-            lbChangePt.Text = $"Pattern Table {patternTableNo + 1} of {ConfigScript.patternTableSize}";
+            if (patternTable1No == 0)
+                patternTable1No = ConfigScript.patternTableFirstHalfAddr.Length - 1;
+            else patternTable1No--;
+            lbChangePt1.Text = $"Pattern Table A {patternTable1No + 1} of {ConfigScript.patternTableFirstHalfAddr.Length} ({ConfigScript.patternTableFirstHalfAddr[patternTable1No]:X})";
+            reloadLevel(false, true);
+        }
+
+        private void btPattern2Next_Click(object sender, EventArgs e)
+        {
+            if (patternTable2No == ConfigScript.patternTableSecondHalfAddr.Length - 1)
+                patternTable2No = 0;
+            else patternTable2No++;
+            lbChangePt2.Text = $"Pattern Table B {patternTable2No + 1} of {ConfigScript.patternTableSecondHalfAddr.Length} ({ConfigScript.patternTableSecondHalfAddr[patternTable2No]:X})";
+            reloadLevel(false, true);
+        }
+
+        private void btPattern2Prev_Click(object sender, EventArgs e)
+        {
+            if (patternTable2No == 0)
+                patternTable2No = ConfigScript.patternTableSecondHalfAddr.Length - 1;
+            else patternTable2No--;
+            lbChangePt2.Text = $"Pattern Table B {patternTable2No + 1} of {ConfigScript.patternTableSecondHalfAddr.Length} ({ConfigScript.patternTableSecondHalfAddr[patternTable2No]:X})";
             reloadLevel(false, true);
         }
 
@@ -522,7 +552,8 @@ namespace BuckyEditor
         public bool showGridlines { get; private set; }
         public int screenNo { get; private set; }
         public int palNo { get; private set; }
-        public int patternTableNo { get; private set; }
+        public int patternTable1No { get; private set; }
+        public int patternTable2No { get; private set; }
 
         public bool additionalRenderEnabled { get; private set; } = true;
 

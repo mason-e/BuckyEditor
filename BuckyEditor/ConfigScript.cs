@@ -50,7 +50,6 @@ namespace BuckyEditor
             paletteAddresses = callFromScript(asm, data, "*.getPalAddresses", new int[] {0});
             patternTableFirstHalfAddr = callFromScript(asm, data, "*.getPatternTableFirstHalfAddr", new int[] {0});
             patternTableSecondHalfAddr = callFromScript(asm, data, "*.getPatternTableSecondHalfAddr", new int[] {0});
-            patternTableSize = Math.Max(patternTableFirstHalfAddr.Length, patternTableSecondHalfAddr.Length);
 
             metatileCount = callFromScript(asm, data, "*.getMetatileCount", 256);
 
@@ -122,8 +121,6 @@ namespace BuckyEditor
         public static int[] patternTableFirstHalfAddr;
 
         public static int[] patternTableSecondHalfAddr;
-
-        public static int patternTableSize;
         
         public static int[] paletteAddresses;
 

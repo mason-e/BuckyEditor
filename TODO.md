@@ -2,7 +2,7 @@
 
 ## High Priority
 
-- Show addresses of metatiles, palette bytes, etc. within editors
+- Show address of screen
 - Can change palette and pattern table on main screen but not metatile editor
     - Option A: Duplicate main editor flow (buttons, etc.)
     - Option B: Find way to pass through from main form

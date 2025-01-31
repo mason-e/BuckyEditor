@@ -59,16 +59,11 @@ namespace BuckyEditor
             return mblock;
         }
 
-        private static Bitmap[] makeObjects(int palIndex, int patternTableIndex)
+        private static Bitmap[] makeObjects(int palIndex, int patternTable1Index, int patternTable2Index)
         {
-            bool moreinSecondHalf = ConfigScript.patternTableSecondHalfAddr.Length > ConfigScript.patternTableFirstHalfAddr.Length;
-            int firstHalf = moreinSecondHalf ? ConfigScript.patternTableFirstHalfAddr[0] : ConfigScript.patternTableFirstHalfAddr[patternTableIndex];
-            int secondHalf = moreinSecondHalf ? ConfigScript.patternTableSecondHalfAddr[patternTableIndex] : ConfigScript.patternTableSecondHalfAddr[0];
-            if (ConfigScript.patternTableFirstHalfAddr.Length > ConfigScript.patternTableSecondHalfAddr.Length)
-            {
-                firstHalf = ConfigScript.patternTableFirstHalfAddr[patternTableIndex];
-                secondHalf = ConfigScript.patternTableSecondHalfAddr[0];
-            }
+
+            int firstHalf = ConfigScript.patternTableFirstHalfAddr[patternTable1Index];
+            int secondHalf = ConfigScript.patternTableSecondHalfAddr[patternTable2Index];
             byte[] patternTable = Utils.getPatternTableFromRom(firstHalf, secondHalf);
             ObjRec[] objects = ConfigScript.getBlocks();
 
@@ -84,13 +79,13 @@ namespace BuckyEditor
             return bitmaps;
         }
 
-        public static Image[] makeBigBlocks(bool drawNumbers, int palIndex, int patternTableIndex)
+        public static Image[] makeBigBlocks(bool drawNumbers, int palIndex, int patternTable1Index, int patternTable2Index)
         {
             int blockCount = ConfigScript.metatileCount;
             var bigBlocks = new Image[blockCount];
 
             Image[] smallBlocksPack;
-            smallBlocksPack = makeObjects(palIndex, patternTableIndex);
+            smallBlocksPack = makeObjects(palIndex, patternTable1Index, patternTable2Index);
 
             //tt version hardcode
             Image[][] smallBlocksAll = new Image[4][] { smallBlocksPack, smallBlocksPack, smallBlocksPack, smallBlocksPack };

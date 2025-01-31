@@ -53,13 +53,16 @@
             this.cbSection = new System.Windows.Forms.ComboBox();
             this.cbStage = new System.Windows.Forms.ComboBox();
             this.pnViewScroll = new System.Windows.Forms.Panel();
-            this.lbChangePt = new System.Windows.Forms.Label();
+            this.lbChangePt2 = new System.Windows.Forms.Label();
+            this.btPattern2Prev = new System.Windows.Forms.Button();
+            this.btPattern2Next = new System.Windows.Forms.Button();
+            this.lbChangePt1 = new System.Windows.Forms.Label();
             this.lbChangePalette = new System.Windows.Forms.Label();
             this.lbChangeScreen = new System.Windows.Forms.Label();
-            this.btPatternPrev = new System.Windows.Forms.Button();
+            this.btPattern1Prev = new System.Windows.Forms.Button();
             this.btPalettePrev = new System.Windows.Forms.Button();
             this.btScreenPrev = new System.Windows.Forms.Button();
-            this.btPatternNext = new System.Windows.Forms.Button();
+            this.btPattern1Next = new System.Windows.Forms.Button();
             this.btPaletteNext = new System.Windows.Forms.Button();
             this.btScreenNext = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.mapScreen)).BeginInit();
@@ -125,7 +128,7 @@
             this.lbCoords.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lbCoords.AutoSize = true;
-            this.lbCoords.Location = new System.Drawing.Point(5, 499);
+            this.lbCoords.Location = new System.Drawing.Point(5, 542);
             this.lbCoords.Name = "lbCoords";
             this.lbCoords.Size = new System.Drawing.Size(64, 13);
             this.lbCoords.TabIndex = 56;
@@ -244,7 +247,7 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.pnViewScroll);
-            this.splitContainer1.Size = new System.Drawing.Size(1071, 520);
+            this.splitContainer1.Size = new System.Drawing.Size(1071, 563);
             this.splitContainer1.SplitterDistance = 373;
             this.splitContainer1.TabIndex = 5;
             // 
@@ -257,7 +260,7 @@
             this.pnBlocks.Location = new System.Drawing.Point(3, 4);
             this.pnBlocks.Margin = new System.Windows.Forms.Padding(2);
             this.pnBlocks.Name = "pnBlocks";
-            this.pnBlocks.Size = new System.Drawing.Size(193, 509);
+            this.pnBlocks.Size = new System.Drawing.Size(193, 552);
             this.pnBlocks.TabIndex = 61;
             this.pnBlocks.SizeChanged += new System.EventHandler(this.pnBlocks_SizeChanged);
             // 
@@ -288,7 +291,7 @@
             this.pnElements.Dock = System.Windows.Forms.DockStyle.Right;
             this.pnElements.Location = new System.Drawing.Point(294, 0);
             this.pnElements.Name = "pnElements";
-            this.pnElements.Size = new System.Drawing.Size(77, 518);
+            this.pnElements.Size = new System.Drawing.Size(77, 561);
             this.pnElements.TabIndex = 5;
             // 
             // btLoadConfig
@@ -364,31 +367,64 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.pnViewScroll.AutoScroll = true;
-            this.pnViewScroll.Controls.Add(this.lbChangePt);
+            this.pnViewScroll.Controls.Add(this.lbChangePt2);
+            this.pnViewScroll.Controls.Add(this.btPattern2Prev);
+            this.pnViewScroll.Controls.Add(this.btPattern2Next);
+            this.pnViewScroll.Controls.Add(this.lbChangePt1);
             this.pnViewScroll.Controls.Add(this.lbChangePalette);
             this.pnViewScroll.Controls.Add(this.lbChangeScreen);
-            this.pnViewScroll.Controls.Add(this.btPatternPrev);
+            this.pnViewScroll.Controls.Add(this.btPattern1Prev);
             this.pnViewScroll.Controls.Add(this.btPalettePrev);
             this.pnViewScroll.Controls.Add(this.btScreenPrev);
-            this.pnViewScroll.Controls.Add(this.btPatternNext);
+            this.pnViewScroll.Controls.Add(this.btPattern1Next);
             this.pnViewScroll.Controls.Add(this.btPaletteNext);
             this.pnViewScroll.Controls.Add(this.btScreenNext);
             this.pnViewScroll.Controls.Add(this.pnView);
             this.pnViewScroll.Location = new System.Drawing.Point(3, 6);
             this.pnViewScroll.Margin = new System.Windows.Forms.Padding(2);
             this.pnViewScroll.Name = "pnViewScroll";
-            this.pnViewScroll.Size = new System.Drawing.Size(675, 529);
+            this.pnViewScroll.Size = new System.Drawing.Size(675, 572);
             this.pnViewScroll.TabIndex = 5;
             // 
-            // lbChangePt
+            // lbChangePt2
             // 
-            this.lbChangePt.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbChangePt.Location = new System.Drawing.Point(176, 487);
-            this.lbChangePt.Name = "lbChangePt";
-            this.lbChangePt.Size = new System.Drawing.Size(327, 22);
-            this.lbChangePt.TabIndex = 66;
-            this.lbChangePt.Text = "Pattern Table 1 of ?";
-            this.lbChangePt.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lbChangePt2.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbChangePt2.Location = new System.Drawing.Point(176, 521);
+            this.lbChangePt2.Name = "lbChangePt2";
+            this.lbChangePt2.Size = new System.Drawing.Size(327, 22);
+            this.lbChangePt2.TabIndex = 69;
+            this.lbChangePt2.Text = "Pattern Table B - 1 of ?";
+            this.lbChangePt2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // btPattern2Prev
+            // 
+            this.btPattern2Prev.Image = ((System.Drawing.Image)(resources.GetObject("btPattern2Prev.Image")));
+            this.btPattern2Prev.Location = new System.Drawing.Point(106, 518);
+            this.btPattern2Prev.Name = "btPattern2Prev";
+            this.btPattern2Prev.Size = new System.Drawing.Size(64, 32);
+            this.btPattern2Prev.TabIndex = 68;
+            this.btPattern2Prev.UseVisualStyleBackColor = true;
+            this.btPattern2Prev.Click += new System.EventHandler(this.btPattern2Prev_Click);
+            // 
+            // btPattern2Next
+            // 
+            this.btPattern2Next.Image = ((System.Drawing.Image)(resources.GetObject("btPattern2Next.Image")));
+            this.btPattern2Next.Location = new System.Drawing.Point(509, 518);
+            this.btPattern2Next.Name = "btPattern2Next";
+            this.btPattern2Next.Size = new System.Drawing.Size(64, 32);
+            this.btPattern2Next.TabIndex = 67;
+            this.btPattern2Next.UseVisualStyleBackColor = true;
+            this.btPattern2Next.Click += new System.EventHandler(this.btPattern2Next_Click);
+            // 
+            // lbChangePt1
+            // 
+            this.lbChangePt1.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbChangePt1.Location = new System.Drawing.Point(176, 487);
+            this.lbChangePt1.Name = "lbChangePt1";
+            this.lbChangePt1.Size = new System.Drawing.Size(327, 22);
+            this.lbChangePt1.TabIndex = 66;
+            this.lbChangePt1.Text = "Pattern Table A - 1 of ?";
+            this.lbChangePt1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // lbChangePalette
             // 
@@ -410,15 +446,15 @@
             this.lbChangeScreen.Text = "Screen 1 of ?";
             this.lbChangeScreen.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // btPatternPrev
+            // btPattern1Prev
             // 
-            this.btPatternPrev.Image = ((System.Drawing.Image)(resources.GetObject("btPatternPrev.Image")));
-            this.btPatternPrev.Location = new System.Drawing.Point(106, 484);
-            this.btPatternPrev.Name = "btPatternPrev";
-            this.btPatternPrev.Size = new System.Drawing.Size(64, 32);
-            this.btPatternPrev.TabIndex = 63;
-            this.btPatternPrev.UseVisualStyleBackColor = true;
-            this.btPatternPrev.Click += new System.EventHandler(this.btPatternPrev_Click);
+            this.btPattern1Prev.Image = ((System.Drawing.Image)(resources.GetObject("btPattern1Prev.Image")));
+            this.btPattern1Prev.Location = new System.Drawing.Point(106, 484);
+            this.btPattern1Prev.Name = "btPattern1Prev";
+            this.btPattern1Prev.Size = new System.Drawing.Size(64, 32);
+            this.btPattern1Prev.TabIndex = 63;
+            this.btPattern1Prev.UseVisualStyleBackColor = true;
+            this.btPattern1Prev.Click += new System.EventHandler(this.btPattern1Prev_Click);
             // 
             // btPalettePrev
             // 
@@ -440,15 +476,15 @@
             this.btScreenPrev.UseVisualStyleBackColor = true;
             this.btScreenPrev.Click += new System.EventHandler(this.btScreenPrev_Click);
             // 
-            // btPatternNext
+            // btPattern1Next
             // 
-            this.btPatternNext.Image = ((System.Drawing.Image)(resources.GetObject("btPatternNext.Image")));
-            this.btPatternNext.Location = new System.Drawing.Point(509, 484);
-            this.btPatternNext.Name = "btPatternNext";
-            this.btPatternNext.Size = new System.Drawing.Size(64, 32);
-            this.btPatternNext.TabIndex = 60;
-            this.btPatternNext.UseVisualStyleBackColor = true;
-            this.btPatternNext.Click += new System.EventHandler(this.btPatternNext_Click);
+            this.btPattern1Next.Image = ((System.Drawing.Image)(resources.GetObject("btPattern1Next.Image")));
+            this.btPattern1Next.Location = new System.Drawing.Point(509, 484);
+            this.btPattern1Next.Name = "btPattern1Next";
+            this.btPattern1Next.Size = new System.Drawing.Size(64, 32);
+            this.btPattern1Next.TabIndex = 60;
+            this.btPattern1Next.UseVisualStyleBackColor = true;
+            this.btPattern1Next.Click += new System.EventHandler(this.btPattern1Next_Click);
             // 
             // btPaletteNext
             // 
@@ -474,7 +510,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1073, 573);
+            this.ClientSize = new System.Drawing.Size(1073, 616);
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.toolStrip1);
             this.DoubleBuffered = true;
@@ -526,14 +562,14 @@
         private System.Windows.Forms.PictureBox blocksScreen;
         private System.Windows.Forms.Panel pnViewScroll;
         private System.Windows.Forms.Button btScreenNext;
-        private System.Windows.Forms.Button btPatternPrev;
+        private System.Windows.Forms.Button btPattern1Prev;
         private System.Windows.Forms.Button btPalettePrev;
         private System.Windows.Forms.Button btScreenPrev;
-        private System.Windows.Forms.Button btPatternNext;
+        private System.Windows.Forms.Button btPattern1Next;
         private System.Windows.Forms.Button btPaletteNext;
         private System.Windows.Forms.Label lbChangePalette;
         private System.Windows.Forms.Label lbChangeScreen;
-        private System.Windows.Forms.Label lbChangePt;
+        private System.Windows.Forms.Label lbChangePt1;
         private System.Windows.Forms.ToolStripButton bttShowAddress;
         private System.Windows.Forms.ComboBox cbStage;
         private System.Windows.Forms.ComboBox cbSection;
@@ -541,6 +577,9 @@
         private System.Windows.Forms.Label lbSection;
         private System.Windows.Forms.Label lbStage;
         private System.Windows.Forms.Button btLoadConfig;
+        private System.Windows.Forms.Label lbChangePt2;
+        private System.Windows.Forms.Button btPattern2Prev;
+        private System.Windows.Forms.Button btPattern2Next;
     }
 }
 
