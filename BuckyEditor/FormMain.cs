@@ -410,7 +410,7 @@ namespace BuckyEditor
                 palNo = 0;
             else palNo++;
             lbChangePalette.Text = $"Palette {palNo + 1} of {ConfigScript.paletteAddresses.Length} ({ConfigScript.paletteAddresses[palNo]:X})";
-            reloadLevel(true, true);
+            reloadLevel(false, true);
         }
 
         private void btPalettePrev_Click(object sender, EventArgs e)
@@ -419,7 +419,7 @@ namespace BuckyEditor
                 palNo = ConfigScript.paletteAddresses.Length - 1;
             else palNo--;
             lbChangePalette.Text = $"Palette {palNo + 1} of {ConfigScript.paletteAddresses.Length} ({ConfigScript.paletteAddresses[palNo]:X})";
-            reloadLevel(true, true);
+            reloadLevel(false, true);
         }
 
         private void btPatternNext_Click(object sender, EventArgs e)
@@ -427,8 +427,8 @@ namespace BuckyEditor
             if (patternTableNo == ConfigScript.patternTableSize - 1)
                 patternTableNo = 0;
             else patternTableNo++;
-            lbChangePalette.Text = $"Pattern Table {patternTableNo + 1} of {ConfigScript.patternTableSize}";
-            reloadLevel(true, true);
+            lbChangePt.Text = $"Pattern Table {patternTableNo + 1} of {ConfigScript.patternTableSize}";
+            reloadLevel(false, true);
         }
 
         private void btPatternPrev_Click(object sender, EventArgs e)
@@ -436,8 +436,8 @@ namespace BuckyEditor
             if (patternTableNo == 0)
                 patternTableNo = ConfigScript.patternTableSize - 1;
             else patternTableNo--;
-            lbChangePalette.Text = $"Pattern Table {patternTableNo + 1} of {ConfigScript.patternTableSize}";
-            reloadLevel(true, true);
+            lbChangePt.Text = $"Pattern Table {patternTableNo + 1} of {ConfigScript.patternTableSize}";
+            reloadLevel(false, true);
         }
 
         private void cbShowNeighbors_CheckedChanged(object sender, EventArgs e)
@@ -695,7 +695,7 @@ namespace BuckyEditor
 
         private void bttShowAddress_CheckedChanged(object sender, EventArgs e)
         {
-            reloadLevel(true, true);
+            reloadLevel(false, true);
         }
 
         private void cbStage_SelectedIndexChanged(object sender, EventArgs e)

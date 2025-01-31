@@ -2,21 +2,11 @@
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
-using System.Runtime.InteropServices;
 
 namespace BuckyEditor
 {
     public static class UtilsGDI
     {
-
-        public static Bitmap CropImage(Bitmap source, Rectangle rect)
-        {
-            Bitmap bmp = new Bitmap(rect.Width, rect.Height);
-            using (var g = Graphics.FromImage(bmp))
-                g.DrawImage(source, 0, 0, rect, GraphicsUnit.Pixel);
-            return bmp;
-        }
-
         public static Image ResizeBitmap(Image image, int width, int height)
         {
             if ((image.Width == width) && (image.Height == height))
