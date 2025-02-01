@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
-using System.Text;
 using System.Windows.Forms;
 
 namespace BuckyEditor
@@ -36,6 +35,9 @@ namespace BuckyEditor
 
                 resetControls();
             }
+            toolTipScreen.SetToolTip(lbChangeScreen, "Address of data that defines screen layout");
+            toolTipPt1.SetToolTip(lbChangePt1, "Pattern table for first half of tiles. Neither of these is the sprite pattern table. The address is relative to the CHR ROM, which starts at $20010");
+            toolTipPt2.SetToolTip(lbChangePt2, "Pattern table for second half of tiles. Neither of these is the sprite pattern table. The address is relative to the CHR ROM, which starts at $20010");
 
             subeditorsDict = new Dictionary<ToolStripButton, Func<Form>> {
                  { bttMetatiles,       makeBlocksEditor },

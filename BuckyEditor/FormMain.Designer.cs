@@ -66,6 +66,9 @@
             this.btPattern1Next = new System.Windows.Forms.Button();
             this.btPaletteNext = new System.Windows.Forms.Button();
             this.btScreenNext = new System.Windows.Forms.Button();
+            this.toolTipScreen = new System.Windows.Forms.ToolTip(this.components);
+            this.toolTipPt1 = new System.Windows.Forms.ToolTip(this.components);
+            this.toolTipPt2 = new System.Windows.Forms.ToolTip(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.mapScreen)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.activeBlock)).BeginInit();
             this.pnView.SuspendLayout();
@@ -581,6 +584,9 @@
         private System.Windows.Forms.Label lbChangePt2;
         private System.Windows.Forms.Button btPattern2Prev;
         private System.Windows.Forms.Button btPattern2Next;
+        private System.Windows.Forms.ToolTip toolTipScreen;
+        private System.Windows.Forms.ToolTip toolTipPt1;
+        private System.Windows.Forms.ToolTip toolTipPt2;
     }
 }
 
