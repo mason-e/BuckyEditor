@@ -99,7 +99,7 @@ namespace BuckyEditor
                 btPattern2Next.Enabled = true;
                 btPattern2Prev.Enabled = true;
             }
-            lbChangeScreen.Text = $"Screen {screenNo + 1} of {ConfigScript.screenCount}";
+            lbChangeScreen.Text = $"Screen {screenNo + 1} of {ConfigScript.screenCount} ({ConfigScript.levelStartAddress + ConfigScript.screenSize * screenNo:X})";
             lbChangePalette.Text = $"Palette {palNo + 1} of {ConfigScript.paletteAddresses.Length} ({ConfigScript.paletteAddresses[palNo]:X})";
             lbChangePt1.Text = $"Pattern Table A {patternTable1No + 1} of {ConfigScript.patternTableFirstHalfAddr.Length} ({ConfigScript.patternTableFirstHalfAddr[patternTable1No]:X})";
             lbChangePt2.Text = $"Pattern Table B {patternTable2No + 1} of {ConfigScript.patternTableSecondHalfAddr.Length} ({ConfigScript.patternTableSecondHalfAddr[patternTable2No]:X})";
@@ -390,7 +390,7 @@ namespace BuckyEditor
             if (screenNo == ConfigScript.screenCount - 1)
                 screenNo = 0;
             else screenNo++;
-            lbChangeScreen.Text = $"Screen {screenNo + 1} of {ConfigScript.screenCount}";
+            lbChangeScreen.Text = $"Screen {screenNo + 1} of {ConfigScript.screenCount} ({ConfigScript.levelStartAddress + ConfigScript.screenSize * screenNo:X})";
             resetMapScreenSize();
             mapScreen.Invalidate();
         }
@@ -400,7 +400,7 @@ namespace BuckyEditor
             if (screenNo == 0)
                 screenNo = ConfigScript.screenCount - 1;
             else screenNo--;
-            lbChangeScreen.Text = $"Screen {screenNo + 1} of {ConfigScript.screenCount}";
+            lbChangeScreen.Text = $"Screen {screenNo + 1} of {ConfigScript.screenCount} ({ConfigScript.levelStartAddress + ConfigScript.screenSize * screenNo:X})";
             resetMapScreenSize();
             mapScreen.Invalidate();
         }

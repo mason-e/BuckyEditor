@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
             this.mapScreen = new System.Windows.Forms.PictureBox();
             this.activeBlock = new System.Windows.Forms.PictureBox();
@@ -439,9 +440,9 @@
             // lbChangeScreen
             // 
             this.lbChangeScreen.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbChangeScreen.Location = new System.Drawing.Point(184, 420);
+            this.lbChangeScreen.Location = new System.Drawing.Point(176, 420);
             this.lbChangeScreen.Name = "lbChangeScreen";
-            this.lbChangeScreen.Size = new System.Drawing.Size(319, 22);
+            this.lbChangeScreen.Size = new System.Drawing.Size(327, 22);
             this.lbChangeScreen.TabIndex = 64;
             this.lbChangeScreen.Text = "Screen 1 of ?";
             this.lbChangeScreen.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
