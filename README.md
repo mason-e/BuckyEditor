@@ -1,5 +1,7 @@
 # BuckyEditor
 
+**Due to changing personal and professional priorities, [the project that uses this](https://github.com/mason-e/mega-bucky) has been archived, and this has been archived in turn.**
+
 Fork of https://github.com/spiiin/CadEditor (obviously). Shout out to spiiin and all other original contributors!
 
 ## Objectives
